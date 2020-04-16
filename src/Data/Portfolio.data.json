@@ -1,0 +1,34 @@
+{
+  "header_data": {
+    "logo_name": "Sachin",
+    "navigation_links": [
+      "Home",
+      "About Me",
+      "My Ventures",
+      "Skills",
+      "Open Source Projects",
+      "Blog",
+      "Connect"
+    ],
+    "introduction_data": {
+      "name": "Sachin Kr. Shukla",
+      "profession": "Entrepreneur | Full Stack Web Dev. | UI/UX Designer"
+    }
+  },
+  "about_me": [
+    "In second year of my college I started working my first startup Gangs Of Hackspur. While building up the product I learned Full stack Web Dev, SEO and Web analytics.",
+    "From then, I have learned UI/UX Designing, Data Science and currently working in ML and AI environment. Improving day-by-day just to became an skilled Entrepreneur.",
+    "In my free time I love reading business, design and self-improvement books that help me shape my life. Watching movies or brainstorming the solution to problems I had recently."
+  ],
+  "my_ventures": {
+    "heading": "My Ventures",
+    "gangs_of_hackspur": {
+      "name": "Gangs Of Hackspur",
+      "about": "Testing"
+    },
+    "vire_go": {
+      "name": "Vire Go",
+      "about": "Testing"
+    }
+  }
+}

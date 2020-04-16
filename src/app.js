@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import VirestoreApp from './components/VirestoreApp';
+import React from "react";
+import ReactDOM from "react-dom";
+import PortfolioApp from "./components/PortfolioApp";
 
-import './styles/styles.scss';
+import "./styles/styles.scss";
 
-ReactDOM.render(<VirestoreApp />, document.getElementById('app'));
+ReactDOM.render(<PortfolioApp />, document.getElementById("app"));
