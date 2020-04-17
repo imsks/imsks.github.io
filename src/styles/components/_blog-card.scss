@@ -1,0 +1,33 @@
+.blog__card {
+    margin: 5rem 0 0 5rem;
+    height: 42rem;
+    width: 35rem;
+    border-radius: 1rem;
+    background-color: $color-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: all 0.5s;
+
+    &__image {
+        margin-top: -10rem;
+        width: 35rem;
+        height: 24rem;
+        white-space: nowrap;
+        border-radius: inherit;
+    }
+
+    &__title {
+        margin: 0 2rem;
+        color: $color-primary;
+        font-size: 1.8rem;
+    }
+
+    &__link {
+        margin: 1rem auto;
+    }
+
+    &:hover {
+        transform: translateY(-1.5rem) scale(1.03);
+    }
+}

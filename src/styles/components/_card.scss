@@ -4,8 +4,49 @@
   width: 40rem;
   background-color: $color-primary;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: 0.5s all;
+  border-radius: 1rem;
+
+  &__button {
+    margin-top: 5rem;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    background-color: $color-white;
+    box-shadow: 0rem 2rem 5rem rgba($color: $color-black, $alpha: 0.2);
+    cursor: pointer;
+    transition: 0.5s all;
+    animation: moveInRight 1s ease-out infinite;
+
+    @keyframes moveInRight {
+      0% {
+          transform: translateY(0);
+      }
+  
+      25% {
+          transform: translateY(-1.5rem);
+      }
+
+      75% {
+        transform: translateY(0.5rem);
+    }
+  
+      100% {
+          transform: translateY(1.5rem);
+      }
+  }
+    
+    &:hover {
+      transform: translateY(-1.5rem) scale(1.03);
+    }
+  }
+
+  &:hover {
+    transform: translateY(-1.5rem) scale(1.03);
+  }
 
   &__heading {
     font-size: 3rem;

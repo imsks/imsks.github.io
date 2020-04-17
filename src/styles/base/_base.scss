@@ -16,6 +16,5 @@ body {
   background: $color-black;
 }
 
-::selection {
-  color: $color-primary;
-}
+
+@include selectionTextGlobal;

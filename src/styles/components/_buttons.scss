@@ -1,0 +1,19 @@
+.btn {
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding: 2rem 8rem;
+    border-radius: 0.4rem;
+    background-color: $color-primary;
+    color: white;
+    box-shadow: 1rem 1rem 2rem rgba($color: $color-black, $alpha: 0.2);
+    transition: all 0.5s;
+    font-weight: 500;
+
+    &:hover {
+        box-shadow: 1rem 2rem 5rem rgba($color: $color-black, $alpha: 0.4);
+    }
+}
+
+.btn-md {
+    padding: 1.5rem 4rem;
+}

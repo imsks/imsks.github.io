@@ -15,20 +15,154 @@
       "profession": "Entrepreneur | Full Stack Web Dev. | UI/UX Designer"
     }
   },
+
   "about_me": [
     "In second year of my college I started working my first startup Gangs Of Hackspur. While building up the product I learned Full stack Web Dev, SEO and Web analytics.",
     "From then, I have learned UI/UX Designing, Data Science and currently working in ML and AI environment. Improving day-by-day just to became an skilled Entrepreneur.",
     "In my free time I love reading business, design and self-improvement books that help me shape my life. Watching movies or brainstorming the solution to problems I had recently."
   ],
+
   "my_ventures": {
     "heading": "My Ventures",
-    "gangs_of_hackspur": {
-      "name": "Gangs Of Hackspur",
-      "about": "Testing"
-    },
-    "vire_go": {
-      "name": "Vire Go",
-      "about": "Testing"
+    "data": {
+      "gangs_of_hackspur": {
+        "name": "Gangs Of Hackspur",
+        "about": "Testing"
+      },
+      "vire_go": {
+        "name": "Vire Go",
+        "about": "Testing"
+      }
+    }
+  },
+
+  "my_blogs": {
+    "heading": "Blogs",
+    "data": {
+      "blog_1": {
+        "title": "1. Why Deep Work important for our generation and how can we do it?",
+        "blog_url": "test.url",
+        "image_url": "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+      },
+      "blog_2": {
+        "title": "2. Why Deep Work important for our generation and how can we do it?",
+        "blog_url": "test.url",
+        "image_url": "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+      },
+      "blog_3": {
+        "title": "3. Why Deep Work important for our generation and how can we do it?",
+        "blog_url": "test.url",
+        "image_url": "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+      }
+    }
+  },
+
+  "my_skills": {
+    "heading": "What I am good at",
+    "data": {
+      "skill_1": {
+        "title": "UI/UX Design",
+        "sub_title": "Build User-centric design for your product with me",
+        "cta": "Show me the designs",
+        "skill_data": {
+
+        }
+      },
+      "skill_2": {
+        "title": "Web Dev",
+        "sub_title": "I can help you build functional websites for your personal or professional purpose.",
+        "cta": "How will you do that?",
+        "skill_data": {
+
+        }
+      },
+      "skill_3": {
+        "title": "Marketing",
+        "sub_title": "Building Marketing Campaigns, Social Media Management & Advertising, SEO",
+        "cta": "I want to know more",
+        "skill_data": {
+
+        }
+      },
+      "skill_4": {
+        "title": "Copywriting",
+        "sub_title": "I help you  making copy for your Websites, Social Media Ads, Emails.",
+        "cta": "Copy that sells..?",
+        "skill_data": {
+
+        }
+      },
+      "skill_5": {
+        "title": "Content Writing",
+        "sub_title": "I can help you making content that sells",
+        "cta": "What can you write?",
+        "skill_data": {
+
+        }
+      },
+      "skill_6": {
+        "title": "Graphic Designs",
+        "sub_title": "Build Interactive Logo or Social Media posters with me",
+        "cta": "Show some art",
+        "skill_data": {
+
+        }
+      },
+      "skill_7": {
+        "title": "Mentorship",
+        "sub_title": "I can guide you building your career in Entrepreneurship, like a friend.",
+        "cta": "I need Mentorship!",
+        "skill_data": {
+
+        }
+      },
+      "skill_8": {
+        "title": "App Dev",
+        "sub_title": "Currently learning Flutter",
+        "cta": "Learning...",
+        "skill_data": {
+
+        }
+      }
+    }
+  },
+
+  "contact_me": {
+    "heading": "How about connecting with me?",
+    "sub_heading": "Your next big idea or how we can help each other, Let's talk.",
+    "form_content": [
+      "Your Name",
+      "Your Email", 
+      "Your Message",
+      "Submit Me"
+    ]
+  },
+
+  "footer": {
+    "left": [
+      "Sachinshukla.ml"
+    ],
+    "right": {
+      "facebook": {
+        "url": "https://www.google.com",
+        "icon_data": "facebook-square"
+      },
+      "instagram": {
+        "url": "https://www.google.com",
+        "icon_data": "instagram"
+      },
+      "twitter": {
+        "url": "https://www.google.com",
+        "icon_data": "twitter"
+      },
+      "linkedin": {
+        "url": "https://www.google.com",
+        "icon_data": "linkedin-square"
+      },
+      "medium": {
+        "url": "https://www.google.com",
+        "icon_data": "medium"
+      }
     }
   }
 }

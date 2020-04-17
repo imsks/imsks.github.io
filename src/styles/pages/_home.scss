@@ -25,3 +25,78 @@
     justify-content: space-evenly;
   }
 }
+
+.blog{
+  margin: 12rem 0;
+
+  &__content {
+    margin-top: 6rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  }
+}
+
+.skill{
+  &__heading {
+    margin-bottom: -5rem;
+  }
+
+  &__content {
+    margin-top: 6rem;
+    display: grid;
+    gap: .5rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+.contact {
+  margin-top: 10rem;
+
+  &__header {
+    text-align: center;
+    &__subheading {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__content {
+    margin: 4rem 0;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__input {
+      margin-top: 2rem;
+      font-size: 2rem;
+      font-weight: 500;
+      font-family: inherit;
+      color: inherit;
+      padding: 2rem 15rem;
+      border-radius: 0.3rem;
+      background-color: $color-primary;
+      border: none;
+      transition: all .3s;
+      text-align: center;
+      outline: none;
+
+      &::-webkit-input-placeholder {
+          color: $color-white;
+          font-weight: 500;
+          font-size: 2rem;
+      }
+    }
+
+    &__submit {
+      margin-top: 2rem;
+    }
+  }
+}
+
+#message {
+  padding: 5rem 15rem;
+}

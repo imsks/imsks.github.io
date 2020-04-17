@@ -2,6 +2,7 @@ import React from "react";
 
 const Ventures = (props) => {
   const { ventures_data } = props;
+  const data = ventures_data.data;
 
   return (
     <section className="ventures">
@@ -10,21 +11,13 @@ const Ventures = (props) => {
       </h1>
       {/* Venture Card Content */}
       <div className="ventures__content">
-        {}
-        <div className="card">
-          <h3 className="card__heading">
-            {ventures_data.gangs_of_hackspur.name}
-          </h3>
-        </div>
-
-        <div className="card">
-          <h3 className="card__heading">
-            {ventures_data.gangs_of_hackspur.name}
-          </h3>
-        </div>
-
-        {Object.keys(ventures_data).map((key) => {
-          return <h1>{ventures_data[key].name}</h1>;
+        {Object.keys(data).map((key) => {
+          return (
+            <div className="card" key={key}>
+              <h3 className="card__heading">{data[key].name}</h3>
+              <span className="card__button"></span>
+            </div>
+          );
         })}
       </div>
     </section>

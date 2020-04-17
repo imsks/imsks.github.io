@@ -13,6 +13,19 @@
   transform: translate(-50%, -50%);
 }
 
+@mixin selectionTextGlobal {
+  ::selection {
+    color: $color-primary;
+  }
+}
+
+@mixin selectionTextLocal {
+  ::selection {
+    color: $color-white;
+    background-color: $color-primary;
+  }
+}
+
 // MEDIA QUERY MANAGER
 /*
 0 - 600px:      Phone
