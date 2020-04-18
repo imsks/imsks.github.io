@@ -1,5 +1,5 @@
 .card {
-  margin: 10rem 0;
+  margin: 10rem 0 2rem 0;
   height: 40rem;
   width: 40rem;
   background-color: $color-primary;
@@ -9,6 +9,15 @@
   align-items: center;
   transition: 0.5s all;
   border-radius: 1rem;
+
+  @include respond(phone) {
+      margin-top: 10rem;
+    }
+
+  @include respond(small-phone) {
+      height: 30rem;
+      width: 30rem;
+  }
 
   &__button {
     margin-top: 5rem;

@@ -1,11 +1,22 @@
 .footer {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    gap: .5rem;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+    @include respond(small-phone) {
+      grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
+    }
 
     &__left {
         &__content {
             font-size: 2.5rem;
             font-weight: 500;
+
+            @include respond(small-phone) {
+                font-size: 2rem;
+                font-weight: 700;
+            }
         }
     }
 
@@ -17,6 +28,10 @@
             &__item {
                 font-size: 4rem;
                 color: $color-white;
+
+                @include respond(small-phone) {
+                    font-size: 3rem;
+                }
             }
         }
     }

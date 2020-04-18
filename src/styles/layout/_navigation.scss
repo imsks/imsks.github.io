@@ -9,12 +9,17 @@
     width: 6.5rem;
     border-radius: 50%;
     position: fixed;
-    top: 3rem;
+    top: 2rem;
     right: 3rem;
     z-index: 100;
     box-shadow: 0 1rem 3rem rgba($color: $color-white, $alpha: 0.1);
     text-align: center;
     cursor: pointer;
+
+    @include respond(small-phone) {
+      height: 5rem;
+      width: 5rem;
+    }
   }
 
   &__background {
@@ -22,11 +27,17 @@
     width: 6rem;
     border-radius: 50%;
     position: fixed;
-    top: 6.5;
+    margin-top: -3rem;
     right: 3.5rem;
     background-image: linear-gradient($color-secondary, $color-primary);
     z-index: 10;
     transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+
+    @include respond(small-phone) {
+      height: 5rem;
+      width: 5rem;
+      right: 3rem;
+    }
   }
 
   &__nav {
@@ -71,6 +82,11 @@
     background-size: 250%;
     transition: all 0.4s;
 
+    @include respond(phone) {
+      font-size: 2rem;
+    font-weight: 700;
+    }
+
     &:hover,
     &:active {
       background-position: 100%;
@@ -94,6 +110,10 @@
     position: relative;
     margin-top: 3rem;
 
+    @include respond(small-phone) {
+      margin-top: 2.5rem;
+    }
+
     &,
     &::before,
     &::after {
@@ -101,6 +121,10 @@
       height: 3px;
       background-color: $color-primary;
       display: inline-block;
+
+      @include respond(small-phone) {
+        width: 2.5rem;
+      }
     }
 
     &::before,
@@ -112,10 +136,18 @@
     }
 
     &::before {
-      top: -0.9rem;
+      top: 1rem;
+
+      @include respond(small-phone) {
+        top: -1rem;
+      }
     }
     &::after {
-      top: 0.9rem;
+      top: -1rem;
+
+      @include respond(small-phone) {
+        top: 1rem;
+      }
     }
   }
 

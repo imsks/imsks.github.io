@@ -1,6 +1,6 @@
 .blog__card {
-    margin: 5rem 0 0 5rem;
-    height: 42rem;
+    margin: 5rem 0 0 0;
+    height: 50rem;
     width: 35rem;
     border-radius: 1rem;
     background-color: $color-white;
@@ -8,23 +8,51 @@
     flex-direction: column;
     justify-content: space-evenly;
     transition: all 0.5s;
+    position: relative;
+
+    @include respond(small-phone) {
+      height: 50rem;
+      width: 30rem;
+    }
 
     &__image {
-        margin-top: -10rem;
+        // margin-top: -10rem;
+        position: absolute;
+        top: 0;
         width: 35rem;
-        height: 24rem;
+        height: 25rem;
         white-space: nowrap;
         border-radius: inherit;
+
+        @include respond(small-phone) {
+            height: 25rem;
+            width: 30rem;
+        }
     }
 
     &__title {
+        position: absolute;
+        top: 27rem;
         margin: 0 2rem;
         color: $color-primary;
         font-size: 1.8rem;
     }
 
     &__link {
+        position: absolute;
+        top: 38rem;
+        transform: translateX(20%);
         margin: 1rem auto;
+
+        @include respond(phone) {
+            font-size: 2rem;
+            font-weight: 700;
+            transform: translateX(55%);
+        }
+
+        @include respond(small-phone) {
+            transform: translateX(45%);
+        }
     }
 
     &:hover {

@@ -14,6 +14,18 @@ body {
   box-sizing: border-box;
   padding: 3rem;
   background: $color-black;
+  
+  @include respond(small-phone) {
+    padding: 3rem;
+  }
+
+  // &__home {
+  //   background: $color-black;
+  // }
+
+  // &__status {
+  //   background-color: red;
+  // }
 }
 
 

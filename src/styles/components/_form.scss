@@ -1,0 +1,71 @@
+.contact {
+    &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+    &__input {
+      margin-top: 2rem;
+      font-size: 2rem;
+      font-weight: 500;
+      font-family: inherit;
+      color: inherit;
+      padding: 2rem 15rem;
+      border-radius: 0.3rem;
+      background-color: $color-primary;
+      border: none;
+      transition: all .3s;
+      text-align: center;
+      outline: none;
+
+    // @include respond(tab-land) {
+    //     // padding: 2rem 10rem;
+    //     width: 40%;
+    // }
+
+    // @include respond(tab-port) {
+    //     // padding: 2rem 10rem;
+    //     width: 50%;
+    // }
+
+    @include respond(phone) {
+        // padding: 2rem 10rem;
+        width: 100%;
+        padding: 2rem 2rem;
+        font-weight: 500;
+        font-size: 2rem;
+    }
+
+      &::-webkit-input-placeholder {
+          color: $color-black;
+          font-weight: 500;
+          font-size: 2rem;
+
+        @include respond(phone) {
+            padding: 2rem 10rem;
+            font-weight: 500;
+            font-size: 5rem;
+        }
+      }
+    }
+
+    &__submit {
+      margin-top: 2rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
+}
+
+#message {
+    padding: 5rem 14rem;
+    @include respond(phone) {
+        // padding: 2rem 10rem;
+        width: 100%;
+        padding: 5rem 0rem;
+        font-weight: 500;
+        font-size: 2rem;
+    }
+}
