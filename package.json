@@ -1,7 +1,7 @@
 {
-  "name": "virestore",
+  "name": "portfolio",
   "version": "1.0.0",
-  "description": "VireStore for Web",
+  "description": "Portfolio for Sachin",
   "author": "Sachin Kr. Shukla",
   "license": "ISC",
   "main": "index.js",

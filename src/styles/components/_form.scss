@@ -32,21 +32,21 @@
 
     @include respond(phone) {
         // padding: 2rem 10rem;
-        width: 100%;
+        width: 80%;
         padding: 2rem 2rem;
         font-weight: 500;
         font-size: 2rem;
     }
 
       &::-webkit-input-placeholder {
-          color: $color-black;
+          color: $color-white;
           font-weight: 500;
           font-size: 2rem;
 
         @include respond(phone) {
-            padding: 2rem 10rem;
+            padding: 2rem 2rem;
             font-weight: 500;
-            font-size: 5rem;
+            font-size: 2rem;
         }
       }
     }
@@ -60,10 +60,10 @@
 }
 
 #message {
-    padding: 5rem 14rem;
+    padding: 5rem 15rem;
     @include respond(phone) {
         // padding: 2rem 10rem;
-        width: 100%;
+        width: 80%;
         padding: 5rem 0rem;
         font-weight: 500;
         font-size: 2rem;

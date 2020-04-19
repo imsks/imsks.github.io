@@ -1,0 +1,54 @@
+{
+    "currently_upto": {
+        "Books I am reading": [
+            "Book 1",
+            "Book 2",
+            "Book 3",
+            "Book 4",
+            "Book 5"
+        ],
+
+        "Currently Learning": [
+            "Skills 1",
+            "Skills 2",
+            "Skills 3",
+            "Skills 4",
+            "Skills 5"
+        ],
+
+        "Working on": [
+            "Project 1",
+            "Project 2",
+            "Project 3",
+            "Project 4",
+            "Project 5"
+        ]
+    },
+
+    "i_loved": {
+        "Favorite Books": [
+            "Book 1",
+            "Book 2",
+            "Book 3",
+            "Book 4",
+            "Book 5"
+        ],
+
+        "All time favorite Movies": [
+            "Movies 1",
+            "Movies 2",
+            "Movies 3",
+            "Movies 4",
+            "Movies 5"
+        ],
+
+        "I liked Podcasts": [
+            "Podcasts 1",
+            "Podcasts 2",
+            "Podcasts 3",
+            "Podcasts 4",
+            "Podcasts 5"
+        ]
+    },
+    "current_location": "Lakhimpur-Kheri, India"
+}

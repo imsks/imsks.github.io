@@ -11,6 +11,10 @@
 
   &__logo {
     // position: fixed;
+    
+    @include respond(small-phone) {
+      margin-left: 2rem;
+    }
     &__text {
       color: $color-white;
       font-size: $logo-font-size;

@@ -15,7 +15,7 @@ const Footer = (props) => {
       <div className="footer__right">
         <div className="footer__right__socialmedia">
           {Object.keys(data).map((key) => {
-            console.log(data[key].icon_data);
+            // console.log(data[key].icon_data);
             return (
               <a
                 href={data[key].url}

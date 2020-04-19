@@ -1,7 +1,7 @@
 import React from "react";
+import Data from "../Data/Portfolio.data.json";
 
 import Header from "../components/Header";
-import Data from "../Data/Portfolio.data.json";
 import AboutMe from "../components/AboutMe";
 import Ventures from "../components/Ventures";
 import Blogs from "../components/Blogs";
@@ -11,8 +11,9 @@ import Footer from "../components/Footer";
 
 export default class PortfolioApp extends React.Component {
   render() {
+    // console.log(typeof Data.header_data.logo_name);
     return (
-      <main className="body__home">
+      <main>
         <Header header_data={Data.header_data} />
         <AboutMe about_data={Data.about_me} />
         <Ventures ventures_data={Data.my_ventures} />
