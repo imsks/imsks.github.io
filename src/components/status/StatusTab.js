@@ -7,7 +7,11 @@ const StatusTab = (props) => {
     <div>
       {
         <div className="tab">
-          <input type="checkbox" id={uid} />
+          <input
+            type="checkbox"
+            id={uid}
+            className="status__content__checkbox"
+          />
           <label className="tab-label" htmlFor={uid}>
             {status_head}
           </label>

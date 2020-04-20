@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Slugify from "slugify";
 
 const Navigation = (props) => {
   return (
@@ -14,9 +16,16 @@ const Navigation = (props) => {
       <nav className="navigation__nav">
         <ul className="navigation__list">
           {props.link_data.map((element) => {
+            const goToPage =
+              Slugify(element.toLowerCase()) == "home"
+                ? "/"
+                : Slugify(element.toLowerCase());
+            // console.log(goToPage);
             return (
               <li className="navigation__item" key={element}>
-                <a className="navigation__link">{element}</a>
+                <Link to={goToPage} className="navigation__link">
+                  {element}
+                </Link>
               </li>
             );
           })}

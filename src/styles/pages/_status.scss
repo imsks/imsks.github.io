@@ -64,15 +64,16 @@
               font-size: 3rem;
             }
         }
+
+        &__checkbox {
+          position: absolute;
+          opacity: 0;
+          z-index: -1;
+        }
     }
 }
 
-input {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-  
-}
+
 
 .tab {
   width: 100%;

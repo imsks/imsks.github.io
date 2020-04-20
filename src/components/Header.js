@@ -20,7 +20,7 @@ const Header = (props) => {
         </Link>
 
         {/* 2. Status Button */}
-        <Link to={currLoc == Location.home ? Location.status : Location.home}>
+        <Link to={Location.status}>
           <div className="header__status">
             <div className="header__status__style"></div>
           </div>

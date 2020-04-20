@@ -1,5 +1,4 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import PortfolioData from "../Data/Portfolio.data.json";
 import StatusData from "../Data/Status.data.json";
 
@@ -10,7 +9,7 @@ export default class Status extends React.Component {
   render() {
     const currently_upto_items = StatusData.currently_upto;
     const i_loved__item = StatusData.i_loved;
-    // console.log(StatusData.currently_upto);
+    // console.log(History);
     return (
       <main className="status">
         <Header header_data={PortfolioData.header_data} />
@@ -38,7 +37,6 @@ export default class Status extends React.Component {
             <div className="status__content__right__content">
               <h3 className="status__content__right__heading">I loved</h3>
               <div className="status__content__right__items">
-                {/* Accordion comes here */}
                 {/* Accordion comes here */}
                 {Object.keys(i_loved__item).map((key, id) => {
                   // console.log(currently_upto_items[key], key);
