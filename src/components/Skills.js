@@ -1,9 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Slugify from "slugify";
 
 const Skills = (props) => {
   const { skills_data } = props;
   const data = skills_data.data;
-  //   console.log(data);
+  const currLoc = skills_data.url;
+  // console.log(currLoc);
 
   return (
     <section className="skill">

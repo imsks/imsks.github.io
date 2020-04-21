@@ -24,14 +24,33 @@
 
   "my_ventures": {
     "heading": "My Ventures",
+    "url": "/my-ventures/",
     "data": {
       "gangs_of_hackspur": {
         "name": "Gangs Of Hackspur",
-        "about": "Testing"
+        "about": [
+          "Why I Founded: The academic content we were getting was very uncertain about why we were learning that course. Without a cause it was just a grade-oriented useless education",
+          "Gangs Of Hackspur was a one-stop solution for engineering academic content that I was selling in printed 'Hacks'",
+          "I invested 1k INR and sold around 2k. As I was working alone on it and also had academic pressure so I'd to drop it :("
+        ],
+        "visit_link": {
+          "link": null,
+          "cta": "Coming Soon" 
+        },
+        "url": "/gangs-of-hackspur"
       },
       "vire_go": {
         "name": "Vire Go",
-        "about": "Testing"
+        "about": [
+          "Why We Founded: The B2B marketplace is still offering services and expanding conventionally. We thought we can do it better by offering management to small businesses.",
+          "We offer managment and expansion solution to small business in Vellore and Lucknow region.",
+          "We founded in December, 2019 and 200+ businesses have joined so far."
+        ],
+        "visit_link": {
+          "link": "https://testing.com",
+          "cta": "Coming Soon" 
+        },
+        "url": "/vire-go"
       }
     }
   },
@@ -59,6 +78,7 @@
 
   "my_skills": {
     "heading": "What I am good at",
+    "url": "/skills/",
     "data": {
       "skill_1": {
         "title": "UI/UX Design",
@@ -144,23 +164,23 @@
     ],
     "right": {
       "facebook": {
-        "url": "https://www.google.com",
+        "url": "https://www.testing.com",
         "icon_data": "facebook-square"
       },
       "instagram": {
-        "url": "https://www.google.com",
+        "url": "https://www.testing.com",
         "icon_data": "instagram"
       },
       "twitter": {
-        "url": "https://www.google.com",
+        "url": "https://www.testing.com",
         "icon_data": "twitter"
       },
       "linkedin": {
-        "url": "https://www.google.com",
+        "url": "https://www.testing.com",
         "icon_data": "linkedin-square"
       },
       "medium": {
-        "url": "https://www.google.com",
+        "url": "https://www.testing.com",
         "icon_data": "medium"
       }
     }

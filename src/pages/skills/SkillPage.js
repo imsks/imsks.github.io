@@ -1,7 +1,7 @@
 import React from "react";
 import PortfolioData from "../../Data/Portfolio.data.json";
 import Header from "../../components/Header";
-import Ventures from "../../components/Ventures";
+import Skills from "../../components/Skills";
 
 // import "./ventures.styles.scss";
 
