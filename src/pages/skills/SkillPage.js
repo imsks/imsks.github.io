@@ -7,10 +7,10 @@ import Skills from "../../components/Skills";
 
 const VenturesPage = () => {
   return (
-    <main className="ventures__page">
+    <main className="skills__page">
       <Header header_data={PortfolioData.header_data} />
-      <div className="ventures__page__content">
-        <Ventures ventures_data={PortfolioData.my_ventures} />
+      <div className="skills__page__content">
+        <Skills skills_data={PortfolioData.my_skills} />
       </div>
     </main>
   );

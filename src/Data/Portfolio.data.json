@@ -24,7 +24,7 @@
 
   "my_ventures": {
     "heading": "My Ventures",
-    "url": "/my-ventures/",
+    "url": "/my-ventures",
     "data": {
       "gangs_of_hackspur": {
         "name": "Gangs Of Hackspur",
@@ -78,70 +78,686 @@
 
   "my_skills": {
     "heading": "What I am good at",
-    "url": "/skills/",
+    "url": "/skills",
     "data": {
       "skill_1": {
         "title": "UI/UX Design",
         "sub_title": "Build User-centric design for your product with me",
         "cta": "Show me the designs",
+        "url": "/ui-ux-design",
         "skill_data": {
-
+          "cta": "Show me project",
+          "project_1": {
+            "name": "FlapX1 UI Designs",
+            "description": "FlapX1 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_2": {
+            "name": "FlapX2 UI Designs",
+            "description": "FlapX2 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_3": {
+            "name": "FlapX3 UI Designs",
+            "description": "FlapX3 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_4": {
+            "name": "FlapX4 UI Designs",
+            "description": "FlapX4 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          }
         }
       },
       "skill_2": {
         "title": "Web Dev",
         "sub_title": "I can help you build functional websites for your personal or professional purpose.",
         "cta": "How will you do that?",
+        "url": "/web-dev",
         "skill_data": {
-
+          "cta": "Show me project",
+          "project_1": {
+            "name": "FlapX1 UI Designs",
+            "description": "FlapX1 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_2": {
+            "name": "FlapX2 UI Designs",
+            "description": "FlapX2 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_3": {
+            "name": "FlapX3 UI Designs",
+            "description": "FlapX3 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_4": {
+            "name": "FlapX4 UI Designs",
+            "description": "FlapX4 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          }
         }
       },
       "skill_3": {
         "title": "Marketing",
         "sub_title": "Building Marketing Campaigns, Social Media Management & Advertising, SEO",
         "cta": "I want to know more",
+        "url": "/digital-marketing",
         "skill_data": {
-
+          "cta": "Show me project",
+          "project_1": {
+            "name": "FlapX1 UI Designs",
+            "description": "FlapX1 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_2": {
+            "name": "FlapX2 UI Designs",
+            "description": "FlapX2 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_3": {
+            "name": "FlapX3 UI Designs",
+            "description": "FlapX3 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_4": {
+            "name": "FlapX4 UI Designs",
+            "description": "FlapX4 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          }
         }
       },
       "skill_4": {
         "title": "Copywriting",
         "sub_title": "I help you  making copy for your Websites, Social Media Ads, Emails.",
         "cta": "Copy that sells..?",
+        "url": "/copywriting",
         "skill_data": {
-
+          "cta": "Show me project",
+          "project_1": {
+            "name": "FlapX1 UI Designs",
+            "description": "FlapX1 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_2": {
+            "name": "FlapX2 UI Designs",
+            "description": "FlapX2 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_3": {
+            "name": "FlapX3 UI Designs",
+            "description": "FlapX3 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_4": {
+            "name": "FlapX4 UI Designs",
+            "description": "FlapX4 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          }
         }
       },
       "skill_5": {
         "title": "Content Writing",
         "sub_title": "I can help you making content that sells",
         "cta": "What can you write?",
+        "url": "/content-writing",
         "skill_data": {
-
+          "cta": "Show me project",
+          "project_1": {
+            "name": "FlapX1 UI Designs",
+            "description": "FlapX1 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_2": {
+            "name": "FlapX2 UI Designs",
+            "description": "FlapX2 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_3": {
+            "name": "FlapX3 UI Designs",
+            "description": "FlapX3 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_4": {
+            "name": "FlapX4 UI Designs",
+            "description": "FlapX4 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          }
         }
       },
       "skill_6": {
         "title": "Graphic Designs",
         "sub_title": "Build Interactive Logo or Social Media posters with me",
         "cta": "Show some art",
+        "url": "/graphic-design",
         "skill_data": {
-
+          "cta": "Show me project",
+          "project_1": {
+            "name": "FlapX1 UI Designs",
+            "description": "FlapX1 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_2": {
+            "name": "FlapX2 UI Designs",
+            "description": "FlapX2 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_3": {
+            "name": "FlapX3 UI Designs",
+            "description": "FlapX3 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_4": {
+            "name": "FlapX4 UI Designs",
+            "description": "FlapX4 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          }
         }
       },
       "skill_7": {
         "title": "Mentorship",
         "sub_title": "I can guide you building your career in Entrepreneurship, like a friend.",
         "cta": "I need Mentorship!",
+        "url": "/mentorship",
         "skill_data": {
-
+          "cta": "Show me project",
+          "project_1": {
+            "name": "FlapX1 UI Designs",
+            "description": "FlapX1 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_2": {
+            "name": "FlapX2 UI Designs",
+            "description": "FlapX2 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_3": {
+            "name": "FlapX3 UI Designs",
+            "description": "FlapX3 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_4": {
+            "name": "FlapX4 UI Designs",
+            "description": "FlapX4 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          }
         }
       },
       "skill_8": {
         "title": "App Dev",
         "sub_title": "Currently learning Flutter",
         "cta": "Learning...",
+        "url": "/app-dev",
         "skill_data": {
-
+          "cta": "Show me project",
+          "project_1": {
+            "name": "FlapX1 UI Designs",
+            "description": "FlapX1 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_2": {
+            "name": "FlapX2 UI Designs",
+            "description": "FlapX2 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_3": {
+            "name": "FlapX3 UI Designs",
+            "description": "FlapX3 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          },
+          "project_4": {
+            "name": "FlapX4 UI Designs",
+            "description": "FlapX4 Description",
+            "meta_data": {
+              "software_used": [
+                "Adobe XD"
+              ],
+              "role": [
+                "Designer"
+              ] 
+            },
+            "link": "https://testing.com",
+            "images_link": [
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            "video_link": null
+          }
         }
       }
     }

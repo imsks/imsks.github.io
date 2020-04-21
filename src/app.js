@@ -30,6 +30,12 @@ const routes = (
           //   PortfolioData.my_ventures.data[key].about,
           //   key
           // );
+          // console.log(
+          //   "2." +
+          //     PortfolioData.my_ventures.url +
+          //     PortfolioData.my_ventures.data[key].url
+          // );
+          // console.log(PortfolioData.my_ventures.url);
           return (
             <Route
               path={
@@ -52,6 +58,35 @@ const routes = (
           component={SkillPage}
           exact={true}
         />
+        {Object.keys(PortfolioData.my_skills.data).map((key) => {
+          // console.log(
+          //   PortfolioData.my_skills.data[key].name,
+          //   PortfolioData.my_skills.data[key].about,
+          //   key
+          // );
+          // console.log(
+          //   "2." +
+          //     PortfolioData.my_skills.url +
+          //     PortfolioData.my_skills.data[key].url
+          // );
+          // console.log(PortfolioData.my_skills.data[key]);
+          return (
+            <Route
+              path={
+                PortfolioData.my_skills.url +
+                PortfolioData.my_skills.data[key].url
+              }
+              render={() => (
+                <SkillItem
+                  skillName={PortfolioData.my_skills.data[key].title}
+                  skillAbout={PortfolioData.my_skills.data[key].sub_title}
+                  skillData={PortfolioData.my_skills.data[key].skill_data}
+                />
+              )}
+              key={key}
+            />
+          );
+        })}
       </Switch>
     </div>
   </BrowserRouter>

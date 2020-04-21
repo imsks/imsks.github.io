@@ -6,7 +6,6 @@ const Skills = (props) => {
   const { skills_data } = props;
   const data = skills_data.data;
   const currLoc = skills_data.url;
-  // console.log(currLoc);
 
   return (
     <section className="skill">
@@ -17,6 +16,7 @@ const Skills = (props) => {
       <div className="skill__content">
         {Object.keys(data).map((key, id) => {
           // console.log(data[`skill_${id + 1}`].title);
+          // console.log(data[key].url);
           return (
             <div className="skill__card" key={key}>
               <h3 className="skill__card__title">
@@ -25,9 +25,12 @@ const Skills = (props) => {
               <p className="skill__card__subtitle">
                 {data[`skill_${id + 1}`].sub_title}
               </p>
-              <a href="#" className="btn btn-md skill__card__link">
+              <Link
+                to={currLoc + data[key].url}
+                className="btn btn-md skill__card__link"
+              >
                 {data[`skill_${id + 1}`].cta}
-              </a>
+              </Link>
             </div>
           );
         })}

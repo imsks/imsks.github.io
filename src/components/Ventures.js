@@ -17,12 +17,13 @@ const Ventures = (props) => {
       {/* Venture Card Content */}
       <div className="ventures__content">
         {Object.keys(data).map((key) => {
-          const venture_name = currLoc + Slugify(data[key].name).toLowerCase();
+          const venture_name =
+            currLoc + "/" + Slugify(data[key].name).toLowerCase();
           // const goTo = {
           //   pathName: venture_name,
           //   state: "testing",
           // };
-          console.log(venture_name);
+          // console.log("1." + venture_name);
           return (
             <div className="card" key={key}>
               <h3 className="card__heading">{data[key].name}</h3>

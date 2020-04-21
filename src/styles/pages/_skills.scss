@@ -1,0 +1,72 @@
+.skills__page {
+    &__content {
+        // transform: translateY(-2rem);
+        margin-top: 10rem;
+
+        @include respond(phone) {
+            margin-top: 5rem;
+        }
+    }
+}
+
+.skillitem {
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        &__heading {
+            align-self: center;
+            margin-top: 10rem;
+
+            @include respond(phone) {
+                margin-top: 10rem;
+            }
+        }
+
+        &__about {
+            align-self: center;
+            margin: 1rem 10rem;
+
+            @include respond(phone) {
+                margin: 1rem 2rem;
+            }
+        }
+
+        &__project {
+            display: grid;
+            gap: .5rem;
+            justify-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+            @include respond(small-phone) {
+                grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
+            }
+
+            &__card {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                overflow: hidden;
+                background-color: $color-white;
+                color: $color-primary;
+            }
+
+            &__heading {
+                font-size: 3rem;
+                margin: 0 1rem;
+                font-weight: 700;
+            }
+
+            &__description {
+                font-size: 1.6rem;
+                font-weight: 600;
+            }
+
+
+            &__cta {
+                padding: 2rem 5rem;
+                // background-color: $color-white;
+            }
+        }
+    }
+}

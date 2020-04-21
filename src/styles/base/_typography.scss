@@ -67,7 +67,7 @@
     display: block;
     font-size: 2rem;
     font-weight: 500;
-    letter-spacing: 0.4rem;
+    letter-spacing: 0.1rem;
 
     @include respond(phone) {
       font-size: 2rem;
