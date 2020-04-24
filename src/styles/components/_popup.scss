@@ -5,6 +5,7 @@
     top: 0;
     left: 0;
     background-color: rgba($color-black, .8);
+    color: $color-primary;
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
@@ -18,52 +19,118 @@
 
     &__content {
         @include absCenter;
-
-        width: 75%;
+        width: 90%;
+        height: 80vh;
         background-color: $color-white;
         box-shadow: 0 2rem 4rem rgba($color-black, .2);
         border-radius: 3px;
-        display: table;
         overflow: hidden;
         opacity: 0;
         transform: translate(-50%, -50%) scale(.25);
         transition: all .5s .2s;
+
+        display: grid;
+        gap: .5rem;
+        justify-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+        @include respond(small-phone) {
+            grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
+        }
+
+        &__header{
+            margin: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+
+            &__heading {
+                font-weight: 600;
+            }
+
+            &__subheading {
+                margin: 0 5rem 1rem 5rem;
+                font-weight: 500;
+            }
+
+            &__meta {
+                display: flex;
+                align-items: baseline;
+
+                &__content {
+                    font-size: 2rem;
+                    font-weight: 500;
+                    margin-left: 1rem;
+                }
+            }
+
+            &__softwares {
+                display: flex;
+            }
+
+            &__roles{
+                display: flex;
+            }
+
+            &__software {
+                margin-left: 1rem;
+                background-color: $color-primary;
+                padding: 1rem 2rem;
+                border-radius: 10rem;
+                &__item{
+                    color: $color-white;
+                    font-size: 1.4rem;
+                }
+            }
+
+            &__role {
+                margin-left: 1rem;
+                background-color: $color-primary;
+                padding: 1rem 2rem;
+                border-radius: 10rem;
+                &__item{
+                    color: $color-white;
+                    font-size: 1.4rem;
+                }
+            }
+        }
     }
 
-    &__left {
-        width: 33.333333%;
-        display: table-cell;
-    }
+    // &__left {
+    //     width: 33.333333%;
+    //     display: table-cell;
+    // }
 
-    &__right {
-        width: 66.6666667%;
-        display: table-cell;
-        vertical-align: middle;
-        padding: 3rem 5rem;
-    }
+    // &__right {
+    //     width: 66.6666667%;
+    //     display: table-cell;
+    //     vertical-align: middle;
+    //     padding: 3rem 5rem;
+    // }
 
-    &__img {
-        display: block;
-        width: 100%;
-    }
+    // &__img {
+    //     display: block;
+    //     width: 100%;
+    // }
 
-    &__text {
-        font-size: 1.4rem;
-        margin-bottom: 4rem;
+    // &__text {
+    //     font-size: 1.4rem;
+    //     margin-bottom: 4rem;
 
-        -moz-column-count: 2;
-        -moz-column-gap: 4rem; //1em = 14px;
-        -moz-column-rule: 1px solid $color-primary;
+    //     -moz-column-count: 2;
+    //     -moz-column-gap: 4rem; //1em = 14px;
+    //     -moz-column-rule: 1px solid $color-primary;
 
-        column-count: 2;
-        column-gap: 4rem; //1em = 14px;
-        column-rule: 1px solid $color-primary;
+    //     column-count: 2;
+    //     column-gap: 4rem; //1em = 14px;
+    //     column-rule: 1px solid $color-primary;
 
-        -moz-hyphens: auto;
-        -ms-hyphens: auto;
-        -webkit-hyphens: auto;
-        hyphens: auto;
-    }
+    //     -moz-hyphens: auto;
+    //     -ms-hyphens: auto;
+    //     -webkit-hyphens: auto;
+    //     hyphens: auto;
+    // }
 
     //Open states
     &:target {
@@ -81,9 +148,9 @@
         &:visited {
             color: $color-primary;
             position: absolute;
-            top: 2.5rem;
-            right: 2.5rem;
-            font-size: 3rem;
+            top: 1rem;
+            right: 3rem;
+            font-size: 5rem;
             text-decoration: none;
             display: inline-block;
             transition: all .2s;
@@ -93,5 +160,10 @@
         &:hover {
             color: $color-primary;
         }
+    }
+
+    ::selection {
+        color: $color-white;
+        background-color: $color-primary;
     }
 }

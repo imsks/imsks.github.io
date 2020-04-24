@@ -82,22 +82,21 @@
     "data": {
       "skill_1": {
         "title": "UI/UX Design",
-        "sub_title": "Build User-centric design for your product with me",
+        "sub_title": "*Talk about your experience in UI/UX Design*",
         "cta": "Show me the designs",
         "url": "/ui-ux-design",
         "skill_data": {
-          "cta": "Show me project",
+          "cta": "Project CTA",
           "project_1": {
-            "name": "FlapX1 UI Designs",
-            "description": "FlapX1 Description",
-            "meta_data": {
-              "software_used": [
-                "Adobe XD"
+            "name": "Test 1 UI Designs",
+            "description": "Test 1 Project Description",
+            "software_used": [
+                "Adobe XD",
+                "Adobe AE"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -107,16 +106,14 @@
             "video_link": null
           },
           "project_2": {
-            "name": "FlapX2 UI Designs",
-            "description": "FlapX2 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 2 UI Designs",
+            "description": "Test 2 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -126,16 +123,14 @@
             "video_link": null
           },
           "project_3": {
-            "name": "FlapX3 UI Designs",
-            "description": "FlapX3 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 3 UI Designs",
+            "description": "Test 3 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -145,16 +140,14 @@
             "video_link": null
           },
           "project_4": {
-            "name": "FlapX4 UI Designs",
-            "description": "FlapX4 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 4 UI Designs",
+            "description": "Test 4 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -171,18 +164,16 @@
         "cta": "How will you do that?",
         "url": "/web-dev",
         "skill_data": {
-          "cta": "Show me project",
+          "cta": "Project CTA",
           "project_1": {
-            "name": "FlapX1 UI Designs",
-            "description": "FlapX1 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 1 UI Designs",
+            "description": "Test 1 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -192,16 +183,14 @@
             "video_link": null
           },
           "project_2": {
-            "name": "FlapX2 UI Designs",
-            "description": "FlapX2 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 2 UI Designs",
+            "description": "Test 2 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -211,16 +200,14 @@
             "video_link": null
           },
           "project_3": {
-            "name": "FlapX3 UI Designs",
-            "description": "FlapX3 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 3 UI Designs",
+            "description": "Test 3 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -230,16 +217,14 @@
             "video_link": null
           },
           "project_4": {
-            "name": "FlapX4 UI Designs",
-            "description": "FlapX4 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 4 UI Designs",
+            "description": "Test 4 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -256,18 +241,16 @@
         "cta": "I want to know more",
         "url": "/digital-marketing",
         "skill_data": {
-          "cta": "Show me project",
+          "cta": "Project CTA",
           "project_1": {
-            "name": "FlapX1 UI Designs",
-            "description": "FlapX1 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 1 UI Designs",
+            "description": "Test 1 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -277,16 +260,14 @@
             "video_link": null
           },
           "project_2": {
-            "name": "FlapX2 UI Designs",
-            "description": "FlapX2 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 2 UI Designs",
+            "description": "Test 2 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -296,16 +277,14 @@
             "video_link": null
           },
           "project_3": {
-            "name": "FlapX3 UI Designs",
-            "description": "FlapX3 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 3 UI Designs",
+            "description": "Test 3 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -315,16 +294,14 @@
             "video_link": null
           },
           "project_4": {
-            "name": "FlapX4 UI Designs",
-            "description": "FlapX4 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 4 UI Designs",
+            "description": "Test 4 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -341,18 +318,16 @@
         "cta": "Copy that sells..?",
         "url": "/copywriting",
         "skill_data": {
-          "cta": "Show me project",
+          "cta": "Project CTA",
           "project_1": {
-            "name": "FlapX1 UI Designs",
-            "description": "FlapX1 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 1 UI Designs",
+            "description": "Test 1 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -362,16 +337,14 @@
             "video_link": null
           },
           "project_2": {
-            "name": "FlapX2 UI Designs",
-            "description": "FlapX2 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 2 UI Designs",
+            "description": "Test 2 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -381,16 +354,14 @@
             "video_link": null
           },
           "project_3": {
-            "name": "FlapX3 UI Designs",
-            "description": "FlapX3 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 3 UI Designs",
+            "description": "Test 3 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -400,16 +371,14 @@
             "video_link": null
           },
           "project_4": {
-            "name": "FlapX4 UI Designs",
-            "description": "FlapX4 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 4 UI Designs",
+            "description": "Test 4 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -426,18 +395,16 @@
         "cta": "What can you write?",
         "url": "/content-writing",
         "skill_data": {
-          "cta": "Show me project",
+          "cta": "Project CTA",
           "project_1": {
-            "name": "FlapX1 UI Designs",
-            "description": "FlapX1 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 1 UI Designs",
+            "description": "Test 1 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -447,16 +414,14 @@
             "video_link": null
           },
           "project_2": {
-            "name": "FlapX2 UI Designs",
-            "description": "FlapX2 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 2 UI Designs",
+            "description": "Test 2 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -466,16 +431,14 @@
             "video_link": null
           },
           "project_3": {
-            "name": "FlapX3 UI Designs",
-            "description": "FlapX3 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 3 UI Designs",
+            "description": "Test 3 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -485,16 +448,14 @@
             "video_link": null
           },
           "project_4": {
-            "name": "FlapX4 UI Designs",
-            "description": "FlapX4 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 4 UI Designs",
+            "description": "Test 4 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -511,18 +472,16 @@
         "cta": "Show some art",
         "url": "/graphic-design",
         "skill_data": {
-          "cta": "Show me project",
+          "cta": "Project CTA",
           "project_1": {
-            "name": "FlapX1 UI Designs",
-            "description": "FlapX1 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 1 UI Designs",
+            "description": "Test 1 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -532,16 +491,14 @@
             "video_link": null
           },
           "project_2": {
-            "name": "FlapX2 UI Designs",
-            "description": "FlapX2 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 2 UI Designs",
+            "description": "Test 2 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -551,16 +508,14 @@
             "video_link": null
           },
           "project_3": {
-            "name": "FlapX3 UI Designs",
-            "description": "FlapX3 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 3 UI Designs",
+            "description": "Test 3 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -570,16 +525,14 @@
             "video_link": null
           },
           "project_4": {
-            "name": "FlapX4 UI Designs",
-            "description": "FlapX4 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 4 UI Designs",
+            "description": "Test 4 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -596,18 +549,16 @@
         "cta": "I need Mentorship!",
         "url": "/mentorship",
         "skill_data": {
-          "cta": "Show me project",
+          "cta": "Project CTA",
           "project_1": {
-            "name": "FlapX1 UI Designs",
-            "description": "FlapX1 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 1 UI Designs",
+            "description": "Test 1 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -617,16 +568,14 @@
             "video_link": null
           },
           "project_2": {
-            "name": "FlapX2 UI Designs",
-            "description": "FlapX2 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 2 UI Designs",
+            "description": "Test 2 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -636,16 +585,14 @@
             "video_link": null
           },
           "project_3": {
-            "name": "FlapX3 UI Designs",
-            "description": "FlapX3 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 3 UI Designs",
+            "description": "Test 3 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -655,16 +602,14 @@
             "video_link": null
           },
           "project_4": {
-            "name": "FlapX4 UI Designs",
-            "description": "FlapX4 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 4 UI Designs",
+            "description": "Test 4 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -681,18 +626,16 @@
         "cta": "Learning...",
         "url": "/app-dev",
         "skill_data": {
-          "cta": "Show me project",
+          "cta": "Project CTA",
           "project_1": {
-            "name": "FlapX1 UI Designs",
-            "description": "FlapX1 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 1 UI Designs",
+            "description": "Test 1 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -702,16 +645,14 @@
             "video_link": null
           },
           "project_2": {
-            "name": "FlapX2 UI Designs",
-            "description": "FlapX2 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 2 UI Designs",
+            "description": "Test 2 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -721,16 +662,14 @@
             "video_link": null
           },
           "project_3": {
-            "name": "FlapX3 UI Designs",
-            "description": "FlapX3 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 3 UI Designs",
+            "description": "Test 3 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
@@ -740,16 +679,14 @@
             "video_link": null
           },
           "project_4": {
-            "name": "FlapX4 UI Designs",
-            "description": "FlapX4 Description",
-            "meta_data": {
-              "software_used": [
+            "name": "Test 4 UI Designs",
+            "description": "Test 4 Project Description",
+            "software_used": [
                 "Adobe XD"
               ],
-              "role": [
+              "roles": [
                 "Designer"
-              ] 
-            },
+              ],
             "link": "https://testing.com",
             "images_link": [
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
