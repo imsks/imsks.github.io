@@ -80,6 +80,13 @@ const routes = (
                 <SkillItem
                   skillName={PortfolioData.my_skills.data[key].title}
                   skillAbout={PortfolioData.my_skills.data[key].sub_title}
+                  skillSpecialized={
+                    PortfolioData.my_skills.data[key].specialized_in
+                  }
+                  skillExp={PortfolioData.my_skills.data[key].experience_data}
+                  skillCertificate={
+                    PortfolioData.my_skills.data[key].certificates
+                  }
                   skillData={PortfolioData.my_skills.data[key].skill_data}
                 />
               )}

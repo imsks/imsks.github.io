@@ -24,22 +24,15 @@
         background-color: $color-white;
         box-shadow: 0 2rem 4rem rgba($color-black, .2);
         border-radius: 3px;
-        overflow: hidden;
+        overflow-y: scroll;
         opacity: 0;
         transform: translate(-50%, -50%) scale(.25);
         transition: all .5s .2s;
 
-        display: grid;
-        gap: .5rem;
-        justify-items: center;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-
-        @include respond(small-phone) {
-            grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
-        }
+        
 
         &__header{
-            margin: 2rem;
+            margin: 1rem;
             display: flex;
             flex-direction: column;
             justify-content: start;
@@ -95,6 +88,62 @@
                 }
             }
         }
+
+        &__main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            // grid-row: 1 / 4;
+            //     display: flex;
+            //     flex-direction: column;
+            //     justify-content: center;
+            //     align-items: center;
+
+            &__heading {
+                margin: 1rem 0 2rem 0;
+                font-size: 2rem;
+                text-align: center;
+                color: $color-primary;
+            }
+
+            &__data {
+                
+                &__image {
+                    display: block;
+                    margin: 0 auto 3rem auto;
+                    width: 50%;
+                    height: 50%;
+                    box-shadow: 1rem 1rem 3rem rgba($color: $color-black, $alpha: 0.1);
+                    transition: all 0.5s;
+
+                    &:hover {
+                        box-shadow: 2rem 5rem 5rem rgba($color: $color-black, $alpha: 0.2);
+                    }
+                }
+            }
+
+            // &__right {
+            //     grid-column: 3 / 6;
+            //     grid-row: 1 / 4;
+            // }
+
+            &__link {
+                margin: 3rem 0;
+
+                &__button {
+                    font-weight: 500;
+                }
+            }
+        }
+
+        &__hline {
+            margin-top: 1.5rem;
+            height: 0.2rem;
+            width: 80%;
+            background-color: $color-primary;
+        }
     }
 
     // &__left {
@@ -147,7 +196,7 @@
         &:link,
         &:visited {
             color: $color-primary;
-            position: absolute;
+            position: fixed;
             top: 1rem;
             right: 3rem;
             font-size: 5rem;

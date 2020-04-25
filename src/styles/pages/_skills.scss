@@ -7,6 +7,17 @@
             margin-top: 5rem;
         }
     }
+
+    &__certificate__data {
+        overflow-y: scroll;
+        width: 20% !important;
+        height: 10% !important;
+
+        &__image {
+            width: 40% !important;
+            height: 20% !important;
+        }
+    }
 }
 
 .skillitem {
@@ -29,6 +40,52 @@
 
             @include respond(phone) {
                 margin: 1rem 2rem;
+            }
+        }
+
+        &__desc {
+            margin-top: 2rem;
+            padding: 2rem 10rem;
+            align-self: center;
+            // height: 80%;
+            width: 80%;
+            background-color: $color-white;
+            border-radius: 0.5rem;
+
+            &__specialize {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: auto;
+
+                &__cta {
+                    color: $color-primary;
+                    font-size: 3rem;
+                    margin-left: 2rem;
+                }
+
+                &__items {
+                margin-left: 1rem;
+                background-color: $color-primary;
+                padding: 1rem 2rem;
+                border-radius: 10rem;
+                &__item{
+                    color: $color-white;
+                    font-size: 1.4rem;
+                }
+            }
+            }
+            
+            &__exp {
+                text-align: center;
+                margin: auto;
+                &__data {
+                    &__item{
+                        margin-top: 1rem;
+                        color: $color-primary;
+                        font-size: 1.6rem;
+                    }
+                }
             }
         }
 
@@ -65,6 +122,7 @@
 
             &__cta {
                 padding: 2rem 5rem;
+                font-weight: 500;
                 // background-color: $color-white;
             }
         }
