@@ -47,10 +47,11 @@
         @include respond(phone) {
             font-size: 2rem;
             font-weight: 700;
-            transform: translateX(55%);
+            transform: translateX(45%);
         }
 
         @include respond(small-phone) {
+            padding: 1.5rem 3rem;
             transform: translateX(45%);
         }
     }

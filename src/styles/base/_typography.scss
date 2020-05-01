@@ -18,7 +18,7 @@
     @include respond(small-phone) {
       font-size: 3.5rem;
       font-weight: 600;
-      margin: 0 2rem 1rem 2rem;
+      margin: -5rem 2rem 1rem 3rem;
     }
   }
 
@@ -34,7 +34,7 @@
 
     @include respond(small-phone) {
       font-size: 2rem;
-      margin: 0 2rem;
+      margin: 0 2rem 1rem 3rem;
     }
   }
 }

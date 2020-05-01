@@ -6,7 +6,6 @@
       "About Me",
       "My Ventures",
       "Skills",
-      "Open Source Projects",
       "Blog",
       "Connect"
     ],
@@ -34,7 +33,7 @@
           "I invested 1k INR and sold around 2k. As I was working alone on it and also had academic pressure so I'd to drop it :("
         ],
         "visit_link": {
-          "link": null,
+          "link_data": null,
           "cta": "Coming Soon" 
         },
         "url": "/gangs-of-hackspur"
@@ -47,7 +46,7 @@
           "We founded in December, 2019 and 200+ businesses have joined so far."
         ],
         "visit_link": {
-          "link": "https://testing.com",
+          "link_data": "https://testing.com",
           "cta": "Coming Soon" 
         },
         "url": "/vire-go"
@@ -97,7 +96,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -115,7 +114,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -133,7 +132,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -151,7 +150,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -214,7 +213,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -232,7 +231,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -250,7 +249,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -277,7 +276,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -295,7 +294,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -313,7 +312,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -331,7 +330,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -358,7 +357,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -376,7 +375,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -394,7 +393,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -412,7 +411,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -439,7 +438,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -457,7 +456,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -475,7 +474,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -493,7 +492,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -520,7 +519,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -538,7 +537,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -556,7 +555,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -574,7 +573,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -601,7 +600,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -619,7 +618,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -637,7 +636,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -655,7 +654,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -682,7 +681,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -700,7 +699,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -718,7 +717,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",
@@ -736,7 +735,7 @@
               "roles": [
                 "Designer"
               ],
-            "link": "https://testing.com",
+            "link_data": "https://testing.com",
             "images": [
               "Project Images",
               "https://images.unsplash.com/photo-1586809784406-0665c2d5d819",

@@ -20,10 +20,9 @@ const Navigation = (props) => {
               Slugify(element.toLowerCase()) == "home"
                 ? "/"
                 : Slugify(element.toLowerCase());
-            // console.log(goToPage);
             return (
               <li className="navigation__item" key={element}>
-                <Link to={goToPage} className="navigation__link">
+                <Link to={"/" + goToPage} className="navigation__link">
                   {element}
                 </Link>
               </li>

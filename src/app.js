@@ -10,6 +10,7 @@ import VenturesPage from "./pages/ventures/VenturesPage";
 import VentureItem from "./pages/ventures/VentureItem";
 import SkillPage from "./pages/skills/SkillPage";
 import SkillItem from "./pages/skills/SkillItem";
+import AboutMePage from "./pages/aboutMe/AboutMePage";
 
 import "./styles/styles.scss";
 
@@ -19,6 +20,7 @@ const routes = (
       <Switch>
         <Route path={Location.home} component={PortfolioApp} exact={true} />
         <Route path={Location.status} component={Status} />
+        <Route path={Location.about} component={AboutMePage} />
         <Route
           path={PortfolioData.my_ventures.url}
           component={VenturesPage}

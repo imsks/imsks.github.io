@@ -16,21 +16,12 @@ const Contact = (props) => {
 
       <div className="contact__content">
         <form action="#" className="contact__form">
-          <input
-            type="text"
-            placeholder={contact_data.form_content[0]}
-            className="contact__form__input"
-          />
-          <input
-            type="email"
-            placeholder={contact_data.form_content[1]}
-            className="contact__form__input"
-          />
-          <textarea
-            placeholder={contact_data.form_content[2]}
-            className="contact__form__input"
-            id="message"
-          ></textarea>
+          <p className="contact__form__label">{contact_data.form_content[0]}</p>
+          <input type="text" className="contact__form__input" />
+          <p className="contact__form__label">{contact_data.form_content[1]}</p>
+          <input type="email" className="contact__form__input" />
+          <p className="contact__form__label">{contact_data.form_content[2]}</p>
+          <textarea className="contact__form__input" id="message"></textarea>
 
           <a href="#" className="btn contact__form__submit" type="submit">
             {contact_data.form_content[3]}

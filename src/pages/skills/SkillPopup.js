@@ -71,27 +71,23 @@ const SkillPopup = (props) => {
                 })
               : ""}
           </div>
-          {popup_data["link_data"] != null
-            ? popup_data["link_data"].map((key, el, id) => {
-                // console.log("The link data is" + popup_data["link_data"]);
-                // console.log("The image data is" + popup_data["images"]);
-                return el == 0 ? (
-                  <div className="popup__content__main__link" key={key}>
-                    <a href={id[1]}>
-                      <button className="btn popup__content__main__link__button">
-                        {id[0]}
-                      </button>
-                    </a>
-                  </div>
-                ) : (
-                  ""
-                );
-              })
-            : ""}
+          <div>
+            {popup_data["link_data"] != null ? (
+              <div className="popup__content__main__link">
+                <a href={popup_data["link_data"]}>
+                  <button className="btn popup__content__main__link__button">
+                    Project Link
+                  </button>
+                </a>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
           {popup_data["link_data"] == null && popup_data["images"] == null ? (
             <div className="popup__content__main__end">
               <h3 className="heading-secondary--main">
-                {popup_data["link_data"]}
+                {popup_data["no_data"]}
               </h3>
             </div>
           ) : (
