@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Location from "./Data/Link.data";
-import PortfolioData from "./Data/Portfolio.data.json";
+import PortfolioData from "./data/Portfolio.data.json";
 
 import PortfolioApp from "./pages/PortfolioApp";
 import Status from "./pages/Status";
@@ -11,6 +11,8 @@ import VentureItem from "./pages/ventures/VentureItem";
 import SkillPage from "./pages/skills/SkillPage";
 import SkillItem from "./pages/skills/SkillItem";
 import AboutMePage from "./pages/aboutMe/AboutMePage";
+import BlogHome from "./pages/blog/BlogHome";
+import ContactPage from "./pages/ContactPage";
 
 import "./styles/styles.scss";
 
@@ -96,6 +98,18 @@ const routes = (
             />
           );
         })}
+
+        <Route
+          path={PortfolioData.my_blogs.url}
+          component={BlogHome}
+          exact={true}
+        />
+
+        <Route
+          path={PortfolioData.contact_me.url}
+          component={ContactPage}
+          exact={true}
+        />
       </Switch>
     </div>
   </BrowserRouter>

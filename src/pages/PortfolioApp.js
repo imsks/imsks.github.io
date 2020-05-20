@@ -1,5 +1,5 @@
 import React from "react";
-import Data from "../Data/Portfolio.data.json";
+import Data from "../data/Portfolio.data.json";
 
 import Header from "../components/Header";
 import AboutMe from "../components/AboutMe";

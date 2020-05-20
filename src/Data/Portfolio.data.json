@@ -56,6 +56,7 @@
 
   "my_blogs": {
     "heading": "Blogs",
+    "url": "/blog",
     "data": {
       "blog_1": {
         "title": "1. Why Deep Work important for our generation and how can we do it?",

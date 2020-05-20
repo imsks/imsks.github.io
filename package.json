@@ -8,7 +8,7 @@
   "scripts": {
     "serve": "live-server public/",
     "build": "webpack",
-    "dev-server": "webpack-dev-server"
+    "start": "webpack-dev-server"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
