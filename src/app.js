@@ -16,18 +16,26 @@ import ContactPage from "./pages/ContactPage";
 
 import "./styles/styles.scss";
 
+const {
+  home,
+  status,
+  about,
+  ventures,
+  skills,
+  blog,
+  connect,
+} = PortfolioData.slugs;
+
+console.log(connect);
+
 const routes = (
   <BrowserRouter>
     <div>
       <Switch>
-        <Route path={Location.home} component={PortfolioApp} exact={true} />
-        <Route path={Location.status} component={Status} />
-        <Route path={Location.about} component={AboutMePage} />
-        <Route
-          path={PortfolioData.my_ventures.url}
-          component={VenturesPage}
-          exact={true}
-        />
+        <Route path={home} component={PortfolioApp} exact={true} />
+        <Route path={status} component={Status} />
+        <Route path={about} component={AboutMePage} />
+        <Route path={ventures} component={VenturesPage} exact={true} />
         {Object.keys(PortfolioData.my_ventures.data).map((key) => {
           // console.log(
           //   PortfolioData.my_ventures.data[key].name,
@@ -42,10 +50,7 @@ const routes = (
           // console.log(PortfolioData.my_ventures.url);
           return (
             <Route
-              path={
-                PortfolioData.my_ventures.url +
-                PortfolioData.my_ventures.data[key].url
-              }
+              path={ventures + PortfolioData.my_ventures.data[key].url}
               render={() => (
                 <VentureItem
                   ventureName={PortfolioData.my_ventures.data[key].name}
@@ -57,11 +62,7 @@ const routes = (
             />
           );
         })}
-        <Route
-          path={PortfolioData.my_skills.url}
-          component={SkillPage}
-          exact={true}
-        />
+        <Route path={skills} component={SkillPage} exact={true} />
         {Object.keys(PortfolioData.my_skills.data).map((key) => {
           // console.log(
           //   PortfolioData.my_skills.data[key].name,
@@ -70,16 +71,13 @@ const routes = (
           // );
           // console.log(
           //   "2." +
-          //     PortfolioData.my_skills.url +
+          //     skills +
           //     PortfolioData.my_skills.data[key].url
           // );
           // console.log(PortfolioData.my_skills.data[key]);
           return (
             <Route
-              path={
-                PortfolioData.my_skills.url +
-                PortfolioData.my_skills.data[key].url
-              }
+              path={skills + PortfolioData.my_skills.data[key].url}
               render={() => (
                 <SkillItem
                   skillName={PortfolioData.my_skills.data[key].title}
@@ -99,17 +97,9 @@ const routes = (
           );
         })}
 
-        <Route
-          path={PortfolioData.my_blogs.url}
-          component={BlogHome}
-          exact={true}
-        />
+        <Route path={blog} component={BlogHome} exact={true} />
 
-        <Route
-          path={PortfolioData.contact_me.url}
-          component={ContactPage}
-          exact={true}
-        />
+        <Route path={connect} component={ContactPage} exact={true} />
       </Switch>
     </div>
   </BrowserRouter>

@@ -1,12 +1,23 @@
 {
+  "slugs":{
+    "home": "/",
+    "status": "/status",
+    "about": "/about",
+    "ventures": "/ventures",
+    "skills": "/skills",
+    "blog": "/blogs",
+    "connect": "/connect"
+  },
+
+  
   "header_data": {
     "logo_name": "Sachin",
     "navigation_links": [
       "Home",
-      "About Me",
-      "My Ventures",
+      "About",
+      "Ventures",
       "Skills",
-      "Blog",
+      "Blogs",
       "Connect"
     ],
     "introduction_data": {

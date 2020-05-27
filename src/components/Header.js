@@ -1,17 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Location from "../Data/Link.data";
+import PortfolioData from "../data/Portfolio.data.json";
 
 import Navigation from "./Navigation";
 
 const Header = (props) => {
   const currLoc = window.location.pathname;
 
+  const { home, status } = PortfolioData.slugs;
+
+  // console.log(home);
   return (
     <header>
       <div className="header">
         {/* 1. Logo */}
-        <Link to={Location.home} style={{ textDecoration: "none" }}>
+        <Link to={home} style={{ textDecoration: "none" }}>
           <div className="header__logo">
             <span className="header__logo__text">
               {props.header_data.logo_name}
@@ -20,7 +24,7 @@ const Header = (props) => {
         </Link>
 
         {/* 2. Status Button */}
-        <Link to={Location.status}>
+        <Link to={status}>
           <div className="header__status">
             <div className="header__status__style"></div>
           </div>
@@ -31,7 +35,7 @@ const Header = (props) => {
       </div>
 
       {/* Content Starts Here */}
-      {currLoc === Location.home ? (
+      {currLoc === home ? (
         <div className="header__content">
           <h1 className="header__content__heading heading-primary--main">
             {props.header_data.introduction_data.name}

@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Slugify from "slugify";
+import PortfolioData from "../data/Portfolio.data.json";
 // import VentureItem from "../pages/ventures/VentureItem";
 
 const Ventures = (props) => {
   const { ventures_data } = props;
   const data = ventures_data.data;
-  const currLoc = ventures_data.url;
+  const { ventures } = PortfolioData.slugs;
   // let { path, url } = useRouteMatch();
 
   return (
@@ -18,7 +19,7 @@ const Ventures = (props) => {
       <div className="ventures__content">
         {Object.keys(data).map((key) => {
           const venture_name =
-            currLoc + "/" + Slugify(data[key].name).toLowerCase();
+            ventures + "/" + Slugify(data[key].name).toLowerCase();
           // const goTo = {
           //   pathName: venture_name,
           //   state: "testing",
