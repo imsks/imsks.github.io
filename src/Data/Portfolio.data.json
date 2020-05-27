@@ -93,17 +93,16 @@
     "data": {
       "skill_1": {
         "title": "UI/UX Design",
-        "sub_title": "*Talk about your experience in UI/UX Design*",
+        "sub_title": "Built 8+ projects for Startups and Internships. Have 10+ months experience in XD, Invision and Figma.",
         "cta": "Show me the designs",
         "url": "/ui-ux-design",
         "skill_data": {
-          "cta": "Project CTA",
+          "cta": "Open Project",
           "project_1": {
-            "name": "Test 1 UI Designs",
-            "description": "Test 1 Project Description",
+            "name": "Virgin Tutor",
+            "description": "Started with UX Process with ideation and research and finished with UI design",
             "software_used": [
-                "Adobe XD",
-                "Adobe AE"
+                "Adobe XD"
               ],
               "roles": [
                 "Designer"

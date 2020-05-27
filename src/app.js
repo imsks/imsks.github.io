@@ -26,8 +26,6 @@ const {
   connect,
 } = PortfolioData.slugs;
 
-console.log(connect);
-
 const routes = (
   <BrowserRouter>
     <div>
