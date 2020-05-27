@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 // import "./aboutMe.styles.scss";
 
 const ContactPage = () => {
-  console.log("ss");
+  // console.log("ss");
   return (
     <main className="about__page">
       <Header header_data={Data.header_data} />

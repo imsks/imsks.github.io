@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Location from "../Data/Link.data";
+// import Location from "../Data/Link.data";
 import PortfolioData from "../data/Portfolio.data.json";
 
 import Navigation from "./Navigation";

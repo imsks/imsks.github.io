@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Location from "./Data/Link.data";
+// import Location from "./Data/Link.data";
 import PortfolioData from "./data/Portfolio.data.json";
 
 import PortfolioApp from "./pages/PortfolioApp";
