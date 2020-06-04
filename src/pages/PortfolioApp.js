@@ -11,7 +11,6 @@ import Footer from "../components/Footer";
 
 export default class PortfolioApp extends React.Component {
   render() {
-    // console.log(typeof Data.header_data.logo_name);
     return (
       <main>
         <Header header_data={Data.header_data} />

@@ -2,7 +2,6 @@ import React from "react";
 
 const SkillPopup = (props) => {
   const { popup_data } = props;
-  // console.log(popup_data);
   return (
     <div className="popup" id="popup">
       <div className="popup__content">
@@ -20,7 +19,6 @@ const SkillPopup = (props) => {
             <span className="popup__content__header__meta__content">Used</span>
             <div className="popup__content__header__softwares">
               {popup_data["software_used"].map((key, el, id) => {
-                // console.log(key, el, id);
                 return (
                   <div className="popup__content__header__software" key={key}>
                     <h5 className="popup__content__header__software__item">
@@ -33,7 +31,6 @@ const SkillPopup = (props) => {
             <span className="popup__content__header__meta__content">As</span>
             <div className="popup__content__header__roles">
               {popup_data["roles"].map((key, el, id) => {
-                // console.log(key, el, id);
                 return (
                   <div className="popup__content__header__role" key={key}>
                     <h5 className="popup__content__header__role__item">
@@ -50,7 +47,6 @@ const SkillPopup = (props) => {
           <div>
             {popup_data["images"] != null
               ? popup_data["images"].map((key, el, id) => {
-                  // console.log(popup_data["images"]);
                   return el == 0 ? (
                     <h2 className="popup__content__main__heading" key={key}>
                       {popup_data["images"][0]}

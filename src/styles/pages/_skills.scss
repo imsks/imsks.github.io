@@ -1,6 +1,5 @@
 .skills__page {
     &__content {
-        // transform: translateY(-2rem);
         margin-top: 10rem;
 
         @include respond(phone) {
@@ -47,7 +46,6 @@
             margin-top: 2rem;
             padding: 2rem 0rem;
             align-self: center;
-            // height: 80%;
             width: 80%;
             background-color: $color-white;
             border-radius: 0.5rem;
@@ -144,7 +142,6 @@
             &__cta {
                 padding: 2rem 5rem;
                 font-weight: 500;
-                // background-color: $color-white;
             }
         }
     }

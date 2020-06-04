@@ -3,8 +3,6 @@ import Data from "../../data/Portfolio.data.json";
 import Header from "../../components/Header";
 import Blogs from "../../components/Blogs";
 
-// import "./aboutMe.styles.scss";
-
 const BlogHome = () => {
   return (
     <main className="about__page">

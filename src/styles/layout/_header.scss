@@ -9,9 +9,7 @@
   z-index: 9999;
   background-color: $color-black;
 
-  &__logo {
-    // position: fixed;
-    
+  &__logo {    
     @include respond(small-phone) {
       margin-left: 2rem;
     }
@@ -33,10 +31,6 @@
   }
 
   &__status {
-    // position: fixed;
-    // top: 4rem;
-    // right: 45%;
-    // transform: translate(-50%, 20%);
     margin: 1rem 10rem 0 0;
     height: 3rem;
     width: 3rem;

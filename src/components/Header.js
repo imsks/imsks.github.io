@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Location from "../Data/Link.data";
+
 import PortfolioData from "../data/Portfolio.data.json";
 
 import Navigation from "./Navigation";
@@ -10,7 +10,6 @@ const Header = (props) => {
 
   const { home, status } = PortfolioData.slugs;
 
-  // console.log(home);
   return (
     <header>
       <div className="header">

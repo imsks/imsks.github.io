@@ -1,6 +1,5 @@
 .ventures__page {
     &__content {
-        // transform: translateY(-2rem);
         margin-top: -10rem;
 
         @include respond(phone) {

@@ -3,8 +3,6 @@ import PortfolioData from "../../data/Portfolio.data.json";
 import Header from "../../components/Header";
 import Skills from "../../components/Skills";
 
-// import "./ventures.styles.scss";
-
 const VenturesPage = () => {
   return (
     <main className="skills__page">

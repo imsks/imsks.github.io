@@ -3,7 +3,6 @@ import PortfolioData from "../../data/Portfolio.data.json";
 import Header from "../../components/Header";
 
 const VentureItem = (props) => {
-  // console.log(props.ventureLink.link);
   return (
     <section className="ventureitem">
       <Header header_data={PortfolioData.header_data} />

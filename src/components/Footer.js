@@ -4,7 +4,6 @@ var FontAwesome = require("react-fontawesome");
 const Footer = (props) => {
   const { footer_data } = props;
   const data = footer_data.right;
-  //   console.log(data);
 
   return (
     <footer className="footer">
@@ -15,7 +14,6 @@ const Footer = (props) => {
       <div className="footer__right">
         <div className="footer__right__socialmedia">
           {Object.keys(data).map((key) => {
-            // console.log(data[key].icon_data);
             return (
               <a
                 href={data[key].url}

@@ -15,8 +15,6 @@ const Skills = (props) => {
 
       <div className="skill__content">
         {Object.keys(data).map((key, id) => {
-          // console.log(data[`skill_${id + 1}`].title);
-          // console.log(data[key].url);
           return (
             <div className="skill__card" key={key}>
               <h3 className="skill__card__title">

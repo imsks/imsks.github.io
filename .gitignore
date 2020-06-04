@@ -1,2 +1,7 @@
 // Folders
 node_modules/
+.firebase/
+.firebaserc
+.prettierrc
+firebase.json
+package-lock.json

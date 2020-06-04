@@ -41,7 +41,6 @@ export default class PortfolioApp extends React.Component {
               {skillSpecialized != null ? (
                 <div className="skillitem__content__desc__specialize">
                   {skillSpecialized.map((key, el, id) => {
-                    // console.log(key, el, id);
                     return el != 0 ? (
                       <div
                         className="skillitem__content__desc__specialize__items"
@@ -68,7 +67,6 @@ export default class PortfolioApp extends React.Component {
                 <div className="skillitem__content__desc__exp">
                   {Object.keys(skillExp).map((key, el, id) => {
                     const temp = skillExp[key];
-                    // console.log(key, el, temp);
                     return (
                       <div
                         className="skillitem__content__desc__exp__data"
@@ -96,8 +94,6 @@ export default class PortfolioApp extends React.Component {
           <div className="skillitem__content__project">
             {Object.keys(skillData).map((key, id) => {
               const project_data = skillData[key];
-              // console.log(key);
-
               return id != 0 ? (
                 <div
                   className="card skillitem__content__project__card"
@@ -126,7 +122,6 @@ export default class PortfolioApp extends React.Component {
           </div>
           {Object.keys(skillData).map((key, id) => {
             const project_data = skillData[this.state.skill_item_popup_url];
-            // console.log(id);
             let i = id;
 
             return id != 0 &&
@@ -141,5 +136,4 @@ export default class PortfolioApp extends React.Component {
       </section>
     );
   }
-  // console.log(props.skillData);
 }

@@ -17,7 +17,8 @@
         font-weight: 500;
         font-family: inherit;
         color: inherit;
-        padding: 2rem 15rem;
+        padding: 2rem 0;
+        width: 40%;
         border-radius: 0.3rem;
         background-color: $color-primary;
         border: none;
@@ -25,10 +26,16 @@
         text-align: center;
         outline: none;
 
+        @include respond(tab-port) {
+          width: 80%;
+          padding: 2rem 0;
+          font-weight: 500;
+          font-size: 2rem;
+      }
+
         @include respond(phone) {
-            // padding: 2rem 10rem;
             width: 80%;
-            padding: 2rem 2rem;
+            padding: 2rem 0;
             font-weight: 500;
             font-size: 2rem;
         }
@@ -57,7 +64,6 @@
 #message {
     padding: 5rem 15rem;
     @include respond(phone) {
-        // padding: 2rem 10rem;
         width: 80%;
         padding: 5rem 0rem;
         font-weight: 500;

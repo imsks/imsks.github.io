@@ -14,7 +14,6 @@ const StatusTab = (props) => {
           <div className="tab__content skills__page_certificate_data">
             <div className="tab__content__items">
               {certificate_data.map((key, id, el) => {
-                // console.log(id, el, key);
                 return id != 0 ? (
                   <img
                     src={key}
