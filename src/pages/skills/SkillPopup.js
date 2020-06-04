@@ -60,7 +60,7 @@ const SkillPopup = (props) => {
                       <div className="popup__content__main__data__images">
                         <div>
                           <img
-                            src={key}
+                            src={"https://gdurl.com" + key}
                             alt={key}
                             className="popup__content__main__data__image"
                           />
@@ -74,7 +74,7 @@ const SkillPopup = (props) => {
           <div>
             {popup_data["link_data"] != null ? (
               <div className="popup__content__main__link">
-                <a href={popup_data["link_data"]}>
+                <a href={popup_data["link_data"]} target="_blank">
                   <button className="btn popup__content__main__link__button">
                     Project Link
                   </button>

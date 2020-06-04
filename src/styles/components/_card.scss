@@ -15,8 +15,8 @@
     }
 
   @include respond(small-phone) {
-      height: 30rem;
-      width: 30rem;
+      height: 90%;
+      width: 80%;
   }
 
   &__button {

@@ -20,7 +20,7 @@ export default class Status extends React.Component {
               <div className="status__content__left__items">
                 {/* Accordion comes here */}
                 {Object.keys(currently_upto_items).map((key, id) => {
-                  // console.log(currently_upto_items[key], key);
+                  console.log(currently_upto_items[key], key);
                   return (
                     <StatusTab
                       key={id}

@@ -45,18 +45,38 @@
 
         &__desc {
             margin-top: 2rem;
-            padding: 2rem 10rem;
+            padding: 2rem 0rem;
             align-self: center;
             // height: 80%;
             width: 80%;
             background-color: $color-white;
             border-radius: 0.5rem;
 
+            @include respond(tab-land) {
+                width: 100%;
+            }
+
+            @include respond(small-phone) {
+                width: 80%;
+            }
+
             &__specialize {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 margin: auto;
+
+                @include respond(tab-port) {
+                    display: grid;
+                    gap: .5rem;
+                    justify-items: center;
+                    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                }
+
+                @include respond(small-phone) {
+                    width: 80%;
+                    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                }
 
                 &__cta {
                     color: $color-primary;
@@ -81,7 +101,7 @@
                 margin: auto;
                 &__data {
                     &__item{
-                        margin-top: 1rem;
+                        margin: 1rem;
                         color: $color-primary;
                         font-size: 1.6rem;
                     }
@@ -96,7 +116,7 @@
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 
             @include respond(small-phone) {
-                grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             }
 
             &__card {
@@ -115,6 +135,7 @@
             }
 
             &__description {
+                margin: 0 5rem;
                 font-size: 1.6rem;
                 font-weight: 600;
             }
