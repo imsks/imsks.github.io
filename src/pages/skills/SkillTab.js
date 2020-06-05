@@ -2,7 +2,7 @@ import React from "react";
 
 const StatusTab = (props) => {
   const { certificate_data } = props;
-  console.log(certificate_data);
+  // console.log(certificate_data);
   return (
     <div>
       {

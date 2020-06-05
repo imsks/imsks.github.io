@@ -12,7 +12,7 @@ const SkillPopup = (props) => {
           <h3 className="heading-secondary--sub popup__content__header__subheading">
             {popup_data.description}
           </h3>
-          <a href="" className="popup__close">
+          <a href="/skills" className="popup__close">
             &times;
           </a>
           <div className="popup__content__header__meta">

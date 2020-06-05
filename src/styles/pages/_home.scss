@@ -72,11 +72,11 @@
 
 .skill{
   &__heading {
-    margin-bottom: -5rem;
+    margin: 10rem 0 0rem 0;
   }
 
   &__content {
-    margin-top: 6rem;
+    // margin-top: 6rem;
     display: grid;
     gap: .5rem;
     justify-items: center;
