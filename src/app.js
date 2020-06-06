@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-// import Location from "./Data/Link.data";
+import * as serviceWorker from "./serviceWorker";
 import PortfolioData from "./data/Portfolio.data.json";
 
 import PortfolioApp from "./pages/PortfolioApp";
@@ -35,17 +35,6 @@ const routes = (
         <Route path={about} component={AboutMePage} />
         <Route path={ventures} component={VenturesPage} exact={true} />
         {Object.keys(PortfolioData.my_ventures.data).map((key) => {
-          // console.log(
-          //   PortfolioData.my_ventures.data[key].name,
-          //   PortfolioData.my_ventures.data[key].about,
-          //   key
-          // );
-          // console.log(
-          //   "2." +
-          //     PortfolioData.my_ventures.url +
-          //     PortfolioData.my_ventures.data[key].url
-          // );
-          // console.log(PortfolioData.my_ventures.url);
           return (
             <Route
               path={ventures + PortfolioData.my_ventures.data[key].url}
@@ -62,17 +51,6 @@ const routes = (
         })}
         <Route path={skills} component={SkillPage} exact={true} />
         {Object.keys(PortfolioData.my_skills.data).map((key) => {
-          // console.log(
-          //   PortfolioData.my_skills.data[key].name,
-          //   PortfolioData.my_skills.data[key].about,
-          //   key
-          // );
-          // console.log(
-          //   "2." +
-          //     skills +
-          //     PortfolioData.my_skills.data[key].url
-          // );
-          // console.log(PortfolioData.my_skills.data[key]);
           return (
             <Route
               path={skills + PortfolioData.my_skills.data[key].url}
@@ -104,3 +82,4 @@ const routes = (
 );
 
 ReactDOM.render(routes, document.getElementById("app"));
+serviceWorker.register();
