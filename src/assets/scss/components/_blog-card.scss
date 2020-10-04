@@ -1,0 +1,61 @@
+.blog__card {
+    margin: 5rem 0 0 0;
+    height: 50rem;
+    width: 35rem;
+    border-radius: 1rem;
+    background-color: $color-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: all 0.5s;
+    position: relative;
+
+    @include respond(small-phone) {
+      height: 50rem;
+      width: 30rem;
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        width: 35rem;
+        height: 25rem;
+        white-space: nowrap;
+        border-radius: inherit;
+
+        @include respond(small-phone) {
+            height: 25rem;
+            width: 30rem;
+        }
+    }
+
+    &__title {
+        position: absolute;
+        top: 27rem;
+        margin: 0 2rem;
+        color: $color-primary;
+        font-size: 1.8rem;
+    }
+
+    &__link {
+        position: absolute;
+        top: 38rem;
+        transform: translateX(20%);
+        margin: 1rem auto;
+
+        @include respond(phone) {
+            font-size: 2rem;
+            font-weight: 700;
+            transform: translateX(45%);
+        }
+
+        @include respond(small-phone) {
+            padding: 1.5rem 3rem;
+            transform: translateX(45%);
+        }
+    }
+
+    &:hover {
+        transform: translateY(-1.5rem) scale(1.03);
+    }
+}

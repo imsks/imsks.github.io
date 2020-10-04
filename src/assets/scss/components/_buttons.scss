@@ -1,0 +1,29 @@
+.btn {
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding: 2rem 8rem;
+    margin: 1rem 0;
+    border-radius: 0.4rem;
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 1rem 1rem 2rem rgba($color: $color-black, $alpha: 0.2);
+    transition: all 0.5s;
+    font-weight: 600;
+    border: none;
+    outline : none;
+    cursor: pointer;
+
+    @include respond(phone) {
+        padding: 2rem 4rem;
+        font-weight: 500;
+        font-size: 1.6rem;
+    }
+
+    &:hover {
+        box-shadow: 1rem 2rem 5rem rgba($color: $color-black, $alpha: 0.4);
+    }
+}
+
+.btn-md {
+    padding: 1.5rem 4rem;
+}

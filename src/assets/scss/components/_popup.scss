@@ -1,0 +1,218 @@
+.popup {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black, .8);
+    color: $color-primary;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba($color-black, .3);
+    }
+
+    &__content {
+        @include absCenter;
+        width: 90%;
+        height: 80vh;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        border-radius: 3px;
+        overflow-y: scroll;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.25);
+        transition: all .5s .2s;
+
+        @include respond(phone) {
+            width: 95%;
+            height: 90vh;
+        }
+
+        
+
+        &__header{
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+
+            &__heading {
+                font-weight: 600;
+
+                @include respond(phone) {
+                    padding: 2rem 0rem;
+                    font-weight: 700;
+                    font-size: 2.4rem;
+                }
+            }
+
+            &__subheading {
+                margin: 0 5rem 2rem 5rem;
+                font-weight: 500;
+
+                @include respond(phone) {
+                    margin: -2rem 0rem 1rem 2rem;
+                    font-weight: 600;
+                    font-size: 2rem;
+                }
+            }
+
+            &__meta {
+                display: flex;
+                align-items: baseline;
+
+                @include respond(phone) {
+                    display: grid;
+                    gap: .5rem;
+                    justify-items: center;
+                    grid-template-columns: repeat(auto-fit, minmax(200, 1fr));
+
+                    @include respond(small-phone) {
+                        grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
+                    }
+                }
+                
+                span {
+                    font-weight: 600;
+                }
+
+                &__content {
+                    font-size: 2rem;
+                    font-weight: 500;
+                    margin-left: 1rem;
+                }
+            }
+
+            &__softwares {
+                display: flex;
+
+                @include respond(phone) {
+                    display: grid;
+                    gap: .5rem;
+                    justify-items: center;
+                    grid-template-columns: repeat(auto-fit, minmax(200, 1fr));
+
+                    @include respond(small-phone) {
+                        grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
+                    }
+                }
+            }
+
+            &__roles{
+                display: flex;
+            }
+
+            &__software {
+                margin-left: 1rem;
+                background-color: $color-primary;
+                padding: 1rem 2rem;
+                border-radius: 10rem;
+                &__item{
+                    color: $color-white;
+                    font-size: 1.4rem;
+                }
+            }
+
+            &__role {
+                margin-left: 1rem;
+                background-color: $color-primary;
+                padding: 1rem 2rem;
+                border-radius: 10rem;
+                &__item{
+                    color: $color-white;
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+        &__main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &__heading {
+                margin: 1rem 0 2rem 0;
+                font-size: 2rem;
+                text-align: center;
+                color: $color-primary;
+            }
+
+            &__data {
+                
+                &__image {
+                    display: block;
+                    margin: 0 auto 3rem auto;
+                    width: 50%;
+                    height: 50%;
+                    box-shadow: 1rem 1rem 3rem rgba($color: $color-black, $alpha: 0.1);
+                    transition: all 0.5s;
+
+                    &:hover {
+                        box-shadow: 2rem 5rem 5rem rgba($color: $color-black, $alpha: 0.2);
+                    }
+
+                    @include respond(phone) {
+                        width: 80%;
+                        height: 50%;
+                    }
+                }
+            }
+            &__link {
+                margin: 3rem 0;
+
+                &__button {
+                    font-weight: 500;
+                }
+            }
+        }
+
+        &__hline {
+            margin-top: 1.5rem;
+            height: 0.2rem;
+            width: 80%;
+            background-color: $color-primary;
+        }
+    }
+
+    //Open states
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-primary;
+            position: fixed;
+            top: 1rem;
+            right: 3rem;
+            font-size: 5rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+            line-height: 1;
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    ::selection {
+        color: $color-white;
+        background-color: $color-primary;
+    }
+}

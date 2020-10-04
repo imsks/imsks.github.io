@@ -1,0 +1,45 @@
+.ventures__page {
+    &__content {
+        margin-top: -10rem;
+
+        @include respond(phone) {
+            margin-top: 5rem;
+        }
+    }
+}
+
+.ventureitem {
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &__heading {
+            margin: 17rem 0 2rem 0;
+            
+            @include respond(phone) {
+                margin-top: 10rem;
+            }
+        }
+
+        &__description {
+            margin: 1rem 10rem;
+
+            @include respond(phone) {
+                margin: 1rem 2rem;
+            }
+        }
+
+        &__button {
+            margin-top: 5rem;
+            
+            &:hover {
+                transform: translateY(-1rem);
+            }
+
+            @include respond(phone) {
+                margin-top: 2rem;
+            }
+        }
+    }
+}

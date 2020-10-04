@@ -1,0 +1,25 @@
+.about {
+  &__heading {
+    margin-top: 10rem;
+
+    @include respond(phone) {
+      margin-top: 30rem;
+      font-weight: 600;
+    }
+  }
+
+  &__content {
+    margin: 4rem 20rem;
+    text-align: left;
+    font-size: 2.5rem;
+
+    @include respond(tab-port) {
+      margin: 4rem 2rem;
+      font-size: 2rem;
+    }
+
+    @include respond(phone) {
+      margin-top: 2rem;
+    }
+  }
+}

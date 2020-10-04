@@ -1,0 +1,132 @@
+.about {
+  &__heading {
+    margin-top: 40rem;
+
+    @include respond(phone) {
+      margin-top: 10rem !important;
+      font-weight: 600;
+    }
+  }
+
+  &__content {
+    margin: 4rem 20rem;
+    text-align: left;
+    font-size: 2.5rem;
+
+    @include respond(tab-port) {
+      margin: 4rem 2rem;
+      font-size: 2rem;
+    }
+
+    @include respond(phone) {
+      margin-top: 2rem;
+    }
+  }
+}
+
+.ventures {
+  &__heading {
+    margin-top: 20rem;
+
+    @include respond(phone) {
+      margin-top: 10rem;
+    }
+  }
+
+  &__content {
+    display: grid;
+    gap: .5rem;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+    @include respond(small-phone) {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+}
+
+.blog{
+  margin: 12rem 0;
+
+  @include respond(phone) {
+    margin-top: 18rem;
+  }
+
+  &__content {
+    margin-top: 6rem;
+    
+    display: grid;
+    gap: .5rem;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+    @include respond(phone) {
+      margin-top: 3rem;
+    }
+
+    @include respond(small-phone) {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+}
+
+.skill{
+  &__heading {
+    margin: 10rem 0 0rem 0;
+  }
+
+  &__content {
+    // margin-top: 6rem;
+    display: grid;
+    gap: .5rem;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+    @include respond(small-phone) {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+}
+
+.contact {
+  margin-top: 10rem;
+
+  &__header {
+    text-align: center;
+
+    &__heading {
+      font-size: 3rem;
+      font-weight: 700;
+
+      @include respond(phone) {
+          font-size: 2.4rem;
+          font-weight: 700;
+      }
+
+      @include respond(small-phone) {
+        margin: 10rem 0 2rem 0;
+          font-size: 2rem;
+          font-weight: 700;
+      }
+    }
+
+    &__subheading {
+      font-size: 2rem;
+      margin: 0 2rem;
+
+      @include respond(phone) {
+          font-size: 1.8rem;
+          font-weight: 500;
+      }
+
+      @include respond(small-phone) {
+          font-size: 1.6rem;
+          font-weight: 600;
+      }
+    }
+  }
+
+  &__content {
+    margin: 4rem 0;
+  }
+}

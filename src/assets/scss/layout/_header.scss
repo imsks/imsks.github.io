@@ -1,0 +1,49 @@
+.header {
+  height: 10rem;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+  background-color: $color-black;
+
+  &__logo {    
+    @include respond(small-phone) {
+      margin-left: 2rem;
+    }
+    &__text {
+      color: $color-white;
+      font-size: $logo-font-size;
+      font-weight: 600;
+
+      &::after {
+        content: "";
+        display: inline-block;
+        background: $color-primary;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 50%;
+        margin-left: 0.3rem;
+      }
+    }
+  }
+
+  &__status {
+    margin: 1rem 10rem 0 0;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background: $color-primary;
+    cursor: pointer;
+  }
+
+  &__content {
+    margin: 40vh 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
