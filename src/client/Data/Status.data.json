@@ -1,0 +1,41 @@
+{
+    "currently_upto": {
+        "Books I am reading": [
+            "Elon Musk",
+            "Ego Is The Enemy"
+        ],
+
+        "Currently Learning": [
+            "NodeJS",
+            "Flutter",
+            "After Effects"
+        ],
+
+        "Working on": [
+            "Virgin Tutor",
+            "investorcracy(As an intern)"
+        ],
+        "Favorite Books": [
+            "Steve Jobs",
+            "Crushing It",
+            "Zero To One",
+            "The Mom's Test",
+            "Rework",
+            "Rich Dad Poor Dad"
+        ],
+
+        "Favorite Movies": [
+            "Gangs Of Wasseypur(I & II)",
+            "Swadesh: We The People",
+            "The Wolf Of Wall Street",
+            "Steve Jobs",
+            "Padman"
+        ],
+
+        "I liked Podcasts": [
+            "Rework Podcast",
+            "Gary V Audio Exp.",
+            "How I Built This?"
+        ]
+    }
+}

@@ -1,0 +1,81 @@
+.heading-primary {
+  color: $color-white;
+
+  &--main {
+    display: block;
+    font-size: 5rem;
+    font-weight: 500;
+    letter-spacing: 0.2rem;
+
+    @include respond(tab-land) {
+      font-size: 4rem;
+    }
+
+    @include respond(phone) {
+      font-size: 4rem;
+    }
+
+    @include respond(small-phone) {
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin: -5rem 2rem 1rem 3rem;
+    }
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.4rem;
+
+    @include respond(phone) {
+      font-size: 2rem;
+    }
+
+    @include respond(small-phone) {
+      font-size: 2rem;
+      margin: 0 2rem 1rem 3rem;
+    }
+  }
+}
+
+.heading-secondary {
+  color: $color-white;
+
+  &--main {
+    display: block;
+    font-size: 4rem;
+    font-weight: 500;
+    letter-spacing: 0.2rem;
+
+    @include respond(tab-land) {
+      font-size: 4rem;
+    }
+
+    @include respond(phone) {
+      font-size: 4rem;
+    }
+
+    @include respond(small-phone) {
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin: 0 2rem 1rem 2rem;
+    }
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+
+    @include respond(phone) {
+      font-size: 2rem;
+    }
+
+    @include respond(small-phone) {
+      font-size: 2rem;
+      margin: 0 2rem;
+    }
+  }
+}
