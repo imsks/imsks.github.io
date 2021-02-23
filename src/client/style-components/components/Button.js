@@ -6,12 +6,17 @@ import { device } from '../base/mediaQuery';
 export const StyledButton = styled.button`
   background-color: ${(props) => {
     const param = props.type;
-    if (param === 'primary') {
-      return `${colorPrimary}`;
-    } else if (param === 'danger') {
-      return `${colorDanger}`;
-    } else if (param === 'light') {
-      return `${colorShadow}`;
+    switch (param) {
+      case 'primary':
+        return `${colorPrimary}`;
+
+      case 'danger':
+        return `${colorDanger}`;
+      case 'light':
+        return `${colorShadow}`;
+
+      default:
+        break;
     }
   }};
 
@@ -19,20 +24,24 @@ export const StyledButton = styled.button`
     const param = props.type;
     if (param === 'primary' || param === 'success' || param === 'danger') {
       return `${colorWhite}`;
-    } else if (param === 'light') {
-      return `${colorBlack}`;
     }
+
+    return `${colorBlack}`;
   }};
 
   padding: ${(props) => {
-    if (props.size === 'large') {
-      return '1.6rem 5rem';
-    } else if (props.size === 'medium') {
-      return '1.3rem 3rem';
-    } else if (props.size === 'small') {
-      return '1rem 1.5rem';
-    } else {
-      return props.padding;
+    switch (props.size) {
+      case 'large':
+        return '1.5rem 3rem';
+
+      case 'medium':
+        return '1.2rem 2rem';
+
+      case 'small':
+        return '1rem 1.5rem';
+
+      default:
+        break;
     }
   }};
 
@@ -45,12 +54,18 @@ export const StyledButton = styled.button`
   }};
 
   font-size: ${(props) => {
-    if (props.size === 'large') {
-      return '3rem';
-    } else if (props.size === 'medium' || props.size === 'small') {
-      return '2rem';
-    } else {
-      return props.fontSize;
+    switch (props.size) {
+      case 'large':
+        return '1.8rem';
+
+      case 'medium':
+        return '1.6rem';
+
+      case 'small':
+        return '1.4rem';
+
+      default:
+        break;
     }
   }};
 
@@ -96,15 +111,16 @@ export const StyledButton = styled.button`
   border-radius: 5px;
 
   :hover {
-    opacity: 0.9;
+    opacity: 0.85;
+    transform: scale(0.95);
   }
 
   @media ${device.phone} {
-    font-size: 2em;
+    font-size: 1.6em;
   }
 
   @media ${device.phone} {
-    font-size: 1.5em;
+    font-size: 1.4em;
   }
 `;
 

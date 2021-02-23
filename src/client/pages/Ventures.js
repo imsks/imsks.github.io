@@ -7,6 +7,7 @@ import {
   MainHeading,
   SecondaryHeading,
   SecondarySubheading,
+  Paragraph,
 } from '../style-components/base/typography';
 import { StyledButton } from '../style-components/components/Button';
 import {
@@ -37,26 +38,24 @@ const Ventures = () => {
     <PageContainer>
       {head()}
       <PageContentBox>
-        <MainHeading fontSize="5rem" type="main">
+        <SecondaryHeading type="main" margin="0 0 1rem 0">
           {data.heading}
-        </MainHeading>
+        </SecondaryHeading>
         <VentureCardGroup>
-          {data.cards.map((line, key) => {
+          {data.cards.map((ventureCardData, key) => {
             return (
               <VentureCard key={key}>
-                <SecondaryHeading fontSize="4rem" type="main">
-                  {line.title}
-                </SecondaryHeading>
-                <SecondarySubheading fontSize="1.5rem" margin="1rem 0" type="secondary">
-                  {line.subtitle}
+                <MainHeading type="main">{ventureCardData.title}</MainHeading>
+                <SecondarySubheading margin="0 0 1rem 0" type="secondary">
+                  {ventureCardData.subtitle}
                 </SecondarySubheading>
                 <Divider />
                 <VentureCardContent>
-                  {line.text.map((text, key) => {
+                  {ventureCardData.text.map((text, key) => {
                     return (
-                      <SecondarySubheading fontSize="2rem" margin="1rem 0" key={key}>
+                      <Paragraph margin="1rem 0" key={key}>
                         {text}
-                      </SecondarySubheading>
+                      </Paragraph>
                     );
                   })}
                 </VentureCardContent>
@@ -66,7 +65,7 @@ const Ventures = () => {
         </VentureCardGroup>
 
         <Link to="/skills">
-          <StyledButton size="large" margin="4rem 0" type="primary">
+          <StyledButton size="large" margin="3rem 0" type="primary">
             {data.next_cta_text}
           </StyledButton>
         </Link>

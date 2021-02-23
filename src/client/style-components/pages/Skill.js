@@ -1,11 +1,6 @@
-import styled from "styled-components";
-import {
-  colorBlack,
-  colorPrimary,
-  colorShadow,
-  colorWhite,
-} from "../constants";
-import { device } from "../base/mediaQuery";
+import styled from 'styled-components';
+import { colorBlack, colorPrimary, colorShadow, colorWhite } from '../constants';
+import { device } from '../base/mediaQuery';
 
 export const ToolsContainer = styled.div`
   display: flex;
@@ -76,7 +71,7 @@ export const ExperienceContainerItemText = styled.p`
 
 export const ProjectContent = styled.div`
   width: 100%;
-  
+
   display: grid;
   gap: 3rem;
   justify-items: center;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { device } from './mediaQuery';
-import { colorPrimary, colorWhite, colorBlack, fontGlobal, colorGrey } from '../constants';
+import { colorPrimary, colorWhite, fontGlobal, colorGrey } from '../constants';
 
 export const MainHeading = styled.h1`
   display: block;
@@ -11,7 +11,7 @@ export const MainHeading = styled.h1`
   font-family: ${fontGlobal} !important;
 
   margin: ${(props) => {
-    return props.margin !== undefined ? props.margin : '2rem 0 1rem 0';
+    return props.margin;
   }};
 
   height: ${(props) => {
@@ -20,36 +20,33 @@ export const MainHeading = styled.h1`
 
   color: ${(props) => {
     const param = props.type;
-    if (param === 'main') {
-      return `${colorPrimary}`;
-    } else if (param === 'sub') {
-      return `${colorWhite}`;
-    } else {
-      return `${colorGrey}`;
+
+    switch (param) {
+      case 'main':
+        return `${colorPrimary}`;
+
+      case 'sub':
+        return `${colorWhite}`;
+
+      default:
+        return `${colorGrey}`;
     }
   }};
 
-  line-height: 135%;
+  font-size: 4rem;
 
-  font-size: ${(props) => {
-    return props.fontSize !== undefined ? props.fontSize : '7rem';
-  }};
-
-  font-weight: ${(props) => {
-    return props.fontWeight !== undefined ? props.fontWeight : '500';
-  }};
+  font-weight: 600;
 
   text-align: ${(props) => {
     return props.align;
   }};
 
   @media ${device.tabPort} {
-    font-size: 5em;
+    font-size: 3.5em;
   }
 
   @media ${device.phone} {
-    font-size: 4rem;
-    line-height: 100%;
+    font-size: 2.5rem;
   }
 `;
 
@@ -68,32 +65,25 @@ export const MainSubheading = styled.h2`
 
   color: ${(props) => {
     const param = props.type;
-    if (param === 'main') {
-      return `${colorPrimary}`;
-    } else if (param === 'secondary') {
-      return `${colorBlack}`;
-    } else if (param === 'sub') {
-      return `${colorWhite}`;
-    } else {
-      return `${colorGrey}`;
+
+    switch (param) {
+      case 'main':
+        return `${colorPrimary}`;
+
+      case 'sub':
+        return `${colorWhite}`;
+
+      default:
+        return `${colorGrey}`;
     }
   }};
 
-  font-size: ${(props) => {
-    return props.fontSize !== undefined ? props.fontSize : '6rem';
-  }};
+  font-size: 2.6rem';
 
-  font-weight: ${(props) => {
-    return props.fontWeight !== undefined ? props.fontWeight : '400';
-  }};
+  font-weight: 500;
 
   @media ${device.tabPort} {
-    font-size: 4rem;
-  }
-
-  @media ${device.phone} {
-    font-size: 3rem;
-    font-weight: 600;
+    font-size: 2.2rem;
   }
 `;
 
@@ -112,29 +102,29 @@ export const SecondaryHeading = styled.h3`
 
   color: ${(props) => {
     const param = props.type;
-    if (param === 'main') {
-      return `${colorPrimary}`;
-    } else if (param === 'sub') {
-      return `${colorWhite}`;
-    } else {
-      return `${colorGrey}`;
+
+    switch (param) {
+      case 'main':
+        return `${colorPrimary}`;
+
+      case 'sub':
+        return `${colorWhite}`;
+
+      default:
+        return `${colorGrey}`;
     }
   }};
 
-  font-size: ${(props) => {
-    return props.fontSize !== undefined ? props.fontSize : '4rem';
-  }};
+  font-size: 2.4rem;
 
-  font-weight: ${(props) => {
-    return props.fontWeight !== undefined ? props.fontWeight : '400';
-  }};
+  font-weight: 500;
 
   @media ${device.tabPort} {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   @media ${device.phone} {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 600;
   }
 `;
@@ -154,59 +144,52 @@ export const SecondarySubheading = styled.h4`
 
   color: ${(props) => {
     const param = props.type;
-    if (param === 'main') {
-      return `${colorPrimary}`;
-    } else if (param === 'secondary') {
-      return `${colorBlack}`;
-    } else {
-      return `${colorGrey}`;
+
+    switch (param) {
+      case 'main':
+        return `${colorPrimary}`;
+
+      case 'sub':
+        return `${colorWhite}`;
+
+      default:
+        return `${colorGrey}`;
     }
   }};
 
-  font-size: ${(props) => {
-    return props.fontSize !== undefined ? props.fontSize : '3rem';
-  }};
+  font-size: 2rem;
 
-  font-weight: ${(props) => {
-    return props.fontWeight !== undefined ? props.fontWeight : '400';
-  }};
+  font-weight: 400;
 
   @media ${device.tabPort} {
-    font-size: 2rem;
-  }
-
-  @media ${device.phone} {
     font-size: 1.8rem;
-    font-weight: 600;
   }
 `;
 
 export const Paragraph = styled.p`
-  font-size: 2rem;
   display: inline-block;
   transition: 0.3s all;
   font-family: ${fontGlobal} !important;
 
   color: ${(props) => {
     const param = props.type;
-    if (param === 'main') {
-      return `${colorPrimary}`;
-    } else if (param === 'sub') {
-      return `${colorWhite}`;
-    } else {
-      return `${colorGrey}`;
+
+    switch (param) {
+      case 'main':
+        return `${colorPrimary}`;
+
+      case 'sub':
+        return `${colorWhite}`;
+
+      default:
+        return `${colorGrey}`;
     }
   }};
 
-  font-size: ${(props) => {
-    return props.fontSize;
-  }};
+  font-size: 1.6rem;
+  font-weight: 400;
 
   @media ${device.tabLand} {
-    font-size: 2.5rem;
-  }
-
-  @media ${device.tabPort} {
-    font-size: 2em;
+    font-size: 1.4rem;
   }
 `;

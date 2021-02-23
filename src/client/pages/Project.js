@@ -48,7 +48,7 @@ const Project = () => {
                           <SecondarySubheading>{project.subtitle}</SecondarySubheading>
                         </PrimaryTextContentBox>
 
-                        {project.about[0] !== null ? (
+                        {project.about[0] !== null && (
                           <PrimaryTextContentBox margin="3rem 0 1rem 0">
                             {project.about.map((item, key) => {
                               return (
@@ -58,8 +58,6 @@ const Project = () => {
                               );
                             })}
                           </PrimaryTextContentBox>
-                        ) : (
-                          ''
                         )}
 
                         <PrimaryImagesContainer margin="2rem 0 0 0">
@@ -70,14 +68,12 @@ const Project = () => {
                           </PrimaryImagesGrid>
                         </PrimaryImagesContainer>
 
-                        {project.link ? (
-                          <Link to={project.link}>
+                        {project.link && (
+                          <a href={project.link} target="_blank">
                             <StyledButton size="medium" margin="1rem 0" type="primary">
                               Project Link
                             </StyledButton>
-                          </Link>
-                        ) : (
-                          ''
+                          </a>
                         )}
                       </PrimarySectionContainer>
                     );
@@ -89,7 +85,7 @@ const Project = () => {
         })}
 
         <Divider />
-        <Link to="/ventures">
+        <Link to="/connect">
           <StyledButton size="large" margin="2rem 0" type="primary">
             {data.next_cta_text}
           </StyledButton>

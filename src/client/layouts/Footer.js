@@ -15,7 +15,7 @@ import {
   SocialLinksContainer,
   SocialLinksContainerItem,
 } from '../style-components/components/Containers';
-import { SecondaryHeading, SecondarySubheading } from '../style-components/base/typography';
+import { SecondaryHeading, SecondarySubheading, Paragraph } from '../style-components/base/typography';
 
 import FooterData from '../Data/footer.data.json';
 
@@ -29,68 +29,52 @@ const Footer = () => {
           {data.title}
         </SecondaryHeading>
         <SocialLinksContainer>
-          {linkedin ? (
+          {linkedin && (
             <SocialLinksContainerItem href={linkedin} target="_blank">
               <FaLinkedin />
             </SocialLinksContainerItem>
-          ) : (
-            ''
           )}
 
-          {github ? (
+          {github && (
             <SocialLinksContainerItem href={github} target="_blank">
               <FaGithub />
             </SocialLinksContainerItem>
-          ) : (
-            ''
           )}
 
-          {facebook ? (
+          {facebook && (
             <SocialLinksContainerItem href={facebook} target="_blank">
               <FaFacebook />
             </SocialLinksContainerItem>
-          ) : (
-            ''
           )}
 
-          {instagram ? (
+          {instagram && (
             <SocialLinksContainerItem href={instagram} target="_blank">
               <FaInstagram />
             </SocialLinksContainerItem>
-          ) : (
-            ''
           )}
 
-          {twitter ? (
+          {twitter && (
             <SocialLinksContainerItem href={twitter} target="_blank">
               <FaTwitter />
             </SocialLinksContainerItem>
-          ) : (
-            ''
           )}
 
-          {medium ? (
+          {medium && (
             <SocialLinksContainerItem href={medium} target="_blank">
               <FaMediumM />
             </SocialLinksContainerItem>
-          ) : (
-            ''
           )}
 
-          {dribbble ? (
+          {dribbble && (
             <SocialLinksContainerItem href={dribbble} target="_blank">
               <FaDribbble />
             </SocialLinksContainerItem>
-          ) : (
-            ''
           )}
         </SocialLinksContainer>
       </SocialConnectContainer>
       <CreditsContainer>
-        <SecondarySubheading fontSize="2rem">{data.credits}</SecondarySubheading>
-        <SecondarySubheading fontSize="1.5rem">
-          {data.copyright + new Date().getFullYear()}
-        </SecondarySubheading>
+        <SecondarySubheading>{data.credits}</SecondarySubheading>
+        <Paragraph>{data.copyright + new Date().getFullYear()}</Paragraph>
       </CreditsContainer>
     </FooterContainer>
   );

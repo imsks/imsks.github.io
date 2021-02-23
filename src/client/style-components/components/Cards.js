@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   colorBlack,
   colorShadow,
   colorPrimary,
   colorWhite,
   colorCardBackground,
-} from "../constants";
-import { HeadingPrimary, Paragraph } from "../base/typography";
-import { device } from "../base/mediaQuery";
+} from '../constants';
+import { HeadingPrimary, Paragraph } from '../base/typography';
+import { device } from '../base/mediaQuery';
 
 export const QuickNavigationModalContainer = styled.div`
   padding: ${(props) => {
@@ -57,7 +57,7 @@ export const VentureCardGroup = styled.div`
   text-decoration: none;
   width: 100%;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(200, 1fr));
   font-size: 2rem;
@@ -75,11 +75,11 @@ export const VentureCard = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 2rem;
+  padding: 5rem;
   background-color: ${colorCardBackground};
   border-radius: 5px;
   color: ${colorBlack};
-  box-shadow: 2px 2px 15px rgba(${colorShadow}, 0.2);
+  box-shadow: 1px 1px 10px rgba(${colorShadow}, 0.2);
   transition: 0.5s all;
 
   :hover {
@@ -106,7 +106,7 @@ export const VentureCardContent = styled.div`
 export const SkillCardGroup = styled.div`
   width: auto;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   font-size: 2rem;
@@ -133,16 +133,17 @@ export const SkillCard = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 5rem;
+  padding: 8rem;
   background-color: ${colorCardBackground};
   border-radius: 5px;
   color: ${colorBlack};
-  box-shadow: 2px 2px 15px rgba(${colorShadow}, 0.2);
+  box-shadow: 1px 1px 10px rgba(${colorShadow}, 0.2);
   transition: 0.5s all;
 
   :hover {
     color: ${colorWhite};
-    box-shadow: 5px 5px 20px rgba(${colorShadow}, 0.3);
+    box-shadow: 4px 4px 10px rgba(${colorShadow}, 0.2);
+    transform: scale(1.02);
   }
 `;
 
@@ -183,8 +184,8 @@ export const ProjectCard = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  gap: 3rem;
-  justify-items: center;
+  gap: 1rem;
+  justify-items: left;
   grid-template-columns: repeat(auto-fit, minmax(200, 1fr));
   padding: 5rem;
   background-color: ${colorCardBackground};

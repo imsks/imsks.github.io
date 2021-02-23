@@ -5,7 +5,6 @@ import { renderRoutes } from 'react-router-config';
 import { ServerStyleSheet } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import Routes from '../client/Routes';
-import webConfig from '../../webConfig.json';
 
 export default (req, context) => {
   // 1. Created instance for Sheet
@@ -55,8 +54,8 @@ export default (req, context) => {
         />
         <meta name="twitter:creator" content="@i_skrs" />
         ${styles}
-        <link rel="shortcut icon" href="${webConfig.siteURL}/assets/images/favicon.png">
-        <link rel="stylesheet" href="${webConfig.siteURL}/assets/css/styles.min.css">
+        <link rel="shortcut icon" href="/assets/images/favicon.png">
+        <link rel="stylesheet" href="/assets/css/styles.min.css">
         </head>
             <body>
                 <div id="root">${content}</div>

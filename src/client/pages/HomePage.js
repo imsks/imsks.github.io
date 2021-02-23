@@ -42,14 +42,14 @@ const HomePage = () => {
         <MainHeading type="main">{data.heading}</MainHeading>
         <SecondarySubheading>{data.subheading}</SecondarySubheading>
         <Link to="/about">
-          <StyledButton size="large" margin="4rem 0 1rem 0" type="primary">
+          <StyledButton size="large" margin="2rem 0 1rem 0" type="primary">
             {data.cta_text}
           </StyledButton>
         </Link>
 
         <StyledButton
           size="small"
-          margin="2rem 0"
+          margin="1rem 0"
           type="light"
           borderRadius="5px"
           onClick={openModal}
@@ -64,9 +64,9 @@ const HomePage = () => {
             <Paragraph>{data.modal.title}</Paragraph>
           </Modal.Header>
           <Modal.Body>
-            {data.modal.links.map((link, key) => {
+            {data.modal.links.map((link) => {
               return (
-                <QuickNavigationModalCard key={key}>
+                <QuickNavigationModalCard key={link}>
                   <QuickNavigationModalCardItem href={link.slug}>
                     {link.text}
                   </QuickNavigationModalCardItem>

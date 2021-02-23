@@ -1,13 +1,12 @@
-import styled from "styled-components";
-import { colorWhite, colorPrimary } from "../constants";
-import { device } from "../base/mediaQuery";
+import styled from 'styled-components';
+import { colorWhite, colorPrimary } from '../constants';
+import { device } from '../base/mediaQuery';
 // Top Navbar
 export const NavbarHead = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: fixed;
-  top: 0;
+
   width: 100%;
   padding: 2rem 0px;
   z-index: 1;

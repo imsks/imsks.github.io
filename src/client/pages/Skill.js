@@ -32,8 +32,8 @@ const Skill = () => {
   const [currentSkill, setCurrentSkill] = useState('');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (typeof window === 'object') {
+      window.scrollTo(0, 0);
       setCurrentSkill(window.location.pathname.split('/')[2]);
     }
   }, []);
@@ -41,7 +41,7 @@ const Skill = () => {
   return (
     <PageContainer>
       <PageContentBox>
-        <SecondarySubheading fontSize="2rem">{data.heading}</SecondarySubheading>
+        <SecondaryHeading fontSize="2rem">{data.heading}</SecondaryHeading>
 
         {data.cards.map((skill, key) => {
           if (skill.slug === currentSkill) {
@@ -54,9 +54,7 @@ const Skill = () => {
 
                 <SkillCardMetaContent>
                   <ToolsContainer>
-                    <SecondaryHeading fontSize="1.8rem" type="sub">
-                      {skill.data.specialized_in.text}
-                    </SecondaryHeading>
+                    <SecondaryHeading type="sub">{skill.data.specialized_in.text}</SecondaryHeading>
                     <ToolsContainerItems>
                       {skill.data.specialized_in.items.map((item, key) => {
                         return (
@@ -69,13 +67,13 @@ const Skill = () => {
                   </ToolsContainer>
 
                   <ExperienceContainer>
-                    <SecondaryHeading fontSize="1.8rem" type="sub">
+                    <SecondaryHeading type="sub">
                       {skill.data.experience_data.text}
                     </SecondaryHeading>
                     <ExperienceContainerItems>
                       {skill.data.experience_data.items.map((item, key) => {
                         return (
-                          <ExperienceContainerItem>
+                          <ExperienceContainerItem key={key}>
                             <ExperienceContainerItemText>{item}</ExperienceContainerItemText>
                           </ExperienceContainerItem>
                         );
@@ -93,16 +91,16 @@ const Skill = () => {
                 <ProjectContent>
                   {skill.project.item.map((project, key) => {
                     return (
-                      <Link
-                        to={`/skills/${currentSkill}/${project.slug}`}
+                      <a
+                        href={`/skills/${currentSkill}/${project.slug}`}
                         key={key}
                         style={{ width: '100%', height: 'auto' }}
                       >
                         <ProjectCard>
-                          <MainSubheading>{project.title}</MainSubheading>
+                          <MainSubheading type="main">{project.title}</MainSubheading>
                           <SecondarySubheading>{project.subtitle}</SecondarySubheading>
                         </ProjectCard>
-                      </Link>
+                      </a>
                     );
                   })}
                 </ProjectContent>

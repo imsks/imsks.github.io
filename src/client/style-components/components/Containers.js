@@ -3,14 +3,15 @@ import { colorPrimary, colorShadow, colorCardBackground } from '../constants';
 import { device } from '../base/mediaQuery';
 
 export const PageContainer = styled.main`
-  margin: 10rem 0 0 0;
+  margin: 5rem 0 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const HomepageContainer = styled.main`
-  margin: 10rem 0 0 0;
+  margin: 5rem 0 0 0;
+  padding: 10rem 0px;
   display: flex;
   justify-content: center;
   align-items: center;
