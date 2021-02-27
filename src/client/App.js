@@ -28,3 +28,11 @@ App.defaultProps = {
 export default {
   component: App,
 };
+
+// TODO: 
+/*
+  1. All spelling checks
+  2. Complete SSR with Styled Component
+  3. Add more projects
+  4. Deploy
+*/

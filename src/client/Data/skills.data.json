@@ -13,7 +13,7 @@
             "items": ["Adobe XD", "Figma", "Invision", "Framer"]
           },
           "experience_data": {
-            "text": "Work Experience",
+            "text": "More about it",
             "items": [
               "Experience - 1 Year",
               "Working with startups build the initial product(MVP)",
@@ -104,7 +104,7 @@
             ]
           },
           "experience_data": {
-            "text": "Work Experience",
+            "text": "More about it",
             "items": [
               "Working experience - 1.5 Year",
               "Built digital products for Investocracy, Trilingo & Virgin Tutor",
@@ -166,6 +166,11 @@
               "link": "https://github.com/imsks/ImageN"
             }
           ]
+        },
+        "seo": {
+          "title": "Web Dev | Skill",
+          "description": "My work on Web Dev",
+          "keywords": "skills sachin shukla, sachin kumar shukla skills, sachin kalpana shukla skills, sachin shukla vit skills, sachin vit skills, sachin vit vellore skills, sachin shukla lakhimpur ventures"
         }
       },
       {
@@ -216,6 +221,11 @@
               "link": "https://play.google.com/store/apps/details?id=co.investocracy.investocracy&hl=en"
             }
           ]
+        },
+        "seo": {
+          "title": "App Dev | Skill",
+          "description": "My work on App Dev",
+          "keywords": "skills sachin shukla, sachin kumar shukla skills, sachin kalpana shukla skills, sachin shukla vit skills, sachin vit skills, sachin vit vellore skills, sachin shukla lakhimpur ventures"
         }
       }
     ],

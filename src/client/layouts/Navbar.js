@@ -5,7 +5,7 @@ import { NavbarHead, Logo, LogoDot } from '../style-components/layout/navigation
 import NavbarData from '../Data/navbar.data.json';
 
 const Navbar = () => {
-  const { logo, hamburger_links } = NavbarData.data;
+  const { logo, hamburgerLinks } = NavbarData.data;
   return (
     <NavbarHead>
       <Logo href={logo.slug} margin="1rem 0 0 3rem">
@@ -23,12 +23,12 @@ const Navbar = () => {
 
         <nav className="navigation__nav">
           <ul className="navigation__list">
-            {hamburger_links.map((link, key) => {
+            {hamburgerLinks.map((link, key) => {
               return (
                 <li className="navigation__item" key={key}>
-                  <a href={link.slug} className="navigation__link">
+                  <Link to={link.slug} className="navigation__link">
                     {link.text}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

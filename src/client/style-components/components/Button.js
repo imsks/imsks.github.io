@@ -6,6 +6,7 @@ import { device } from '../base/mediaQuery';
 export const StyledButton = styled.button`
   background-color: ${(props) => {
     const param = props.type;
+
     switch (param) {
       case 'primary':
         return `${colorPrimary}`;

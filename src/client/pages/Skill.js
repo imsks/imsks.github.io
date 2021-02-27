@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import {
   PageContainer,
   PageContentBox,
@@ -27,19 +28,47 @@ import {
 } from '../style-components/pages/Skill';
 import SkillsData from '../Data/skills.data.json';
 
-const Skill = () => {
+const Skill = (props) => {
   const { data } = SkillsData;
   const [currentSkill, setCurrentSkill] = useState('');
+  const [seoData, setSeoData] = useState({});
 
   useEffect(() => {
+    const { skill } = props.match.params;
+
+    setCurrentSkill(skill);
     if (typeof window === 'object') {
       window.scrollTo(0, 0);
-      setCurrentSkill(window.location.pathname.split('/')[2]);
     }
+
+    // Set SEO data
+    data.cards.map((skillFromData, key) => {
+      if (skillFromData.slug === skill) {
+        const { title, description, keywords } = skillFromData.seo;
+        setSeoData({
+          title,
+          description,
+          keywords,
+        });
+      }
+    });
   }, []);
+
+  const head = () => {
+    const { title, description, keywords } = seoData;
+
+    return (
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+      </Helmet>
+    );
+  };
 
   return (
     <PageContainer>
+      {head()}
       <PageContentBox>
         <SecondaryHeading fontSize="2rem">{data.heading}</SecondaryHeading>
 
@@ -49,16 +78,18 @@ const Skill = () => {
               <PrimaryContentBox key={key}>
                 <PrimaryTextContentBox>
                   <MainHeading type="main">{skill.title}</MainHeading>
-                  <SecondaryHeading fontSize="2.5rem">{skill.subtitle}</SecondaryHeading>
+                  <SecondarySubheading>{skill.subtitle}</SecondarySubheading>
                 </PrimaryTextContentBox>
 
                 <SkillCardMetaContent>
                   <ToolsContainer>
-                    <SecondaryHeading type="sub">{skill.data.specialized_in.text}</SecondaryHeading>
+                    <SecondarySubheading type="sub">
+                      {skill.data.specialized_in.text}
+                    </SecondarySubheading>
                     <ToolsContainerItems>
                       {skill.data.specialized_in.items.map((item, key) => {
                         return (
-                          <ToolsContainerItem>
+                          <ToolsContainerItem key={key}>
                             <ToolsContainerItemText>{item}</ToolsContainerItemText>
                           </ToolsContainerItem>
                         );
@@ -67,9 +98,9 @@ const Skill = () => {
                   </ToolsContainer>
 
                   <ExperienceContainer>
-                    <SecondaryHeading type="sub">
+                    <SecondarySubheading type="sub">
                       {skill.data.experience_data.text}
-                    </SecondaryHeading>
+                    </SecondarySubheading>
                     <ExperienceContainerItems>
                       {skill.data.experience_data.items.map((item, key) => {
                         return (

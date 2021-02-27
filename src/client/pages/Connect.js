@@ -39,7 +39,7 @@ const Connect = () => {
       <PageContentBox>
         <PrimaryContentBox>
           <PrimaryTextContentBox>
-            <SecondarySubheading fontSize="2rem">{data.subheading}</SecondarySubheading>
+            <SecondarySubheading>{data.subheading}</SecondarySubheading>
             <MainHeading type="main">{data.heading}</MainHeading>
           </PrimaryTextContentBox>
         </PrimaryContentBox>
@@ -48,9 +48,7 @@ const Connect = () => {
           {data.cards.map((contact, key) => {
             return (
               <ConnectCardItem key={key}>
-                <MainSubheading type="main" fontSize="3rem">
-                  {contact.title}
-                </MainSubheading>
+                <MainSubheading type="main">{contact.title}</MainSubheading>
                 <a href={contact.link} target="_black">
                   <StyledButton size="medium" margin="2rem 0" type="primary">
                     {contact.cta_text}

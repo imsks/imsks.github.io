@@ -78,7 +78,7 @@ export const MainSubheading = styled.h2`
     }
   }};
 
-  font-size: 2.6rem';
+  font-size: 2.6rem;
 
   font-weight: 500;
 

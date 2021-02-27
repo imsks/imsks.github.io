@@ -16,6 +16,7 @@ export const ToolsContainerItems = styled.div`
   display: grid;
   gap: 1rem;
   justify-items: baseline;
+  margin: 1rem 0;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 `;
 
@@ -26,6 +27,7 @@ export const ToolsContainerItem = styled.div`
   height: 2rem;
   border-radius: 5px;
   padding: 3rem;
+  width: 100%;
   background-color: ${colorWhite};
   color: ${colorPrimary};
 `;
@@ -58,7 +60,7 @@ export const ExperienceContainerItem = styled.div`
   align-items: center;
   height: 2rem;
   border-radius: 5px;
-  padding: 5rem 3rem;
+  padding: 4rem 3rem;
   background-color: ${colorWhite};
   color: ${colorPrimary};
   margin: 1rem 0;

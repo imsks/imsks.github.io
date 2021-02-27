@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { PageContainer, PageContentBox } from '../style-components/components/Containers';
-import { MainHeading, SecondaryHeading, Paragraph } from '../style-components/base/typography';
+import { MainHeading, Paragraph } from '../style-components/base/typography';
 import { StyledButton } from '../style-components/components/Button';
 import { SkillCardGroup, SkillCard } from '../style-components/components/Cards';
 import SkillsData from '../Data/skills.data.json';
@@ -28,9 +28,9 @@ const Skills = () => {
     <PageContainer>
       {head()}
       <PageContentBox>
-        <SecondaryHeading fontSize="5rem" type="main" margin="0 0 1rem 0">
+        <MainHeading fontSize="5rem" type="main" margin="0 0 1rem 0">
           {data.heading}
-        </SecondaryHeading>
+        </MainHeading>
         <SkillCardGroup>
           {data.cards.map((line, key) => {
             return (

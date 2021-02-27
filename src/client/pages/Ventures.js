@@ -38,9 +38,9 @@ const Ventures = () => {
     <PageContainer>
       {head()}
       <PageContentBox>
-        <SecondaryHeading type="main" margin="0 0 1rem 0">
+        <MainHeading type="main" margin="0 0 1rem 0">
           {data.heading}
-        </SecondaryHeading>
+        </MainHeading>
         <VentureCardGroup>
           {data.cards.map((ventureCardData, key) => {
             return (
