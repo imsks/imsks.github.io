@@ -9,7 +9,6 @@
   "engines": {
     "node": "10.14.2"
   },
-  "main": "index.js",
   "scripts": {
     "start": "node build/bundle.js",
     "build:prod": "rm -rf build && rm -rf public && webpack  --config webpack.server.js && webpack -p --config webpack.client.prod.js --mode production",
