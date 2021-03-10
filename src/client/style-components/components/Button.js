@@ -112,7 +112,7 @@ export const StyledButton = styled.button`
   border-radius: 5px;
 
   :hover {
-    opacity: 0.85;
+    opacity: 0.9;
     transform: scale(0.95);
   }
 

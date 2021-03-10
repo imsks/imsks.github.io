@@ -12,10 +12,15 @@ import {
   FooterContainer,
   SocialConnectContainer,
   CreditsContainer,
+  CreditsContainerSubheading,
   SocialLinksContainer,
   SocialLinksContainerItem,
 } from '../style-components/components/Containers';
-import { SecondaryHeading, SecondarySubheading, Paragraph } from '../style-components/base/typography';
+import {
+  SecondaryHeading,
+  SecondarySubheading,
+  Paragraph,
+} from '../style-components/base/typography';
 
 import FooterData from '../Data/footer.data.json';
 
@@ -73,7 +78,7 @@ const Footer = () => {
         </SocialLinksContainer>
       </SocialConnectContainer>
       <CreditsContainer>
-        <SecondarySubheading>{data.credits}</SecondarySubheading>
+        <CreditsContainerSubheading>{data.credits}</CreditsContainerSubheading>
         <Paragraph>{data.copyright + new Date().getFullYear()}</Paragraph>
       </CreditsContainer>
     </FooterContainer>

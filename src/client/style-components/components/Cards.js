@@ -86,6 +86,10 @@ export const VentureCard = styled.div`
     color: ${colorWhite};
     box-shadow: 4px 4px 15px rgba(${colorShadow}, 0.2);
   }
+
+  @media ${device.phone} {
+    padding: 2rem;
+  }
 `;
 
 export const VentureCardContent = styled.div`
@@ -122,7 +126,8 @@ export const SkillCardGroup = styled.div`
   }
 
   @media ${device.phone} {
-    margin: 2rem -2rem;
+    margin: 0 -2rem;
+    grid-template-columns: none;
   }
 `;
 
@@ -144,6 +149,10 @@ export const SkillCard = styled.div`
     color: ${colorWhite};
     box-shadow: 4px 4px 10px rgba(${colorShadow}, 0.2);
     transform: scale(1.02);
+  }
+
+  @media ${device.phone} {
+    padding: 8rem 4rem;
   }
 `;
 
@@ -182,11 +191,7 @@ export const SkillCardMetaContent = styled.div`
 
 export const ProjectCard = styled.div`
   width: 100%;
-  height: 100%;
-  display: grid;
-  gap: 1rem;
   justify-items: left;
-  grid-template-columns: repeat(auto-fit, minmax(200, 1fr));
   padding: 5rem;
   background-color: ${colorCardBackground};
   border-radius: 5px;
@@ -196,6 +201,10 @@ export const ProjectCard = styled.div`
 
   :hover {
     box-shadow: 5px 5px 20px rgba(${colorShadow}, 0.3);
+  }
+
+  @media ${device.phone} {
+    padding: 2rem 4rem;
   }
 `;
 
@@ -209,6 +218,7 @@ export const ConnectCardGrid = styled.div`
 
   @media ${device.phone} {
     gap: 0rem;
+    grid-template-columns: none;
   }
 `;
 
@@ -226,4 +236,8 @@ export const ConnectCardItem = styled.div`
   color: ${colorBlack};
   box-shadow: 2px 2px 15px rgba(${colorShadow}, 0.1);
   transition: 0.5s all;
+
+  @media ${device.phone} {
+    padding: 3rem;
+  }
 `;

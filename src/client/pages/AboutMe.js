@@ -23,7 +23,7 @@ const AboutMe = () => {
     <PageContainer>
       {head()}
       <PageContentBox>
-        <MainHeading fontSize="5rem" type="main" margin="0 0 1rem 0">
+        <MainHeading fontSize="5rem" type="main">
           {data.heading}
         </MainHeading>
         {data.paragraphs.map((paragraphContent, key) => {

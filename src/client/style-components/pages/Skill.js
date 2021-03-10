@@ -58,9 +58,8 @@ export const ExperienceContainerItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2rem;
   border-radius: 5px;
-  padding: 4rem 3rem;
+  padding: 2rem;
   background-color: ${colorWhite};
   color: ${colorPrimary};
   margin: 1rem 0;
@@ -73,7 +72,6 @@ export const ExperienceContainerItemText = styled.p`
 
 export const ProjectContent = styled.div`
   width: 100%;
-
   display: grid;
   gap: 3rem;
   justify-items: center;
@@ -84,7 +82,7 @@ export const ProjectContent = styled.div`
   }
 
   @media ${device.phone} {
-    margin: 0 -3rem;
+    grid-template-columns: none;
   }
 `;
 

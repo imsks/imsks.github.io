@@ -16249,6 +16249,10 @@ textarea.rs-picker-search-input {
 .rs-modal-sm {
   width: 30%;
 
+  @include respond(tab-land) {
+    width: 80%;
+  }
+
   @include respond(phone) {
     width: 90%;
   }

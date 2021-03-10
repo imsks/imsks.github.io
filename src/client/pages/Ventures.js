@@ -3,12 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Divider } from 'rsuite';
 import { PageContainer, PageContentBox } from '../style-components/components/Containers';
-import {
-  MainHeading,
-  SecondaryHeading,
-  SecondarySubheading,
-  Paragraph,
-} from '../style-components/base/typography';
+import { MainHeading, SecondarySubheading, Paragraph } from '../style-components/base/typography';
 import { StyledButton } from '../style-components/components/Button';
 import {
   VentureCardGroup,

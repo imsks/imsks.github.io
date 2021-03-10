@@ -7,6 +7,10 @@ export const PageContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media ${device.phone} {
+    margin: 2rem 0 0 0;
+  }
 `;
 
 export const HomepageContainer = styled.main`
@@ -16,6 +20,11 @@ export const HomepageContainer = styled.main`
   justify-content: center;
   align-items: center;
   height: 100%;
+
+  @media ${device.phone} {
+    margin: 0;
+    padding: 5rem 0px;
+  }
 `;
 
 export const PageContentBox = styled.section`
@@ -27,14 +36,6 @@ export const PageContentBox = styled.section`
   width: 50%;
 
   @media ${device.tabPort} {
-    width: 60%;
-  }
-
-  @media ${device.phone} {
-    width: 70%;
-  }
-
-  @media ${device.smallPhone} {
     width: 80%;
   }
 `;
@@ -127,7 +128,6 @@ export const SocialConnectContainer = styled.div`
   background-color: ${colorCardBackground};
   width: 100%;
   border-radius: 5px;
-  padding: 3rem 0 2rem 0;
 `;
 
 export const SocialLinksContainer = styled.div`
@@ -154,5 +154,9 @@ export const CreditsContainer = styled.div`
   background-color: ${colorCardBackground};
   width: 100%;
   border-radius: 5px;
-  padding: 2rem 0 3rem 0;
+  margin: 1rem 0;
+`;
+
+export const CreditsContainerSubheading = styled.h4`
+  text-align: center;
 `;

@@ -42,7 +42,7 @@ export const MainHeading = styled.h1`
   }};
 
   @media ${device.tabPort} {
-    font-size: 3.5em;
+    font-size: 3.5rem;
   }
 
   @media ${device.phone} {

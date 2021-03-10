@@ -1,5 +1,5 @@
 // For constants
-export const colorPrimary = "#8348FF";
+export const colorPrimary = "#553fe8";
 export const colorBackground = "#f2f6fa";
 export const colorDanger = "#f02648";
 export const colorBlack = "black";
