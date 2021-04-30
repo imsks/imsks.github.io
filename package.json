@@ -5,11 +5,21 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export",
+    "pre:deploy": "npm run build && npm run export"
   },
   "dependencies": {
     "next": "10.2.0",
+    "node-sass": "^5.0.0",
+    "prop-types": "^15.7.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.2.0",
+    "rsuite": "^4.9.4",
+    "styled-components": "^5.2.3"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.12.0"
   }
 }

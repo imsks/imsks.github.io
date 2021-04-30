@@ -1,0 +1,33 @@
+{
+  "data": {
+    "heading": "I've built...",
+    "cards": [
+      {
+        "title": "Gangs Of Hackspur",
+        "subtitle": "I faced academic problems in engineering so I built the platform that help students who were looking to better exam preparation methods.",
+        "text": [
+          "Why I Founded: The academic content we were getting was very uncertain about why we were learning that course. Without a cause it was just a grade-oriented useless education.",
+          "Gangs Of Hackspur was a one-stop solution for engineering academic content that I was selling in printed 'Hacks'",
+          "I invested 1k INR and sold around 2k. As I was working alone on it and also had academic pressure so I'd to drop it :("
+        ],
+        "cta_text": "Show me more"
+      },
+      {
+        "title": "Virgin Tutor",
+        "subtitle": "There should be a platform that helped students in higher standards teach kids in their locality so we built one.",
+        "text": [
+          "Why I Founded: I wanted to teach kids in my 10+2 but there was no platform for that.",
+          "Virgin Tutor connects students with their local kids in lower standards.",
+          "This was my first 'Zero-Rupee-Invested' startup. We built on the top of Firebase and used Social Media Content creations strategies for user acquisition."
+        ],
+        "cta_text": "Show me more"
+      }
+    ],
+    "next_cta_text": "I'm skilled in.."
+  },
+  "seo": {
+    "title": "Ventures",
+    "description": "Know more about what Sachin has built",
+    "keywords": "ventures sachin shukla, sachin kumar shukla ventures, sachin kalpana shukla ventures, sachin shukla vit ventures, sachin vit ventures, sachin vit vellore ventures, sachin shukla lakhimpur ventures"
+  }
+}

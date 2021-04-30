@@ -1,0 +1,239 @@
+{
+  "data": {
+    "heading": "I'm good at..",
+    "cards": [
+      {
+        "title": "UX/UI Design",
+        "slug": "ux-ui-design",
+        "subtitle": "Built 5 MVPs for startups and my own. Have 1 year experience in user experience & interface designing.",
+        "cta_text": "Show me the designs",
+        "data": {
+          "specialized_in": {
+            "text": "Tool I use",
+            "items": ["Adobe XD", "Figma", "Invision", "Framer"]
+          },
+          "experience_data": {
+            "text": "More about it",
+            "items": [
+              "Experience - 1 Year",
+              "Working with startups build the initial product(MVP)",
+              "Building digital prototypes using Figma and Framer."
+            ]
+          },
+          "certificates": ["https://gdurl.com/lXOB", "https://gdurl.com/McLp"]
+        },
+        "project": {
+          "title": "My Projects",
+          "subtitle": "The projects I've built over time",
+          "heading": "You're viewing..",
+          "item": [
+            {
+              "title": "Virgin Tutor Web App",
+              "subtitle": "Designed Virgin Tutor's Web UI in Adobe XD",
+              "slug": "virgin-tutor-web-app",
+              "about": [null],
+              "images": [
+                "https://gdurl.com/2RWO",
+                "https://gdurl.com/N4h9",
+                "https://gdurl.com/YNWg",
+                "https://gdurl.com/7SWQ"
+              ],
+              "link": "https://xd.adobe.com/view/71924c8f-4cdc-46cd-4696-f554a36e0ac2-07a3/"
+            },
+            {
+              "title": "FlapX App UI",
+              "slug": "flapx-app-ui",
+              "subtitle": "Built the app UI for platform called FlapX.",
+              "about": [null],
+              "images": [
+                "https://gdurl.com/3d2D",
+                "https://gdurl.com/PMiX",
+                "https://gdurl.com/8oWM"
+              ],
+              "link": "https://xd.adobe.com/view/3fea5635-a3a8-4e8f-4cd3-720f6e84f13a-49db/"
+            },
+            {
+              "title": "VireGo Web UI",
+              "subtitle": "Built Web UI design for our startup VireGo which is in B2B ecosystem.",
+              "slug": "virego-web-ui",
+              "about": [null],
+              "images": ["https://gdurl.com/kPLa"],
+              "link": null
+            },
+            {
+              "title": "Felix Global Web UI",
+              "subtitle": "Designed for Felix Global(Fictional) that provides cloud services & web security.",
+              "slug": "felix-global-web-ui",
+              "link": null,
+              "about": [null],
+              "images": ["https://gdurl.com/yLQg"]
+            },
+            {
+              "title": "Trifler UX/UI",
+              "subtitle": "Build the working prototype in Figma for my project named Trifler.",
+              "slug": "trifler-ux-ui",
+              "link": "https://www.figma.com/proto/w8HiDe9ph7aDUNcEPmBeAC/Trifler-B?node-id=1%3A2&scaling=min-zoom",
+              "about": [
+                "Trifler helps you store contacts without asking people."
+              ],
+              "images": [null]
+            }
+          ]
+        },
+        "seo": {
+          "title": "UX/UI Design | Skill",
+          "description": "My work on UX/UI Design",
+          "keywords": "skills sachin shukla, sachin kumar shukla skills, sachin kalpana shukla skills, sachin shukla vit skills, sachin vit skills, sachin vit vellore skills, sachin shukla lakhimpur ventures"
+        }
+      },
+      {
+        "title": "Web Dev",
+        "slug": "web-dev",
+        "subtitle": "Solving real-life problems I/People face with my web dev skills in MERN stack.",
+        "cta_text": "Show what you built",
+        "data": {
+          "specialized_in": {
+            "text": "Worked with",
+            "items": [
+              "React",
+              "NodeJS",
+              "Django",
+              "REST API",
+              "MongoDB",
+              "Firebase"
+            ]
+          },
+          "experience_data": {
+            "text": "More about it",
+            "items": [
+              "Working experience - 1.5 Year",
+              "Built digital products for Investocracy, Trilingo & Virgin Tutor",
+              "Built my first startup Gangs Of Hackspur(Failed) and buidling Virgin Tutor currently."
+            ]
+          }
+        },
+        "project": {
+          "title": "My Projects",
+          "subtitle": "The projects I've built in 3 years",
+          "heading": "You're viewing..",
+          "item": [
+            {
+              "title": "this.Website",
+              "subtitle": "Built the website you're on currently, using React with dynamic data flow from JSON files.",
+              "slug": "this-Website",
+              "about": [null],
+              "images": [null],
+              "link": "https://github.com/imsks/imsks.github.io"
+            },
+            {
+              "title": "Investocracy",
+              "slug": "investocracy",
+              "subtitle": "Worked as an product developer and helped them build the platform.",
+              "about": [null],
+              "images": [null],
+              "link": "https://investocracy.co"
+            },
+            {
+              "title": "Trilingo",
+              "slug": "trilingo",
+              "subtitle": "Built the MVP for language learning platform Trilingo focusing on tribal language research.",
+              "about": [null],
+              "images": [null],
+              "link": "https://learn.trilingo.in"
+            },
+            {
+              "title": "Virgin Tutor Web(β)",
+              "slug": "virgin-tutor",
+              "subtitle": "Built VT's web app in React and Firebase. Currently working on NodeJs and React for V1.",
+              "about": [null],
+              "images": [null],
+              "link": "https://virgintutor.web.app"
+            },
+            {
+              "title": "Blogg",
+              "slug": "blogg",
+              "subtitle": "A web app that allows you to create content with user auth, build in React.",
+              "about": [null],
+              "images": [null],
+              "link": "https://github.com/imsks/Blogg"
+            },
+            {
+              "title": "ImageN",
+              "slug": "imagen",
+              "subtitle": "A Django web app that extracts text from images using OpenCV lib in py.",
+              "about": [null],
+              "images": [null],
+              "link": "https://github.com/imsks/ImageN"
+            }
+          ]
+        },
+        "seo": {
+          "title": "Web Dev | Skill",
+          "description": "My work on Web Dev",
+          "keywords": "skills sachin shukla, sachin kumar shukla skills, sachin kalpana shukla skills, sachin shukla vit skills, sachin vit skills, sachin vit vellore skills, sachin shukla lakhimpur ventures"
+        }
+      },
+      {
+        "title": "App Dev",
+        "slug": "app-dev",
+        "subtitle": "Building user-centric apps for startups and my own projects.",
+        "cta_text": "Show what you built",
+        "data": {
+          "specialized_in": {
+            "text": "I have worked in",
+            "items": ["Flutter", "Firebase", "REST NodeJS + MongoDB"]
+          },
+          "experience_data": {
+            "text": "I've experience in",
+            "items": [
+              "Worked as an Intern for one month in a startup",
+              "Been building human-centered designs for more than 10 months, from my college times."
+            ]
+          }
+        },
+        "project": {
+          "title": "My Projects",
+          "subtitle": "The projects I've built over time",
+          "heading": "You're viewing..",
+          "item": [
+            {
+              "title": "On-Board-Me",
+              "slug": "on-board-me",
+              "subtitle": "Built my first open source project that helps you create on-boarding screens for your flutter apps within minutes",
+              "about": [null],
+              "images": [null],
+              "link": "https://github.com/imsks/On-Board-Me"
+            },
+            {
+              "title": "Easyomu",
+              "slug": "imagen",
+              "subtitle": "Built my first app for both IOS and Android that made it to App and Play Store. The app helps you read different country's news in many languages.",
+              "about": [null],
+              "images": [null],
+              "link": "https://play.google.com/store/apps/details?id=com.website.easyomu&hl=en"
+            },
+            {
+              "title": "Investocracy",
+              "slug": "investocracy",
+              "subtitle": "Built Investocracy platform for Android and IOS. The platform is under-construction that will help connect investors & VCs with budding startups.",
+              "about": [null],
+              "images": [null],
+              "link": "https://play.google.com/store/apps/details?id=co.investocracy.investocracy&hl=en"
+            }
+          ]
+        },
+        "seo": {
+          "title": "App Dev | Skill",
+          "description": "My work on App Dev",
+          "keywords": "skills sachin shukla, sachin kumar shukla skills, sachin kalpana shukla skills, sachin shukla vit skills, sachin vit skills, sachin vit vellore skills, sachin shukla lakhimpur ventures"
+        }
+      }
+    ],
+    "next_cta_text": "Looking to connect.."
+  },
+  "seo": {
+    "title": "Skills",
+    "description": "What skills do Sachin aquire",
+    "keywords": "skills sachin shukla, sachin kumar shukla skills, sachin kalpana shukla skills, sachin shukla vit skills, sachin vit skills, sachin vit vellore skills, sachin shukla lakhimpur ventures"
+  }
+}

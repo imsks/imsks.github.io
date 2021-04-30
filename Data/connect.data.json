@@ -1,0 +1,24 @@
+{
+  "data": {
+    "heading": "Connect with me",
+    "subheading": "Discuss me your next idea or plan a project together",
+    "cards": [
+      {
+        "title": "Ping me on Phone",
+        "link": "tel:+918072937581",
+        "cta_text": "Call me"
+      },
+      {
+        "title": "Ping me on Whatsapp",
+        "link": "https://api.whatsapp.com/send?phone=8072937581",
+        "cta_text": "Ping on Whatsapp"
+      }
+    ],
+    "next_cta_text": "Back to home page"
+  },
+  "seo": {
+    "title": "Connect with Sachin",
+    "description": "Connnect with me to discuss about Ideas and projects.",
+    "keywords": "connnect with sachin shukla, connnect with sachin kumar shukla, connnect with sachin kalpana shukla, connnect with sachin shukla vit, connnect with sachin vit, connnect with sachin vit vellore, connnect with sachin shukla lakhimpur ventures"
+  }
+}

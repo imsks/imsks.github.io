@@ -1,0 +1,30 @@
+{
+  "data": {
+    "heading": "Hi, I'm Sachin.",
+    "subheading": "I help people build digital products with my design, development and marketing skills.",
+    "cta_text": "I want to know more",
+    "cta_modal_text": "Quikly show me...",
+    "modal": {
+      "title": "I am looking for..",
+      "links": [
+        {
+          "text": "What I've built",
+          "slug": "/ventures"
+        },
+        {
+          "text": "What skills do I have",
+          "slug": "/skills"
+        },
+        {
+          "text": "Connect with me",
+          "slug": "/connect"
+        }
+      ]
+    }
+  },
+  "seo": {
+    "title": "Sachin Kr. Shukla",
+    "description": "I'm Sachin Kr. Shukla. I help people lift-off their digital products with my skills in project management, web & app dev and user experience and interface design.",
+    "keywords": "sachin shukla, sachin kumar shukla, sachin kalpana shukla, sachin shukla vit, sachin vit, sachin vit vellore, sachin shukla lakhimpur, sachin shukla lakhimpur kheri"
+  }
+}

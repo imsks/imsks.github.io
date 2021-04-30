@@ -1,0 +1,678 @@
+{
+  "slugs":{
+    "home": "/",
+    "status": "/status",
+    "about": "/about",
+    "ventures": "/ventures",
+    "skills": "/skills",
+    "blog": "/blogs",
+    "connect": "/connect"
+  },
+
+  "header_data": {
+    "logo_name": "Sachin",
+    "navigation_links": [
+      "Home",
+      "About",
+      "Ventures",
+      "Skills",
+      "Blogs",
+      "Connect"
+    ],
+    "introduction_data": {
+      "name": "Sachin Kr. Shukla",
+      "profession": "Entrepreneur | Full Stack Web Dev. | UI/UX Designer"
+    }
+  },
+
+  "about_me": [
+    "In second year of my college I started working my first startup Gangs Of Hackspur. While building up the product I learned Full stack Web Dev, SEO and Web analytics.",
+    "From then, I have learned UI/UX Designing, Data Science and currently working in ML and AI environment. Improving day-by-day just to became an skilled Entrepreneur.",
+    "In my free time I love reading business, design and self-improvement books that help me shape my life. Watching movies or brainstorming the solution to problems I had recently."
+  ],
+
+  "my_ventures": {
+    "heading": "My Ventures",
+    "url": "/my-ventures",
+    "data": {
+      "gangs_of_hackspur": {
+        "name": "Gangs Of Hackspur",
+        "about": [
+          "Why I Founded: The academic content we were getting was very uncertain about why we were learning that course. Without a cause it was just a grade-oriented useless education",
+          "Gangs Of Hackspur was a one-stop solution for engineering academic content that I was selling in printed 'Hacks'",
+          "I invested 1k INR and sold around 2k. As I was working alone on it and also had academic pressure so I'd to drop it :("
+        ],
+        "visit_link": {
+          "link_data": null,
+          "cta": "Coming Soon" 
+        },
+        "url": "/gangs-of-hackspur"
+      },
+      "vire_go": {
+        "name": "Vire Go",
+        "about": [
+          "Why We Founded: The B2B marketplace is still offering services and expanding conventionally. We thought we can do it better by offering management to small businesses.",
+          "We offer managment and expansion solution to small business in Vellore and Lucknow region.",
+          "We founded in December, 2019 and 200+ businesses have joined so far."
+        ],
+        "visit_link": {
+          "link_data": "https://testing.com",
+          "cta": "Coming Soon" 
+        },
+        "url": "/vire-go"
+      }
+    }
+  },
+
+  "my_blogs": {
+    "heading": "Blogs",
+    "url": "/blog",
+    "data": {
+      "blog_1": {
+        "title": "1. Why Deep Work important for our generation and how can we do it?",
+        "blog_url": "test.url",
+        "image_url": "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+      },
+      "blog_2": {
+        "title": "2. Why Deep Work important for our generation and how can we do it?",
+        "blog_url": "test.url",
+        "image_url": "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+      },
+      "blog_3": {
+        "title": "3. Why Deep Work important for our generation and how can we do it?",
+        "blog_url": "test.url",
+        "image_url": "https://images.unsplash.com/photo-1586809784406-0665c2d5d819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+      }
+    }
+  },
+
+  "my_skills": {
+    "heading": "What I am good at",
+    "url": "/skills",
+    "data": {
+      "skill_1": {
+        "title": "UI/UX Design",
+        "sub_title": "Built 8+ projects for Startups and Internships. Have 10+ months experience in XD, Invision and Figma.",
+        "cta": "Show me the designs",
+        "url": "/ui-ux-design",
+        "specialized_in": [
+          "Tools I use",
+          "Adobe XD", "Invision", "Figma"
+        ],
+        "experience_data": {
+          "desc_1": "Worked as an Intern for one month in a startup",
+          "desc_2": "Been building human-centered designs for more than 10 months, from my college times."
+        }, 
+        "certificates": [
+          "Centificates",
+          "https://gdurl.com/lXOB",
+          "https://gdurl.com/McLp"
+          
+        ],
+        "skill_data": {
+          "cta": "Open Project",
+          "project_1": {
+            "name": "Virgin Tutor Web App",
+            "description": "Built VT's UI design with 15 pages web app in Adobe XD",
+            "software_used": [
+                "Adobe XD"
+              ],
+              "roles": [
+                "Designer"
+              ],
+            "link_data": "https://xd.adobe.com/view/71924c8f-4cdc-46cd-4696-f554a36e0ac2-07a3/",
+            "images": [
+              "Project Images",
+              "/2RWO",
+              "/N4h9",
+              "/YNWg",
+              "/7SWQ"
+            ],
+            "no_data": "Nothing to show"
+          },
+          "project_2": {
+            "name": "FlapX App UI",
+            "description": "Built my second app UI for platform called FlapX.",
+            "software_used": [
+                "Adobe XD"
+              ],
+              "roles": [
+                "Designer"
+              ],
+            "link_data": "https://xd.adobe.com/view/3fea5635-a3a8-4e8f-4cd3-720f6e84f13a-49db/",
+            "images": [
+              "Project Images",
+              "/3d2D",
+              "/PMiX",
+              "/8oWM"
+            ],
+            "no_data": "Nothing to show"
+          },
+          "project_3": {
+            "name": "VireGo Web UI",
+            "description": "Built Web UI design for our startup VireGo which is in B2B ecosystem.",
+            "software_used": [
+                "Adobe XD"
+              ],
+              "roles": [
+                "Designer"
+              ],
+            "link_data": null,
+            "images": [
+              "Project Images",
+              "https://gdurl.com/kPLa"
+            ],
+            "no_data": "Nothing to show"
+          },
+          "project_4": {
+            "name": "Felix Global Web UI",
+            "description": "Designed for Felix Global(Fictional) that provides cloud services & web security.",
+            "software_used": [
+                "Adobe XD"
+              ],
+              "roles": [
+                "Designer"
+              ],
+            "link_data": null,
+            "images": [
+              "Project Images",
+              "/yLQg"
+            ],
+            "no_data": "Nothing to show"
+          },
+          "project_5": {
+            "name": "Portfolio Web UI",
+            "description": "Designed this portfolio UI that you're looking at, in Adobe XD",
+            "software_used": [
+                "Adobe XD"
+              ],
+              "roles": [
+                "Designer"
+              ],
+            "link_data": "https://xd.adobe.com/view/f1cb2715-1f12-4cd5-5500-364e9b78b7e2-87fa/",
+            "images": [
+              "Project Images",
+              "/kZGG"
+            ],
+            "no_data": "Nothing to show"
+          },
+          "project_6": {
+            "name": "VireGo App UI",
+            "description": "Built App UI design for our startup VireGo which is in B2B ecosystem.",
+            "software_used": [
+                "Adobe XD"
+              ],
+              "roles": [
+                "Designer"
+              ],
+            "link_data": "https://projects.invisionapp.com/prototype/ck67ts1w1000ma4013hungxv1/play",
+            "images": [
+              "Project Images",
+              "/uWJR",
+              "/GpVz"
+            ],
+            "no_data": "Nothing to show"
+          }
+        }
+      },
+      "skill_2": {
+        "title": "Web Dev",
+        "sub_title": "Solving real-life problems I face with my web dev skills in JS and Python.",
+        "cta": "Show what you built",
+        "url": "/web-dev",
+        "specialized_in": [
+          "Skills",
+          "React", "NodeJS", "Django", "REST API", "Firebase", "SQL"
+        ],
+        "experience_data": {
+          "desc_1": "Working over my web dev skills since 3rd year in college.",
+          "desc_2": "Built my first startup Gangs Of Hackspur(Failed) and buidling Virgin Tutor currently.",
+          "desc_3": "Currently working Investorcracy Web App",
+          "duration": "Working experience - 1.5 Year"
+        }, 
+        "skill_data": {
+          "cta": "Show Project",
+          "project_1": {
+            "name": "this.Website",
+            "description": "Built the website you're on currently, using React with dynamic data flow from JSON files.",
+            "software_used": [
+                "React"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": [
+              "https://github.com/imsks/imsks.github.io"
+            ],
+            "no_data": "Nothing to show"
+          },
+          "project_2": {
+            "name": "Virgin Tutor Web(β)",
+            "description": "Built VT's web app in React and Firebase. Currently working on NodeJs and React for V1.",
+            "software_used": [
+                "React",
+                "FIrebase"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "virgintutor.web.app",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_3": {
+            "name": "Blogg",
+            "description": "A web app that allows you to create content with user auth, build in React.",
+            "software_used": [
+                "React"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Blogg",
+            "no_data": "Nothing to show"
+          },
+          "project_4": {
+            "name": "Expensify",
+            "description": "A web app that tracks your daily expenses. Built in React & Firebase with user auth.",
+            "software_used": [
+                "React",
+                "FIrebase"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Expensify",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_5": {
+            "name": "Budgety",
+            "description": "A web app that helps you calculate your budget. Built purely in JS",
+            "software_used": [
+                "Vanilla JS"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Budgety",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_6": {
+            "name": "ImageN",
+            "description": "A Django web app that extracts text from images using OpenCV lib in py.",
+            "software_used": [
+                "Django",
+                "OpenCV"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/ImageN",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_7": {
+            "name": "BloggedUp",
+            "description": "A web app built in Django that can used as Blogging platform allowing user authentication.",
+            "software_used": [
+                "Django"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/BloggedUp",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          
+          "project_8": {
+            "name": "Forkify",
+            "description": "A web app that fetches various recipes from an API using purely JS.",
+            "software_used": [
+                "Vanilla JS"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Forkify",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_9": {
+            "name": "Natours",
+            "description": "Built a travel website using CSS framework SCSS that can be used by travelling agencies",
+            "software_used": [
+                "SCSS"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Natours",
+            "no_data": "Nothing to show"
+          },
+          
+          "project_10": {
+            "name": "Imazzz",
+            "description": "A web app build in Javascript that helps you edit the images you upload.",
+            "software_used": [
+                "Vanilla JS"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Imazzz",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_11": {
+            "name": "Trillo",
+            "description": "Built my first website using CSS Grids.",
+            "software_used": [
+                "SCSS"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Trillo",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_12": {
+            "name": "Nexter",
+            "description": "Built my first website using CSS Flexbox.",
+            "software_used": [
+                "SCSS"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Nexter",
+            "images": [],
+            "no_data": "Nothing to show"
+          }
+        }
+      },
+      "skill_3": {
+        "title": "Digital Marketing",
+        "sub_title": "Built my campaigns for my startup and startups as an intern.",
+        "cta": "I want to know more",
+        "url": "/digital-marketing",
+        "specialized_in": [
+          "Skills",
+          "SEO", "Social Media Marketing", "Search Engine Marketing", "Facebook Ads", "Instagram Marketing"
+        ],
+        "experience_data": {
+          "desc_1": "Working over my digital  skills since 3rd year in college.",
+          "desc_2": "Built my first startup Gangs Of Hackspur(Failed) and buidling Virgin Tutor currently.",
+          "desc_3": "Currently working Investorcracy SEO Manager",
+          "duration": "Working experience - 6 months"
+        },
+        "certificates": [
+          "Centificates",
+          "https://gdurl.com/LaKh",
+          "https://gdurl.com/swNQ",
+          "https://gdurl.com/qi8T",
+          "https://gdurl.com/1FfF",
+          "https://gdurl.com/yi4i"
+          
+        ],
+        "skill_data": {
+          "cta": "Show Project",
+          "project_1": {
+            "name": "Gangs Of Hackspur",
+            "description": "Applied my SEO knowledge on my first startup by auditing, keyword research and technical SEO.",
+            "software_used": [
+              "Worked on",
+              "SEO Auditing",
+              "Keyword Research",
+              "On-page SEO",
+              "Responsive Web Design"
+            ],
+            "roles": [
+              "SEO Manager"
+            ],
+            "link_data": null,
+            "no_data": "No images to show."
+          },
+          "project_2": {
+            "name": "7th Dev",
+            "description": "Worked as an intern for 1 months. Worked on SEO Auditing, Keyword research, Linkedin inMail ads & Social Media Manager.",
+            "software_used": [
+              "Worked on",
+              "SEO Auditing",
+              "Keyword Research",
+              "On-page SEO",
+              "Responsive Web Design"
+              ],
+              "roles": [
+                "Marketing Intern"
+              ],
+            "link_data": "https://testing.com",
+            "no_data": "No images to show."
+          }
+        }
+      },
+      "skill_4": {
+        "title": "App Dev",
+        "sub_title": "Solving real-life problems I face with my app dev skills in Flutter.",
+        "cta": "Show what you built",
+        "url": "/app-dev",
+        "skill_data": {
+          "cta": "Show Project",
+          "project_1": {
+            "name": "Easyomu",
+            "description": "Built my first app for both IOS and Android that made it to App and Play Store. The app helps you read different country's news in many languages.",
+            "software_used": [
+                "Flutter",
+                "Firebase"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://play.google.com/store/apps/details?id=com.website.easyomu&hl=en",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_2": {
+            "name": "Investocracy",
+            "description": "Built Investocracy platform for Android and IOS. The platform is under-construction that will help connect investors & VCs with budding startups.",
+            "software_used": [
+                "Flutter"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://play.google.com/store/apps/details?id=co.investocracy.investocracy&hl=en",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_3": {
+            "name": "On-Board-Me",
+            "description": "Built my first open source project that helps you create on-boarding screens for your flutter apps within minutes",
+            "software_used": [
+                "Flutter"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/On-Board-Me",
+            "images": [
+              "Project Images",
+              "/DsCol",
+              "/cNBT",
+              "/CQfz"
+            ],
+            "no_data": "Nothing to show"
+          },
+          "project_4": {
+            "name": "brew-crew",
+            "description": "An app that helps you order coffee at your office desk.",
+            "software_used": [
+                "Flutter",
+                "Firebase"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/brew-crew",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_5": {
+            "name": "Flash-Chat",
+            "description": "An app that allows to chatting with P2P System built in Flutter.",
+            "software_used": [
+                "Flutter",
+                "Firebase"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Flash-Chat",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_6": {
+            "name": "Clima",
+            "description": "A weather app that uses REST API data build in Flutter.",
+            "software_used": [
+                "Flutter",
+                "Firebase"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Clima",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_7": {
+            "name": "Despicable-me-characters",
+            "description": "The app shows the Despicable Me charcaters with interactive animation.",
+            "software_used": [
+                "Flutter"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Despicable-me-characters",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_8": {
+            "name": "Flight App",
+            "description": "A simple app mocking up flight booking app in Flutter with Bloc.",
+            "software_used": [
+                "Flutter",
+                "Firebase"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/flightapp",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_9": {
+            "name": "Bitcoin-Ticker",
+            "description": "An app built in flutter shows different values of currencies for a BTC.",
+            "software_used": [
+                "Flutter",
+                "REST API"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Bitcoin-Ticker",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_10": {
+            "name": "BMI-Calculator",
+            "description": "An app that will calculate your BMI based on given data.",
+            "software_used": [
+                "Flutter"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/BMI-Calculator",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_11": {
+            "name": "Flutter-Notes",
+            "description": "A simple app that uses Flutter UI design elements for the notes",
+            "software_used": [
+                "Flutter"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Flutter-Notes",
+            "images": [],
+            "no_data": "Nothing to show"
+          },
+          "project_12": {
+            "name": "Quizzler",
+            "description": "An app showing Quiz UI built in Flutter.",
+            "software_used": [
+                "Flutter"
+              ],
+              "roles": [
+                "Developer"
+              ],
+            "link_data": "https://github.com/imsks/Flutter-Notes",
+            "images": [],
+            "no_data": "Nothing to show"
+          }
+        }
+      }
+    }
+  },
+
+  "contact_me": {
+    "heading": "Connect with me.",
+    "sub_heading": "Your next big idea or how we can help each other, Let's talk.",
+    "form_content": [
+      "Your Name",
+      "Your Email", 
+      "Your Message",
+      "Send it to Me"
+    ]
+  },
+
+  "footer": {
+    "left": [
+      "sachinshukla.me"
+    ],
+    "right": {
+      "facebook": {
+        "url": "https://www.facebook.com/imskrs",
+        "icon_data": "facebook-square"
+      },
+      "instagram": {
+        "url": "https://www.instagram.com/im_skrs",
+        "icon_data": "instagram"
+      },
+      "twitter": {
+        "url": "https://twitter.com/i_skrs",
+        "icon_data": "twitter"
+      },
+      "linkedin": {
+        "url": "https://linkedin.com/in/imsks",
+        "icon_data": "linkedin-square"
+      },
+      "medium": {
+        "url": "https://medium.com/@imskrs",
+        "icon_data": "medium"
+      },
+      "github": {
+        "url": "https://github.com/imsks",
+        "icon_data": "github"
+      }
+    }
+  }
+}
