@@ -29,9 +29,9 @@ const Navbar = () => {
             {hamburgerLinks.map((link, key) => {
               return (
                 <li className="navigation__item" key={key}>
-                  <a href={link.slug} className="navigation__link">
-                    {link.text}
-                  </a>
+                  <Link href={link.slug}>
+                    <a className="navigation__link">{link.text}</a>
+                  </Link>
                 </li>
               );
             })}

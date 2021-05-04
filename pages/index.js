@@ -68,9 +68,11 @@ const HomePage = () => {
             {data.modal.links.map((link, key) => {
               return (
                 <QuickNavigationModalCard key={key}>
-                  <QuickNavigationModalCardItem href={link.slug}>
-                    {link.text}
-                  </QuickNavigationModalCardItem>
+                  <Link href={link.slug}>
+                    <QuickNavigationModalCardItem>
+                      {link.text}
+                    </QuickNavigationModalCardItem>
+                  </Link>
                 </QuickNavigationModalCard>
               );
             })}
