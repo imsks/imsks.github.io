@@ -1,0 +1,30 @@
+{
+  "data": {
+    "logo": {
+      "text": "Sachin",
+      "slug": "/"
+    },
+    "hamburgerLinks": [
+      {
+        "text": "Home",
+        "slug": "/"
+      },
+      {
+        "text": "About Me",
+        "slug": "/about"
+      },
+      {
+        "text": "My Ventures",
+        "slug": "/ventures"
+      },
+      {
+        "text": "Skills",
+        "slug": "/skills"
+      },
+      {
+        "text": "Connect",
+        "slug": "/connect"
+      }
+    ]
+  }
+}
