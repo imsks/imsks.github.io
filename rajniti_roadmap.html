@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — 6-Month Product Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:     #0D0D0D;
+  --paper:   #F6F1E8;
+  --cream:   #EDE8DC;
+  --rule:    #CEC8BA;
+  --muted:   #7A7060;
+  --navy:    #1A2A4A;
+  --navy-lt: #E8ECF4;
+  --navy-md: #A0B0CC;
+  --saffron: #E06B2A;
+  --saff-lt: #FDF0E8;
+  --saff-md: #F5C4A0;
+  --green:   #1A6B40;
+  --green-lt:#E6F4ED;
+  --green-md:#9FD4BA;
+  --gold:    #B8860B;
+  --gold-lt: #FBF3DC;
+  --red:     #B71C1C;
+  --red-lt:  #FEECEC;
+  --purple:  #5B21B6;
+  --purp-lt: #EDE9FE;
+  --teal:    #0F766E;
+  --teal-lt: #CCFBF1;
+}
+
+body{
+  background:var(--paper);
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  width:960px;
+  margin:0 auto;
+}
+
+/* ── COVER ── */
+.cover{
+  background:var(--navy);
+  padding:48px 56px 0;
+  position:relative;
+  overflow:hidden;
+  min-height:320px;
+}
+.cover::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,
+    var(--saffron) 0%,var(--saffron) 33.3%,
+    #fff 33.3%,#fff 66.6%,
+    var(--green) 66.6%);
+}
+.cover::after{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 90% at 92% 40%,rgba(224,107,42,0.09) 0%,transparent 65%),
+    radial-gradient(ellipse 30% 50% at 5% 80%,rgba(26,106,64,0.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.cover-meta{
+  display:flex;justify-content:space-between;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;color:rgba(255,255,255,0.25);
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding-bottom:12px;margin-bottom:32px;
+  position:relative;z-index:1;
+}
+.chapter-tag{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:12px;
+  position:relative;z-index:1;
+}
+.cover-title{
+  font-family:'Playfair Display',serif;
+  font-size:58px;font-weight:900;line-height:0.92;
+  color:#F6F1E8;letter-spacing:-2px;
+  margin-bottom:16px;
+  position:relative;z-index:1;
+}
+.cover-title em{font-style:italic;color:var(--saffron);}
+.cover-thesis{
+  font-size:13px;font-weight:300;
+  color:rgba(246,241,232,0.55);
+  line-height:1.7;max-width:580px;
+  margin-bottom:32px;
+  position:relative;z-index:1;
+}
+.cover-thesis strong{color:rgba(246,241,232,0.85);font-weight:500;}
+.summary-strip{
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:grid;grid-template-columns:repeat(5,1fr);
+  position:relative;z-index:1;
+}
+.sum-cell{
+  padding:14px 0;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.sum-cell:last-child{border-right:none;}
+.sum-num{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-weight:700;
+  color:var(--saffron);display:block;
+}
+.sum-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;color:rgba(246,241,232,0.3);
+  text-transform:uppercase;display:block;margin-top:2px;
+}
+
+/* ── BODY ── */
+.body{padding:0 56px 56px;background:var(--paper);}
+
+.sec-hdr{
+  display:flex;align-items:center;gap:14px;
+  margin:40px 0 20px;
+}
+.sec-n{
+  font-family:'Playfair Display',serif;
+  font-size:11px;font-style:italic;
+  color:var(--gold);width:22px;flex-shrink:0;
+}
+.sec-t{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.sec-r{flex:1;height:1px;background:var(--rule);}
+
+/* ── PRINCIPLE ── */
+.principle{
+  background:var(--ink);
+  padding:20px 28px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:20px;align-items:center;
+}
+.p-icon{
+  font-family:'Playfair Display',serif;
+  font-size:44px;font-style:italic;
+  color:var(--saffron);opacity:0.4;line-height:1;
+}
+.p-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(246,241,232,0.35);margin-bottom:6px;
+}
+.p-text{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  line-height:1.4;color:#F6F1E8;
+}
+.p-text em{font-style:italic;color:var(--saffron);}
+
+/* ── ROADMAP COLUMNS ── */
+.roadmap-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0;
+  border:1px solid var(--rule);
+  margin-bottom:28px;
+  background:white;
+}
+
+.rm-col{border-right:1px solid var(--rule);}
+.rm-col:last-child{border-right:none;}
+
+.rm-col-header{
+  padding:14px 18px;
+  border-bottom:2px solid;
+  position:relative;
+}
+
+.rm-col-tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.16em;text-transform:uppercase;
+  font-weight:500;margin-bottom:4px;
+}
+.rm-col-name{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;
+  margin-bottom:2px;line-height:1;
+}
+.rm-col-period{
+  font-size:10px;color:var(--muted);
+  font-family:'DM Mono',monospace;
+}
+
+.rm-col-body{padding:16px 18px;}
+
+/* Roadmap card */
+.rm-card{
+  border:1px solid var(--rule);
+  margin-bottom:12px;
+  background:var(--paper);
+}
+.rm-card:last-child{margin-bottom:0;}
+
+.rm-card-header{
+  padding:10px 12px;
+  border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:8px;
+}
+.rm-card-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.rm-card-name{
+  font-size:11.5px;font-weight:500;color:var(--ink);
+  flex:1;line-height:1.3;
+}
+.rm-card-type{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;padding:2px 6px;
+  border-radius:2px;flex-shrink:0;
+}
+
+.rm-card-body{padding:10px 12px;}
+.rm-outcome{
+  font-size:10.5px;color:var(--muted);
+  line-height:1.55;margin-bottom:8px;
+  font-style:italic;
+}
+.rm-kr-link{
+  display:flex;align-items:center;gap:6px;
+}
+.rm-kr-badge{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;padding:2px 6px;
+  flex-shrink:0;
+}
+.rm-kr-text{
+  font-size:10px;color:var(--muted);
+  line-height:1.4;
+}
+
+/* Blocked card styling */
+.rm-card.blocked{
+  opacity:0.65;
+}
+.blocked-note{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:var(--red);letter-spacing:0.06em;
+  margin-top:6px;display:flex;align-items:center;gap:4px;
+}
+
+/* ── TIMELINE BAR ── */
+.timeline-wrap{
+  background:white;
+  border:1px solid var(--rule);
+  padding:20px;
+  margin-bottom:24px;
+}
+.timeline-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+.timeline-row{
+  display:grid;
+  grid-template-columns:160px 1fr;
+  align-items:center;
+  gap:12px;
+  margin-bottom:8px;
+}
+.timeline-item-label{
+  font-size:10.5px;color:var(--ink);
+  font-weight:500;text-align:right;
+  line-height:1.3;
+}
+.timeline-bar-track{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:2px;
+  height:24px;
+}
+.timeline-seg{
+  height:100%;
+  border-radius:2px;
+  display:flex;align-items:center;
+  padding:0 6px;
+}
+.timeline-seg span{
+  font-family:'DM Mono',monospace;font-size:8px;
+  font-weight:500;white-space:nowrap;
+  color:white;
+}
+.timeline-months{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:2px;
+  padding-left:172px;
+  margin-bottom:12px;
+}
+.tm-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:var(--muted);text-align:center;
+  letter-spacing:0.06em;
+}
+.timeline-legend{
+  display:flex;gap:16px;margin-top:12px;padding-top:12px;
+  border-top:1px solid var(--cream);
+  flex-wrap:wrap;
+}
+.tl-item{
+  display:flex;align-items:center;gap:6px;
+  font-size:10px;color:var(--muted);
+}
+.tl-dot{
+  width:10px;height:10px;border-radius:2px;
+  flex-shrink:0;
+}
+
+/* ── TRADE-OFFS ── */
+.tradeoff-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+.tradeoff-card{
+  border:1px solid var(--rule);
+  background:white;
+  overflow:hidden;
+}
+.tradeoff-header{
+  padding:10px 14px;
+  border-bottom:1px solid var(--rule);
+}
+.tradeoff-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.tradeoff-title{
+  font-size:12px;font-weight:500;color:var(--ink);
+}
+.tradeoff-body{
+  padding:12px 14px;
+  font-size:11px;color:var(--muted);
+  line-height:1.65;
+}
+.tradeoff-body strong{
+  color:var(--ink);font-weight:500;
+}
+
+/* ── KR CONNECTION TABLE ── */
+.kr-conn{
+  background:white;
+  border:1px solid var(--rule);
+  margin-bottom:24px;
+}
+.kr-conn-hdr{
+  display:grid;
+  grid-template-columns:200px 1fr 80px 80px;
+  background:var(--ink);
+}
+.kc-th{
+  padding:9px 12px;
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(246,241,232,0.5);
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.kc-th:last-child{border-right:none;}
+.kr-conn-row{
+  display:grid;
+  grid-template-columns:200px 1fr 80px 80px;
+  border-bottom:1px solid var(--rule);
+  align-items:start;
+}
+.kr-conn-row:last-child{border-bottom:none;}
+.kr-conn-row:nth-child(odd){background:var(--paper);}
+.kc-cell{
+  padding:10px 12px;
+  border-right:1px solid var(--rule);
+  font-size:11px;color:var(--ink);
+  line-height:1.45;
+}
+.kc-cell:last-child{border-right:none;}
+.kc-cell.kr-name{
+  font-weight:500;font-size:11.5px;
+}
+.phase-badge{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.08em;padding:3px 7px;
+  display:inline-block;border-radius:2px;
+  margin-top:2px;
+}
+
+/* ── SARANSH SECTION ── */
+.saransh-box{
+  background:var(--navy);
+  color:#F6F1E8;
+  padding:22px 28px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:20px;align-items:start;
+}
+.sb-icon{
+  font-family:'Playfair Display',serif;
+  font-size:40px;font-style:italic;
+  color:var(--saffron);opacity:0.4;line-height:1;
+  padding-top:4px;
+}
+.sb-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(246,241,232,0.35);margin-bottom:6px;
+}
+.sb-title{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  line-height:1.4;color:#F6F1E8;
+  margin-bottom:10px;
+}
+.sb-title em{font-style:italic;color:var(--saffron);}
+.sb-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+.sb-card{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:10px 12px;
+}
+.sb-card-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(246,241,232,0.4);margin-bottom:4px;
+}
+.sb-card-val{
+  font-size:11px;color:rgba(246,241,232,0.75);
+  line-height:1.5;
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--cream);border-top:1px solid var(--rule);
+  padding:14px 56px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.author{display:flex;align-items:center;gap:10px;}
+.av{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;font-style:italic;color:#F6F1E8;
+}
+.au-name{font-size:12px;font-weight:500;}
+.au-role{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;border:1px solid var(--rule);
+  padding:3px 8px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-meta">
+    <span>Rajniti · PM Portfolio Case Study</span>
+    <span>Chapter 3 of 4 · Roadmap & Prioritisation</span>
+    <span>Sachin Shukla · 2025</span>
+  </div>
+  <div class="chapter-tag">Chapter 3 — The 6-Month Product Roadmap</div>
+  <div class="cover-title">Build the Trust.<br><em>Then</em> Scale It.</div>
+  <div class="cover-thesis">
+    A roadmap is not a list of features. It is a <strong>sequenced argument</strong> for why certain problems get solved in a certain order. Every item in Now connects to a Q1 KR. Every item in Next is unlocked by the work that precedes it. And the items in Later are not rejected — they are waiting for the right conditions to be worth building.
+  </div>
+  <div class="summary-strip">
+    <div class="sum-cell">
+      <span class="sum-num">6 mo</span>
+      <span class="sum-lbl">Planning horizon</span>
+    </div>
+    <div class="sum-cell">
+      <span class="sum-num">3</span>
+      <span class="sum-lbl">Phases</span>
+    </div>
+    <div class="sum-cell">
+      <span class="sum-num">11</span>
+      <span class="sum-lbl">Roadmap items</span>
+    </div>
+    <div class="sum-cell">
+      <span class="sum-num">4</span>
+      <span class="sum-lbl">KRs connected</span>
+    </div>
+    <div class="sum-cell">
+      <span class="sum-num">Saransh</span>
+      <span class="sum-lbl">Q2 unlock</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- PRINCIPLE -->
+  <div class="sec-hdr">
+    <span class="sec-n">I</span>
+    <span class="sec-t">The Roadmap Principle</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="principle">
+    <div class="p-icon">"</div>
+    <div>
+      <div class="p-label">Why This Roadmap Is Sequenced This Way</div>
+      <div class="p-text">
+        You cannot monetise a product users don't trust. You cannot scale a product that isn't worth returning to. <em>Trust first. Value second. Scale third.</em> Every sequencing decision in this roadmap flows from that order.
+      </div>
+    </div>
+  </div>
+
+  <!-- ROADMAP COLUMNS -->
+  <div class="sec-hdr">
+    <span class="sec-n">II</span>
+    <span class="sec-t">Now / Next / Later — The Full Roadmap</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="roadmap-grid">
+
+    <!-- NOW -->
+    <div class="rm-col">
+      <div class="rm-col-header" style="border-color:var(--saffron);background:var(--saff-lt);">
+        <div class="rm-col-tag" style="color:var(--saffron);">Now · Active</div>
+        <div class="rm-col-name" style="color:var(--saffron);">Q1 2025</div>
+        <div class="rm-col-period">Jan – Mar · Foundation Quarter</div>
+      </div>
+      <div class="rm-col-body">
+
+        <!-- Item 1 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--saffron)"></div>
+            <div class="rm-card-name">Source References per Data Point</div>
+            <div class="rm-card-type" style="background:var(--saff-lt);color:var(--saffron);">Trust</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Every politician data point links to its verified ECI source. No fact without a citation.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--green-lt);color:var(--green);">KR3</span>
+              <span class="rm-kr-text">100% source attribution before scale push</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--navy)"></div>
+            <div class="rm-card-name">AI Performance Summary (per MLA/MP)</div>
+            <div class="rm-card-type" style="background:var(--navy-lt);color:var(--navy);">Revenue</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">AI-generated performance rating with attendance, voting record, and asset history — the feature that justifies ₹99/month.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--saff-lt);color:var(--saffron);">KR2</span>
+              <span class="rm-kr-text">8% free-to-premium conversion among activated users</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--green)"></div>
+            <div class="rm-card-name">TBE Community Launch Campaign</div>
+            <div class="rm-card-type" style="background:var(--green-lt);color:var(--green);">GTM</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Seed first 50,000 users from The Boring Education's 100K+ community. Zero paid acquisition.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--navy-lt);color:var(--navy);">KR1</span>
+              <span class="rm-kr-text">100,000 MAU by end of Q1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--purple)"></div>
+            <div class="rm-card-name">B2B Pipeline Outreach (3 orgs)</div>
+            <div class="rm-card-type" style="background:var(--purp-lt);color:var(--purple);">B2B</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Open conversations with ADR, The Wire, PRS Legislative Research. Understand their data needs before making the API ask.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--purp-lt);color:var(--purple);">KR4</span>
+              <span class="rm-kr-text">3 warm B2B pipeline conversations</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NEXT -->
+    <div class="rm-col">
+      <div class="rm-col-header" style="border-color:var(--navy);background:var(--navy-lt);">
+        <div class="rm-col-tag" style="color:var(--navy);">Next · Committed</div>
+        <div class="rm-col-name" style="color:var(--navy);">Q2 2025</div>
+        <div class="rm-col-period">Apr – Jun · Scale Quarter</div>
+      </div>
+      <div class="rm-col-body">
+
+        <!-- Item 5 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--navy)"></div>
+            <div class="rm-card-name">Candidate Comparison Tool</div>
+            <div class="rm-card-type" style="background:var(--navy-lt);color:var(--navy);">Core UX</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Side-by-side comparison of two candidates across attendance, assets, criminal record, and AI rating. Pre-election viral feature.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--navy-lt);color:var(--navy);">Q2 KR1</span>
+              <span class="rm-kr-text">250K MAU — comparison tool drives pre-election sharing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--green)"></div>
+            <div class="rm-card-name">B2B API — First 5 Contracts</div>
+            <div class="rm-card-type" style="background:var(--green-lt);color:var(--green);">Revenue</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Convert Q1 pipeline conversations into ₹50K/month contracts. Requires 200K+ MAU to justify the B2B ask.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--green-lt);color:var(--green);">Q2 KR2</span>
+              <span class="rm-kr-text">5 B2B contracts · ₹30L ARR from API alone</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 7 — Blocked -->
+        <div class="rm-card blocked">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--red)"></div>
+            <div class="rm-card-name">News vs Politician (Saransh Integration)</div>
+            <div class="rm-card-type" style="background:var(--red-lt);color:var(--red);">Blocked</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Map daily news headlines to accountable politicians. First live, dynamic content in Rajniti — transforms it from static record to live intelligence.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--saff-lt);color:var(--saffron);">Q2 KR3</span>
+              <span class="rm-kr-text">First Saransh-powered feature live in Rajniti</span>
+            </div>
+            <div class="blocked-note">⚠ Blocked — depends on Saransh news pipeline shipping first</div>
+          </div>
+        </div>
+
+        <!-- Item 8 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--teal)"></div>
+            <div class="rm-card-name">Election Alert System</div>
+            <div class="rm-card-type" style="background:var(--teal-lt);color:var(--teal);">Retention</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Personalised push notifications when a tracked politician votes, files new disclosures, or an election is announced in their constituency.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--navy-lt);color:var(--navy);">Q2 KR1</span>
+              <span class="rm-kr-text">Re-engagement loop — pulls users back between election spikes</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LATER -->
+    <div class="rm-col">
+      <div class="rm-col-header" style="border-color:var(--muted);background:var(--cream);">
+        <div class="rm-col-tag" style="color:var(--muted);">Later · Acknowledged</div>
+        <div class="rm-col-name" style="color:var(--muted);">Q3–Q4 2025</div>
+        <div class="rm-col-period">Jul – Dec · Intelligence Quarter</div>
+      </div>
+      <div class="rm-col-body">
+
+        <!-- Item 9 — Blocked -->
+        <div class="rm-card blocked">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--gold)"></div>
+            <div class="rm-card-name">Politician Leaderboards</div>
+            <div class="rm-card-type" style="background:var(--gold-lt);color:var(--gold);">Viral</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Weekly / monthly leaderboards — Most Controversial, Most Accountable, Most Active. Shareable content that drives organic acquisition.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--gold-lt);color:var(--gold);">Q3</span>
+              <span class="rm-kr-text">Viral acquisition loop — no paid acquisition needed</span>
+            </div>
+            <div class="blocked-note">⚠ Blocked — requires Saransh data for methodology credibility</div>
+          </div>
+        </div>
+
+        <!-- Item 10 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--purple)"></div>
+            <div class="rm-card-name">Multi-Language Support (Hindi-first)</div>
+            <div class="rm-card-type" style="background:var(--purp-lt);color:var(--purple);">Scale</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">Hindi localisation unlocks 300M+ Hindi-speaking voters currently unreachable in English-only UI. Biggest single TAM expansion lever.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--purp-lt);color:var(--purple);">Q3–Q4</span>
+              <span class="rm-kr-text">Unlocks non-English civic information seekers — 2× SAM expansion</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 11 -->
+        <div class="rm-card">
+          <div class="rm-card-header">
+            <div class="rm-card-dot" style="background:var(--navy)"></div>
+            <div class="rm-card-name">Voter Research Report (Pre-Election PDF)</div>
+            <div class="rm-card-type" style="background:var(--navy-lt);color:var(--navy);">Premium</div>
+          </div>
+          <div class="rm-card-body">
+            <div class="rm-outcome">One-tap personalised PDF summarising all candidates in the user's constituency — shareable, printable, offline-ready. Premium-only feature.</div>
+            <div class="rm-kr-link">
+              <span class="rm-kr-badge" style="background:var(--saff-lt);color:var(--saffron);">Q4</span>
+              <span class="rm-kr-text">Premium retention + B2B upsell for media orgs covering local elections</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TIMELINE BAR -->
+  <div class="sec-hdr">
+    <span class="sec-n">III</span>
+    <span class="sec-t">Delivery Timeline — 6 Months Visualised</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="timeline-wrap">
+    <div class="timeline-label">Each bar shows the expected delivery window. Blocked items shown at planned start — subject to Saransh dependency resolution.</div>
+
+    <div class="timeline-months">
+      <div class="tm-label">Jan</div>
+      <div class="tm-label">Feb</div>
+      <div class="tm-label">Mar</div>
+      <div class="tm-label">Apr</div>
+      <div class="tm-label">May</div>
+      <div class="tm-label">Jun</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="timeline-item-label">Source References</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-seg" style="background:var(--saffron);grid-column:1/3;"><span>Sprint 1</span></div>
+        <div style="grid-column:3/7"></div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-item-label">AI Performance Summary</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-seg" style="background:var(--navy);grid-column:2/4;"><span>Sprint 1–2</span></div>
+        <div style="grid-column:4/7"></div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-item-label">TBE Launch Campaign</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-seg" style="background:var(--green);grid-column:1/4;"><span>Q1 ongoing</span></div>
+        <div style="grid-column:4/7"></div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-item-label">B2B Outreach (3 orgs)</div>
+      <div class="timeline-bar-track">
+        <div class="timeline-seg" style="background:var(--purple);grid-column:2/4;"><span>Q1</span></div>
+        <div style="grid-column:4/7"></div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-item-label">Candidate Comparison</div>
+      <div class="timeline-bar-track">
+        <div style="grid-column:1/4"></div>
+        <div class="timeline-seg" style="background:var(--navy);grid-column:4/6;"><span>Sprint 3–4</span></div>
+        <div style="grid-column:6/7"></div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-item-label">Election Alert System</div>
+      <div class="timeline-bar-track">
+        <div style="grid-column:1/5"></div>
+        <div class="timeline-seg" style="background:var(--teal);grid-column:5/7;"><span>Q2</span></div>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-item-label">News vs Politician ⚠</div>
+      <div class="timeline-bar-track">
+        <div style="grid-column:1/5"></div>
+        <div class="timeline-seg" style="background:var(--red);opacity:0.5;grid-column:5/7;"><span>If Saransh ships</span></div>
+      </div>
+    </div>
+
+    <div class="timeline-legend">
+      <div class="tl-item"><div class="tl-dot" style="background:var(--saffron)"></div>Trust layer</div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--navy)"></div>Revenue/core features</div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div>GTM & growth</div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--purple)"></div>B2B pipeline</div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--teal)"></div>Retention</div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--red);opacity:0.5"></div>Dependency-blocked</div>
+    </div>
+  </div>
+
+  <!-- KR CONNECTION TABLE -->
+  <div class="sec-hdr">
+    <span class="sec-n">IV</span>
+    <span class="sec-t">Every Roadmap Item Connected to a Key Result</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="kr-conn">
+    <div class="kr-conn-hdr">
+      <div class="kc-th">Key Result</div>
+      <div class="kc-th">Roadmap Item That Moves This KR</div>
+      <div class="kc-th">Phase</div>
+      <div class="kc-th">Status</div>
+    </div>
+    <div class="kr-conn-row">
+      <div class="kc-cell kr-name">KR1 — 100K MAU by Q1</div>
+      <div class="kc-cell">TBE Community Launch Campaign seeds first 50K. AI Summary creates upgrade moment that drives sharing. Comparison Tool adds pre-election viral loop in Q2.</div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--saff-lt);color:var(--saffron);">Now + Next</span></div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--green-lt);color:var(--green);">Active</span></div>
+    </div>
+    <div class="kr-conn-row">
+      <div class="kc-cell kr-name">KR2 — 8% premium conversion</div>
+      <div class="kc-cell">AI Performance Summary is the paywall gate. Users who complete 3+ profile views encounter the summary — this is the upgrade trigger. No summary = no conversion rationale.</div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--saff-lt);color:var(--saffron);">Now</span></div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--green-lt);color:var(--green);">Active</span></div>
+    </div>
+    <div class="kr-conn-row">
+      <div class="kc-cell kr-name">KR3 — 100% source attribution</div>
+      <div class="kc-cell">Source References is the direct deliverable for this KR. No other roadmap item touches it — this is a standalone trust infrastructure investment.</div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--saff-lt);color:var(--saffron);">Now</span></div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--green-lt);color:var(--green);">Active</span></div>
+    </div>
+    <div class="kr-conn-row">
+      <div class="kc-cell kr-name">KR4 — 3 B2B pipeline conversations</div>
+      <div class="kc-cell">Outreach campaign to ADR, The Wire, PRS Legislative Research. Not feature-dependent — this is relationship work. Requires 50K+ MAU before the ask is credible.</div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--saff-lt);color:var(--saffron);">Now</span></div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--green-lt);color:var(--green);">Active</span></div>
+    </div>
+    <div class="kr-conn-row">
+      <div class="kc-cell kr-name">Q2 KR2 — 5 B2B contracts</div>
+      <div class="kc-cell">Converts Q1 pipeline conversations into ₹50K/month contracts. Gated behind 200K MAU milestone. API infrastructure built in parallel with Q1 features.</div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--navy-lt);color:var(--navy);">Next</span></div>
+      <div class="kc-cell"><span class="phase-badge" style="background:var(--gold-lt);color:var(--gold);">Planned</span></div>
+    </div>
+  </div>
+
+  <!-- SARANSH DEPENDENCY -->
+  <div class="sec-hdr">
+    <span class="sec-n">V</span>
+    <span class="sec-t">The Saransh Dependency — Managing the Critical Path</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="saransh-box">
+    <div class="sb-icon">"</div>
+    <div>
+      <div class="sb-label">Strategic Dependency — Why Two Roadmap Items Are Blocked</div>
+      <div class="sb-title">
+        Saransh is not a feature. It is the <em>data infrastructure</em> that unlocks Rajniti's highest-potential roadmap items. The right PM decision is not to force-build News vs Politician on weak data — it is to invest in Saransh first so both features ship with strong confidence and no credibility risk.
+      </div>
+      <div class="sb-grid">
+        <div class="sb-card">
+          <div class="sb-card-label">What Saransh does</div>
+          <div class="sb-card-val">Categorises daily Indian civic news and maps each story to the accountable politician</div>
+        </div>
+        <div class="sb-card">
+          <div class="sb-card-label">What it unlocks in Rajniti</div>
+          <div class="sb-card-val">News vs Politician mapping + Leaderboards. RICE scores jump from ~60K to ~107K when unblocked</div>
+        </div>
+        <div class="sb-card">
+          <div class="sb-card-label">Dependency management</div>
+          <div class="sb-card-val">Bi-weekly check-in with Saransh team lead. Clear integration spec agreed by end of Q1.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRADE-OFFS -->
+  <div class="sec-hdr">
+    <span class="sec-n">VI</span>
+    <span class="sec-t">The Three Trade-offs This Roadmap Makes Explicitly</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="tradeoff-grid">
+    <div class="tradeoff-card">
+      <div class="tradeoff-header" style="background:var(--saff-lt);">
+        <div class="tradeoff-label" style="color:var(--saffron);">Trade-off 1</div>
+        <div class="tradeoff-title">Trust before revenue</div>
+      </div>
+      <div class="tradeoff-body">
+        Source References ships before AI Performance Summary despite having a higher RICE score. <strong>A trustworthy product with fewer features retains better than an impressive product users do not trust.</strong> In civic tech, one viral wrong data point ends the product. We buy the trust moat first.
+      </div>
+    </div>
+    <div class="tradeoff-card">
+      <div class="tradeoff-header" style="background:var(--navy-lt);">
+        <div class="tradeoff-label" style="color:var(--navy);">Trade-off 2</div>
+        <div class="tradeoff-title">Scale before B2B contracts</div>
+      </div>
+      <div class="tradeoff-body">
+        B2B outreach starts in Q1 but contracts are a Q2 KR. <strong>Forcing B2B contracts at 10K users produces bad deals at low prices.</strong> Waiting until 200K MAU gives Rajniti pricing power and genuine leverage. Q1 builds the pipeline. Q2 closes it.
+      </div>
+    </div>
+    <div class="tradeoff-card">
+      <div class="tradeoff-header" style="background:var(--green-lt);">
+        <div class="tradeoff-label" style="color:var(--green);">Trade-off 3</div>
+        <div class="tradeoff-title">English-first, then Hindi</div>
+      </div>
+      <div class="tradeoff-body">
+        Hindi localisation unlocks 2× the addressable market but sits in Q3. <strong>Localising an unproven product is expensive and reversible.</strong> English-first lets us validate the core product loop — research → trust → upgrade — before investing in the translation layer. If the loop breaks, localisation is wasted effort.
+      </div>
+    </div>
+    <div class="tradeoff-card">
+      <div class="tradeoff-header" style="background:var(--red-lt);">
+        <div class="tradeoff-label" style="color:var(--red);">Trade-off 4</div>
+        <div class="tradeoff-title">Defer leaderboards until Saransh ships</div>
+      </div>
+      <div class="tradeoff-body">
+        Politician Leaderboards have high viral potential but a 50% confidence score on election data alone. <strong>Publishing a "Most Corrupt Politicians" list built on incomplete data is a reputational catastrophe.</strong> We wait for Saransh's news categorisation pipeline to raise confidence to 85% before shipping.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="author">
+    <div class="av">S</div>
+    <div>
+      <div class="au-name">Sachin Shukla — Rajniti Portfolio Case Study</div>
+      <div class="au-role">Full-Stack AI Product Engineer → AI PM · Chapter 3 of 4</div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag">#Roadmap</span>
+    <span class="tag">#NowNextLater</span>
+    <span class="tag">#ProductStrategy</span>
+    <span class="tag">#Rajniti</span>
+    <span class="tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>

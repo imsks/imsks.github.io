@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — PM Analytics Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:      #0C0E14;
+  --surface: #141720;
+  --card:    #1A1E2A;
+  --border:  #252A38;
+  --border2: #2E3447;
+  --muted:   #5A6380;
+  --dim:     #8892AA;
+  --text:    #D4DAE8;
+  --white:   #F0F4FF;
+
+  --saffron: #FF6B2B;
+  --saff-lt: rgba(255,107,43,0.12);
+  --green:   #2DD4A0;
+  --green-lt:rgba(45,212,160,0.1);
+  --blue:    #4B8EFF;
+  --blue-lt: rgba(75,142,255,0.1);
+  --red:     #FF4B6B;
+  --red-lt:  rgba(255,75,107,0.1);
+  --gold:    #FFB830;
+  --gold-lt: rgba(255,184,48,0.1);
+  --purple:  #9B6DFF;
+  --purp-lt: rgba(155,109,255,0.1);
+}
+
+body{
+  background:var(--bg);
+  font-family:'Instrument Sans',sans-serif;
+  color:var(--text);
+  width:960px;
+  margin:0 auto;
+  min-height:100vh;
+}
+
+/* ── TOP BAR ── */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 32px;
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+.topbar-left{
+  display:flex;align-items:center;gap:16px;
+}
+.topbar-logo{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:800;
+  color:var(--white);letter-spacing:-0.5px;
+}
+.topbar-logo span{color:var(--saffron);}
+.topbar-divider{
+  width:1px;height:20px;
+  background:var(--border2);
+}
+.topbar-page{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:0.08em;
+  color:var(--muted);text-transform:uppercase;
+}
+.topbar-right{
+  display:flex;align-items:center;gap:12px;
+}
+.status-pill{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:0.12em;text-transform:uppercase;
+  padding:4px 10px;
+  border:1px solid var(--border2);
+  color:var(--muted);
+}
+.status-pill.live{
+  border-color:rgba(45,212,160,0.3);
+  color:var(--green);
+  background:var(--green-lt);
+}
+.period-btn{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  padding:4px 10px;color:var(--dim);
+  border:1px solid var(--border2);
+  cursor:pointer;background:none;
+  transition:all 0.15s;
+}
+.period-btn.active{
+  background:var(--saffron);
+  border-color:var(--saffron);
+  color:white;font-weight:500;
+}
+
+/* ── HEADER ── */
+.header{
+  padding:24px 32px 20px;
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:end;
+  background:var(--surface);
+}
+.header-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:8px;
+}
+.header-title{
+  font-family:'Syne',sans-serif;
+  font-size:28px;font-weight:800;
+  color:var(--white);letter-spacing:-0.5px;
+  line-height:1;margin-bottom:6px;
+}
+.header-sub{
+  font-size:12px;color:var(--dim);line-height:1.5;
+}
+.header-ns{
+  text-align:right;flex-shrink:0;
+}
+.ns-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:4px;
+}
+.ns-value{
+  font-family:'Syne',sans-serif;
+  font-size:32px;font-weight:800;
+  color:var(--saffron);line-height:1;
+}
+.ns-sub{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;color:var(--muted);margin-top:3px;
+}
+
+/* ── DIAGNOSTIC BANNER ── */
+.diag-banner{
+  background:rgba(255,75,107,0.08);
+  border:1px solid rgba(255,75,107,0.2);
+  border-left:3px solid var(--red);
+  padding:12px 32px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:16px;align-items:center;
+}
+.diag-icon{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:500;
+  color:var(--red);letter-spacing:0.06em;
+}
+.diag-text{
+  font-size:12px;color:var(--text);line-height:1.5;
+}
+.diag-text strong{color:var(--red);font-weight:600;}
+.diag-sequence{
+  display:flex;gap:6px;
+}
+.diag-step{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.08em;padding:3px 9px;
+  border:1px solid var(--border2);color:var(--dim);
+}
+.diag-step.first{
+  border-color:rgba(255,75,107,0.3);
+  color:var(--red);background:var(--red-lt);
+}
+
+/* ── GRID ── */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.grid.three{grid-template-columns:1fr 1fr 1fr;}
+.grid.full{grid-template-columns:1fr;}
+
+.chart-card{
+  background:var(--card);
+  padding:22px 24px;
+}
+
+/* Card header */
+.card-hdr{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;gap:12px;
+  margin-bottom:16px;
+}
+.card-hdr-left{}
+.card-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:4px;
+}
+.card-title{
+  font-family:'Syne',sans-serif;
+  font-size:14px;font-weight:700;
+  color:var(--white);line-height:1.2;
+}
+.card-hdr-right{
+  display:flex;flex-direction:column;
+  align-items:flex-end;gap:4px;
+  flex-shrink:0;
+}
+.metric-big{
+  font-family:'Syne',sans-serif;
+  font-size:24px;font-weight:800;
+  line-height:1;
+}
+.metric-change{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:500;
+  display:flex;align-items:center;gap:3px;
+}
+.metric-change.up{color:var(--green);}
+.metric-change.down{color:var(--red);}
+.metric-change.neutral{color:var(--muted);}
+
+/* Sparkline bars */
+.sparkline{
+  display:flex;align-items:flex-end;
+  gap:3px;height:48px;margin-bottom:12px;
+}
+.spark{
+  flex:1;border-radius:2px 2px 0 0;
+  transition:opacity 0.15s;min-width:4px;
+}
+.spark:hover{opacity:0.8;}
+
+/* Threshold line annotation */
+.threshold-wrap{
+  position:relative;
+}
+.threshold-label{
+  font-family:'JetBrains Mono',monospace;font-size:8px;
+  color:var(--red);letter-spacing:0.06em;
+  position:absolute;right:0;
+}
+
+/* Signal rows */
+.signal-list{margin-top:14px;}
+.signal-item{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 0;
+  border-bottom:1px solid var(--border);
+  font-size:11px;
+}
+.signal-item:last-child{border-bottom:none;}
+.signal-dot{
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.signal-text{color:var(--dim);flex:1;line-height:1.4;}
+.signal-badge{
+  font-family:'JetBrains Mono',monospace;font-size:8.5px;
+  letter-spacing:0.06em;padding:2px 7px;
+  border-radius:2px;flex-shrink:0;
+}
+
+/* Funnel bars */
+.funnel{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.funnel-step{
+  display:grid;
+  grid-template-columns:130px 1fr 52px;
+  align-items:center;gap:8px;
+}
+.funnel-lbl{
+  font-size:10px;color:var(--dim);text-align:right;
+  line-height:1.3;
+}
+.funnel-track{
+  height:20px;background:var(--border2);
+  border-radius:2px;overflow:hidden;
+  position:relative;
+}
+.funnel-fill{
+  height:100%;border-radius:2px;
+  display:flex;align-items:center;padding:0 6px;
+  position:relative;
+}
+.funnel-fill span{
+  font-family:'JetBrains Mono',monospace;
+  font-size:8.5px;font-weight:500;
+  color:rgba(255,255,255,0.7);white-space:nowrap;
+}
+.funnel-pct{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:500;text-align:right;
+}
+.drop-arrow{
+  font-size:9px;color:var(--muted);
+  padding-left:130px;margin:-2px 0;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* Retention curve */
+.retention-chart{
+  height:100px;position:relative;
+  margin-bottom:12px;
+}
+.ret-svg{width:100%;height:100%;}
+
+/* Cohort mini-grid */
+.cohort-grid{
+  display:grid;
+  grid-template-columns:80px repeat(6,1fr);
+  gap:1px;
+  background:var(--border);
+  font-size:9px;
+  margin-bottom:12px;
+}
+.coh-cell{
+  background:var(--card);
+  padding:5px 4px;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+}
+.coh-cell.header{
+  background:var(--surface);
+  color:var(--muted);letter-spacing:0.06em;
+  font-size:8px;text-transform:uppercase;
+}
+.coh-cell.row-label{
+  background:var(--surface);
+  color:var(--dim);text-align:left;
+  padding-left:8px;font-size:9px;
+}
+
+/* ── INVESTIGATION PANEL ── */
+.investigation{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-top:none;
+}
+.inv-header{
+  padding:14px 24px;
+  background:rgba(255,75,107,0.06);
+  border-bottom:1px solid rgba(255,75,107,0.15);
+  display:flex;align-items:center;gap:12px;
+}
+.inv-title{
+  font-family:'Syne',sans-serif;
+  font-size:13px;font-weight:700;color:var(--red);
+}
+.inv-sub{font-size:11px;color:var(--dim);}
+.inv-steps{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0;
+  border-bottom:1px solid var(--border);
+}
+.inv-step{
+  padding:16px 20px;
+  border-right:1px solid var(--border);
+}
+.inv-step:last-child{border-right:none;}
+.inv-step-num{
+  font-family:'Syne',sans-serif;
+  font-size:20px;font-weight:800;font-style:italic;
+  opacity:0.15;margin-bottom:4px;
+}
+.inv-step-title{
+  font-size:11.5px;font-weight:600;
+  color:var(--white);margin-bottom:4px;
+  line-height:1.3;
+}
+.inv-step-check{
+  font-size:10px;color:var(--dim);
+  line-height:1.6;
+}
+.inv-step-check span{
+  color:var(--text);font-weight:500;
+}
+
+/* celebrate strip */
+.celebrate{
+  padding:14px 24px;
+  background:rgba(45,212,160,0.04);
+  border-bottom:1px solid rgba(45,212,160,0.12);
+  display:flex;align-items:center;gap:16px;
+}
+.cel-title{
+  font-family:'Syne',sans-serif;
+  font-size:13px;font-weight:700;color:var(--green);
+  flex-shrink:0;
+}
+.cel-items{
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.cel-item{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:0.07em;padding:3px 9px;
+  border:1px solid rgba(45,212,160,0.2);
+  color:var(--green);background:var(--green-lt);
+}
+
+/* ── FOOTER ── */
+.footer{
+  padding:14px 32px;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-author{
+  display:flex;align-items:center;gap:10px;
+}
+.footer-av{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,var(--saffron),#8B2500);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:12px;
+  font-weight:800;font-style:italic;color:white;
+}
+.footer-name{font-size:12px;font-weight:500;color:var(--white);}
+.footer-role{
+  font-family:'JetBrains Mono',monospace;
+  font-size:8.5px;color:var(--muted);
+}
+.footer-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.footer-tag{
+  font-family:'JetBrains Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;border:1px solid var(--border2);
+  padding:3px 8px;color:var(--muted);
+}
+
+hr.section-gap{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:0;
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">Rajniti<span>.</span></div>
+    <div class="topbar-divider"></div>
+    <div class="topbar-page">PM Analytics Dashboard</div>
+  </div>
+  <div class="topbar-right">
+    <div class="status-pill live">● Live Data</div>
+    <button class="period-btn">7D</button>
+    <button class="period-btn active">30D</button>
+    <button class="period-btn">90D</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="header-eyebrow">Week 7 · Day 6 · Analytics Design</div>
+    <div class="header-title">PM Metrics Dashboard</div>
+    <div class="header-sub">5 charts. Each connected to a KR or north star. Each with defined investigate and celebrate thresholds. This is what the PM checks every morning.</div>
+  </div>
+  <div class="header-ns">
+    <div class="ns-label">North Star Metric</div>
+    <div class="ns-value">—</div>
+    <div class="ns-sub">Research sessions (60s+) / week</div>
+  </div>
+</div>
+
+<!-- DIAGNOSTIC BANNER -->
+<div class="diag-banner">
+  <div class="diag-icon">⚠ SCENARIO</div>
+  <div class="diag-text">
+    <strong>Research sessions dropped 20% week-on-week.</strong> Before looking at product data, the PM's first three checks — in order — are below. External cause first, then acquisition, then funnel breakpoint.
+  </div>
+  <div class="diag-sequence">
+    <div class="diag-step first">1. External?</div>
+    <div class="diag-step">2. Acquisition?</div>
+    <div class="diag-step">3. Funnel break?</div>
+  </div>
+</div>
+
+<!-- ROW 1: NORTH STAR + ACQUISITION -->
+<div class="grid">
+
+  <!-- Chart 1: North Star Trend -->
+  <div class="chart-card">
+    <div class="card-hdr">
+      <div class="card-hdr-left">
+        <div class="card-label" style="color:var(--saffron);">Chart 01 · North Star</div>
+        <div class="card-title">Research Sessions (60s+) per Week</div>
+      </div>
+      <div class="card-hdr-right">
+        <div class="metric-big" style="color:var(--saffron);">—</div>
+        <div class="metric-change neutral">Week target: —</div>
+      </div>
+    </div>
+
+    <div class="sparkline">
+      <div class="spark" style="height:25%;background:rgba(255,107,43,0.25);"></div>
+      <div class="spark" style="height:38%;background:rgba(255,107,43,0.3);"></div>
+      <div class="spark" style="height:42%;background:rgba(255,107,43,0.35);"></div>
+      <div class="spark" style="height:55%;background:rgba(255,107,43,0.45);"></div>
+      <div class="spark" style="height:50%;background:rgba(255,107,43,0.45);"></div>
+      <div class="spark" style="height:65%;background:rgba(255,107,43,0.55);"></div>
+      <div class="spark" style="height:70%;background:rgba(255,107,43,0.6);"></div>
+      <div class="spark" style="height:60%;background:rgba(255,107,43,0.55);"></div>
+      <div class="spark" style="height:80%;background:rgba(255,107,43,0.7);"></div>
+      <div class="spark" style="height:75%;background:rgba(255,107,43,0.65);"></div>
+      <div class="spark" style="height:88%;background:rgba(255,107,43,0.8);"></div>
+      <div class="spark" style="height:100%;background:var(--saffron);"></div>
+    </div>
+
+    <div class="signal-list">
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--red)"></div>
+        <div class="signal-text">Drop >15% week-on-week with no known external event</div>
+        <div class="signal-badge" style="background:var(--red-lt);color:var(--red);">Investigate</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--red)"></div>
+        <div class="signal-text">Drop correlated with an election announcement → compare to prior election cycles</div>
+        <div class="signal-badge" style="background:var(--gold-lt);color:var(--gold);">Expected</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--green)"></div>
+        <div class="signal-text">Spike >30% sustained for 2+ weeks — not just election-driven</div>
+        <div class="signal-badge" style="background:var(--green-lt);color:var(--green);">Celebrate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 2: Acquisition -->
+  <div class="chart-card">
+    <div class="card-hdr">
+      <div class="card-hdr-left">
+        <div class="card-label" style="color:var(--blue);">Chart 02 · KR1 · Acquisition</div>
+        <div class="card-title">New Users per Week + Channel</div>
+      </div>
+      <div class="card-hdr-right">
+        <div class="metric-big" style="color:var(--blue);">—</div>
+        <div class="metric-change neutral">Target: 7,700/wk → 100K MAU</div>
+      </div>
+    </div>
+
+    <div class="sparkline">
+      <div class="spark" style="height:30%;background:rgba(75,142,255,0.25);"></div>
+      <div class="spark" style="height:40%;background:rgba(75,142,255,0.3);"></div>
+      <div class="spark" style="height:45%;background:rgba(75,142,255,0.35);"></div>
+      <div class="spark" style="height:50%;background:rgba(75,142,255,0.4);"></div>
+      <div class="spark" style="height:60%;background:rgba(75,142,255,0.5);"></div>
+      <div class="spark" style="height:55%;background:rgba(75,142,255,0.45);"></div>
+      <div class="spark" style="height:72%;background:rgba(75,142,255,0.6);"></div>
+      <div class="spark" style="height:68%;background:rgba(75,142,255,0.58);"></div>
+      <div class="spark" style="height:82%;background:rgba(75,142,255,0.7);"></div>
+      <div class="spark" style="height:90%;background:rgba(75,142,255,0.8);"></div>
+      <div class="spark" style="height:85%;background:rgba(75,142,255,0.75);"></div>
+      <div class="spark" style="height:100%;background:var(--blue);"></div>
+    </div>
+
+    <div style="margin-bottom:12px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Channel breakdown (illustrative)</div>
+      <div style="display:flex;gap:2px;height:8px;border-radius:2px;overflow:hidden;margin-bottom:5px;">
+        <div style="flex:5;background:var(--saffron);"></div>
+        <div style="flex:3;background:var(--blue);"></div>
+        <div style="flex:2;background:var(--purple);"></div>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--dim);">
+          <div style="width:8px;height:8px;background:var(--saffron);border-radius:1px;flex-shrink:0;"></div>TBE Community (~50%)
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--dim);">
+          <div style="width:8px;height:8px;background:var(--blue);border-radius:1px;flex-shrink:0;"></div>Organic Search (~30%)
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--dim);">
+          <div style="width:8px;height:8px;background:var(--purple);border-radius:1px;flex-shrink:0;"></div>Word-of-mouth (~20%)
+        </div>
+      </div>
+    </div>
+
+    <div class="signal-list">
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--red)"></div>
+        <div class="signal-text">New users drop but north star also drops → acquisition is the cause, not product quality</div>
+        <div class="signal-badge" style="background:var(--red-lt);color:var(--red);">GTM Fix</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--gold)"></div>
+        <div class="signal-text">New users stable but north star drops → retention / engagement problem, not acquisition</div>
+        <div class="signal-badge" style="background:var(--gold-lt);color:var(--gold);">Product Fix</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="section-gap">
+
+<!-- ROW 2: FUNNEL + CONVERSION -->
+<div class="grid">
+
+  <!-- Chart 3: Conversion Funnel -->
+  <div class="chart-card">
+    <div class="card-hdr">
+      <div class="card-hdr-left">
+        <div class="card-label" style="color:var(--green);">Chart 03 · KR1+KR2 · Funnel</div>
+        <div class="card-title">Acquisition → Research → Upgrade Funnel</div>
+      </div>
+      <div class="card-hdr-right">
+        <div class="metric-big" style="color:var(--green);">—%</div>
+        <div class="metric-change neutral">End-to-end conversion</div>
+      </div>
+    </div>
+
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="funnel-lbl">App visits</div>
+        <div class="funnel-track">
+          <div class="funnel-fill" style="width:100%;background:rgba(75,142,255,0.5);">
+            <span>100%</span>
+          </div>
+        </div>
+        <div class="funnel-pct" style="color:var(--blue);">—</div>
+      </div>
+      <div class="drop-arrow">↓ ~40% drop (can't find politician)</div>
+      <div class="funnel-step">
+        <div class="funnel-lbl">Profile views</div>
+        <div class="funnel-track">
+          <div class="funnel-fill" style="width:60%;background:rgba(75,142,255,0.6);">
+            <span>~60%</span>
+          </div>
+        </div>
+        <div class="funnel-pct" style="color:var(--blue);">—</div>
+      </div>
+      <div class="drop-arrow">↓ ~25% drop (content not compelling)</div>
+      <div class="funnel-step">
+        <div class="funnel-lbl">60s+ sessions</div>
+        <div class="funnel-track">
+          <div class="funnel-fill" style="width:35%;background:var(--saffron);">
+            <span>~35%</span>
+          </div>
+        </div>
+        <div class="funnel-pct" style="color:var(--saffron);">—</div>
+      </div>
+      <div class="drop-arrow">↓ ~92% drop (paywall friction)</div>
+      <div class="funnel-step">
+        <div class="funnel-lbl">Premium upgrade</div>
+        <div class="funnel-track">
+          <div class="funnel-fill" style="width:8%;background:var(--green);min-width:32px;">
+            <span>~8%</span>
+          </div>
+        </div>
+        <div class="funnel-pct" style="color:var(--green);">—</div>
+      </div>
+    </div>
+
+    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;margin-top:4px;">Drop-off diagnosis key</div>
+    <div class="signal-list">
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--blue)"></div>
+        <div class="signal-text">Visits → Profile drop increases → search/navigation UX broken</div>
+        <div class="signal-badge" style="background:var(--blue-lt);color:var(--blue);">UX Fix</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--saffron)"></div>
+        <div class="signal-text">Profile → 60s drop increases → data quality or presentation issue</div>
+        <div class="signal-badge" style="background:var(--saff-lt);color:var(--saffron);">Content Fix</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--green)"></div>
+        <div class="signal-text">60s → Upgrade drop with high blur-click rate → pricing experiment needed</div>
+        <div class="signal-badge" style="background:var(--green-lt);color:var(--green);">Price Test</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 4: Retention Cohorts -->
+  <div class="chart-card">
+    <div class="card-hdr">
+      <div class="card-hdr-left">
+        <div class="card-label" style="color:var(--purple);">Chart 04 · Retention · Cohort Analysis</div>
+        <div class="card-title">Monthly Cohort Retention — Election vs Non-Election</div>
+      </div>
+      <div class="card-hdr-right">
+        <div class="metric-big" style="color:var(--purple);">—%</div>
+        <div class="metric-change neutral">Day-30 retention target</div>
+      </div>
+    </div>
+
+    <!-- Cohort grid -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Retention by cohort (illustrative structure)</div>
+    <div class="cohort-grid">
+      <div class="coh-cell header">Cohort</div>
+      <div class="coh-cell header">Day 1</div>
+      <div class="coh-cell header">Day 7</div>
+      <div class="coh-cell header">Day 14</div>
+      <div class="coh-cell header">Day 21</div>
+      <div class="coh-cell header">Day 30</div>
+      <div class="coh-cell header">Day 60</div>
+
+      <div class="coh-cell row-label">Jan (pre-elec)</div>
+      <div class="coh-cell" style="background:rgba(45,212,160,0.5);color:var(--white);">100%</div>
+      <div class="coh-cell" style="background:rgba(45,212,160,0.35);color:var(--text);">52%</div>
+      <div class="coh-cell" style="background:rgba(45,212,160,0.25);color:var(--text);">44%</div>
+      <div class="coh-cell" style="background:rgba(45,212,160,0.2);color:var(--text);">41%</div>
+      <div class="coh-cell" style="background:rgba(45,212,160,0.18);color:var(--text);">40%</div>
+      <div class="coh-cell" style="background:rgba(45,212,160,0.15);color:var(--dim);">38%</div>
+
+      <div class="coh-cell row-label">Feb (election)</div>
+      <div class="coh-cell" style="background:rgba(45,212,160,0.5);color:var(--white);">100%</div>
+      <div class="coh-cell" style="background:rgba(255,107,43,0.25);color:var(--text);">31%</div>
+      <div class="coh-cell" style="background:rgba(255,107,43,0.18);color:var(--text);">24%</div>
+      <div class="coh-cell" style="background:rgba(255,107,43,0.14);color:var(--dim);">22%</div>
+      <div class="coh-cell" style="background:rgba(255,107,43,0.12);color:var(--dim);">22%</div>
+      <div class="coh-cell" style="background:rgba(255,107,43,0.1);color:var(--muted);">21%</div>
+
+      <div class="coh-cell row-label">Mar (post-elec)</div>
+      <div class="coh-cell" style="background:rgba(45,212,160,0.5);color:var(--white);">100%</div>
+      <div class="coh-cell" style="background:rgba(255,75,107,0.2);color:var(--text);">24%</div>
+      <div class="coh-cell" style="background:rgba(255,75,107,0.14);color:var(--dim);">17%</div>
+      <div class="coh-cell" style="background:rgba(255,75,107,0.1);color:var(--muted);">15%</div>
+      <div class="coh-cell" style="background:rgba(255,75,107,0.08);color:var(--muted);">15%</div>
+      <div class="coh-cell" style="background:rgba(255,75,107,0.06);color:var(--muted);">14%</div>
+    </div>
+
+    <div class="signal-list">
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--red)"></div>
+        <div class="signal-text">Election cohorts retain at half the rate of normal cohorts — expected but must be addressed by Q2 (Saransh dynamic content)</div>
+        <div class="signal-badge" style="background:var(--red-lt);color:var(--red);">Roadmap risk</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--green)"></div>
+        <div class="signal-text">Day-30 retention flattens (doesn't reach zero) → habit formed in core segment</div>
+        <div class="signal-badge" style="background:var(--green-lt);color:var(--green);">Product-market fit signal</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="section-gap">
+
+<!-- ROW 3: TRUST -->
+<div class="grid full">
+  <div class="chart-card">
+    <div class="card-hdr">
+      <div class="card-hdr-left">
+        <div class="card-label" style="color:var(--gold);">Chart 05 · KR3 · Trust Architecture</div>
+        <div class="card-title">Source Attribution Coverage + Trust Signal Health</div>
+      </div>
+      <div class="card-hdr-right">
+        <div class="metric-big" style="color:var(--gold);">—%</div>
+        <div class="metric-change neutral">Target: 100% · Gates Q2 scale push</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;">
+
+      <div style="background:var(--surface);padding:14px;border:1px solid var(--border2);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Attribution Coverage</div>
+        <div style="display:flex;align-items:flex-end;gap:3px;height:40px;margin-bottom:8px;">
+          <div style="flex:1;height:55%;background:rgba(255,184,48,0.2);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:62%;background:rgba(255,184,48,0.3);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:70%;background:rgba(255,184,48,0.4);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:80%;background:rgba(255,184,48,0.5);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:90%;background:rgba(255,184,48,0.7);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:100%;background:var(--gold);border-radius:2px 2px 0 0;"></div>
+        </div>
+        <div style="font-size:9px;color:var(--dim);line-height:1.5;">Must reach 100% and hold before Q2 scale. Any drop = pipeline break. Investigate immediately.</div>
+      </div>
+
+      <div style="background:var(--surface);padding:14px;border:1px solid var(--border2);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Source Click Rate</div>
+        <div style="display:flex;align-items:flex-end;gap:3px;height:40px;margin-bottom:8px;">
+          <div style="flex:1;height:40%;background:rgba(75,142,255,0.2);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:45%;background:rgba(75,142,255,0.3);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:50%;background:rgba(75,142,255,0.35);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:55%;background:rgba(75,142,255,0.45);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:65%;background:rgba(75,142,255,0.55);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:70%;background:var(--blue);border-radius:2px 2px 0 0;"></div>
+        </div>
+        <div style="font-size:9px;color:var(--dim);line-height:1.5;">Users clicking source links = trust architecture working. Rising click rate = users verifying data = engaged, high-trust users.</div>
+      </div>
+
+      <div style="background:var(--surface);padding:14px;border:1px solid var(--border2);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">AI Summary Thumbs Down</div>
+        <div style="display:flex;align-items:flex-end;gap:3px;height:40px;margin-bottom:8px;">
+          <div style="flex:1;height:30%;background:rgba(255,75,107,0.4);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:25%;background:rgba(255,75,107,0.35);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:22%;background:rgba(255,75,107,0.3);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:18%;background:rgba(255,75,107,0.25);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:15%;background:rgba(255,75,107,0.2);border-radius:2px 2px 0 0;"></div>
+          <div style="flex:1;height:12%;background:rgba(255,75,107,0.18);border-radius:2px 2px 0 0;"></div>
+        </div>
+        <div style="font-size:9px;color:var(--dim);line-height:1.5;">Should trend down as AI model improves. Spike = hallucination event. Investigate which politician profiles generated negative feedback.</div>
+      </div>
+
+    </div>
+
+    <div class="signal-list">
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--red)"></div>
+        <div class="signal-text">Attribution drops below 95% → data pipeline break, halt Q2 scale push regardless of other metrics</div>
+        <div class="signal-badge" style="background:var(--red-lt);color:var(--red);">All-hands</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--red)"></div>
+        <div class="signal-text">AI thumbs-down spikes on a specific politician → hallucination on that profile, pull immediately</div>
+        <div class="signal-badge" style="background:var(--red-lt);color:var(--red);">Pull & fix</div>
+      </div>
+      <div class="signal-item">
+        <div class="signal-dot" style="background:var(--green)"></div>
+        <div class="signal-text">Source click rate rising week-on-week → users are verifying, trusting, and engaging deeply</div>
+        <div class="signal-badge" style="background:var(--green-lt);color:var(--green);">Trust building</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-gap">
+
+<!-- INVESTIGATION + CELEBRATE PANEL -->
+<div class="investigation">
+  <div class="inv-header">
+    <div class="inv-title">⚠ If Research Sessions Drop 20% — The 24-Hour Diagnosis</div>
+    <div class="inv-sub">Three checks in order. Never start with product quality.</div>
+  </div>
+  <div class="inv-steps">
+    <div class="inv-step">
+      <div class="inv-step-num" style="color:var(--red);">01</div>
+      <div class="inv-step-title">Rule out external cause first</div>
+      <div class="inv-step-check">
+        Check: <span>Did a major election result drop last week, creating a spike that inflated the baseline?</span><br><br>
+        Check: <span>Is there a national news event pulling attention away from political research?</span><br><br>
+        Check: <span>Did a social media post misrepresent Rajniti, causing distrust?</span><br><br>
+        If yes to any → context explains the drop. Communicate to co-founder, monitor for normalisation.
+      </div>
+    </div>
+    <div class="inv-step">
+      <div class="inv-step-num" style="color:var(--blue);">02</div>
+      <div class="inv-step-title">Separate acquisition from engagement</div>
+      <div class="inv-step-check">
+        Check: <span>Did new user volume also drop this week?</span><br><br>
+        If yes → acquisition problem. Fewer users arrived = fewer sessions. Fix: GTM channel review, TBE community reactivation.<br><br>
+        If no → same users, fewer sessions. This is a retention or engagement problem. Product is failing to bring existing users back. Proceed to Check 3.
+      </div>
+    </div>
+    <div class="inv-step">
+      <div class="inv-step-num" style="color:var(--gold);">03</div>
+      <div class="inv-step-title">Find the funnel breakpoint</div>
+      <div class="inv-step-check">
+        Check: <span>Where in the funnel did users stop?</span><br><br>
+        Visits → Profile drop ↑ = search/navigation broken<br>
+        Profile → 60s drop ↑ = content quality issue<br>
+        60s → Upgrade drop ↑ = paywall friction<br><br>
+        Then — and only then — check data accuracy, AI summary quality, and missing politician profiles.
+      </div>
+    </div>
+  </div>
+  <div class="celebrate">
+    <div class="cel-title">🟢 Celebrate When —</div>
+    <div class="cel-items">
+      <div class="cel-item">Research sessions +20% sustained 2 wks</div>
+      <div class="cel-item">Day-30 retention curve flattens</div>
+      <div class="cel-item">Premium conversion hits 8%+ two weeks running</div>
+      <div class="cel-item">NGO publishes data citing Rajniti</div>
+      <div class="cel-item">TBE community drives 10K installs in one week</div>
+      <div class="cel-item">Thumbs-down rate reaches below 2%</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-author">
+    <div class="footer-av">S</div>
+    <div>
+      <div class="footer-name">Sachin Shukla — Rajniti Analytics Dashboard</div>
+      <div class="footer-role">Full-Stack AI Product Engineer → AI PM · Week 7</div>
+    </div>
+  </div>
+  <div class="footer-tags">
+    <span class="footer-tag">#Analytics</span>
+    <span class="footer-tag">#AARRR</span>
+    <span class="footer-tag">#CohortAnalysis</span>
+    <span class="footer-tag">#Rajniti</span>
+    <span class="footer-tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>

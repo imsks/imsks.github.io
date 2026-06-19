@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — Feature Prioritization (RICE + Kano)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:      #0D0D0D;
+  --paper:    #F6F1E8;
+  --cream:    #EDE8DC;
+  --rule:     #CEC8BA;
+  --muted:    #7A7060;
+  --navy:     #1A2A4A;
+  --navy-lt:  #E8ECF4;
+  --navy-md:  #A0B0CC;
+  --saffron:  #E06B2A;
+  --saff-lt:  #FDF0E8;
+  --saff-md:  #F5C4A0;
+  --green:    #1A6B40;
+  --green-lt: #E6F4ED;
+  --green-md: #9FD4BA;
+  --gold:     #B8860B;
+  --gold-lt:  #FBF3DC;
+  --red:      #B71C1C;
+  --red-lt:   #FEECEC;
+  --purple:   #5B21B6;
+  --purp-lt:  #EDE9FE;
+}
+
+body{
+  background:var(--paper);
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  width:940px;
+  margin:0 auto;
+}
+
+/* ── MASTHEAD ── */
+.masthead{
+  background:var(--navy);
+  padding:24px 48px 0;
+  position:relative;overflow:hidden;
+}
+.masthead::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--saffron) 0%,var(--saffron) 33.3%,#fff 33.3%,#fff 66.6%,var(--green) 66.6%);
+}
+.masthead::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 120% at 88% 50%,rgba(224,107,42,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.meta-row{
+  display:flex;justify-content:space-between;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;color:rgba(255,255,255,0.25);
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding-bottom:12px;margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.mast-grid{
+  display:grid;grid-template-columns:1fr auto;
+  gap:24px;align-items:end;
+  position:relative;z-index:1;
+}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:8px;
+}
+.mast-title{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:900;line-height:0.95;
+  color:#F6F1E8;letter-spacing:-1px;margin-bottom:10px;
+}
+.mast-title em{font-style:italic;color:var(--saffron);}
+.mast-sub{
+  font-size:12px;color:rgba(246,241,232,0.45);
+  line-height:1.65;max-width:500px;margin-bottom:20px;
+}
+.mast-badge{
+  width:110px;height:110px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+}
+.badge-icon{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:900;font-style:italic;
+  color:var(--saffron);line-height:1;
+}
+.badge-text{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:rgba(246,241,232,0.3);letter-spacing:0.08em;
+  text-align:center;text-transform:uppercase;
+}
+.mast-footer{
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:flex;position:relative;z-index:1;
+}
+.stat-cell{
+  flex:1;padding:12px 0;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.stat-cell:last-child{border-right:none;}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  color:var(--saffron);display:block;
+}
+.stat-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;color:rgba(246,241,232,0.3);
+  text-transform:uppercase;display:block;margin-top:2px;
+}
+
+/* ── BODY ── */
+.body{padding:0 48px 48px;}
+
+.sec-hdr{
+  display:flex;align-items:center;gap:14px;
+  margin:32px 0 16px;
+}
+.sec-n{
+  font-family:'Playfair Display',serif;
+  font-size:11px;font-style:italic;
+  color:var(--gold);width:22px;flex-shrink:0;
+}
+.sec-t{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.sec-r{flex:1;height:1px;background:var(--rule);}
+
+/* ── FORMULA BOX ── */
+.formula-box{
+  background:var(--ink);
+  padding:18px 24px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:center;
+}
+.formula{
+  font-family:'DM Mono',monospace;
+  font-size:16px;
+  font-weight:500;
+  color:#F6F1E8;
+  letter-spacing:0.04em;
+}
+.formula .op{color:rgba(246,241,232,0.4);}
+.formula .r{color:#60A5FA;}
+.formula .i{color:var(--saffron);}
+.formula .c{color:var(--green-md);}
+.formula .e{color:#F87171;}
+.formula-parts{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+.formula-part{
+  text-align:center;
+  padding:8px 10px;
+  border-top:2px solid;
+}
+.formula-part-letter{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:900;
+  display:block;margin-bottom:3px;
+}
+.formula-part-desc{
+  font-size:9px;color:rgba(246,241,232,0.45);
+  line-height:1.4;
+}
+
+/* ── KANO STRIP ── */
+.kano-strip{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0;
+  border:1px solid var(--rule);
+  margin-bottom:24px;
+  background:white;
+}
+.kano-cell{
+  padding:16px 18px;
+  border-right:1px solid var(--rule);
+}
+.kano-cell:last-child{border-right:none;}
+.kano-badge{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:6px;font-weight:500;
+}
+.kano-title{
+  font-size:12px;font-weight:600;
+  color:var(--ink);margin-bottom:5px;
+}
+.kano-body{
+  font-size:10.5px;color:var(--muted);
+  line-height:1.55;
+}
+.kano-examples{
+  margin-top:8px;display:flex;flex-wrap:wrap;gap:4px;
+}
+.kano-ex{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.06em;padding:2px 7px;
+  border:1px solid var(--rule);color:var(--muted);
+}
+
+/* ── RICE TABLE ── */
+.rice-table-wrap{
+  background:white;
+  border:1px solid var(--rule);
+  margin-bottom:8px;
+  overflow:hidden;
+}
+
+.rice-header{
+  display:grid;
+  grid-template-columns:24px 1fr 70px 70px 70px 70px 100px 80px;
+  background:var(--ink);
+  padding:0;
+}
+.rh-cell{
+  padding:10px 10px;
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(246,241,232,0.5);
+  border-right:1px solid rgba(255,255,255,0.06);
+  text-align:center;
+}
+.rh-cell:first-child{text-align:left;padding-left:12px;}
+.rh-cell.feature{text-align:left;}
+.rh-cell:last-child{border-right:none;}
+
+.rice-row{
+  display:grid;
+  grid-template-columns:24px 1fr 70px 70px 70px 70px 100px 80px;
+  border-bottom:1px solid var(--rule);
+  align-items:stretch;
+}
+.rice-row:last-child{border-bottom:none;}
+.rice-row:nth-child(odd){background:var(--paper);}
+.rice-row:nth-child(even){background:white;}
+
+.rank-cell{
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:11px;font-style:italic;
+  color:var(--muted);
+  border-right:1px solid var(--rule);
+}
+
+.feature-cell{
+  padding:14px 12px;
+  border-right:1px solid var(--rule);
+}
+.feature-name{
+  font-size:12px;font-weight:500;
+  color:var(--ink);margin-bottom:3px;
+  line-height:1.3;
+}
+.feature-origin{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.06em;padding:1px 6px;
+  border-radius:2px;
+  display:inline-block;
+}
+.feature-kano{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:var(--muted);margin-top:4px;
+  display:block;
+}
+
+.score-cell{
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:11px;
+  font-weight:500;color:var(--ink);
+  border-right:1px solid var(--rule);
+  text-align:center;
+  padding:0 6px;
+}
+
+.rice-score-cell{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:10px 8px;
+  border-right:1px solid var(--rule);
+}
+.rice-number{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;
+  line-height:1;
+}
+.rice-bar-wrap{
+  width:100%;height:4px;
+  background:var(--cream);
+  border-radius:2px;
+  margin-top:5px;
+  overflow:hidden;
+}
+.rice-bar{
+  height:100%;
+  border-radius:2px;
+}
+
+.decision-cell{
+  display:flex;align-items:center;
+  padding:10px 10px;
+  font-size:10px;
+  line-height:1.4;
+}
+
+/* ── STRATEGIC OVERRIDE ── */
+.override-box{
+  background:var(--gold-lt);
+  border:1px solid #D4A017;
+  padding:16px 20px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:14px;align-items:start;
+}
+.override-icon{
+  font-size:20px;line-height:1.2;
+}
+.override-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:5px;
+}
+.override-text{
+  font-size:11.5px;color:var(--ink);line-height:1.65;
+}
+.override-text strong{font-weight:600;}
+
+/* ── SPRINT PLAN ── */
+.sprint-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+.sprint-card{
+  border:1px solid var(--rule);
+  background:white;
+  overflow:hidden;
+}
+.sprint-header{
+  padding:10px 14px;
+  border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:8px;
+}
+.sprint-label{
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  font-weight:500;
+}
+.sprint-body{padding:12px 14px;}
+.sprint-item{
+  display:flex;gap:8px;align-items:flex-start;
+  padding:6px 0;
+  border-bottom:1px solid var(--cream);
+}
+.sprint-item:last-child{border-bottom:none;}
+.sprint-dot{
+  width:6px;height:6px;border-radius:50%;
+  flex-shrink:0;margin-top:4px;
+}
+.sprint-item-name{
+  font-size:11px;font-weight:500;color:var(--ink);
+  line-height:1.3;
+}
+.sprint-item-note{
+  font-size:9.5px;color:var(--muted);
+  line-height:1.45;margin-top:2px;
+}
+
+/* ── DEPENDENCY MAP ── */
+.dep-box{
+  background:var(--navy);
+  color:#F6F1E8;
+  padding:20px 24px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:18px;align-items:center;
+}
+.dep-icon{
+  font-family:'Playfair Display',serif;
+  font-size:38px;font-style:italic;
+  color:var(--saffron);opacity:0.4;line-height:1;
+}
+.dep-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(246,241,232,0.35);margin-bottom:6px;
+}
+.dep-text{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;
+  line-height:1.4;color:#F6F1E8;
+  margin-bottom:10px;
+}
+.dep-text em{font-style:italic;color:var(--saffron);}
+.dep-points{display:flex;gap:8px;flex-wrap:wrap;}
+.dep-pt{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.07em;
+  border:1px solid rgba(255,255,255,0.12);
+  padding:3px 9px;color:rgba(246,241,232,0.5);
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--cream);border-top:1px solid var(--rule);
+  padding:14px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.author{display:flex;align-items:center;gap:10px;}
+.av{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;font-style:italic;color:#F6F1E8;
+}
+.au-name{font-size:12px;font-weight:500;}
+.au-role{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;border:1px solid var(--rule);
+  padding:3px 8px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="meta-row">
+    <span>Rajniti · PM Portfolio Case Study · Week 6</span>
+    <span>Feature Prioritization · RICE + Kano</span>
+    <span>Sachin Shukla · 2025</span>
+  </div>
+  <div class="mast-grid">
+    <div>
+      <div class="eyebrow">Prioritization Framework</div>
+      <div class="mast-title">Rajniti<br><em>What to Build Next</em></div>
+      <div class="mast-sub">
+        5 features. RICE scoring against the north star metric. Kano classification before scoring. Strategic override where numeric ranking diverges from product mission. This is how a PM defends a roadmap.
+      </div>
+    </div>
+    <div class="mast-badge">
+      <div class="badge-icon">R</div>
+      <div class="badge-text">RICE<br>Backlog</div>
+    </div>
+  </div>
+  <div class="mast-footer">
+    <div class="stat-cell">
+      <span class="stat-num">5</span>
+      <span class="stat-lbl">Features scored</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">RICE</span>
+      <span class="stat-lbl">Primary method</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">Kano</span>
+      <span class="stat-lbl">Pre-classification</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">1</span>
+      <span class="stat-lbl">Strategic override</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">Q1 2025</span>
+      <span class="stat-lbl">Planning horizon</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- SECTION I: FORMULA -->
+  <div class="sec-hdr">
+    <span class="sec-n">I</span>
+    <span class="sec-t">The RICE Formula — How Every Feature Gets Scored</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="formula-box">
+    <div>
+      <div class="formula">
+        RICE <span class="op">=</span>
+        (<span class="r">Reach</span> <span class="op">×</span>
+        <span class="i">Impact</span> <span class="op">×</span>
+        <span class="c">Confidence</span>)
+        <span class="op">/</span>
+        <span class="e">Effort</span>
+      </div>
+    </div>
+    <div class="formula-parts">
+      <div class="formula-part" style="border-color:#60A5FA;background:rgba(96,165,250,0.08);">
+        <span class="formula-part-letter" style="color:#60A5FA;">R</span>
+        <span class="formula-part-desc">Users reached per quarter (absolute number)</span>
+      </div>
+      <div class="formula-part" style="border-color:var(--saffron);background:rgba(224,107,42,0.08);">
+        <span class="formula-part-letter" style="color:var(--saffron);">I</span>
+        <span class="formula-part-desc">3=massive · 2=high · 1=medium · 0.5=low</span>
+      </div>
+      <div class="formula-part" style="border-color:var(--green-md);background:rgba(26,107,64,0.08);">
+        <span class="formula-part-letter" style="color:var(--green-md);">C</span>
+        <span class="formula-part-desc">% confidence in R and I estimates</span>
+      </div>
+      <div class="formula-part" style="border-color:#F87171;background:rgba(248,113,113,0.08);">
+        <span class="formula-part-letter" style="color:#F87171;">E</span>
+        <span class="formula-part-desc">Person-months across all functions</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION II: KANO -->
+  <div class="sec-hdr">
+    <span class="sec-n">II</span>
+    <span class="sec-t">Kano Classification — Before Scoring Comes Categorisation</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="kano-strip">
+    <div class="kano-cell">
+      <div class="kano-badge" style="color:var(--red)">Must-Be Quality</div>
+      <div class="kano-title">Basic Expectations</div>
+      <div class="kano-body">Absence = outrage. Presence = taken for granted. Cannot build loyalty here — only lose it. Fix these first, always.</div>
+      <div class="kano-examples">
+        <span class="kano-ex">Data accuracy</span>
+        <span class="kano-ex">Source attribution</span>
+        <span class="kano-ex">App speed</span>
+      </div>
+    </div>
+    <div class="kano-cell">
+      <div class="kano-badge" style="color:var(--navy)">One-Dimensional</div>
+      <div class="kano-title">Performance Features</div>
+      <div class="kano-body">More = better satisfaction, linearly. These are your RICE candidates. Every additional unit of investment has measurable return.</div>
+      <div class="kano-examples">
+        <span class="kano-ex">MP history coverage</span>
+        <span class="kano-ex">AI summaries</span>
+        <span class="kano-ex">Comparison depth</span>
+      </div>
+    </div>
+    <div class="kano-cell">
+      <div class="kano-badge" style="color:var(--green)">Attractive Quality</div>
+      <div class="kano-title">Delighters</div>
+      <div class="kano-body">Unexpected. Unanticipated. Absent = no dissatisfaction. Present = disproportionate delight and sharing. Today's delighter is tomorrow's basic expectation.</div>
+      <div class="kano-examples">
+        <span class="kano-ex">Politician leaderboards</span>
+        <span class="kano-ex">News vs MP mapping</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION III: RICE TABLE -->
+  <div class="sec-hdr">
+    <span class="sec-n">III</span>
+    <span class="sec-t">Scored Backlog — 5 Features, Full RICE Audit</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="rice-table-wrap">
+    <div class="rice-header">
+      <div class="rh-cell">#</div>
+      <div class="rh-cell feature">Feature</div>
+      <div class="rh-cell" style="color:#60A5FA;">Reach</div>
+      <div class="rh-cell" style="color:var(--saffron);">Impact</div>
+      <div class="rh-cell" style="color:var(--green-md);">Conf.</div>
+      <div class="rh-cell" style="color:#F87171;">Effort</div>
+      <div class="rh-cell">RICE Score</div>
+      <div class="rh-cell">Decision</div>
+    </div>
+
+    <!-- Rank 1 — Source References -->
+    <div class="rice-row">
+      <div class="rank-cell">1</div>
+      <div class="feature-cell">
+        <div class="feature-name">Source References per Data Point</div>
+        <span class="feature-origin" style="background:var(--saff-lt);color:var(--saffron);">Your idea</span>
+        <span class="feature-kano">Kano: Must-Be Quality — trust architecture</span>
+      </div>
+      <div class="score-cell" style="color:#60A5FA;">352,500</div>
+      <div class="score-cell" style="color:var(--saffron);">2.0</div>
+      <div class="score-cell" style="color:var(--green);">90%</div>
+      <div class="score-cell" style="color:var(--red);">1</div>
+      <div class="rice-score-cell">
+        <div class="rice-number" style="color:var(--saffron)">634,500</div>
+        <div class="rice-bar-wrap">
+          <div class="rice-bar" style="width:100%;background:var(--saffron);"></div>
+        </div>
+      </div>
+      <div class="decision-cell" style="color:var(--green);font-weight:500;font-size:11px;">
+        ✓ Ship in Sprint 1. Low effort, highest reach, trust-critical.
+      </div>
+    </div>
+
+    <!-- Rank 2 — AI Performance Summary -->
+    <div class="rice-row">
+      <div class="rank-cell">2</div>
+      <div class="feature-cell">
+        <div class="feature-name">AI Performance Summary (per MLA/MP)</div>
+        <span class="feature-origin" style="background:var(--navy-lt);color:var(--navy);">From PRD</span>
+        <span class="feature-kano">Kano: Performance — core value proposition</span>
+      </div>
+      <div class="score-cell" style="color:#60A5FA;">352,500</div>
+      <div class="score-cell" style="color:var(--saffron);">3.0</div>
+      <div class="score-cell" style="color:var(--green);">80%</div>
+      <div class="score-cell" style="color:var(--red);">3</div>
+      <div class="rice-score-cell">
+        <div class="rice-number" style="color:var(--navy)">282,000</div>
+        <div class="rice-bar-wrap">
+          <div class="rice-bar" style="width:44%;background:var(--navy);"></div>
+        </div>
+      </div>
+      <div class="decision-cell" style="color:var(--navy);font-weight:500;font-size:11px;">
+        ★ Strategic priority. Drives premium conversion. Override rank 2 → build first.
+      </div>
+    </div>
+
+    <!-- Rank 3 — Candidate Comparison -->
+    <div class="rice-row">
+      <div class="rank-cell">3</div>
+      <div class="feature-cell">
+        <div class="feature-name">Candidate Comparison Tool</div>
+        <span class="feature-origin" style="background:var(--green-lt);color:var(--green);">Wireframed W3</span>
+        <span class="feature-kano">Kano: Performance — directly enables the core JTBD</span>
+      </div>
+      <div class="score-cell" style="color:#60A5FA;">211,500</div>
+      <div class="score-cell" style="color:var(--saffron);">2.0</div>
+      <div class="score-cell" style="color:var(--green);">85%</div>
+      <div class="score-cell" style="color:var(--red);">2</div>
+      <div class="rice-score-cell">
+        <div class="rice-number" style="color:var(--green)">179,775</div>
+        <div class="rice-bar-wrap">
+          <div class="rice-bar" style="width:28%;background:var(--green);"></div>
+        </div>
+      </div>
+      <div class="decision-cell" style="font-size:11px;">
+        Sprint 2. Wireframes done. Directly serves JTBD — compare before voting.
+      </div>
+    </div>
+
+    <!-- Rank 4 — Politician Leaderboards -->
+    <div class="rice-row">
+      <div class="rank-cell">4</div>
+      <div class="feature-cell">
+        <div class="feature-name">Politician Leaderboards (Most Corrupt, Most Controversial)</div>
+        <span class="feature-origin" style="background:var(--saff-lt);color:var(--saffron);">Your idea</span>
+        <span class="feature-kano">Kano: Delighter — viral acquisition driver</span>
+      </div>
+      <div class="score-cell" style="color:#60A5FA;">352,500</div>
+      <div class="score-cell" style="color:var(--saffron);">2.0</div>
+      <div class="score-cell" style="color:#F87171;">50%</div>
+      <div class="score-cell" style="color:var(--red);">4</div>
+      <div class="rice-score-cell">
+        <div class="rice-number" style="color:var(--muted)">88,125</div>
+        <div class="rice-bar-wrap">
+          <div class="rice-bar" style="width:14%;background:var(--muted);"></div>
+        </div>
+      </div>
+      <div class="decision-cell" style="font-size:11px;color:var(--muted)">
+        Q2. Confidence too low (50%) until Saransh data pipeline exists. Don't build on election data alone.
+      </div>
+    </div>
+
+    <!-- Rank 5 — News vs Politician -->
+    <div class="rice-row">
+      <div class="rank-cell">5</div>
+      <div class="feature-cell">
+        <div class="feature-name">News vs Politician Mapping (via Saransh)</div>
+        <span class="feature-origin" style="background:var(--saff-lt);color:var(--saffron);">Your idea</span>
+        <span class="feature-kano">Kano: Delighter — no competitor has this capability</span>
+      </div>
+      <div class="score-cell" style="color:#60A5FA;">105,000</div>
+      <div class="score-cell" style="color:var(--saffron);">3.0</div>
+      <div class="score-cell" style="color:#F87171;">60%</div>
+      <div class="score-cell" style="color:var(--red);">5</div>
+      <div class="rice-score-cell">
+        <div class="rice-number" style="color:var(--muted)">37,800</div>
+        <div class="rice-bar-wrap">
+          <div class="rice-bar" style="width:6%;background:var(--muted);"></div>
+        </div>
+      </div>
+      <div class="decision-cell" style="font-size:11px;color:var(--muted)">
+        Q3. Blocked on Saransh. When Saransh ships, confidence rises to 85% — score jumps to ~107K.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NOTE ROW -->
+  <div style="background:var(--cream);border:1px solid var(--rule);border-top:none;padding:10px 16px;margin-bottom:24px;font-size:10px;color:var(--muted);font-style:italic;">
+    Base case: 352,500 MAU (1.5% of 23.6M SAM). Impact scale: 3=massive, 2=high, 1=medium, 0.5=low. Effort = total person-months across engineering + design. Scores recalculate at each quarterly planning cycle as estimates are refined by real data.
+  </div>
+
+  <!-- STRATEGIC OVERRIDE -->
+  <div class="override-box">
+    <div class="override-icon">⚡</div>
+    <div>
+      <div class="override-label">The Strategic Override — When RICE is Right and Wrong Simultaneously</div>
+      <div class="override-text">
+        Source References scores highest (634,500) because it is low effort and affects every user. AI Performance Summary scores second (282,000) because of its higher effort cost.
+        <strong> But AI Performance Summary ships first.</strong> Here is why: Source References makes the product trustworthy. AI Performance Summary makes the product worth paying for. A product that is trustworthy but not valuable enough to upgrade has no revenue. A product with a compelling premium tier but weak trust signals has no retention. The correct sequence: build the trust layer (Source References, Sprint 1) then immediately follow with the value layer (AI Summary, Sprint 1–2 overlap). RICE ranks them correctly in isolation. Strategic sequencing determines which ships first in a resource-constrained sprint.
+      </div>
+    </div>
+  </div>
+
+  <!-- SPRINT PLAN -->
+  <div class="sec-hdr">
+    <span class="sec-n">IV</span>
+    <span class="sec-t">Recommended Sprint Sequence — Q1 2025</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="sprint-grid">
+    <div class="sprint-card">
+      <div class="sprint-header" style="background:var(--saff-lt);">
+        <div class="sprint-label" style="color:var(--saffron);">Sprint 1 — Trust Layer</div>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-item">
+          <div class="sprint-dot" style="background:var(--saffron)"></div>
+          <div>
+            <div class="sprint-item-name">Source References per Data Point</div>
+            <div class="sprint-item-note">All politician data linked to ECI source. Trust architecture before anything else.</div>
+          </div>
+        </div>
+        <div class="sprint-item">
+          <div class="sprint-dot" style="background:var(--navy)"></div>
+          <div>
+            <div class="sprint-item-name">AI Summary — Begin development</div>
+            <div class="sprint-item-note">Engineering starts while Source References ships. Overlap removes wasted cycles.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sprint-card">
+      <div class="sprint-header" style="background:var(--navy-lt);">
+        <div class="sprint-label" style="color:var(--navy);">Sprint 2 — Value Layer</div>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-item">
+          <div class="sprint-dot" style="background:var(--navy)"></div>
+          <div>
+            <div class="sprint-item-name">AI Performance Summary — Ship</div>
+            <div class="sprint-item-note">The feature that justifies ₹99/month. Premium paywall gate. Drives conversion.</div>
+          </div>
+        </div>
+        <div class="sprint-item">
+          <div class="sprint-dot" style="background:var(--green)"></div>
+          <div>
+            <div class="sprint-item-name">Candidate Comparison Tool — Begin</div>
+            <div class="sprint-item-note">Wireframes ready from Week 3. Directly serves the core JTBD before elections.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sprint-card">
+      <div class="sprint-header" style="background:var(--green-lt);">
+        <div class="sprint-label" style="color:var(--green);">Q2–Q3 — Delight Layer</div>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-item">
+          <div class="sprint-dot" style="background:var(--green)"></div>
+          <div>
+            <div class="sprint-item-name">Politician Leaderboards</div>
+            <div class="sprint-item-note">Blocked until Saransh data pipeline exists. Confidence rises from 50% → 85% when unblocked.</div>
+          </div>
+        </div>
+        <div class="sprint-item">
+          <div class="sprint-dot" style="background:var(--purple)"></div>
+          <div>
+            <div class="sprint-item-name">News vs Politician (Saransh)</div>
+            <div class="sprint-item-note">Biggest potential RICE score when Saransh ships. RICE jumps from 37K → ~107K at 85% confidence.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SARANSH DEPENDENCY -->
+  <div class="dep-box">
+    <div class="dep-icon">"</div>
+    <div>
+      <div class="dep-label">Strategic Dependency — The Saransh Flywheel</div>
+      <div class="dep-text">
+        Two of the five features are <em>blocked on Saransh.</em> The right PM decision is not to force-build them on weak data — it is to invest in Saransh first so both features unlock simultaneously with strong confidence scores.
+      </div>
+      <div class="dep-points">
+        <span class="dep-pt">Saransh = news categorisation engine</span>
+        <span class="dep-pt">Unlocks leaderboards + news mapping</span>
+        <span class="dep-pt">RICE scores 2× when Saransh ships</span>
+        <span class="dep-pt">No competitor can replicate this pipeline</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="author">
+    <div class="av">S</div>
+    <div>
+      <div class="au-name">Sachin Shukla — Rajniti Portfolio Case Study</div>
+      <div class="au-role">Full-Stack AI Product Engineer → AI PM · Week 6</div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag">#Prioritization</span>
+    <span class="tag">#RICE</span>
+    <span class="tag">#Kano</span>
+    <span class="tag">#Rajniti</span>
+    <span class="tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>

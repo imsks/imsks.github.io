@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — Market Sizing Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:      #0D0D0D;
+  --paper:    #F6F1E8;
+  --cream:    #EDE8DC;
+  --rule:     #CEC8BA;
+  --muted:    #7A7060;
+
+  --saffron:  #E06B2A;
+  --saffron-lt:#FDF0E8;
+  --saffron-md:#F5C4A0;
+
+  --green:    #1A6B40;
+  --green-lt: #E6F4ED;
+  --green-md: #9FD4BA;
+
+  --navy:     #1A2A4A;
+  --navy-lt:  #E8ECF4;
+  --navy-md:  #A0B0CC;
+
+  --gold:     #B8860B;
+  --gold-lt:  #FBF3DC;
+
+  --red-lt:   #FEECEC;
+  --red-tx:   #B71C1C;
+
+  --b1: #E8593C;
+  --b2: #D9510F;
+  --b3: #185FA5;
+  --b4: #0C447C;
+  --b5: #1A6B40;
+  --b6: #0F4D2C;
+}
+
+body {
+  background: var(--paper);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  width: 920px;
+  margin: 0 auto;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  background: var(--navy);
+  padding: 24px 48px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.masthead::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--saffron) 0%, var(--saffron) 33.3%, #fff 33.3%, #fff 66.6%, var(--green) 66.6%);
+}
+
+.masthead::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 100% at 90% 50%, rgba(224,107,42,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+
+.mast-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: end;
+  position: relative; z-index: 1;
+}
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 8px;
+}
+
+.mast-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 0.95;
+  color: #F6F1E8;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+}
+
+.mast-title em {
+  font-style: italic;
+  color: var(--saffron);
+}
+
+.mast-sub {
+  font-size: 12px;
+  color: rgba(246,241,232,0.45);
+  line-height: 1.65;
+  max-width: 480px;
+  margin-bottom: 20px;
+}
+
+.tension-box {
+  background: rgba(224,107,42,0.1);
+  border-left: 3px solid var(--saffron);
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  max-width: 480px;
+}
+
+.tension-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 4px;
+}
+
+.tension-text {
+  font-size: 11px;
+  color: rgba(246,241,232,0.65);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.mast-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+  border: 1px solid rgba(255,255,255,0.1);
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.badge-icon {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--saffron);
+  line-height: 1;
+}
+
+.badge-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  color: rgba(246,241,232,0.3);
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mast-footer {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  gap: 0;
+  position: relative; z-index: 1;
+}
+
+.stat-cell {
+  flex: 1;
+  padding: 12px 0;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.stat-cell:last-child { border-right: none; }
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--saffron);
+  display: block;
+}
+
+.stat-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: rgba(246,241,232,0.3);
+  text-transform: uppercase;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ── BODY ── */
+.body { padding: 0 48px 48px; background: var(--paper); }
+
+.section-hdr {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 32px 0 16px;
+}
+
+.sec-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--gold);
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.sec-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sec-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ── FUNNEL ── */
+.funnel-block {
+  background: white;
+  border: 1px solid var(--rule);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.funnel-row {
+  display: grid;
+  grid-template-columns: 190px 1fr 90px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.f-label {
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.45;
+}
+
+.f-label strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.f-label .source {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.bar-track {
+  height: 32px;
+  background: var(--cream);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-radius: 2px;
+}
+
+.bar-fill span {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.f-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.f-note {
+  font-size: 9px;
+  color: var(--muted);
+  font-style: italic;
+  grid-column: 2 / 4;
+  padding-left: 2px;
+  margin-top: -2px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.f-arrow {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  margin: 4px 0;
+  padding-left: 200px;
+}
+
+.sam-highlight {
+  background: var(--navy-lt);
+  border: 1.5px solid var(--navy);
+  padding: 12px 16px;
+  margin: 12px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sam-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 3px;
+}
+
+.sam-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.sam-sub {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── REVENUE ── */
+.rev-model {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.rev-stream {
+  border: 1px solid var(--rule);
+  background: white;
+}
+
+.rev-stream-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stream-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.stream-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.stream-tag {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+
+.rev-stream-body {
+  padding: 14px 16px;
+}
+
+.rev-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.rev-detail-label {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.rev-detail-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.rev-stream-footer {
+  background: var(--cream);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+}
+
+.rev-footer-label {
+  font-size: 10px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+}
+
+.rev-footer-val {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ── SCENARIOS ── */
+.scenarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+  margin-bottom: 24px;
+  background: white;
+}
+
+.scenario {
+  padding: 20px 18px;
+  border-right: 1px solid var(--rule);
+  position: relative;
+}
+
+.scenario:last-child { border-right: none; }
+
+.scenario.base {
+  background: var(--navy-lt);
+  border-top: 3px solid var(--navy);
+}
+
+.sc-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.sc-indicator {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+.sc-type {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.sc-som-pct {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.sc-users {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.sc-user-label {
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.sc-divider {
+  height: 1px;
+  background: var(--rule);
+  margin-bottom: 12px;
+}
+
+.sc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.sc-row-label {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.sc-row-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.sc-total-row {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+
+.sc-total-label {
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.sc-total-num {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.sc-note {
+  font-size: 9.5px;
+  color: var(--muted);
+  margin-top: 8px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── TIMING ARGUMENT ── */
+.timing-box {
+  background: var(--navy);
+  color: #F6F1E8;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.timing-icon {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-style: italic;
+  color: var(--saffron);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.timing-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246,241,232,0.35);
+  margin-bottom: 6px;
+}
+
+.timing-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #F6F1E8;
+}
+
+.timing-text em { font-style: italic; color: var(--saffron); }
+
+/* ── ASSUMPTION AUDIT ── */
+.assumption-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+  background: white;
+  border: 1px solid var(--rule);
+  padding: 20px 20px;
+}
+
+.ass-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--cream);
+}
+
+.ass-row:last-child, .ass-row:nth-last-child(2) { border-bottom: none; }
+
+.ass-anchor {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  min-width: 52px;
+  padding-top: 1px;
+}
+
+.ass-text {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ── MOAT NOTE ── */
+.moat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.moat-card {
+  border-left: 3px solid;
+  padding: 14px 16px;
+  background: white;
+  border-top: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.moat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.moat-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.moat-body {
+  font-size: 10.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--cream);
+  border-top: 1px solid var(--rule);
+  padding: 14px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author { display: flex; align-items: center; gap: 10px; }
+
+.av {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px; font-weight: 700; font-style: italic;
+  color: #F6F1E8;
+}
+
+.au-name { font-size: 12px; font-weight: 500; }
+.au-role { font-family: 'DM Mono', monospace; font-size: 8.5px; color: var(--muted); }
+
+.tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--rule);
+  padding: 3px 8px;
+  color: var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="meta-row">
+    <span>Rajniti · PM Portfolio Case Study · Chapter 2</span>
+    <span>Week 5 · Day 4 · Market Sizing</span>
+    <span>Sachin Shukla · 2025</span>
+  </div>
+
+  <div class="mast-grid">
+    <div>
+      <div class="eyebrow">Market Sizing — Bottom-Up Model</div>
+      <div class="mast-title">Rajniti<br><em>Civic AI</em></div>
+      <div class="mast-sub">
+        AI-powered political research for Indian voters. TAM/SAM/SOM from first principles. Dual revenue architecture — civic free tier + B2B API licensing.
+      </div>
+      <div class="tension-box">
+        <div class="tension-label">The Core PM Tension</div>
+        <div class="tension-text">The users who benefit most from Rajniti are least able to pay for it. The monetisation strategy must not compromise the civic mission — so revenue comes from organisations who benefit from the user base, not from voters directly.</div>
+      </div>
+    </div>
+    <div class="mast-badge">
+      <div class="badge-icon">R</div>
+      <div class="badge-text">Civic<br>Tech</div>
+    </div>
+  </div>
+
+  <div class="mast-footer">
+    <div class="stat-cell">
+      <span class="stat-num">970M</span>
+      <span class="stat-lbl">Eligible voters</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">23.5M</span>
+      <span class="stat-lbl">SAM</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">₹1.87–9.7 Cr</span>
+      <span class="stat-lbl">ARR Range</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">2-Stream</span>
+      <span class="stat-lbl">Revenue model</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">Bottom-Up</span>
+      <span class="stat-lbl">Method</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- SECTION I: FUNNEL -->
+  <div class="section-hdr">
+    <span class="sec-num">I</span>
+    <span class="sec-title">The Population Funnel — TAM to SAM</span>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="funnel-block">
+
+    <div class="funnel-row">
+      <div class="f-label">
+        <strong>India eligible voters</strong>
+        <span class="source">Election Commission of India, 2024</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:100%;background:#A0B0CC;">
+          <span style="color:#1A2A4A;">970,000,000</span>
+        </div>
+      </div>
+      <div class="f-num" style="color:var(--navy)">970M</div>
+    </div>
+    <div class="f-note">This is the theoretical TAM population. Every eligible voter has the problem Rajniti solves.</div>
+
+    <div class="f-arrow">↓ Filter: Smartphone + data access (~65%)</div>
+
+    <div class="funnel-row">
+      <div class="f-label">
+        <strong>Digitally reachable voters</strong>
+        <span class="source">TRAI / IAMAI active internet subscribers</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:65%;background:#8098BC;">
+          <span style="color:#1A2A4A;">630,000,000</span>
+        </div>
+      </div>
+      <div class="f-num" style="color:var(--navy)">630M</div>
+    </div>
+    <div class="f-note">35% without smartphone/data access are not reachable by a mobile-first product. Excluded from all downstream calculations.</div>
+
+    <div class="f-arrow">↓ Filter: Actively seek civic/political information (~25%)</div>
+
+    <div class="funnel-row">
+      <div class="f-label">
+        <strong>Active civic information seekers</strong>
+        <span class="source">Reuters Institute Digital News Report India</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:25%;background:#6080AA;">
+          <span style="color:#E8ECF4;">157,500,000</span>
+        </div>
+      </div>
+      <div class="f-num" style="color:var(--navy)">157.5M</div>
+    </div>
+    <div class="f-note">Proxy: ~25% of Indian news consumers actively seek political news vs. passively receive it via forwards. This is the pool who have the problem Rajniti addresses.</div>
+
+    <div class="f-arrow">↓ Filter: Would use a dedicated civic research tool (~15%)</div>
+
+    <div class="funnel-row">
+      <div class="f-label">
+        <strong>SAM — Rajniti target users</strong>
+        <span class="source">Proxy: political app penetration rate</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:15%;background:var(--navy);min-width:80px;">
+          <span style="color:#F6F1E8;">23,625,000</span>
+        </div>
+      </div>
+      <div class="f-num" style="color:var(--navy)">23.6M</div>
+    </div>
+    <div class="f-note">Conservative: ~15% of civic news consumers use or would use a dedicated political research app vs. relying on WhatsApp, news apps, or Google.</div>
+
+    <div class="sam-highlight">
+      <div>
+        <div class="sam-label">Serviceable Addressable Market</div>
+        <div class="sam-num">~23.6 Million Users</div>
+      </div>
+      <div class="sam-sub">These are voters who have the problem,<br>the device, and the intent to use Rajniti.</div>
+    </div>
+  </div>
+
+  <!-- TAM REVENUE -->
+  <div style="background:var(--saffron-lt);border:1px solid var(--saffron-md);padding:14px 18px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--saffron);margin-bottom:4px;">TAM — Theoretical Revenue Ceiling</div>
+      <div style="font-size:11px;color:var(--ink);line-height:1.6;">970M voters × ₹99/month = <strong>₹96,030 Crore/month</strong> theoretical maximum. Nobody captures TAM. It exists to confirm the problem is large enough to build around.</div>
+    </div>
+    <div style="text-align:right;flex-shrink:0;padding-left:20px;">
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--saffron);">₹11.5 Lakh Cr</div>
+      <div style="font-size:9px;color:var(--muted);font-family:'DM Mono',monospace;">TAM / year</div>
+    </div>
+  </div>
+
+  <!-- SECTION II: REVENUE MODEL -->
+  <div class="section-hdr">
+    <span class="sec-num">II</span>
+    <span class="sec-title">Dual Revenue Architecture</span>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="rev-model">
+
+    <!-- B2C Stream -->
+    <div class="rev-stream">
+      <div class="rev-stream-header">
+        <div class="stream-dot" style="background:var(--saffron)"></div>
+        <div class="stream-name">Stream 1 — Freemium Premium</div>
+        <div class="stream-tag" style="background:var(--saffron-lt);color:var(--saffron);">B2C</div>
+      </div>
+      <div class="rev-stream-body">
+        <div class="rev-detail">
+          <span class="rev-detail-label">Price point</span>
+          <span class="rev-detail-val">₹99 / month</span>
+        </div>
+        <div class="rev-detail">
+          <span class="rev-detail-label">Free tier</span>
+          <span class="rev-detail-val">Basic MP/MLA lookup</span>
+        </div>
+        <div class="rev-detail">
+          <span class="rev-detail-label">Premium features</span>
+          <span class="rev-detail-val">AI summaries, comparisons, alerts</span>
+        </div>
+        <div class="rev-detail">
+          <span class="rev-detail-label">Free-to-paid conversion</span>
+          <span class="rev-detail-val">~8% of MAU</span>
+        </div>
+        <div style="font-size:9.5px;color:var(--muted);font-style:italic;margin-top:8px;padding-top:8px;border-top:1px solid var(--cream);line-height:1.5;">
+          Benchmark: 8% free-to-paid is consistent with civic app conversion in India (NDTV, Inshorts premium tiers). Pricing at ₹99 keeps it below the psychological barrier that kills civic app conversions.
+        </div>
+      </div>
+      <div class="rev-stream-footer">
+        <span class="rev-footer-label">Base case MAU</span>
+        <span class="rev-footer-val" style="color:var(--saffron)">352,500</span>
+      </div>
+    </div>
+
+    <!-- B2B Stream -->
+    <div class="rev-stream">
+      <div class="rev-stream-header">
+        <div class="stream-dot" style="background:var(--green)"></div>
+        <div class="stream-name">Stream 2 — B2B API Licensing</div>
+        <div class="stream-tag" style="background:var(--green-lt);color:var(--green);">B2B</div>
+      </div>
+      <div class="rev-stream-body">
+        <div class="rev-detail">
+          <span class="rev-detail-label">Price point</span>
+          <span class="rev-detail-val">₹50,000 / org / month</span>
+        </div>
+        <div class="rev-detail">
+          <span class="rev-detail-label">Target buyers</span>
+          <span class="rev-detail-val">NGOs, media, researchers</span>
+        </div>
+        <div class="rev-detail">
+          <span class="rev-detail-label">What they get</span>
+          <span class="rev-detail-val">Verified political data API</span>
+        </div>
+        <div class="rev-detail">
+          <span class="rev-detail-label">Base case orgs (Yr 1)</span>
+          <span class="rev-detail-val">25 organisations</span>
+        </div>
+        <div style="font-size:9.5px;color:var(--muted);font-style:italic;margin-top:8px;padding-top:8px;border-top:1px solid var(--cream);line-height:1.5;">
+          Target orgs: ADR, The Wire, NDTV Politics, PRS Legislative Research, Lokniti CSDS, Oxfam India, election-focused academic institutions. This is the high-margin, low-volume revenue stream.
+        </div>
+      </div>
+      <div class="rev-stream-footer">
+        <span class="rev-footer-label">Margin profile</span>
+        <span class="rev-footer-val" style="color:var(--green)">~85% gross margin</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION III: SCENARIOS -->
+  <div class="section-hdr">
+    <span class="sec-num">III</span>
+    <span class="sec-title">Three Scenarios — Conservative · Base · Optimistic</span>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="scenarios">
+
+    <!-- Conservative -->
+    <div class="scenario">
+      <div class="sc-top">
+        <div class="sc-indicator" style="background:var(--red-tx)"></div>
+        <div class="sc-type" style="color:var(--red-tx)">Conservative</div>
+        <div class="sc-som-pct">0.5% of SAM</div>
+      </div>
+      <div class="sc-users" style="color:var(--red-tx)">117,500</div>
+      <div class="sc-user-label">Year 1 MAU</div>
+      <div class="sc-divider"></div>
+      <div class="sc-row">
+        <span class="sc-row-label">Premium users (8%)</span>
+        <span class="sc-row-val">9,400</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2C revenue / yr</span>
+        <span class="sc-row-val">₹1.1 Cr</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2B orgs</span>
+        <span class="sc-row-val">10 orgs</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2B revenue / yr</span>
+        <span class="sc-row-val">₹60 L</span>
+      </div>
+      <div class="sc-total-row">
+        <div class="sc-total-label">Total ARR</div>
+        <div class="sc-total-num" style="color:var(--red-tx)">~₹1.7 Cr</div>
+      </div>
+      <div class="sc-note">Off-election year launch. Slow organic growth. No media partnerships at launch. B2B sales cycles longer than expected.</div>
+    </div>
+
+    <!-- Base -->
+    <div class="scenario base">
+      <div style="position:absolute;top:0;right:0;background:var(--navy);padding:3px 10px;">
+        <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(246,241,232,0.6);">Base Case</span>
+      </div>
+      <div class="sc-top">
+        <div class="sc-indicator" style="background:var(--navy)"></div>
+        <div class="sc-type" style="color:var(--navy)">Realistic</div>
+        <div class="sc-som-pct">1.5% of SAM</div>
+      </div>
+      <div class="sc-users" style="color:var(--navy)">352,500</div>
+      <div class="sc-user-label">Year 1 MAU</div>
+      <div class="sc-divider"></div>
+      <div class="sc-row">
+        <span class="sc-row-label">Premium users (8%)</span>
+        <span class="sc-row-val">28,200</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2C revenue / yr</span>
+        <span class="sc-row-val">₹3.35 Cr</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2B orgs</span>
+        <span class="sc-row-val">25 orgs</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2B revenue / yr</span>
+        <span class="sc-row-val">₹1.5 Cr</span>
+      </div>
+      <div class="sc-total-row">
+        <div class="sc-total-label">Total ARR</div>
+        <div class="sc-total-num" style="color:var(--navy)">~₹4.85 Cr</div>
+      </div>
+      <div class="sc-note">Pre-election launch timing. 3–4 media partnerships at launch. Steady organic growth via civic community word-of-mouth.</div>
+    </div>
+
+    <!-- Optimistic -->
+    <div class="scenario">
+      <div class="sc-top">
+        <div class="sc-indicator" style="background:var(--green)"></div>
+        <div class="sc-type" style="color:var(--green)">Optimistic</div>
+        <div class="sc-som-pct">3% of SAM</div>
+      </div>
+      <div class="sc-users" style="color:var(--green)">705,000</div>
+      <div class="sc-user-label">Year 1 MAU</div>
+      <div class="sc-divider"></div>
+      <div class="sc-row">
+        <span class="sc-row-label">Premium users (8%)</span>
+        <span class="sc-row-val">56,400</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2C revenue / yr</span>
+        <span class="sc-row-val">₹6.7 Cr</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2B orgs</span>
+        <span class="sc-row-val">50 orgs</span>
+      </div>
+      <div class="sc-row">
+        <span class="sc-row-label">B2B revenue / yr</span>
+        <span class="sc-row-val">₹3 Cr</span>
+      </div>
+      <div class="sc-total-row">
+        <div class="sc-total-label">Total ARR</div>
+        <div class="sc-total-num" style="color:var(--green)">~₹9.7 Cr</div>
+      </div>
+      <div class="sc-note">Major election cycle. Viral traction via NGO amplification. Strong B2B pipeline from media integrations.</div>
+    </div>
+
+  </div>
+
+  <!-- TIMING ARGUMENT -->
+  <div class="timing-box">
+    <div class="timing-icon">"</div>
+    <div>
+      <div class="timing-label">The GTM Timing Argument — Why 2025 is the Right Year</div>
+      <div class="timing-text">India has <em>state elections every 6–8 months.</em> Rajniti's growth curve is directly tied to election cycles — each cycle is a built-in acquisition spike. Launch in a pre-election window and the product markets itself.</div>
+    </div>
+  </div>
+
+  <!-- SECTION IV: MOAT -->
+  <div class="section-hdr">
+    <span class="sec-num">IV</span>
+    <span class="sec-title">Why This Market Is Defensible — Rajniti's Moat</span>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="moat-row">
+    <div class="moat-card" style="border-left-color:var(--saffron)">
+      <div class="moat-label" style="color:var(--saffron)">Data Moat</div>
+      <div class="moat-title">Verified political data no one else has structured</div>
+      <div class="moat-body">MP/MLA attendance, voting records, asset declarations, criminal cases — all public but unstructured. Rajniti's data pipeline is the product. A competitor can build the UX but not the data layer overnight.</div>
+    </div>
+    <div class="moat-card" style="border-left-color:var(--navy)">
+      <div class="moat-label" style="color:var(--navy)">Trust Moat</div>
+      <div class="moat-title">Source attribution in a misinformation-heavy space</div>
+      <div class="moat-body">Civic products live or die on trust. Rajniti's citation-first design builds a trust reputation that takes years to replicate — especially in a domain where one wrong data point causes reputational damage.</div>
+    </div>
+    <div class="moat-card" style="border-left-color:var(--green)">
+      <div class="moat-label" style="color:var(--green)">Community Moat</div>
+      <div class="moat-title">Civic network effect via The Boring Education</div>
+      <div class="moat-body">Rajniti can seed its first 100K users from TBE's 100K+ community — young, politically engaged, digitally native. No competitor can replicate this distribution channel. First-mover trust compounds.</div>
+    </div>
+  </div>
+
+  <!-- SECTION V: ASSUMPTION AUDIT -->
+  <div class="section-hdr">
+    <span class="sec-num">V</span>
+    <span class="sec-title">Assumption Audit — Every Number Defended</span>
+    <div class="sec-rule"></div>
+  </div>
+
+  <div class="assumption-grid">
+    <div class="ass-row">
+      <div class="ass-anchor" style="color:var(--navy)">970M</div>
+      <div class="ass-text">Election Commission of India Voter List 2024 — the hardest number in this model. Government source, directly verifiable.</div>
+    </div>
+    <div class="ass-row">
+      <div class="ass-anchor" style="color:var(--navy)">65%</div>
+      <div class="ass-text">TRAI Q4 2023: 900M+ active internet subscribers in India. 900M / 1.4B population ≈ 64%. Rounded to 65% applied to voter-age population.</div>
+    </div>
+    <div class="ass-row">
+      <div class="ass-anchor" style="color:var(--saffron)">25%</div>
+      <div class="ass-text">Reuters Institute Digital News Report India 2023: ~26% of Indian online adults actively seek news vs. passively receive it. Rounded to 25%.</div>
+    </div>
+    <div class="ass-row">
+      <div class="ass-anchor" style="color:var(--saffron)">15%</div>
+      <div class="ass-text">Conservative proxy: ~15% of civic news consumers use dedicated political fact-checking or analysis apps. Harder to source — flagged as weakest assumption.</div>
+    </div>
+    <div class="ass-row">
+      <div class="ass-anchor" style="color:var(--green)">8%</div>
+      <div class="ass-text">Free-to-paid benchmark: NDTV premium conversion ~7–9%. Inshorts premium tier similar. ₹99/month is below the psychological barrier that kills civic app upgrades.</div>
+    </div>
+    <div class="ass-row">
+      <div class="ass-anchor" style="color:var(--green)">₹50K</div>
+      <div class="ass-text">B2B API pricing: benchmarked against PRS Legislative Research and ADR India's data licensing fees to media partners. ₹50K/month is mid-market for civic data API access.</div>
+    </div>
+    <div class="ass-row">
+      <div class="ass-anchor" style="color:var(--muted)">1.5%</div>
+      <div class="ass-text">Base SOM: comparable civic apps in India (MyNeta, Voterhelp) achieved ~1–2% of their SAM in Year 1 pre-elections. 1.5% is mid-range.</div>
+    </div>
+    <div class="ass-row">
+      <div class="ass-anchor" style="color:var(--muted)">25 orgs</div>
+      <div class="ass-text">Base B2B: India has 50+ election-focused NGOs, 10+ political desks at national media houses, and 20+ academic centres studying Indian democracy. 25 is a 25% capture of known pipeline.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="author">
+    <div class="av">S</div>
+    <div>
+      <div class="au-name">Sachin Shukla — Rajniti Portfolio Case Study</div>
+      <div class="au-role">Full-Stack AI Product Engineer → AI PM · Chapter 2 of 4</div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag">#MarketSizing</span>
+    <span class="tag">#CivicTech</span>
+    <span class="tag">#Rajniti</span>
+    <span class="tag">#AIProduct</span>
+    <span class="tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>

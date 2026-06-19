@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — User Discovery Interview Script</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:     #0D0D0D;
+  --paper:   #F6F1E8;
+  --cream:   #EDE8DC;
+  --rule:    #CEC8BA;
+  --muted:   #7A7060;
+  --navy:    #1A2A4A;
+  --navy-lt: #E8ECF4;
+  --navy-md: #A0B0CC;
+  --saffron: #E06B2A;
+  --saff-lt: #FDF0E8;
+  --saff-md: #F5C4A0;
+  --green:   #1A6B40;
+  --green-lt:#E6F4ED;
+  --green-md:#9FD4BA;
+  --gold:    #B8860B;
+  --gold-lt: #FBF3DC;
+  --red:     #B71C1C;
+  --red-lt:  #FEECEC;
+  --purple:  #5B21B6;
+  --purp-lt: #EDE9FE;
+}
+
+body{
+  background:var(--paper);
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  width:920px;
+  margin:0 auto;
+}
+
+/* ── MASTHEAD ── */
+.masthead{
+  background:var(--navy);
+  padding:24px 48px 0;
+  position:relative;overflow:hidden;
+}
+.masthead::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--saffron) 0%,var(--saffron) 33.3%,#fff 33.3%,#fff 66.6%,var(--green) 66.6%);
+}
+.masthead::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 120% at 88% 50%,rgba(224,107,42,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.meta-row{
+  display:flex;justify-content:space-between;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;color:rgba(255,255,255,0.25);
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding-bottom:12px;margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.mast-grid{
+  display:grid;grid-template-columns:1fr auto;
+  gap:24px;align-items:end;
+  position:relative;z-index:1;
+}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:8px;
+}
+.mast-title{
+  font-family:'Playfair Display',serif;
+  font-size:44px;font-weight:900;line-height:0.95;
+  color:#F6F1E8;letter-spacing:-1px;margin-bottom:10px;
+}
+.mast-title em{font-style:italic;color:var(--saffron);}
+.mast-sub{
+  font-size:12px;color:rgba(246,241,232,0.45);
+  line-height:1.65;max-width:520px;margin-bottom:20px;
+}
+.mast-badge{
+  width:110px;height:110px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+}
+.badge-icon{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:900;font-style:italic;
+  color:var(--saffron);line-height:1;
+}
+.badge-text{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:rgba(246,241,232,0.3);letter-spacing:0.08em;
+  text-align:center;text-transform:uppercase;
+}
+.mast-footer{
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:flex;position:relative;z-index:1;
+}
+.stat-cell{
+  flex:1;padding:12px 0;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.stat-cell:last-child{border-right:none;}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  color:var(--saffron);display:block;
+}
+.stat-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;color:rgba(246,241,232,0.3);
+  text-transform:uppercase;display:block;margin-top:2px;
+}
+
+/* ── BODY ── */
+.body{padding:0 48px 48px;}
+
+.sec-hdr{
+  display:flex;align-items:center;gap:14px;
+  margin:32px 0 16px;
+}
+.sec-n{
+  font-family:'Playfair Display',serif;
+  font-size:11px;font-style:italic;
+  color:var(--gold);width:22px;flex-shrink:0;
+}
+.sec-t{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.sec-r{flex:1;height:1px;background:var(--rule);}
+
+/* ── INTERVIEW SETUP ── */
+.setup-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+.setup-card{
+  background:white;
+  border:1px solid var(--rule);
+  padding:14px 16px;
+}
+.setup-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:6px;
+}
+.setup-val{
+  font-size:12px;font-weight:500;
+  color:var(--ink);line-height:1.4;
+}
+
+/* ── RULES BOX ── */
+.rules-box{
+  background:var(--ink);
+  padding:18px 24px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.rules-col-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:10px;font-weight:500;
+}
+.rule-item{
+  display:flex;gap:8px;align-items:flex-start;
+  margin-bottom:6px;
+}
+.rule-dot{
+  font-size:10px;flex-shrink:0;margin-top:1px;
+}
+.rule-text{
+  font-size:10.5px;line-height:1.55;
+}
+
+/* ── ZONE BLOCK ── */
+.zone-block{
+  margin-bottom:24px;
+}
+.zone-header{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:16px;
+  padding:14px 20px;
+  margin-bottom:0;
+  border-bottom:2px solid;
+}
+.zone-num{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:900;font-style:italic;
+  line-height:1;opacity:0.5;
+}
+.zone-info{}
+.zone-name{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.16em;text-transform:uppercase;
+  font-weight:500;margin-bottom:2px;
+}
+.zone-purpose{
+  font-size:10.5px;line-height:1.5;
+  opacity:0.7;
+}
+.zone-time{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.08em;opacity:0.5;
+  white-space:nowrap;
+}
+
+/* ── QUESTION CARD ── */
+.question-card{
+  background:white;
+  border:1px solid var(--rule);
+  border-top:none;
+}
+.question-row{
+  display:grid;
+  grid-template-columns:52px 1fr;
+  border-bottom:1px solid var(--rule);
+}
+.question-row:last-child{border-bottom:none;}
+
+.q-num-cell{
+  display:flex;align-items:flex-start;justify-content:center;
+  padding-top:18px;
+  border-right:1px solid var(--rule);
+}
+.q-num{
+  font-family:'Playfair Display',serif;
+  font-size:14px;font-weight:700;font-style:italic;
+  color:var(--muted);
+}
+
+.q-body{padding:16px 18px;}
+
+.q-text{
+  font-size:14px;font-weight:500;
+  color:var(--ink);line-height:1.5;
+  margin-bottom:10px;
+}
+
+.q-meta{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.q-tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;padding:2px 8px;
+  border-radius:2px;
+}
+
+.q-why{
+  font-size:11px;color:var(--muted);
+  line-height:1.6;font-style:italic;
+  padding-left:12px;
+  border-left:2px solid var(--rule);
+  margin-bottom:8px;
+}
+
+/* Probe question */
+.probe-card{
+  background:var(--gold-lt);
+  border:1px solid #D4A017;
+  border-top:none;
+  padding:12px 18px 12px 70px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.probe-icon{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
+  flex-shrink:0;padding-top:1px;
+}
+.probe-q{
+  font-size:12px;color:var(--ink);
+  line-height:1.5;
+}
+.probe-note{
+  font-size:10px;color:var(--muted);
+  font-style:italic;margin-top:3px;
+  line-height:1.4;
+}
+
+/* ── WHAT TO LISTEN FOR ── */
+.listen-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+.listen-card{
+  background:white;
+  border:1px solid var(--rule);
+  padding:14px 16px;
+  border-top:3px solid;
+}
+.listen-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:8px;font-weight:500;
+}
+.listen-items{
+  display:flex;flex-direction:column;gap:5px;
+}
+.listen-item{
+  display:flex;gap:7px;align-items:flex-start;
+  font-size:10.5px;color:var(--muted);line-height:1.5;
+}
+.listen-dot{
+  width:5px;height:5px;border-radius:50%;
+  flex-shrink:0;margin-top:5px;
+}
+
+/* ── NPS + CLOSING ── */
+.closing-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+.closing-card{
+  background:white;border:1px solid var(--rule);
+  padding:16px 18px;
+}
+.closing-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;
+}
+.closing-q{
+  font-size:13px;font-weight:500;
+  color:var(--ink);line-height:1.5;
+  margin-bottom:8px;
+}
+.closing-note{
+  font-size:10px;color:var(--muted);
+  font-style:italic;line-height:1.55;
+}
+
+/* ── VIOLATIONS FIXED ── */
+.fixes-table{
+  background:white;
+  border:1px solid var(--rule);
+  margin-bottom:24px;
+  overflow:hidden;
+}
+.fixes-hdr{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  background:var(--ink);
+}
+.fh{
+  padding:9px 12px;
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(246,241,232,0.5);
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.fh:last-child{border-right:none;}
+.fixes-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  border-bottom:1px solid var(--rule);
+}
+.fixes-row:last-child{border-bottom:none;}
+.fixes-row:nth-child(odd){background:var(--paper);}
+.fc{
+  padding:10px 12px;
+  font-size:10.5px;
+  color:var(--ink);
+  line-height:1.5;
+  border-right:1px solid var(--rule);
+}
+.fc:last-child{border-right:none;}
+.fc.bad{color:var(--red);font-style:italic;}
+.fc.good{color:var(--green);font-weight:500;}
+.fc.reason{color:var(--muted);font-style:italic;font-size:10px;}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--cream);border-top:1px solid var(--rule);
+  padding:14px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.author{display:flex;align-items:center;gap:10px;}
+.av{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;font-style:italic;color:#F6F1E8;
+}
+.au-name{font-size:12px;font-weight:500;}
+.au-role{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;border:1px solid var(--rule);
+  padding:3px 8px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="meta-row">
+    <span>Rajniti · User Research · Week 7</span>
+    <span>Discovery Interview Script · First/Second-Time Voter</span>
+    <span>Sachin Shukla · 2025</span>
+  </div>
+  <div class="mast-grid">
+    <div>
+      <div class="eyebrow">User Discovery Interview</div>
+      <div class="mast-title">Rajniti<br><em>Interview Script</em></div>
+      <div class="mast-sub">
+        A 10-question discovery script for first and second-time Indian voters. Three zones: Context → Problem → Reaction. Three probing follow-ups. No leading questions, no hypotheticals, no feature evaluation. This is how real PMs do discovery.
+      </div>
+    </div>
+    <div class="mast-badge">
+      <div class="badge-icon">Q</div>
+      <div class="badge-text">User<br>Research</div>
+    </div>
+  </div>
+  <div class="mast-footer">
+    <div class="stat-cell">
+      <span class="stat-num">10</span>
+      <span class="stat-lbl">Questions</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">3</span>
+      <span class="stat-lbl">Zones</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">3</span>
+      <span class="stat-lbl">Probing follow-ups</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">45 min</span>
+      <span class="stat-lbl">Target duration</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">JTBD</span>
+      <span class="stat-lbl">Research lens</span>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- SETUP -->
+  <div class="sec-hdr">
+    <span class="sec-n">I</span>
+    <span class="sec-t">Interview Setup</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="setup-grid">
+    <div class="setup-card">
+      <div class="setup-label">Target Participant</div>
+      <div class="setup-val">Indian voter aged 18–30. Has voted once or twice. Not a political news junkie. Lives in a constituency with a recognisable MLA/MP.</div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-label">What You Are Trying to Learn</div>
+      <div class="setup-val">What actually happens in the week before a first-time voter casts their vote — and where the information gap creates confusion, doubt, or apathy.</div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-label">What You Are NOT Doing</div>
+      <div class="setup-val">Testing Rajniti. Gathering feature requests. Asking for opinions. You are listening for behavior, frustration, and unmet jobs.</div>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="rules-box">
+    <div>
+      <div class="rules-col-label" style="color:var(--green-md);">✓ Rules for This Interview</div>
+      <div class="rule-item">
+        <div class="rule-dot" style="color:var(--green-md);">✓</div>
+        <div class="rule-text" style="color:rgba(246,241,232,0.7);">Ask about past behavior — "tell me about the last time you..." predicts more than "would you ever..."</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot" style="color:var(--green-md);">✓</div>
+        <div class="rule-text" style="color:rgba(246,241,232,0.7);">Go one level deeper on every interesting answer — "why that specifically?" is the most useful follow-up you have</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot" style="color:var(--green-md);">✓</div>
+        <div class="rule-text" style="color:rgba(246,241,232,0.7);">Silence is productive — after a meaningful answer, wait 3 full seconds before your next question. Most real insights come in the pause.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot" style="color:var(--green-md);">✓</div>
+        <div class="rule-text" style="color:rgba(246,241,232,0.7);">Take notes on body language, not just words — hesitation, deflection, and energy spikes are data</div>
+      </div>
+    </div>
+    <div>
+      <div class="rules-col-label" style="color:#F87171;">✗ What Kills This Interview</div>
+      <div class="rule-item">
+        <div class="rule-dot" style="color:#F87171;">✗</div>
+        <div class="rule-text" style="color:rgba(246,241,232,0.7);">Asking "would you use X?" — hypothetical behavior tells you nothing about actual behavior</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot" style="color:#F87171;">✗</div>
+        <div class="rule-text" style="color:rgba(246,241,232,0.7);">Mentioning Rajniti in Zones 1 or 2 — you contaminate the natural behavior you are trying to observe</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot" style="color:#F87171;">✗</div>
+        <div class="rule-text" style="color:rgba(246,241,232,0.7);">Using politically charged language — "corrupt politician", "incompetent representative" — puts participants on guard</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot" style="color:#F87171;">✗</div>
+        <div class="rule-text" style="color:rgba(246,241,232,0.7);">Rating scales in discovery research — you need the why, not the number</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZONE 1 -->
+  <div class="sec-hdr">
+    <span class="sec-n">II</span>
+    <span class="sec-t">Zone 1 — Context (10 minutes)</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="zone-block">
+    <div class="zone-header" style="background:var(--saff-lt);border-color:var(--saffron);">
+      <div class="zone-num" style="color:var(--saffron);">01</div>
+      <div class="zone-info">
+        <div class="zone-name" style="color:var(--saffron);">Context Zone</div>
+        <div class="zone-purpose" style="color:var(--saffron);">Build rapport. Understand the person's world before the problem. No product, no politics yet.</div>
+      </div>
+      <div class="zone-time" style="color:var(--saffron);">~10 min</div>
+    </div>
+    <div class="question-card">
+
+      <!-- Q1 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">1</div></div>
+        <div class="q-body">
+          <div class="q-text">Take me back to your first time voting. What do you remember about that day — how did you decide who to vote for?</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--saff-lt);color:var(--saffron);">Past behavior</span>
+            <span class="q-tag" style="background:var(--green-lt);color:var(--green);">Memory recall</span>
+            <span class="q-tag" style="background:var(--navy-lt);color:var(--navy);">Decision process</span>
+          </div>
+          <div class="q-why">Opens with a specific, personal memory — not an opinion. Surfaces the actual decision process without priming any particular answer. If they say "I just voted for my father's party," that is the most valuable data point you can gather.</div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">2</div></div>
+        <div class="q-body">
+          <div class="q-text">In the week before that election — what, if anything, did you do to learn about the candidates standing in your constituency?</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--saff-lt);color:var(--saffron);">Past behavior</span>
+            <span class="q-tag" style="background:var(--navy-lt);color:var(--navy);">Research behavior</span>
+          </div>
+          <div class="q-why">"If anything" is intentional — it gives permission to say "nothing." Many voters will say nothing, and that is the insight. Do not make them feel bad about it. The non-research behavior is more important to understand than the research behavior.</div>
+        </div>
+      </div>
+
+      <!-- Q2 Probe -->
+      <div class="probe-card">
+        <div class="probe-icon">↳ Probe</div>
+        <div>
+          <div class="probe-q">You mentioned [what they did / didn't do] — what made that feel like enough at the time?</div>
+          <div class="probe-note">Listen for: "I trusted my family", "I didn't know where to look", "I didn't think it would matter." Each answer maps to a different product design implication.</div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">3</div></div>
+        <div class="q-body">
+          <div class="q-text">When was the last time politics came up in a conversation with someone close to you — what were you talking about?</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--saff-lt);color:var(--saffron);">Past behavior</span>
+            <span class="q-tag" style="background:var(--green-lt);color:var(--green);">Social context</span>
+          </div>
+          <div class="q-why">Reveals how political information actually flows in this person's life. Is it family, friends, social media, news? This surfaces the informal channels Rajniti is competing with — which are almost always more trusted than any product.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ZONE 2 -->
+  <div class="sec-hdr">
+    <span class="sec-n">III</span>
+    <span class="sec-t">Zone 2 — The Problem (20 minutes)</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="zone-block">
+    <div class="zone-header" style="background:var(--navy-lt);border-color:var(--navy);">
+      <div class="zone-num" style="color:var(--navy);">02</div>
+      <div class="zone-info">
+        <div class="zone-name" style="color:var(--navy);">Problem Zone</div>
+        <div class="zone-purpose" style="color:var(--navy);">Uncover frustrations, gaps, and unmet jobs. Still no product. Go one level deeper on every interesting answer.</div>
+      </div>
+      <div class="zone-time" style="color:var(--navy);">~20 min</div>
+    </div>
+    <div class="question-card">
+
+      <!-- Q4 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">4</div></div>
+        <div class="q-body">
+          <div class="q-text">After you voted — did you ever feel unsure whether you made the right choice? Tell me about that.</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--navy-lt);color:var(--navy);">Emotional state</span>
+            <span class="q-tag" style="background:var(--saff-lt);color:var(--saffron);">Post-decision regret</span>
+          </div>
+          <div class="q-why">Post-decision doubt is the emotional fingerprint of an unmet information need. If they felt confident, dig into why — that confidence may be false confidence built on limited data, which is equally interesting. If they felt doubtful, you have found the exact emotional job Rajniti solves.</div>
+        </div>
+      </div>
+
+      <!-- Q4 Probe -->
+      <div class="probe-card">
+        <div class="probe-icon">↳ Probe</div>
+        <div>
+          <div class="probe-q">What specific information would have made you feel more confident — and where would you have gone to find it?</div>
+          <div class="probe-note">This is the highest-value question in the entire script. The answer tells you exactly what data Rajniti needs to surface and what the user's current information sources are. Write down everything verbatim.</div>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">5</div></div>
+        <div class="q-body">
+          <div class="q-text">Tell me about a time you heard something about a local politician — your MLA or MP — and thought "I want to know if that's actually true." What did you do next?</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--navy-lt);color:var(--navy);">Verification behavior</span>
+            <span class="q-tag" style="background:var(--saff-lt);color:var(--saffron);">Information seeking</span>
+          </div>
+          <div class="q-why">Tests the natural verification instinct — does it exist? How strong is it? What do they do when it fires? If the answer is "I just let it go," that is the non-consumption insight. If they went somewhere specific, that is a competitor you need to understand.</div>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">6</div></div>
+        <div class="q-body">
+          <div class="q-text">Has there been a moment where you felt let down by something your local representative did — or failed to do? What happened?</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--navy-lt);color:var(--navy);">Accountability awareness</span>
+            <span class="q-tag" style="background:var(--green-lt);color:var(--green);">Neutral framing</span>
+          </div>
+          <div class="q-why">Replaces the original "have you thought your MLA is incompetent?" — which was politically charged and leading. This version asks about a felt experience without casting judgment on the politician. The participant can answer honestly without feeling they are attacking someone.</div>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">7</div></div>
+        <div class="q-body">
+          <div class="q-text">When the next election comes around — what is the one thing you would most want to know about the candidate standing from your area, that you currently don't know?</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--navy-lt);color:var(--navy);">Information gap</span>
+            <span class="q-tag" style="background:var(--purp-lt);color:var(--purple);">Future-oriented</span>
+          </div>
+          <div class="q-why">The one exception to the "no future questions" rule — because it is about a specific information need, not a hypothetical behavior. The answer to "what would you most want to know" directly maps to Rajniti's content priorities. This question should generate your most actionable data.</div>
+        </div>
+      </div>
+
+      <!-- Q7 Probe -->
+      <div class="probe-card">
+        <div class="probe-icon">↳ Probe</div>
+        <div>
+          <div class="probe-q">Why that specifically — and not [another type of information]?</div>
+          <div class="probe-note">Forces the participant to rank and explain their priorities. The reasoning behind their top information need reveals the emotional job underneath it — usually accountability, trust, or relevance to their own life.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ZONE 3 -->
+  <div class="sec-hdr">
+    <span class="sec-n">IV</span>
+    <span class="sec-t">Zone 3 — Reaction (10 minutes)</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="zone-block">
+    <div class="zone-header" style="background:var(--green-lt);border-color:var(--green);">
+      <div class="zone-num" style="color:var(--green);">03</div>
+      <div class="zone-info">
+        <div class="zone-name" style="color:var(--green);">Reaction Zone</div>
+        <div class="zone-purpose" style="color:var(--green);">Introduce the concept only — not a demo. Watch for recognition or confusion. No feature evaluation, no rating scales.</div>
+      </div>
+      <div class="zone-time" style="color:var(--green);">~10 min</div>
+    </div>
+    <div class="question-card">
+
+      <!-- Q8 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">8</div></div>
+        <div class="q-body">
+          <div class="q-text">I want to describe something to you and get your honest reaction — not whether you think it's a good idea, just whether it connects to anything you've just been telling me. Imagine a tool that shows you your MLA's attendance record, how they voted on bills in your state, and an AI-generated summary of their track record — all from official government sources. What's your first reaction?</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--green-lt);color:var(--green);">Concept reaction</span>
+            <span class="q-tag" style="background:var(--navy-lt);color:var(--navy);">Not a feature ask</span>
+          </div>
+          <div class="q-why">Introduces the Rajniti concept as a concept, not a product. "What's your first reaction?" is deliberately open. Watch for leaning forward (recognition of a felt need) vs. polite nodding (it sounds nice but disconnected from their life). These are completely different signals.</div>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="question-row">
+        <div class="q-num-cell"><div class="q-num">9</div></div>
+        <div class="q-body">
+          <div class="q-text">Is there anything about what I just described that would make you trust it — or not trust it?</div>
+          <div class="q-meta">
+            <span class="q-tag" style="background:var(--green-lt);color:var(--green);">Trust signals</span>
+            <span class="q-tag" style="background:var(--saff-lt);color:var(--saffron);">Credibility barriers</span>
+          </div>
+          <div class="q-why">The most important Rajniti-specific question in the script. Civic tech lives or dies on trust. The answer will surface exactly what source attribution language, what institutional credibility signals, and what design patterns Rajniti needs to establish trust with this specific user segment.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CLOSING + NPS -->
+  <div class="sec-hdr">
+    <span class="sec-n">V</span>
+    <span class="sec-t">Closing — NPS Proxy + Open Space</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="closing-row">
+    <div class="closing-card">
+      <div class="closing-label">Question 10 — NPS Proxy (Keep at End, Always)</div>
+      <div class="closing-q">If you knew a friend who was trying to figure out who to vote for in the next election — how likely would you be to mention something like what I described today? What would you say about it?</div>
+      <div class="closing-note">
+        This is the NPS question restructured for discovery interviews. "How likely" gives the signal. "What would you say about it" gives you the verbatim language users would naturally use to describe Rajniti to someone else — which is your organic marketing copy, unfiltered.
+      </div>
+    </div>
+    <div class="closing-card">
+      <div class="closing-label">Open Space — Always End With This</div>
+      <div class="closing-q">Is there anything you expected me to ask that I didn't — or anything you think is important that we haven't covered?</div>
+      <div class="closing-note">
+        The open space question surfaces the blind spots in your script. If three participants in a row bring up the same thing you never asked about — you have discovered an insight your research design missed. This question is how you fix your next interview.
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT TO LISTEN FOR -->
+  <div class="sec-hdr">
+    <span class="sec-n">VI</span>
+    <span class="sec-t">After the Interview — What to Listen For in the Recording</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="listen-grid">
+    <div class="listen-card" style="border-color:var(--saffron);">
+      <div class="listen-label" style="color:var(--saffron);">Signals That Validate the Product</div>
+      <div class="listen-items">
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--saffron)"></div>
+          Post-vote doubt expressed unprompted
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--saffron)"></div>
+          Tried to verify information and couldn't find it
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--saffron)"></div>
+          Leaning forward when the concept was introduced
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--saffron)"></div>
+          Describes the information gap in specific terms
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--saffron)"></div>
+          Would share it with a specific person in mind
+        </div>
+      </div>
+    </div>
+    <div class="listen-card" style="border-color:var(--navy);">
+      <div class="listen-label" style="color:var(--navy);">Signals That Challenge Assumptions</div>
+      <div class="listen-items">
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--navy)"></div>
+          "I trust my family's judgment more than any app"
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--navy)"></div>
+          Confident about their vote despite low information
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--navy)"></div>
+          Never experienced post-vote doubt
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--navy)"></div>
+          Already uses another source that satisfies the job
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--navy)"></div>
+          Skeptical of AI-generated summaries specifically
+        </div>
+      </div>
+    </div>
+    <div class="listen-card" style="border-color:var(--green);">
+      <div class="listen-label" style="color:var(--green);">Trust Architecture Signals</div>
+      <div class="listen-items">
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--green)"></div>
+          Names a specific credible institution unprompted
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--green)"></div>
+          Asks "where does the data come from?"
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--green)"></div>
+          Mentions WhatsApp forwards as a negative example
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--green)"></div>
+          Uses the word "unbiased" or "neutral" spontaneously
+        </div>
+        <div class="listen-item">
+          <div class="listen-dot" style="background:var(--green)"></div>
+          Distinguishes between opinion and record-based facts
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIOLATIONS FIXED TABLE -->
+  <div class="sec-hdr">
+    <span class="sec-n">VII</span>
+    <span class="sec-t">What Was Fixed From the Original Draft — And Why</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="fixes-table">
+    <div class="fixes-hdr">
+      <div class="fh">Original Question</div>
+      <div class="fh">Replacement</div>
+      <div class="fh">Violation Fixed</div>
+    </div>
+    <div class="fixes-row">
+      <div class="fc bad">"How often do you forget your MLA's name?"</div>
+      <div class="fc good">"When did you last hear your MLA's name mentioned — and in what context?"</div>
+      <div class="fc reason">Leading assumption that user forgets. Replacement surfaces the same information without judgment.</div>
+    </div>
+    <div class="fixes-row">
+      <div class="fc bad">"How do you feel about your taxes being used for civic agendas?"</div>
+      <div class="fc good">Removed entirely.</div>
+      <div class="fc reason">Opinion question about government policy. Generates venting, not product insight.</div>
+    </div>
+    <div class="fixes-row">
+      <div class="fc bad">"What are the most critical questions you ask before voting?"</div>
+      <div class="fc good">"Walk me through the week before your last election — what did you actually do?"</div>
+      <div class="fc reason">Original asks for introspection and self-report. Replacement asks for behavior recall, which is far more accurate.</div>
+    </div>
+    <div class="fixes-row">
+      <div class="fc bad">"Have you ever thought your MLA is an incompetent representative?"</div>
+      <div class="fc good">"Has there been a moment where you felt let down by something your local representative did or failed to do?"</div>
+      <div class="fc reason">Original is politically charged and leading. Replacement asks about a felt experience without casting judgment.</div>
+    </div>
+    <div class="fixes-row">
+      <div class="fc bad">"Would you spend 10 min daily reading unbiased news that directly questions politicians?"</div>
+      <div class="fc good">Removed. Replaced with open trust reaction question (Q9).</div>
+      <div class="fc reason">Hypothetical, leading, double-barreled. Three violations in one question.</div>
+    </div>
+    <div class="fixes-row">
+      <div class="fc bad">"On a Scale 1 to 5 — Do you feel the need for an app where politics is discussed freely without agenda?"</div>
+      <div class="fc good">Removed. Discovery research uses open questions, not rating scales.</div>
+      <div class="fc reason">Rating scales attached to hypothetical product concepts produce meaningless data.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="author">
+    <div class="av">S</div>
+    <div>
+      <div class="au-name">Sachin Shukla — Rajniti User Research</div>
+      <div class="au-role">Full-Stack AI Product Engineer → AI PM · Week 7</div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag">#UserResearch</span>
+    <span class="tag">#JTBD</span>
+    <span class="tag">#DiscoveryInterview</span>
+    <span class="tag">#Rajniti</span>
+    <span class="tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>

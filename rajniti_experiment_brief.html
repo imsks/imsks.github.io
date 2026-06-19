@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — Experiment Brief: AI Summary Conversion Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:     #0D0D0D;
+  --paper:   #F6F1E8;
+  --cream:   #EDE8DC;
+  --rule:    #CEC8BA;
+  --muted:   #7A7060;
+  --navy:    #1A2A4A;
+  --navy-lt: #E8ECF4;
+  --navy-md: #A0B0CC;
+  --saffron: #E06B2A;
+  --saff-lt: #FDF0E8;
+  --saff-md: #F5C4A0;
+  --green:   #1A6B40;
+  --green-lt:#E6F4ED;
+  --green-md:#9FD4BA;
+  --gold:    #B8860B;
+  --gold-lt: #FBF3DC;
+  --red:     #B71C1C;
+  --red-lt:  #FEECEC;
+  --purple:  #5B21B6;
+  --purp-lt: #EDE9FE;
+}
+
+body{
+  background:var(--paper);
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  width:920px;
+  margin:0 auto;
+}
+
+/* ── MASTHEAD ── */
+.masthead{
+  background:var(--navy);
+  padding:24px 48px 0;
+  position:relative;overflow:hidden;
+}
+.masthead::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--saffron) 0%,var(--saffron) 33.3%,#fff 33.3%,#fff 66.6%,var(--green) 66.6%);
+}
+.masthead::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 120% at 88% 50%,rgba(224,107,42,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.meta-row{
+  display:flex;justify-content:space-between;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;color:rgba(255,255,255,0.25);
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding-bottom:12px;margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.mast-grid{
+  display:grid;grid-template-columns:1fr auto;
+  gap:24px;align-items:end;
+  position:relative;z-index:1;
+}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:8px;
+}
+.mast-title{
+  font-family:'Playfair Display',serif;
+  font-size:44px;font-weight:900;line-height:0.95;
+  color:#F6F1E8;letter-spacing:-1px;margin-bottom:10px;
+}
+.mast-title em{font-style:italic;color:var(--saffron);}
+.mast-sub{
+  font-size:12px;color:rgba(246,241,232,0.45);
+  line-height:1.65;max-width:520px;margin-bottom:20px;
+}
+.mast-badge{
+  width:110px;height:110px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+}
+.badge-icon{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:900;font-style:italic;
+  color:var(--saffron);line-height:1;
+}
+.badge-text{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:rgba(246,241,232,0.3);letter-spacing:0.08em;
+  text-align:center;text-transform:uppercase;
+}
+.mast-footer{
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:flex;position:relative;z-index:1;
+}
+.stat-cell{
+  flex:1;padding:12px 0;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.stat-cell:last-child{border-right:none;}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  color:var(--saffron);display:block;
+}
+.stat-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;color:rgba(246,241,232,0.3);
+  text-transform:uppercase;display:block;margin-top:2px;
+}
+
+/* ── BODY ── */
+.body{padding:0 48px 48px;}
+
+.sec-hdr{
+  display:flex;align-items:center;gap:14px;
+  margin:32px 0 16px;
+}
+.sec-n{
+  font-family:'Playfair Display',serif;
+  font-size:11px;font-style:italic;
+  color:var(--gold);width:22px;flex-shrink:0;
+}
+.sec-t{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.sec-r{flex:1;height:1px;background:var(--rule);}
+
+/* ── HYPOTHESIS BOX ── */
+.hypothesis{
+  background:var(--ink);
+  padding:24px 28px;
+  margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+}
+.hypothesis::before{
+  content:'';position:absolute;
+  top:0;left:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--saffron),var(--navy-md));
+}
+.hyp-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(246,241,232,0.35);margin-bottom:12px;
+}
+.hyp-text{
+  font-size:14px;line-height:1.7;
+  color:#F6F1E8;
+}
+.hyp-text .change{color:var(--saff-md);font-weight:500;}
+.hyp-text .metric{color:var(--green-md);font-weight:500;}
+.hyp-text .magnitude{color:var(--saffron);font-weight:600;}
+.hyp-text .reasoning{color:rgba(246,241,232,0.65);font-style:italic;}
+.hyp-text .criterion{color:var(--navy-md);font-weight:500;}
+
+.hyp-parts{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;margin-top:16px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:14px;
+}
+.hyp-part{
+  padding:0 12px;
+  border-right:1px solid rgba(255,255,255,0.08);
+  text-align:center;
+}
+.hyp-part:first-child{padding-left:0;}
+.hyp-part:last-child{border-right:none;}
+.hyp-part-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(246,241,232,0.3);margin-bottom:5px;
+}
+.hyp-part-val{
+  font-size:10.5px;color:rgba(246,241,232,0.65);
+  line-height:1.4;
+}
+
+/* ── A/B VISUAL ── */
+.ab-visual{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;border:1px solid var(--rule);
+  margin-bottom:24px;background:white;
+}
+.ab-col{
+  padding:0;border-right:1px solid var(--rule);
+}
+.ab-col:last-child{border-right:none;}
+.ab-header{
+  padding:12px 18px;
+  border-bottom:2px solid;
+  display:flex;align-items:center;gap:10px;
+}
+.ab-badge{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  font-weight:700;width:28px;height:28px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.ab-name{font-size:12px;font-weight:500;color:var(--ink);}
+.ab-sub{font-size:10px;color:var(--muted);}
+.ab-body{padding:18px;}
+
+/* Mock UI preview */
+.mock-profile{
+  background:var(--paper);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+.mock-header{
+  background:var(--navy);
+  padding:10px 12px;
+  display:flex;gap:10px;align-items:center;
+}
+.mock-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--navy-md);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:12px;font-weight:700;font-style:italic;
+  color:white;flex-shrink:0;
+}
+.mock-name{font-size:11px;font-weight:500;color:white;}
+.mock-role{font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,0.4);}
+.mock-stats{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:0;border-bottom:1px solid var(--rule);
+}
+.mock-stat{
+  padding:8px 10px;border-right:1px solid var(--rule);
+  text-align:center;
+}
+.mock-stat:last-child{border-right:none;}
+.mock-stat-n{
+  font-family:'DM Mono',monospace;font-size:12px;
+  font-weight:500;color:var(--navy);display:block;
+}
+.mock-stat-l{
+  font-size:8px;color:var(--muted);display:block;margin-top:1px;
+}
+
+/* Control: No Summary */
+.no-summary{
+  background:var(--cream);
+  border:1px dashed var(--rule);
+  padding:12px;
+  text-align:center;
+  margin:10px;
+}
+.no-summary-text{
+  font-size:10px;color:var(--muted);font-style:italic;
+}
+
+/* Variant: Blurred Summary */
+.blurred-summary{
+  margin:10px;
+  position:relative;
+}
+.blur-content{
+  background:white;
+  border:1px solid var(--rule);
+  padding:10px 12px;
+  filter:blur(3px);
+  user-select:none;
+}
+.blur-text-line{
+  height:8px;background:var(--navy-lt);
+  border-radius:2px;margin-bottom:5px;
+}
+.blur-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:6px;
+  background:rgba(246,241,232,0.5);
+  backdrop-filter:blur(0px);
+}
+.unlock-btn{
+  background:var(--saffron);
+  color:white;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:6px 14px;border:none;cursor:pointer;
+  font-weight:500;
+}
+.unlock-label{
+  font-size:9px;color:var(--muted);font-style:italic;
+}
+
+.ab-insight{
+  font-size:10.5px;color:var(--muted);
+  line-height:1.6;font-style:italic;
+  padding-top:10px;
+  border-top:1px solid var(--cream);
+}
+
+/* ── METRICS TABLE ── */
+.metrics-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-bottom:24px;
+}
+.metric-card{
+  border:1px solid var(--rule);
+  background:white;overflow:hidden;
+}
+.metric-card-header{
+  padding:10px 14px;border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.metric-card-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  font-weight:500;
+}
+.metric-card-type{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;padding:2px 7px;border-radius:2px;
+}
+.metric-card-body{padding:14px;}
+.metric-name{
+  font-size:13px;font-weight:500;color:var(--ink);
+  margin-bottom:5px;line-height:1.3;
+}
+.metric-definition{
+  font-size:10.5px;color:var(--muted);
+  line-height:1.55;margin-bottom:10px;
+}
+.metric-baseline{
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.metric-baseline-label{font-size:10px;color:var(--muted);}
+.metric-baseline-val{
+  font-family:'DM Mono',monospace;font-size:11px;
+  font-weight:500;color:var(--ink);
+}
+.metric-target{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-top:4px;
+}
+.metric-target-label{font-size:10px;color:var(--muted);}
+.metric-target-val{
+  font-family:'DM Mono',monospace;font-size:11px;
+  font-weight:500;
+}
+
+/* ── SAMPLE SIZE CALC ── */
+.sample-calc{
+  background:white;border:1px solid var(--rule);
+  padding:20px;margin-bottom:24px;
+}
+.calc-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:12px;margin-bottom:16px;
+}
+.calc-input{
+  background:var(--paper);
+  border:1px solid var(--rule);
+  padding:12px 14px;
+}
+.calc-input-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:5px;
+}
+.calc-input-val{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;color:var(--navy);
+  line-height:1;margin-bottom:3px;
+}
+.calc-input-note{
+  font-size:9.5px;color:var(--muted);
+  line-height:1.4;
+}
+.calc-result{
+  background:var(--navy);
+  padding:16px 18px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:16px;
+}
+.calc-res-item{text-align:center;}
+.calc-res-num{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:700;
+  color:var(--saffron);display:block;
+  line-height:1;
+}
+.calc-res-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;color:rgba(246,241,232,0.35);
+  text-transform:uppercase;display:block;margin-top:4px;
+}
+
+/* ── TIMELINE ── */
+.timeline-block{
+  background:white;border:1px solid var(--rule);
+  padding:20px;margin-bottom:24px;
+}
+.tl-phases{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:0;border:1px solid var(--rule);
+}
+.tl-phase{
+  padding:14px 16px;
+  border-right:1px solid var(--rule);
+}
+.tl-phase:last-child{border-right:none;}
+.tl-phase-num{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.1em;color:var(--muted);
+  margin-bottom:4px;
+}
+.tl-phase-name{
+  font-size:12px;font-weight:500;color:var(--ink);
+  margin-bottom:4px;
+}
+.tl-phase-duration{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--saffron);font-weight:500;
+  margin-bottom:6px;
+}
+.tl-phase-actions{
+  font-size:10px;color:var(--muted);
+  line-height:1.5;
+}
+
+/* ── DECISION RULES ── */
+.decision-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:12px;margin-bottom:24px;
+}
+.decision-card{
+  padding:16px;border:1px solid var(--rule);background:white;
+  border-top:3px solid;
+}
+.decision-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:8px;font-weight:500;
+}
+.decision-title{
+  font-size:12px;font-weight:500;color:var(--ink);
+  margin-bottom:6px;
+}
+.decision-criteria{
+  font-size:10.5px;color:var(--muted);
+  line-height:1.6;
+}
+.decision-action{
+  margin-top:8px;padding-top:8px;
+  border-top:1px solid var(--cream);
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.06em;font-weight:500;
+}
+
+/* ── NOT TESTING ── */
+.not-testing{
+  background:var(--gold-lt);
+  border:1px solid #D4A017;
+  padding:16px 20px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:14px;align-items:start;
+}
+.nt-icon{font-size:18px;line-height:1.3;}
+.nt-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:5px;
+}
+.nt-text{
+  font-size:11.5px;color:var(--ink);line-height:1.65;
+}
+.nt-text strong{font-weight:600;}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--cream);border-top:1px solid var(--rule);
+  padding:14px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.author{display:flex;align-items:center;gap:10px;}
+.av{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;font-style:italic;color:#F6F1E8;
+}
+.au-name{font-size:12px;font-weight:500;}
+.au-role{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;border:1px solid var(--rule);
+  padding:3px 8px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="meta-row">
+    <span>Rajniti · Experimentation · Week 7</span>
+    <span>A/B Test Brief · AI Summary Conversion Experiment</span>
+    <span>Sachin Shukla · 2025</span>
+  </div>
+  <div class="mast-grid">
+    <div>
+      <div class="eyebrow">Experiment Brief — EXP-001</div>
+      <div class="mast-title">Rajniti<br><em>The Blur Test</em></div>
+      <div class="mast-sub">
+        Does showing a blurred, locked AI Performance Summary to free users increase premium conversion — or does partial visibility damage trust? One hypothesis. One primary metric. One guardrail. 14-day window.
+      </div>
+    </div>
+    <div class="mast-badge">
+      <div class="badge-icon">A</div>
+      <div class="badge-text">A/B<br>Brief</div>
+    </div>
+  </div>
+  <div class="mast-footer">
+    <div class="stat-cell">
+      <span class="stat-num">EXP-001</span>
+      <span class="stat-lbl">Experiment ID</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">14 days</span>
+      <span class="stat-lbl">Test duration</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">95%</span>
+      <span class="stat-lbl">Confidence required</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">15%</span>
+      <span class="stat-lbl">Min detectable lift</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">50/50</span>
+      <span class="stat-lbl">Traffic split</span>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- HYPOTHESIS -->
+  <div class="sec-hdr">
+    <span class="sec-n">I</span>
+    <span class="sec-t">The Hypothesis</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="hypothesis">
+    <div class="hyp-label">Full Hypothesis Statement — Committed Before Any Data Is Seen</div>
+    <div class="hyp-text">
+      We believe that <span class="change">showing a blurred, locked preview of the AI Performance Summary to free users after their third politician profile view</span> — rather than hiding the feature entirely — will cause <span class="metric">free-to-premium conversion rate among activated users</span> to <span class="magnitude">increase by at least 15% relative to the control</span>, <span class="reasoning">because partial visibility of a specific, valuable output creates loss aversion: users can see they are missing something concrete rather than something abstract, making the upgrade decision feel immediate rather than speculative.</span> We will know this is true when <span class="criterion">the variant group shows a statistically significant 15%+ relative lift in conversion rate at 95% confidence over a 14-day test window, without a corresponding drop in 7-day return rate.</span>
+    </div>
+    <div class="hyp-parts">
+      <div class="hyp-part">
+        <div class="hyp-part-label">Change</div>
+        <div class="hyp-part-val">Blurred locked preview vs. hidden feature</div>
+      </div>
+      <div class="hyp-part">
+        <div class="hyp-part-label">Primary Metric</div>
+        <div class="hyp-part-val">Free-to-premium conversion (activated users)</div>
+      </div>
+      <div class="hyp-part">
+        <div class="hyp-part-label">Minimum Lift</div>
+        <div class="hyp-part-val">15% relative improvement</div>
+      </div>
+      <div class="hyp-part">
+        <div class="hyp-part-label">Mechanism</div>
+        <div class="hyp-part-val">Loss aversion via partial visibility</div>
+      </div>
+      <div class="hyp-part">
+        <div class="hyp-part-label">Guardrail</div>
+        <div class="hyp-part-val">7-day return rate must not drop >10%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A/B VISUAL -->
+  <div class="sec-hdr">
+    <span class="sec-n">II</span>
+    <span class="sec-t">Control vs Variant — What Each Group Sees</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="ab-visual">
+    <!-- Control -->
+    <div class="ab-col">
+      <div class="ab-header" style="border-color:var(--muted);background:var(--cream);">
+        <div class="ab-badge" style="background:var(--muted);color:white;">A</div>
+        <div>
+          <div class="ab-name">Control — Current Experience</div>
+          <div class="ab-sub">50% of activated users · Feature hidden entirely</div>
+        </div>
+      </div>
+      <div class="ab-body">
+        <div class="mock-profile">
+          <div class="mock-header">
+            <div class="mock-avatar">R</div>
+            <div>
+              <div class="mock-name">Ramesh Kumar Singh</div>
+              <div class="mock-role">MLA · Lucknow East · 3rd Term</div>
+            </div>
+          </div>
+          <div class="mock-stats">
+            <div class="mock-stat">
+              <span class="mock-stat-n">67%</span>
+              <span class="mock-stat-l">Attendance</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat-n">₹2.4 Cr</span>
+              <span class="mock-stat-l">Assets</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat-n">2</span>
+              <span class="mock-stat-l">Pending cases</span>
+            </div>
+          </div>
+          <div class="no-summary">
+            <div class="no-summary-text">
+              [AI Performance Summary does not appear at all. User sees only raw data tables.]
+            </div>
+          </div>
+        </div>
+        <div class="ab-insight">The user knows the raw numbers but has no synthesis. They leave without understanding what the numbers mean — and without a reason to upgrade.</div>
+      </div>
+    </div>
+
+    <!-- Variant -->
+    <div class="ab-col">
+      <div class="ab-header" style="border-color:var(--saffron);background:var(--saff-lt);">
+        <div class="ab-badge" style="background:var(--saffron);color:white;">B</div>
+        <div>
+          <div class="ab-name">Variant — Blurred Preview</div>
+          <div class="ab-sub">50% of activated users · Summary visible but locked</div>
+        </div>
+      </div>
+      <div class="ab-body">
+        <div class="mock-profile">
+          <div class="mock-header">
+            <div class="mock-avatar">R</div>
+            <div>
+              <div class="mock-name">Ramesh Kumar Singh</div>
+              <div class="mock-role">MLA · Lucknow East · 3rd Term</div>
+            </div>
+          </div>
+          <div class="mock-stats">
+            <div class="mock-stat">
+              <span class="mock-stat-n">67%</span>
+              <span class="mock-stat-l">Attendance</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat-n">₹2.4 Cr</span>
+              <span class="mock-stat-l">Assets</span>
+            </div>
+            <div class="mock-stat">
+              <span class="mock-stat-n">2</span>
+              <span class="mock-stat-l">Pending cases</span>
+            </div>
+          </div>
+          <div class="blurred-summary">
+            <div class="blur-content">
+              <div class="blur-text-line" style="width:90%"></div>
+              <div class="blur-text-line" style="width:75%"></div>
+              <div class="blur-text-line" style="width:85%"></div>
+              <div class="blur-text-line" style="width:60%"></div>
+            </div>
+            <div class="blur-overlay">
+              <button class="unlock-btn">Unlock AI Summary — ₹99/mo</button>
+              <div class="unlock-label">See the full performance analysis</div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-insight">The user can see there is a synthesised analysis — but cannot read it. Loss aversion fires: they know what they are missing. The upgrade decision becomes concrete.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div class="sec-hdr">
+    <span class="sec-n">III</span>
+    <span class="sec-t">Metrics — One Primary, One Guardrail, Two Secondary</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-card-header">
+        <div class="metric-card-label" style="color:var(--saffron);">Primary Metric</div>
+        <div class="metric-card-type" style="background:var(--saff-lt);color:var(--saffron);">Decides the experiment</div>
+      </div>
+      <div class="metric-card-body">
+        <div class="metric-name">Free-to-Premium Conversion Rate (Activated Users)</div>
+        <div class="metric-definition">Percentage of users who have viewed 3+ politician profiles and subsequently upgrade to premium within the 14-day window. Scoped to activated users to isolate the effect of the prompt from traffic noise.</div>
+        <div class="metric-baseline"><span class="metric-baseline-label">Current baseline</span><span class="metric-baseline-val">4.0%</span></div>
+        <div class="metric-target"><span class="metric-target-label">Success threshold</span><span class="metric-target-val" style="color:var(--saffron);">≥ 4.6% (15% relative lift)</span></div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-card-header">
+        <div class="metric-card-label" style="color:var(--red);">Guardrail Metric</div>
+        <div class="metric-card-type" style="background:var(--red-lt);color:var(--red);">Pauses experiment if breached</div>
+      </div>
+      <div class="metric-card-body">
+        <div class="metric-name">7-Day Return Rate</div>
+        <div class="metric-definition">Percentage of users who return to Rajniti within 7 days of their initial session. A drop here signals the blurred UI damaged the product's trust perception — even if conversion looks good.</div>
+        <div class="metric-baseline"><span class="metric-baseline-label">Current baseline</span><span class="metric-baseline-val">~32%</span></div>
+        <div class="metric-target"><span class="metric-target-label">Pause threshold</span><span class="metric-target-val" style="color:var(--red);">Drop of >10% → pause immediately</span></div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-card-header">
+        <div class="metric-card-label" style="color:var(--navy);">Secondary Metric A</div>
+        <div class="metric-card-type" style="background:var(--navy-lt);color:var(--navy);">Informational only</div>
+      </div>
+      <div class="metric-card-body">
+        <div class="metric-name">AI Summary Unlock Click Rate</div>
+        <div class="metric-definition">How many variant users click the "Unlock AI Summary" button — regardless of whether they complete the upgrade. High clicks + low conversion = pricing friction. Low clicks = the prompt is not compelling enough.</div>
+        <div class="metric-baseline"><span class="metric-baseline-label">Baseline</span><span class="metric-baseline-val">N/A (new metric)</span></div>
+        <div class="metric-target"><span class="metric-target-label">Insight trigger</span><span class="metric-target-val" style="color:var(--navy);">Click rate >20% but conversion flat</span></div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-card-header">
+        <div class="metric-card-label" style="color:var(--green);">Secondary Metric B</div>
+        <div class="metric-card-type" style="background:var(--green-lt);color:var(--green);">Informational only</div>
+      </div>
+      <div class="metric-card-body">
+        <div class="metric-name">Session Length on Politician Profile Page</div>
+        <div class="metric-definition">Average time spent on the profile page per session. If the blurred UI confuses users, session length drops. If it creates curiosity, session length increases. Helps diagnose the trust vs. desire trade-off.</div>
+        <div class="metric-baseline"><span class="metric-baseline-label">Baseline</span><span class="metric-baseline-val">~90 seconds avg</span></div>
+        <div class="metric-target"><span class="metric-target-label">Watch for</span><span class="metric-target-val" style="color:var(--green);">Drop >20% = confusion signal</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAMPLE SIZE -->
+  <div class="sec-hdr">
+    <span class="sec-n">IV</span>
+    <span class="sec-t">Sample Size & Duration Calculation</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="sample-calc">
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Three inputs determine how long this experiment runs</div>
+    <div class="calc-grid">
+      <div class="calc-input">
+        <div class="calc-input-label">Baseline Conversion Rate</div>
+        <div class="calc-input-val">4.0%</div>
+        <div class="calc-input-note">Current free-to-premium rate among 3+ profile-view users. Measured over last 30 days.</div>
+      </div>
+      <div class="calc-input">
+        <div class="calc-input-label">Minimum Detectable Effect</div>
+        <div class="calc-input-val">15%</div>
+        <div class="calc-input-note">Relative lift we care about detecting. Below 15%, the business impact does not justify the complexity of shipping the blurred UI.</div>
+      </div>
+      <div class="calc-input">
+        <div class="calc-input-label">Statistical Confidence</div>
+        <div class="calc-input-val">95%</div>
+        <div class="calc-input-note">Standard threshold. 5% chance we are wrong. Power = 80% — standard for product experimentation.</div>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-res-item">
+        <span class="calc-res-num">~15,000</span>
+        <span class="calc-res-label">Users needed per group</span>
+      </div>
+      <div class="calc-res-item">
+        <span class="calc-res-num">~30,000</span>
+        <span class="calc-res-label">Total eligible users needed</span>
+      </div>
+      <div class="calc-res-item">
+        <span class="calc-res-num">14 days</span>
+        <span class="calc-res-label">At 352,500 MAU · 35% activation rate</span>
+      </div>
+    </div>
+    <div style="font-size:10px;color:var(--muted);font-style:italic;margin-top:10px;line-height:1.6;">
+      At 352,500 MAU with ~35% reaching 3+ profile views = ~123,000 eligible users/month = ~4,100 eligible users/day. 30,000 total users needed ÷ 4,100/day = ~7.3 days minimum. We run for 14 days to capture a full two-week behavioral cycle including weekend patterns. Do not end early even if results look conclusive after day 7.
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="sec-hdr">
+    <span class="sec-n">V</span>
+    <span class="sec-t">Experiment Timeline — 4 Phases</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="timeline-block">
+    <div class="tl-phases">
+      <div class="tl-phase" style="border-top:3px solid var(--navy);">
+        <div class="tl-phase-num">Phase 01</div>
+        <div class="tl-phase-name">Pre-Launch Setup</div>
+        <div class="tl-phase-duration">Days −7 to 0</div>
+        <div class="tl-phase-actions">Instrument tracking events. Verify baseline metrics over 7 days. Confirm traffic split randomisation. Brief engineering on rollback plan. Set calendar reminder to check guardrail at Day 3.</div>
+      </div>
+      <div class="tl-phase" style="border-top:3px solid var(--saffron);">
+        <div class="tl-phase-num">Phase 02</div>
+        <div class="tl-phase-name">Experiment Live</div>
+        <div class="tl-phase-duration">Days 1–14</div>
+        <div class="tl-phase-actions">Do not look at primary metric results. Check guardrail metric (7-day return rate) on Day 3 and Day 7 only. If guardrail breached, pause immediately. Avoid any other product changes during this window.</div>
+      </div>
+      <div class="tl-phase" style="border-top:3px solid var(--green);">
+        <div class="tl-phase-num">Phase 03</div>
+        <div class="tl-phase-name">Analysis</div>
+        <div class="tl-phase-duration">Days 15–17</div>
+        <div class="tl-phase-actions">Run significance calculation. Check primary metric, guardrail, and both secondary metrics. Segment results by user type (new vs. returning) and device (mobile vs. web). Write results document before making ship/no-ship decision.</div>
+      </div>
+      <div class="tl-phase" style="border-top:3px solid var(--gold);">
+        <div class="tl-phase-num">Phase 04</div>
+        <div class="tl-phase-name">Decision & Rollout</div>
+        <div class="tl-phase-duration">Day 18+</div>
+        <div class="tl-phase-actions">Ship if primary metric hit and guardrail held. No-ship if guardrail breached or result inconclusive. Iterate if click rate was high but conversion low — pricing friction experiment next. Document learnings regardless of outcome.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECISION RULES -->
+  <div class="sec-hdr">
+    <span class="sec-n">VI</span>
+    <span class="sec-t">Decision Rules — All Three Outcomes Pre-Committed</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="decision-grid">
+    <div class="decision-card" style="border-color:var(--green);">
+      <div class="decision-label" style="color:var(--green);">Outcome: Ship</div>
+      <div class="decision-title">Primary metric hit + guardrail held</div>
+      <div class="decision-criteria">Conversion rate in variant ≥ 4.6% (15%+ lift) at 95% confidence AND 7-day return rate did not drop more than 10% in the variant group.</div>
+      <div class="decision-action" style="color:var(--green);">→ Ship blurred preview to 100% of users. Start pricing optimisation experiment next.</div>
+    </div>
+    <div class="decision-card" style="border-color:var(--red);">
+      <div class="decision-label" style="color:var(--red);">Outcome: No-Ship</div>
+      <div class="decision-title">Guardrail breached or result null</div>
+      <div class="decision-criteria">7-day return rate dropped >10% in variant (trust damaged). OR primary metric showed no significant lift after 14 days. OR result was statistically significant negative (conversion declined).</div>
+      <div class="decision-action" style="color:var(--red);">→ Revert to control. Run user interviews to diagnose. Do not re-run same variant without new qualitative evidence.</div>
+    </div>
+    <div class="decision-card" style="border-color:var(--gold);">
+      <div class="decision-label" style="color:var(--gold);">Outcome: Iterate</div>
+      <div class="decision-title">High click rate, low conversion</div>
+      <div class="decision-criteria">Unlock button click rate >20% but conversion did not move significantly. Guardrail held. Signals the blurred preview created desire but ₹99 price point is a barrier.</div>
+      <div class="decision-action" style="color:var(--gold);">→ Keep blurred preview. Run pricing experiment: ₹99 vs ₹49 trial vs free trial with card capture.</div>
+    </div>
+  </div>
+
+  <!-- WHAT WE ARE NOT TESTING -->
+  <div class="not-testing">
+    <div class="nt-icon">⚡</div>
+    <div>
+      <div class="nt-label">What We Are Not A/B Testing — And Why</div>
+      <div class="nt-text">
+        <strong>Source attribution design is not being tested.</strong> Whether to show source links on every data point is a product values commitment, not an optimization variable. Running an A/B test on attribution would mean showing some voters unattributed political data — in a civic product, that is an ethical problem before it is a methodology question. Some decisions are made on principle, not on data. This is one of them.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="author">
+    <div class="av">S</div>
+    <div>
+      <div class="au-name">Sachin Shukla — Rajniti Experimentation Brief</div>
+      <div class="au-role">Full-Stack AI Product Engineer → AI PM · Week 7</div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag">#ABTesting</span>
+    <span class="tag">#Experimentation</span>
+    <span class="tag">#ProductAnalytics</span>
+    <span class="tag">#Rajniti</span>
+    <span class="tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>

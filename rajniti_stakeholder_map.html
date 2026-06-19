@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — Stakeholder Map & Communication Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:     #0D0D0D;
+  --paper:   #F6F1E8;
+  --cream:   #EDE8DC;
+  --rule:    #CEC8BA;
+  --muted:   #7A7060;
+  --navy:    #1A2A4A;
+  --navy-lt: #E8ECF4;
+  --navy-md: #A0B0CC;
+  --saffron: #E06B2A;
+  --saff-lt: #FDF0E8;
+  --saff-md: #F5C4A0;
+  --green:   #1A6B40;
+  --green-lt:#E6F4ED;
+  --green-md:#9FD4BA;
+  --gold:    #B8860B;
+  --gold-lt: #FBF3DC;
+  --red:     #B71C1C;
+  --red-lt:  #FEECEC;
+  --purple:  #5B21B6;
+  --purp-lt: #EDE9FE;
+}
+
+body{
+  background:var(--paper);
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  width:940px;
+  margin:0 auto;
+}
+
+/* ── MASTHEAD ── */
+.masthead{
+  background:var(--navy);
+  padding:24px 48px 0;
+  position:relative;overflow:hidden;
+}
+.masthead::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--saffron) 0%,var(--saffron) 33.3%,#fff 33.3%,#fff 66.6%,var(--green) 66.6%);
+}
+.masthead::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 120% at 88% 50%,rgba(224,107,42,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.meta-row{
+  display:flex;justify-content:space-between;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;color:rgba(255,255,255,0.25);
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding-bottom:12px;margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.mast-grid{
+  display:grid;grid-template-columns:1fr auto;
+  gap:24px;align-items:end;
+  position:relative;z-index:1;
+}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:8px;
+}
+.mast-title{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:900;line-height:0.95;
+  color:#F6F1E8;letter-spacing:-1px;margin-bottom:10px;
+}
+.mast-title em{font-style:italic;color:var(--saffron);}
+.mast-sub{
+  font-size:12px;color:rgba(246,241,232,0.45);
+  line-height:1.65;max-width:500px;margin-bottom:20px;
+}
+.mast-badge{
+  width:110px;height:110px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+}
+.badge-icon{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:900;font-style:italic;
+  color:var(--saffron);line-height:1;
+}
+.badge-text{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:rgba(246,241,232,0.3);letter-spacing:0.08em;
+  text-align:center;text-transform:uppercase;
+}
+.mast-footer{
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:flex;position:relative;z-index:1;
+}
+.stat-cell{
+  flex:1;padding:12px 0;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.stat-cell:last-child{border-right:none;}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  color:var(--saffron);display:block;
+}
+.stat-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;color:rgba(246,241,232,0.3);
+  text-transform:uppercase;display:block;margin-top:2px;
+}
+
+/* ── BODY ── */
+.body{padding:0 48px 48px;}
+
+.sec-hdr{
+  display:flex;align-items:center;gap:14px;
+  margin:32px 0 16px;
+}
+.sec-n{
+  font-family:'Playfair Display',serif;
+  font-size:11px;font-style:italic;
+  color:var(--gold);width:22px;flex-shrink:0;
+}
+.sec-t{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.sec-r{flex:1;height:1px;background:var(--rule);}
+
+/* ── PRINCIPLE BOX ── */
+.principle-box{
+  background:var(--ink);
+  padding:20px 28px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:20px;
+  align-items:center;
+}
+.principle-icon{
+  font-family:'Playfair Display',serif;
+  font-size:44px;font-style:italic;
+  color:var(--saffron);opacity:0.45;line-height:1;
+}
+.principle-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(246,241,232,0.35);margin-bottom:6px;
+}
+.principle-text{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;
+  line-height:1.4;color:#F6F1E8;
+}
+.principle-text em{font-style:italic;color:var(--saffron);}
+
+/* ── 2x2 MAP ── */
+.map-outer{
+  background:white;
+  border:1px solid var(--rule);
+  padding:24px;
+  margin-bottom:24px;
+}
+
+.map-grid{
+  display:grid;
+  grid-template-columns:40px 1fr 1fr;
+  grid-template-rows:1fr 40px;
+  gap:0;
+  height:460px;
+}
+
+.quadrant{
+  border:1px solid var(--rule);
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  position:relative;
+}
+
+.quad-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  font-weight:500;margin-bottom:4px;
+}
+
+.quad-approach{
+  font-size:10px;color:var(--muted);
+  font-style:italic;line-height:1.5;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--cream);
+  margin-bottom:4px;
+}
+
+.stakeholder-node{
+  display:flex;gap:8px;align-items:flex-start;
+  padding:6px 8px;
+  background:var(--paper);
+  border:1px solid var(--rule);
+  margin-bottom:4px;
+}
+.sn-dot{
+  width:8px;height:8px;border-radius:50%;
+  flex-shrink:0;margin-top:3px;
+}
+.sn-name{
+  font-size:11px;font-weight:500;color:var(--ink);
+  line-height:1.3;
+}
+.sn-role{
+  font-size:9.5px;color:var(--muted);
+  line-height:1.4;margin-top:1px;
+}
+.sn-watch{
+  font-family:'DM Mono',monospace;font-size:8px;
+  padding:1px 5px;border-radius:2px;
+  margin-top:3px;display:inline-block;
+}
+
+/* Axis labels */
+.y-axis-label{
+  grid-row:1;grid-column:1;
+  display:flex;align-items:center;justify-content:center;
+}
+.y-axis-text{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+}
+.x-axis-row{
+  grid-row:2;grid-column:2/4;
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--rule);
+}
+.x-axis-cell{
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);
+  padding:8px 0;
+  border-right:1px solid var(--rule);
+}
+.x-axis-cell:last-child{border-right:none;}
+
+/* Arrow decoration */
+.axis-arrow{
+  font-size:11px;color:var(--rule);
+  margin:0 4px;
+}
+
+/* ── STAKEHOLDER CARDS ── */
+.stakeholder-detail{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.sh-card{
+  background:white;
+  border:1px solid var(--rule);
+  overflow:hidden;
+}
+.sh-card-header{
+  padding:10px 14px;
+  border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:10px;
+}
+.sh-dot{
+  width:10px;height:10px;
+  border-radius:50%;flex-shrink:0;
+}
+.sh-name{
+  font-size:12px;font-weight:500;color:var(--ink);
+}
+.sh-quad{
+  margin-left:auto;
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;padding:2px 7px;
+}
+.sh-card-body{padding:12px 14px;}
+.sh-row{
+  display:flex;justify-content:space-between;
+  align-items:baseline;margin-bottom:5px;
+}
+.sh-lbl{font-size:10px;color:var(--muted);}
+.sh-val{
+  font-size:10.5px;font-weight:500;color:var(--ink);
+  text-align:right;max-width:200px;line-height:1.4;
+}
+.sh-insight{
+  font-size:10px;color:var(--muted);
+  font-style:italic;
+  margin-top:8px;padding-top:8px;
+  border-top:1px solid var(--cream);
+  line-height:1.55;
+}
+
+/* ── RACI TABLE ── */
+.raci-wrap{
+  background:white;
+  border:1px solid var(--rule);
+  margin-bottom:24px;
+  overflow:hidden;
+}
+
+.raci-legend{
+  display:flex;gap:16px;
+  padding:12px 16px;
+  background:var(--cream);
+  border-bottom:1px solid var(--rule);
+  flex-wrap:wrap;
+}
+.raci-legend-item{
+  display:flex;align-items:center;gap:6px;
+  font-size:10.5px;color:var(--ink);
+}
+.raci-badge{
+  font-family:'DM Mono',monospace;font-size:9px;
+  font-weight:500;width:20px;height:20px;
+  border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+
+.raci-header{
+  display:grid;
+  background:var(--ink);
+}
+.raci-th{
+  padding:9px 12px;
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(246,241,232,0.5);
+  border-right:1px solid rgba(255,255,255,0.06);
+  text-align:center;
+}
+.raci-th:first-child{text-align:left;}
+.raci-th:last-child{border-right:none;}
+
+.raci-row{
+  display:grid;
+  border-bottom:1px solid var(--rule);
+  align-items:stretch;
+}
+.raci-row:last-child{border-bottom:none;}
+.raci-row:nth-child(odd){background:var(--paper);}
+
+.raci-decision{
+  padding:12px 14px;
+  border-right:1px solid var(--rule);
+}
+.raci-decision-name{
+  font-size:11.5px;font-weight:500;color:var(--ink);
+  margin-bottom:2px;line-height:1.3;
+}
+.raci-decision-context{
+  font-size:10px;color:var(--muted);
+  line-height:1.45;
+}
+
+.raci-cell{
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid var(--rule);
+  padding:8px;
+}
+.raci-cell:last-child{border-right:none;}
+
+.raci-badge-lg{
+  font-family:'DM Mono',monospace;
+  font-size:13px;font-weight:700;
+  width:32px;height:32px;
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ── NO SAY HOW ── */
+.no-framework{
+  background:var(--gold-lt);
+  border:1px solid #D4A017;
+  padding:20px 24px;
+  margin-bottom:24px;
+}
+.no-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
+}
+.no-steps{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+}
+.no-step{
+  padding:12px 14px;
+  background:white;
+  border:1px solid #E8C96A;
+}
+.no-step-num{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;font-style:italic;
+  color:var(--gold);opacity:0.4;
+  line-height:1;margin-bottom:6px;
+}
+.no-step-title{
+  font-size:12px;font-weight:500;
+  color:var(--ink);margin-bottom:5px;
+}
+.no-step-body{
+  font-size:10.5px;color:var(--muted);
+  line-height:1.55;
+}
+.no-step-example{
+  font-size:10px;color:var(--saffron);
+  font-style:italic;
+  margin-top:6px;padding-top:6px;
+  border-top:1px solid #F5C4A0;
+  line-height:1.5;
+}
+
+/* ── COMMS PLAN ── */
+.comms-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border:1px solid var(--rule);
+  background:white;
+  margin-bottom:24px;
+}
+.comms-card{
+  padding:16px 18px;
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.comms-card:nth-child(2n){border-right:none;}
+.comms-card:nth-last-child(-n+2){border-bottom:none;}
+.comms-quad-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:6px;font-weight:500;
+}
+.comms-title{
+  font-size:12px;font-weight:500;
+  color:var(--ink);margin-bottom:8px;
+}
+.comms-row{
+  display:flex;justify-content:space-between;
+  align-items:baseline;margin-bottom:4px;
+}
+.comms-lbl{font-size:10px;color:var(--muted);}
+.comms-val{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--ink);font-weight:500;
+}
+.comms-note{
+  font-size:10px;color:var(--muted);
+  font-style:italic;margin-top:8px;
+  padding-top:8px;border-top:1px solid var(--cream);
+  line-height:1.5;
+}
+
+/* ── SARANSH WATCH ── */
+.saransh-watch{
+  background:var(--navy);
+  color:#F6F1E8;
+  padding:18px 24px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:18px;align-items:center;
+}
+.sw-icon{
+  font-family:'Playfair Display',serif;
+  font-size:36px;font-style:italic;
+  color:var(--saffron);opacity:0.4;line-height:1;
+}
+.sw-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(246,241,232,0.35);margin-bottom:6px;
+}
+.sw-text{
+  font-family:'Playfair Display',serif;
+  font-size:15px;font-weight:700;
+  line-height:1.45;color:#F6F1E8;
+  margin-bottom:8px;
+}
+.sw-text em{font-style:italic;color:var(--saffron);}
+.sw-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.sw-tag{
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.07em;
+  border:1px solid rgba(255,255,255,0.12);
+  padding:3px 9px;color:rgba(246,241,232,0.5);
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--cream);border-top:1px solid var(--rule);
+  padding:14px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.author{display:flex;align-items:center;gap:10px;}
+.av{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;font-style:italic;color:#F6F1E8;
+}
+.au-name{font-size:12px;font-weight:500;}
+.au-role{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;border:1px solid var(--rule);
+  padding:3px 8px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="meta-row">
+    <span>Rajniti · PM Portfolio Case Study · Week 6</span>
+    <span>Stakeholder Management</span>
+    <span>Sachin Shukla · 2025</span>
+  </div>
+  <div class="mast-grid">
+    <div>
+      <div class="eyebrow">Stakeholder Map & Communication Plan</div>
+      <div class="mast-title">Rajniti<br><em>Managing Without Authority</em></div>
+      <div class="mast-sub">
+        Power vs interest mapping. RACI for the three highest-stakes decisions this quarter. Communication cadence per quadrant. And the framework for saying no to a founder without burning the relationship.
+      </div>
+    </div>
+    <div class="mast-badge">
+      <div class="badge-icon">S</div>
+      <div class="badge-text">Stake-<br>holders</div>
+    </div>
+  </div>
+  <div class="mast-footer">
+    <div class="stat-cell">
+      <span class="stat-num">4</span>
+      <span class="stat-lbl">Quadrants mapped</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">10</span>
+      <span class="stat-lbl">Stakeholders placed</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">3</span>
+      <span class="stat-lbl">RACI decisions</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">4</span>
+      <span class="stat-lbl">Comms cadences</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">1</span>
+      <span class="stat-lbl">Watch: Saransh</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- PRINCIPLE -->
+  <div class="sec-hdr">
+    <span class="sec-n">I</span>
+    <span class="sec-t">The Governing Principle</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="principle-box">
+    <div class="principle-icon">"</div>
+    <div>
+      <div class="principle-label">The One Rule of Stakeholder Management</div>
+      <div class="principle-text">
+        A stakeholder who <em>disagrees</em> with your decision is manageable. A stakeholder who disagrees and <em>was never consulted</em> is a crisis. Nobody with the power to block this product should ever be surprised by a decision you made.
+      </div>
+    </div>
+  </div>
+
+  <!-- 2x2 MAP -->
+  <div class="sec-hdr">
+    <span class="sec-n">II</span>
+    <span class="sec-t">Power vs Interest Map — Who Gets What Kind of Attention</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="map-outer">
+
+    <div style="font-size:11px;color:var(--muted);margin-bottom:16px;line-height:1.6;">
+      Axes determine your management approach — not how much you like the stakeholder. Every person on this map gets a different communication strategy based on where they sit, not who they are.
+    </div>
+
+    <div class="map-grid">
+
+      <!-- Y-axis label -->
+      <div class="y-axis-label">
+        <span class="y-axis-text">Power (Low → High) ↑</span>
+      </div>
+
+      <!-- Top-left: High Power, Low Interest -->
+      <div class="quadrant" style="background:var(--navy-lt);border-color:var(--navy-md);">
+        <div>
+          <div class="quad-label" style="color:var(--navy)">High Power · Low Interest</div>
+          <div class="quad-approach">Keep Satisfied — outcome-focused, infrequent, never waste their time</div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--navy)"></div>
+          <div>
+            <div class="sn-name">ADR India</div>
+            <div class="sn-role">Data source partner. Controls access to structured ECI affidavit data.</div>
+            <span class="sn-watch" style="background:var(--navy-lt);color:var(--navy);">Monthly outcome update</span>
+          </div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--navy)"></div>
+          <div>
+            <div class="sn-name">Future Investor</div>
+            <div class="sn-role">Funding decisions gate product velocity. Cares about traction metrics.</div>
+            <span class="sn-watch" style="background:var(--navy-lt);color:var(--navy);">Fortnightly investor memo</span>
+          </div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--navy)"></div>
+          <div>
+            <div class="sn-name">ECI Data Terms</div>
+            <div class="sn-role">Election Commission data access policy governs all product decisions.</div>
+            <span class="sn-watch" style="background:var(--red-lt);color:var(--red);">Monitor policy changes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top-right: High Power, High Interest -->
+      <div class="quadrant" style="background:var(--saff-lt);border-color:var(--saff-md);">
+        <div>
+          <div class="quad-label" style="color:var(--saffron)">High Power · High Interest</div>
+          <div class="quad-approach">Manage Closely — continuous loop, no surprises, co-owners of strategy</div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--saffron)"></div>
+          <div>
+            <div class="sn-name">Sachin (PM / Co-founder)</div>
+            <div class="sn-role">Owns product strategy, OKRs, roadmap, and stakeholder relationships.</div>
+            <span class="sn-watch" style="background:var(--saff-lt);color:var(--saffron);">You. Daily.</span>
+          </div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--saffron)"></div>
+          <div>
+            <div class="sn-name">Co-founder</div>
+            <div class="sn-role">Strategic direction, founder vision, resource allocation decisions.</div>
+            <span class="sn-watch" style="background:var(--saff-lt);color:var(--saffron);">Weekly sync + async updates</span>
+          </div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--saffron)"></div>
+          <div>
+            <div class="sn-name">Lead Engineer</div>
+            <div class="sn-role">Technical feasibility gates every roadmap item. Architecture decisions are joint.</div>
+            <span class="sn-watch" style="background:var(--saff-lt);color:var(--saffron);">Sprint planning + daily standup</span>
+          </div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--red)"></div>
+          <div>
+            <div class="sn-name">Saransh Team Lead ⚠</div>
+            <div class="sn-role">Two RICE top-5 features are blocked on Saransh. Dependency = high power.</div>
+            <span class="sn-watch" style="background:var(--red-lt);color:var(--red);">Bi-weekly dependency review</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom-left: Low Power, Low Interest -->
+      <div class="quadrant" style="background:var(--cream);">
+        <div>
+          <div class="quad-label" style="color:var(--muted)">Low Power · Low Interest</div>
+          <div class="quad-approach">Monitor — acknowledge existence, watch for quadrant migration</div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--muted)"></div>
+          <div>
+            <div class="sn-name">General Public / Passive Voters</div>
+            <div class="sn-role">Not yet users. Can shift to High Power if product goes viral — positively or negatively.</div>
+            <span class="sn-watch" style="background:var(--cream);color:var(--muted);">Social listening only</span>
+          </div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--muted)"></div>
+          <div>
+            <div class="sn-name">Political Parties</div>
+            <div class="sn-role">Currently low interest. If Rajniti reaches 500K+ users, parties may view it as a threat. Watch carefully.</div>
+            <span class="sn-watch" style="background:var(--red-lt);color:var(--red);">Escalation risk at scale</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom-right: Low Power, High Interest -->
+      <div class="quadrant" style="background:var(--green-lt);border-color:var(--green-md);">
+        <div>
+          <div class="quad-label" style="color:var(--green)">Low Power · High Interest</div>
+          <div class="quad-approach">Keep Informed — transparent, regular, convert interest into advocacy</div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--green)"></div>
+          <div>
+            <div class="sn-name">TBE Community (100K+)</div>
+            <div class="sn-role">First distribution channel. Politically engaged, digitally native early adopters.</div>
+            <span class="sn-watch" style="background:var(--green-lt);color:var(--green);">Fortnightly community update</span>
+          </div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--green)"></div>
+          <div>
+            <div class="sn-name">NGO / Media Pipeline</div>
+            <div class="sn-role">ADR, The Wire, NDTV Politics, PRS Legislative Research. Future B2B buyers.</div>
+            <span class="sn-watch" style="background:var(--green-lt);color:var(--green);">Monthly product update</span>
+          </div>
+        </div>
+        <div class="stakeholder-node">
+          <div class="sn-dot" style="background:var(--green)"></div>
+          <div>
+            <div class="sn-name">Civic Journalists</div>
+            <div class="sn-role">Cover elections and accountability. Strong advocates if Rajniti data is reliable.</div>
+            <span class="sn-watch" style="background:var(--green-lt);color:var(--green);">On-demand data access</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- X-axis -->
+      <div class="x-axis-row">
+        <div class="x-axis-cell">Low Interest <span class="axis-arrow">→</span></div>
+        <div class="x-axis-cell"><span class="axis-arrow">→</span> High Interest</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SARANSH WATCH -->
+  <div class="saransh-watch">
+    <div class="sw-icon">⚠</div>
+    <div>
+      <div class="sw-label">Saransh — Stakeholder Migration Risk</div>
+      <div class="sw-text">
+        Saransh Team Lead starts in <em>High Power, High Interest</em> the moment Rajniti's roadmap formally depends on their delivery. Two features — News vs Politician and Politician Leaderboards — are already blocked on Saransh. This is the highest-risk dependency in the current stakeholder map.
+      </div>
+      <div class="sw-tags">
+        <span class="sw-tag">Leaderboards blocked on Saransh</span>
+        <span class="sw-tag">News vs Politician blocked on Saransh</span>
+        <span class="sw-tag">RICE scores 2× when unblocked</span>
+        <span class="sw-tag">Bi-weekly dependency check required</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RACI -->
+  <div class="sec-hdr">
+    <span class="sec-n">III</span>
+    <span class="sec-t">RACI Matrix — Three High-Stakes Decisions This Quarter</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="raci-wrap">
+    <div class="raci-legend">
+      <div class="raci-legend-item">
+        <div class="raci-badge" style="background:var(--saffron);color:white;">R</div>
+        Responsible — does the work
+      </div>
+      <div class="raci-legend-item">
+        <div class="raci-badge" style="background:var(--navy);color:white;">A</div>
+        Accountable — owns the outcome
+      </div>
+      <div class="raci-legend-item">
+        <div class="raci-badge" style="background:var(--green);color:white;">C</div>
+        Consulted — input needed before decision
+      </div>
+      <div class="raci-legend-item">
+        <div class="raci-badge" style="background:var(--muted);color:white;">I</div>
+        Informed — notified after decision
+      </div>
+    </div>
+
+    <!-- Header row -->
+    <div class="raci-header" style="grid-template-columns:1fr 100px 100px 100px 100px 100px;">
+      <div class="raci-th" style="text-align:left;">Decision</div>
+      <div class="raci-th">PM (Sachin)</div>
+      <div class="raci-th">Co-founder</div>
+      <div class="raci-th">Lead Eng</div>
+      <div class="raci-th">Saransh Lead</div>
+      <div class="raci-th">NGO Partners</div>
+    </div>
+
+    <!-- Row 1 -->
+    <div class="raci-row" style="grid-template-columns:1fr 100px 100px 100px 100px 100px;">
+      <div class="raci-decision">
+        <div class="raci-decision-name">AI Architecture Choice (RAG vs Fine-tuning)</div>
+        <div class="raci-decision-context">Which model approach powers the AI performance summary. Cost, accuracy, and latency trade-offs.</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--navy-lt);color:var(--navy);">A</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--navy-lt);color:var(--navy);">I</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--green-lt);color:var(--green);">C</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--cream);color:var(--muted);">—</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--cream);color:var(--muted);">—</div>
+      </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="raci-row" style="grid-template-columns:1fr 100px 100px 100px 100px 100px;">
+      <div class="raci-decision">
+        <div class="raci-decision-name">Premium Pricing Tier (₹99/month structure)</div>
+        <div class="raci-decision-context">What features sit behind the paywall and at what price. Directly affects revenue model and civic mission.</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--saffron);color:white;">R</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--navy-lt);color:var(--navy);">A</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--navy-lt);color:var(--navy);">I</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--cream);color:var(--muted);">—</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--green-lt);color:var(--green);">C</div>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="raci-row" style="grid-template-columns:1fr 100px 100px 100px 100px 100px;">
+      <div class="raci-decision">
+        <div class="raci-decision-name">Saransh Integration Scope & Timeline</div>
+        <div class="raci-decision-context">What Saransh delivers to Rajniti, by when, and what is in/out of scope for the first integration.</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--navy-lt);color:var(--navy);">A</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--green-lt);color:var(--green);">C</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--green-lt);color:var(--green);">C</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--saffron);color:white;">R</div>
+      </div>
+      <div class="raci-cell">
+        <div class="raci-badge-lg" style="background:var(--navy-lt);color:var(--navy);">I</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SAY NO FRAMEWORK -->
+  <div class="sec-hdr">
+    <span class="sec-n">IV</span>
+    <span class="sec-t">How to Say No to a Founder — The Three-Step Framework</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="no-framework">
+    <div class="no-label">Applied to Rajniti — Real Scenario: Founder Wants to Add "Politician Social Media Tracker" Mid-Quarter</div>
+    <div class="no-steps">
+      <div class="no-step">
+        <div class="no-step-num">1</div>
+        <div class="no-step-title">Acknowledge the insight, not the feature</div>
+        <div class="no-step-body">The founder saw something real. Acknowledge the underlying observation before engaging with what they want to build.</div>
+        <div class="no-step-example">"You're right that voters track politicians through social media more than official records. That behaviour is real and worth addressing."</div>
+      </div>
+      <div class="no-step">
+        <div class="no-step-num">2</div>
+        <div class="no-step-title">Connect to OKRs — or show why it can't</div>
+        <div class="no-step-body">Map their idea against the current KRs. If it connects, show how. If it does not, explain what the north star currently captures and why.</div>
+        <div class="no-step-example">"Social media tracking doesn't move our Q1 KRs — source attribution, premium conversion, or MAU growth. It's a different user job than what we're optimising for this quarter."</div>
+      </div>
+      <div class="no-step">
+        <div class="no-step-num">3</div>
+        <div class="no-step-title">Give it a home, not a rejection</div>
+        <div class="no-step-body">Nobody accepts a flat no. Everyone accepts a "here is where this lives and when we revisit it." RICE it, backlog it, reference it at the next planning cycle.</div>
+        <div class="no-step-example">"I'm adding this to the Q3 backlog with your context attached. When Saransh ships its news pipeline, social media tracking becomes a natural extension — the confidence score goes up significantly."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMS PLAN -->
+  <div class="sec-hdr">
+    <span class="sec-n">V</span>
+    <span class="sec-t">Communication Plan — Four Cadences, Zero Surprises</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="comms-grid">
+
+    <div class="comms-card" style="border-top:3px solid var(--saffron);">
+      <div class="comms-quad-label" style="color:var(--saffron);">High Power · High Interest</div>
+      <div class="comms-title">Co-founder + Lead Engineer</div>
+      <div class="comms-row"><span class="comms-lbl">Frequency</span><span class="comms-val">Weekly sync + async daily</span></div>
+      <div class="comms-row"><span class="comms-lbl">Format</span><span class="comms-val">30-min standup + Notion update</span></div>
+      <div class="comms-row"><span class="comms-lbl">Content</span><span class="comms-val">OKR progress, blockers, next sprint scope</span></div>
+      <div class="comms-row"><span class="comms-lbl">Decision authority</span><span class="comms-val">Joint on strategy, PM on execution</span></div>
+      <div class="comms-note">These stakeholders should never learn about a product decision after the fact. Every call starts with north star metric status.</div>
+    </div>
+
+    <div class="comms-card" style="border-top:3px solid var(--navy);">
+      <div class="comms-quad-label" style="color:var(--navy);">High Power · Low Interest</div>
+      <div class="comms-title">ADR India + Future Investors</div>
+      <div class="comms-row"><span class="comms-lbl">Frequency</span><span class="comms-val">Monthly</span></div>
+      <div class="comms-row"><span class="comms-lbl">Format</span><span class="comms-val">2-minute written memo, no meetings</span></div>
+      <div class="comms-row"><span class="comms-lbl">Content</span><span class="comms-val">3 metrics, 1 decision made, 1 ask</span></div>
+      <div class="comms-row"><span class="comms-lbl">Decision authority</span><span class="comms-val">PM informs, they approve on scope</span></div>
+      <div class="comms-note">Overloading these stakeholders with detail is as damaging as ignoring them. Keep it short, outcome-focused, and always include one specific ask if needed.</div>
+    </div>
+
+    <div class="comms-card" style="border-top:3px solid var(--green);">
+      <div class="comms-quad-label" style="color:var(--green);">Low Power · High Interest</div>
+      <div class="comms-title">TBE Community + NGO Pipeline</div>
+      <div class="comms-row"><span class="comms-lbl">Frequency</span><span class="comms-val">Fortnightly</span></div>
+      <div class="comms-row"><span class="comms-lbl">Format</span><span class="comms-val">Community post + email digest</span></div>
+      <div class="comms-row"><span class="comms-lbl">Content</span><span class="comms-val">New features, data updates, feedback asks</span></div>
+      <div class="comms-row"><span class="comms-lbl">Goal</span><span class="comms-val">Convert interest → advocacy</span></div>
+      <div class="comms-note">When their feedback visibly shapes a decision, say so publicly. "We built this because you asked" is the most powerful community communication a PM can make.</div>
+    </div>
+
+    <div class="comms-card" style="border-top:3px solid var(--muted);">
+      <div class="comms-quad-label" style="color:var(--muted);">Low Power · Low Interest</div>
+      <div class="comms-title">General Public + Political Parties</div>
+      <div class="comms-row"><span class="comms-lbl">Frequency</span><span class="comms-val">Passive monitoring</span></div>
+      <div class="comms-row"><span class="comms-lbl">Format</span><span class="comms-val">Social listening tools</span></div>
+      <div class="comms-row"><span class="comms-lbl">Trigger for action</span><span class="comms-val">Any quadrant migration signal</span></div>
+      <div class="comms-row"><span class="comms-lbl">Watch signal</span><span class="comms-val">Political party mentions Rajniti publicly</span></div>
+      <div class="comms-note">Political parties are currently low power but carry escalation risk at scale. If Rajniti reaches 500K+ users, parties may move to High Power rapidly. The escalation plan should be ready before it is needed.</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="author">
+    <div class="av">S</div>
+    <div>
+      <div class="au-name">Sachin Shukla — Rajniti Portfolio Case Study</div>
+      <div class="au-role">Full-Stack AI Product Engineer → AI PM · Week 6</div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag">#Stakeholders</span>
+    <span class="tag">#RACI</span>
+    <span class="tag">#ProductManagement</span>
+    <span class="tag">#Rajniti</span>
+    <span class="tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>

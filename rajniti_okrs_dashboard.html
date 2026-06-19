@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — OKRs & North Star Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:     #0D0D0D;
+  --paper:   #F6F1E8;
+  --cream:   #EDE8DC;
+  --rule:    #CEC8BA;
+  --muted:   #7A7060;
+  --navy:    #1A2A4A;
+  --navy-lt: #E8ECF4;
+  --navy-md: #A0B0CC;
+  --saffron: #E06B2A;
+  --saff-lt: #FDF0E8;
+  --saff-md: #F5C4A0;
+  --green:   #1A6B40;
+  --green-lt:#E6F4ED;
+  --green-md:#9FD4BA;
+  --gold:    #B8860B;
+  --gold-lt: #FBF3DC;
+  --red:     #B71C1C;
+  --red-lt:  #FEECEC;
+  --purple:  #5B21B6;
+  --purp-lt: #EDE9FE;
+}
+
+body{
+  background:var(--paper);
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  width:940px;
+  margin:0 auto;
+}
+
+/* ── MASTHEAD ── */
+.masthead{
+  background:var(--navy);
+  padding:24px 48px 0;
+  position:relative;overflow:hidden;
+}
+.masthead::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--saffron) 0%,var(--saffron) 33.3%,#fff 33.3%,#fff 66.6%,var(--green) 66.6%);
+}
+.masthead::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 100% at 90% 50%,rgba(224,107,42,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.meta-row{
+  display:flex;justify-content:space-between;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;color:rgba(255,255,255,0.25);
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding-bottom:12px;margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.mast-grid{
+  display:grid;grid-template-columns:1fr auto;
+  gap:24px;align-items:end;
+  position:relative;z-index:1;
+}
+.eyebrow{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:8px;
+}
+.mast-title{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:900;line-height:0.95;
+  color:#F6F1E8;letter-spacing:-1px;margin-bottom:10px;
+}
+.mast-title em{font-style:italic;color:var(--saffron);}
+.mast-sub{
+  font-size:12px;color:rgba(246,241,232,0.45);
+  line-height:1.65;max-width:500px;margin-bottom:20px;
+}
+.mast-badge{
+  width:110px;height:110px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+}
+.badge-icon{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:900;font-style:italic;
+  color:var(--saffron);line-height:1;
+}
+.badge-text{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:rgba(246,241,232,0.3);letter-spacing:0.08em;
+  text-align:center;text-transform:uppercase;
+}
+.mast-footer{
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:flex;position:relative;z-index:1;
+}
+.stat-cell{
+  flex:1;padding:12px 0;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.stat-cell:last-child{border-right:none;}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  color:var(--saffron);display:block;
+}
+.stat-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;color:rgba(246,241,232,0.3);
+  text-transform:uppercase;display:block;margin-top:2px;
+}
+
+/* ── BODY ── */
+.body{padding:0 48px 48px;}
+
+.sec-hdr{
+  display:flex;align-items:center;gap:14px;
+  margin:32px 0 16px;
+}
+.sec-n{
+  font-family:'Playfair Display',serif;
+  font-size:11px;font-style:italic;
+  color:var(--gold);width:22px;flex-shrink:0;
+}
+.sec-t{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.sec-r{flex:1;height:1px;background:var(--rule);}
+
+/* ── NORTH STAR ── */
+.north-star{
+  background:var(--ink);
+  padding:24px 28px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:24px;
+  align-items:center;
+}
+.ns-icon{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-style:italic;
+  color:var(--saffron);opacity:0.4;
+  line-height:1;
+}
+.ns-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(246,241,232,0.35);margin-bottom:6px;
+}
+.ns-metric{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;
+  color:#F6F1E8;line-height:1.2;
+  margin-bottom:8px;
+}
+.ns-metric em{font-style:italic;color:var(--saffron);}
+.ns-definition{
+  font-size:12px;color:rgba(246,241,232,0.5);
+  line-height:1.6;max-width:560px;
+}
+.ns-definition strong{color:rgba(246,241,232,0.8);font-weight:500;}
+.ns-why{
+  font-size:11px;color:rgba(246,241,232,0.35);
+  font-style:italic;margin-top:8px;line-height:1.5;
+}
+
+/* ── OKR BLOCK ── */
+.okr-quarter{
+  background:white;
+  border:1px solid var(--rule);
+  margin-bottom:20px;
+  overflow:hidden;
+}
+.okr-header{
+  background:var(--navy);
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.okr-quarter-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(246,241,232,0.4);margin-bottom:5px;
+}
+.okr-objective{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  color:#F6F1E8;line-height:1.35;
+  max-width:580px;
+}
+.okr-objective em{font-style:italic;color:var(--saffron);}
+.okr-focus-tag{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:5px 12px;
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(246,241,232,0.5);
+  white-space:nowrap;
+  flex-shrink:0;
+  margin-left:20px;
+}
+
+/* KR rows */
+.kr-list{padding:0;}
+.kr-row{
+  display:grid;
+  grid-template-columns:36px 1fr auto;
+  align-items:start;
+  gap:0;
+  border-bottom:1px solid var(--rule);
+  padding:16px 20px;
+}
+.kr-row:last-child{border-bottom:none;}
+.kr-num{
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;font-style:italic;
+  color:var(--muted);
+  padding-top:2px;
+}
+.kr-body{}
+.kr-statement{
+  font-size:13px;font-weight:500;
+  color:var(--ink);margin-bottom:4px;
+  line-height:1.35;
+}
+.kr-statement .metric{
+  color:var(--navy);font-weight:600;
+}
+.kr-why{
+  font-size:10.5px;color:var(--muted);
+  line-height:1.55;font-style:italic;
+  max-width:520px;
+}
+.kr-right{
+  display:flex;flex-direction:column;
+  align-items:flex-end;gap:6px;
+  flex-shrink:0;
+  padding-left:16px;
+}
+.kr-target{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;
+  color:var(--navy);line-height:1;
+}
+.kr-type{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:2px;
+}
+.kr-progress{
+  width:80px;height:4px;
+  background:var(--cream);
+  border-radius:2px;
+  overflow:hidden;
+}
+.kr-progress-fill{
+  height:100%;
+  border-radius:2px;
+  background:var(--navy);
+}
+
+/* Q2 OKR - dimmer */
+.okr-quarter.q2 .okr-header{
+  background:var(--muted);
+}
+.okr-quarter.q2{
+  opacity:0.75;
+}
+.future-tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  border:1px solid rgba(255,255,255,0.2);
+  padding:3px 8px;
+  flex-shrink:0;
+}
+
+/* ── DEPENDENCY NOTE ── */
+.dep-note{
+  background:var(--gold-lt);
+  border:1px solid #D4A017;
+  padding:14px 18px;
+  margin-bottom:24px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:12px;
+  align-items:start;
+}
+.dep-note-icon{
+  font-size:18px;line-height:1.3;
+}
+.dep-note-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:4px;
+}
+.dep-note-text{
+  font-size:11.5px;color:var(--ink);line-height:1.65;
+}
+.dep-note-text strong{font-weight:600;}
+
+/* ── OKR ↔ RICE CHAIN ── */
+.chain-block{
+  background:white;
+  border:1px solid var(--rule);
+  padding:20px;
+  margin-bottom:24px;
+}
+.chain-title{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+}
+.chain-row{
+  display:flex;align-items:center;gap:0;
+  margin-bottom:10px;
+}
+.chain-row:last-child{margin-bottom:0;}
+.chain-kr{
+  background:var(--navy-lt);
+  border:1px solid var(--navy-md);
+  padding:8px 12px;
+  font-size:11px;font-weight:500;
+  color:var(--navy);
+  width:200px;flex-shrink:0;
+  line-height:1.35;
+}
+.chain-arrow{
+  font-size:16px;color:var(--muted);
+  padding:0 12px;flex-shrink:0;
+}
+.chain-feature{
+  background:var(--saff-lt);
+  border:1px solid var(--saff-md);
+  padding:8px 12px;
+  font-size:11px;font-weight:500;
+  color:var(--saffron);
+  flex:1;line-height:1.35;
+}
+.chain-sprint{
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--muted);
+  padding:0 10px;flex-shrink:0;
+  white-space:nowrap;
+}
+
+/* ── DASHBOARD ── */
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.dash-card{
+  background:white;
+  border:1px solid var(--rule);
+  overflow:hidden;
+}
+.dash-card-header{
+  padding:12px 14px;
+  border-bottom:1px solid var(--rule);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.dash-card-label{
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);
+}
+.dash-card-kr{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;
+  padding:2px 7px;
+  border-radius:2px;
+}
+.dash-card-body{
+  padding:14px;
+}
+.dash-metric-num{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:700;
+  line-height:1;margin-bottom:4px;
+}
+.dash-metric-label{
+  font-size:10px;color:var(--muted);
+  margin-bottom:12px;
+}
+
+/* Sparkline chart */
+.sparkline{
+  display:flex;align-items:flex-end;
+  gap:3px;height:40px;
+}
+.spark-bar{
+  flex:1;
+  border-radius:2px 2px 0 0;
+  min-width:6px;
+  transition:height 0.3s;
+}
+.dash-insight{
+  font-size:10px;color:var(--muted);
+  font-style:italic;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid var(--cream);
+  line-height:1.5;
+}
+
+/* Wide dashboard card */
+.dash-card.wide{
+  grid-column:1/-1;
+}
+
+/* Funnel bars */
+.funnel-dash{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:14px;
+}
+.funnel-step{
+  display:grid;
+  grid-template-columns:140px 1fr 60px;
+  align-items:center;
+  gap:10px;
+}
+.funnel-step-label{
+  font-size:10px;color:var(--muted);
+  text-align:right;
+}
+.funnel-step-bar{
+  height:22px;
+  background:var(--cream);
+  border-radius:2px;
+  overflow:hidden;
+}
+.funnel-step-fill{
+  height:100%;
+  border-radius:2px;
+  display:flex;align-items:center;
+  padding:0 8px;
+}
+.funnel-step-fill span{
+  font-family:'DM Mono',monospace;
+  font-size:9px;font-weight:500;
+  color:white;white-space:nowrap;
+}
+.funnel-step-pct{
+  font-family:'DM Mono',monospace;
+  font-size:10px;font-weight:500;
+  text-align:right;
+}
+
+/* Alert / investigation signal */
+.signal-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-bottom:1px solid var(--cream);
+  font-size:11px;
+}
+.signal-row:last-child{border-bottom:none;}
+.signal-dot{
+  width:8px;height:8px;
+  border-radius:50%;flex-shrink:0;
+}
+.signal-label{color:var(--ink);}
+.signal-action{
+  margin-left:auto;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.08em;
+  padding:2px 8px;
+  border-radius:2px;
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--cream);border-top:1px solid var(--rule);
+  padding:14px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.author{display:flex;align-items:center;gap:10px;}
+.av{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;font-style:italic;color:#F6F1E8;
+}
+.au-name{font-size:12px;font-weight:500;}
+.au-role{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;border:1px solid var(--rule);
+  padding:3px 8px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="meta-row">
+    <span>Rajniti · PM Portfolio Case Study · Week 6</span>
+    <span>OKRs + North Star Dashboard</span>
+    <span>Sachin Shukla · 2025</span>
+  </div>
+  <div class="mast-grid">
+    <div>
+      <div class="eyebrow">Goal-Setting Framework</div>
+      <div class="mast-title">Rajniti<br><em>Q1 OKRs</em></div>
+      <div class="mast-sub">
+        One objective. Four measurable key results. Every KR tied to a sprint deliverable. Every sprint deliverable tied to the north star. This is how a PM says no — and means it.
+      </div>
+    </div>
+    <div class="mast-badge">
+      <div class="badge-icon">O</div>
+      <div class="badge-text">OKR<br>Q1 2025</div>
+    </div>
+  </div>
+  <div class="mast-footer">
+    <div class="stat-cell">
+      <span class="stat-num">1</span>
+      <span class="stat-lbl">Objective</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">4</span>
+      <span class="stat-lbl">Key Results</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">70%</span>
+      <span class="stat-lbl">Success threshold</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">Q1→Q2</span>
+      <span class="stat-lbl">Planning horizon</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">Saransh</span>
+      <span class="stat-lbl">Q2 unlock</span>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- NORTH STAR -->
+  <div class="sec-hdr">
+    <span class="sec-n">I</span>
+    <span class="sec-t">North Star Metric — The One Number That Matters</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="north-star">
+    <div class="ns-icon">★</div>
+    <div>
+      <div class="ns-label">North Star Metric</div>
+      <div class="ns-metric">
+        <em>Verified Civic Research Sessions</em> per Month
+      </div>
+      <div class="ns-definition">
+        A session where a user views a politician profile AND spends <strong>60+ seconds</strong> — evidence of genuine research, not an accidental click. Not raw sessions. Not page views. Not logins. The specific action that proves Rajniti is fulfilling its civic mission.
+      </div>
+      <div class="ns-why">
+        Why 60 seconds: below this threshold, the user is scanning, not researching. A voter who reads an AI performance summary, checks attendance records, and scrolls through asset declarations will always exceed 60 seconds. One who opens a profile by mistake will not.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1 OKR -->
+  <div class="sec-hdr">
+    <span class="sec-n">II</span>
+    <span class="sec-t">Q1 2025 OKR — Foundation Quarter</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="okr-quarter">
+    <div class="okr-header">
+      <div>
+        <div class="okr-quarter-label">Q1 2025 · Jan → Mar · Foundation Quarter</div>
+        <div class="okr-objective">
+          Establish Rajniti as the most <em>trusted</em> civic research tool for Indian voters — before the Bihar election cycle begins.
+        </div>
+      </div>
+      <div class="okr-focus-tag">Trust + Scale</div>
+    </div>
+
+    <div class="kr-list">
+
+      <div class="kr-row">
+        <div class="kr-num">KR1</div>
+        <div class="kr-body">
+          <div class="kr-statement">Reach <span class="metric">100,000 Monthly Active Users</span> by end of Q1</div>
+          <div class="kr-why">100K is 0.43% of SAM — conservative enough to be credible, meaningful enough to generate word-of-mouth. Below 50K, growth signal is too weak. Above 200K without paid acquisition requires an unlikely viral event. 70% success = 70,000 MAU.</div>
+        </div>
+        <div class="kr-right">
+          <div class="kr-target" style="color:var(--navy)">100K</div>
+          <div class="kr-type" style="background:var(--navy-lt);color:var(--navy);">MAU</div>
+          <div class="kr-progress"><div class="kr-progress-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <div class="kr-row">
+        <div class="kr-num">KR2</div>
+        <div class="kr-body">
+          <div class="kr-statement">Achieve <span class="metric">8% free-to-premium conversion</span> among users who complete 3+ politician profile views</div>
+          <div class="kr-why">Conversion on all users is a vanity metric — most churn before experiencing the product. Conversion among activated users (3+ profile views) measures whether the premium value proposition is landing with people who've actually used the product. This is the real signal.</div>
+        </div>
+        <div class="kr-right">
+          <div class="kr-target" style="color:var(--saffron)">8%</div>
+          <div class="kr-type" style="background:var(--saff-lt);color:var(--saffron);">Conversion</div>
+          <div class="kr-progress"><div class="kr-progress-fill" style="width:0%;background:var(--saffron)"></div></div>
+        </div>
+      </div>
+
+      <div class="kr-row">
+        <div class="kr-num">KR3</div>
+        <div class="kr-body">
+          <div class="kr-statement">Achieve <span class="metric">100% source attribution</span> across all politician data points in the app</div>
+          <div class="kr-why">Source attribution is not a feature — it is the trust foundation the entire product rests on. If this is not at 100% before we scale, we are growing on a broken foundation. This KR gates everything else. A single unattributed data point that surfaces in a viral screenshot can define Rajniti's reputation permanently.</div>
+        </div>
+        <div class="kr-right">
+          <div class="kr-target" style="color:var(--green)">100%</div>
+          <div class="kr-type" style="background:var(--green-lt);color:var(--green);">Attribution</div>
+          <div class="kr-progress"><div class="kr-progress-fill" style="width:0%;background:var(--green)"></div></div>
+        </div>
+      </div>
+
+      <div class="kr-row">
+        <div class="kr-num">KR4</div>
+        <div class="kr-body">
+          <div class="kr-statement">Secure <span class="metric">3 warm B2B pipeline conversations</span> with NGOs or media organisations</div>
+          <div class="kr-why">Not contracts — conversations. At 100K users, Rajniti is not yet large enough to command ₹50K/month from B2B buyers. The Q1 goal is to build the pipeline: identify the 10 target organisations, open conversations with 3, and understand their data needs. Contracts come in Q2 once scale justifies the ask.</div>
+        </div>
+        <div class="kr-right">
+          <div class="kr-target" style="color:var(--purple)">3</div>
+          <div class="kr-type" style="background:var(--purp-lt);color:var(--purple);">B2B Leads</div>
+          <div class="kr-progress"><div class="kr-progress-fill" style="width:0%;background:var(--purple)"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DEPENDENCY NOTE -->
+  <div class="dep-note">
+    <div class="dep-note-icon">⚡</div>
+    <div>
+      <div class="dep-note-label">Why Q1 B2B target is conversations, not contracts</div>
+      <div class="dep-note-text">
+        <strong>B2B only works at scale.</strong> A media house does not pay ₹50,000/month for API access to a product with 10,000 users. They pay when Rajniti has 200,000+ users and the data consumption is clearly validated. Q1 is about building trust and user base. Q2 is when the B2B ask becomes credible. Writing a Q1 KR for "5 B2B contracts" would be sandbagging the real goal — user growth — in favour of a revenue metric we cannot yet earn.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 OKR PREVIEW -->
+  <div class="okr-quarter q2">
+    <div class="okr-header">
+      <div>
+        <div class="okr-quarter-label">Q2 2025 · Apr → Jun · Scale Quarter · Planned ahead</div>
+        <div class="okr-objective">
+          Convert Rajniti's user base into a defensible revenue business — and unlock the Saransh flywheel.
+        </div>
+      </div>
+      <div class="future-tag">Q2 Preview</div>
+    </div>
+    <div class="kr-list">
+      <div class="kr-row">
+        <div class="kr-num">KR1</div>
+        <div class="kr-body">
+          <div class="kr-statement">Reach <span class="metric">250,000 MAU</span> — triggering B2B credibility threshold</div>
+          <div class="kr-why">250K users is the scale at which media and NGO buyers take the product seriously as a data source. This is the unlock condition for the B2B pipeline opened in Q1.</div>
+        </div>
+        <div class="kr-right">
+          <div class="kr-target" style="color:var(--navy)">250K</div>
+          <div class="kr-type" style="background:var(--navy-lt);color:var(--navy);">MAU</div>
+        </div>
+      </div>
+      <div class="kr-row">
+        <div class="kr-num">KR2</div>
+        <div class="kr-body">
+          <div class="kr-statement">Close <span class="metric">5 B2B API contracts</span> at ₹50,000/month each</div>
+          <div class="kr-why">Depends on Q1 pipeline conversations and 250K MAU milestone. Neither condition met = this KR slides to Q3. Scale gates revenue.</div>
+        </div>
+        <div class="kr-right">
+          <div class="kr-target" style="color:var(--green)">5</div>
+          <div class="kr-type" style="background:var(--green-lt);color:var(--green);">Contracts</div>
+        </div>
+      </div>
+      <div class="kr-row">
+        <div class="kr-num">KR3</div>
+        <div class="kr-body">
+          <div class="kr-statement">Launch <span class="metric">News vs Politician</span> feature powered by Saransh — first daily-updated content in Rajniti</div>
+          <div class="kr-why">This is the feature that transforms Rajniti from static political record to live civic intelligence. Depends entirely on Saransh shipping its news categorisation pipeline first.</div>
+        </div>
+        <div class="kr-right">
+          <div class="kr-target" style="color:var(--saffron)">Live</div>
+          <div class="kr-type" style="background:var(--saff-lt);color:var(--saffron);">Saransh ↑</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OKR → RICE CHAIN -->
+  <div class="sec-hdr">
+    <span class="sec-n">III</span>
+    <span class="sec-t">The Strategy Chain — KR to Feature to Sprint</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="chain-block">
+    <div class="chain-title">Every Key Result maps to a RICE-prioritized feature. Every feature maps to a sprint. No orphan work.</div>
+
+    <div class="chain-row">
+      <div class="chain-kr">KR3 — 100% source attribution</div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-feature">Source References per Data Point (RICE: 634,500)</div>
+      <div class="chain-sprint">Sprint 1</div>
+    </div>
+    <div class="chain-row">
+      <div class="chain-kr">KR2 — 8% premium conversion</div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-feature">AI Performance Summary (RICE: 282,000)</div>
+      <div class="chain-sprint">Sprint 1–2</div>
+    </div>
+    <div class="chain-row">
+      <div class="chain-kr">KR1 — 100K MAU</div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-feature">Candidate Comparison Tool — pre-election viral (RICE: 179,775)</div>
+      <div class="chain-sprint">Sprint 2</div>
+    </div>
+    <div class="chain-row">
+      <div class="chain-kr">KR4 — 3 B2B leads</div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-feature">Direct outreach to ADR, The Wire, NDTV Politics, PRS, Lokniti</div>
+      <div class="chain-sprint">Ongoing</div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="sec-hdr">
+    <span class="sec-n">IV</span>
+    <span class="sec-t">PM Dashboard — 5 Charts, One Morning Check</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <!-- Card 1: North Star -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-label">North Star · Weekly</div>
+        <div class="dash-card-kr" style="background:var(--navy-lt);color:var(--navy);">Core Metric</div>
+      </div>
+      <div class="dash-card-body">
+        <div class="dash-metric-num" style="color:var(--navy)">—</div>
+        <div class="dash-metric-label">Research sessions (60s+) this week</div>
+        <div class="sparkline">
+          <div class="spark-bar" style="height:30%;background:var(--navy-md);"></div>
+          <div class="spark-bar" style="height:45%;background:var(--navy-md);"></div>
+          <div class="spark-bar" style="height:40%;background:var(--navy-md);"></div>
+          <div class="spark-bar" style="height:60%;background:var(--navy-md);"></div>
+          <div class="spark-bar" style="height:55%;background:var(--navy-md);"></div>
+          <div class="spark-bar" style="height:75%;background:var(--navy-md);"></div>
+          <div class="spark-bar" style="height:70%;background:var(--navy);"></div>
+        </div>
+        <div class="dash-insight">This is the morning metric. If it drops week-on-week without a known cause, trigger an investigation before anything else.</div>
+      </div>
+    </div>
+
+    <!-- Card 2: MAU Funnel -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-label">Acquisition Funnel · Weekly</div>
+        <div class="dash-card-kr" style="background:var(--saff-lt);color:var(--saffron);">KR1 tracker</div>
+      </div>
+      <div class="funnel-dash">
+        <div class="funnel-step">
+          <div class="funnel-step-label">New visitors</div>
+          <div class="funnel-step-bar">
+            <div class="funnel-step-fill" style="width:100%;background:#A0B0CC;">
+              <span>—</span>
+            </div>
+          </div>
+          <div class="funnel-step-pct" style="color:var(--muted)">100%</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-step-label">Profile views</div>
+          <div class="funnel-step-bar">
+            <div class="funnel-step-fill" style="width:60%;background:#6080AA;">
+              <span>—</span>
+            </div>
+          </div>
+          <div class="funnel-step-pct" style="color:var(--navy)">~60%</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-step-label">60s+ sessions</div>
+          <div class="funnel-step-bar">
+            <div class="funnel-step-fill" style="width:35%;background:var(--navy);">
+              <span>—</span>
+            </div>
+          </div>
+          <div class="funnel-step-pct" style="color:var(--navy)">~35%</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-step-label">Premium upgrade</div>
+          <div class="funnel-step-bar">
+            <div class="funnel-step-fill" style="width:8%;background:var(--saffron);min-width:24px;">
+              <span>—</span>
+            </div>
+          </div>
+          <div class="funnel-step-pct" style="color:var(--saffron)">8%</div>
+        </div>
+        <div class="dash-insight">Drop between Profile Views → 60s+ sessions = content quality problem. Drop between 60s+ → Upgrade = pricing or value prop problem.</div>
+      </div>
+    </div>
+
+    <!-- Card 3: Premium Conversion -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-label">Premium Conversion · Activated Users</div>
+        <div class="dash-card-kr" style="background:var(--saff-lt);color:var(--saffron);">KR2 tracker</div>
+      </div>
+      <div class="dash-card-body">
+        <div class="dash-metric-num" style="color:var(--saffron)">—%</div>
+        <div class="dash-metric-label">Of users with 3+ profile views who upgraded</div>
+        <div class="sparkline">
+          <div class="spark-bar" style="height:40%;background:var(--saff-md);"></div>
+          <div class="spark-bar" style="height:42%;background:var(--saff-md);"></div>
+          <div class="spark-bar" style="height:50%;background:var(--saff-md);"></div>
+          <div class="spark-bar" style="height:48%;background:var(--saff-md);"></div>
+          <div class="spark-bar" style="height:60%;background:var(--saff-md);"></div>
+          <div class="spark-bar" style="height:65%;background:var(--saff-md);"></div>
+          <div class="spark-bar" style="height:70%;background:var(--saffron);"></div>
+        </div>
+        <div class="dash-insight">Target: 8%. Below 5% = the AI Summary paywall value is not landing. Investigate the upgrade moment UX first.</div>
+      </div>
+    </div>
+
+    <!-- Card 4: Source Attribution -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-label">Source Attribution Coverage</div>
+        <div class="dash-card-kr" style="background:var(--green-lt);color:var(--green);">KR3 tracker</div>
+      </div>
+      <div class="dash-card-body">
+        <div class="dash-metric-num" style="color:var(--green)">—%</div>
+        <div class="dash-metric-label">Data points with verified ECI source link</div>
+        <div class="sparkline">
+          <div class="spark-bar" style="height:50%;background:var(--green-md);"></div>
+          <div class="spark-bar" style="height:58%;background:var(--green-md);"></div>
+          <div class="spark-bar" style="height:65%;background:var(--green-md);"></div>
+          <div class="spark-bar" style="height:72%;background:var(--green-md);"></div>
+          <div class="spark-bar" style="height:80%;background:var(--green-md);"></div>
+          <div class="spark-bar" style="height:90%;background:var(--green-md);"></div>
+          <div class="spark-bar" style="height:100%;background:var(--green);"></div>
+        </div>
+        <div class="dash-insight">This should only go up. Any drop signals a data pipeline issue. This metric gates the Q2 scale push — do not launch paid acquisition until it hits 100%.</div>
+      </div>
+    </div>
+
+    <!-- Card 5: Investigation signals (wide) -->
+    <div class="dash-card wide">
+      <div class="dash-card-header">
+        <div class="dash-card-label">Weekly Signals — What Triggers an Investigation vs a Celebration</div>
+        <div class="dash-card-kr" style="background:var(--navy-lt);color:var(--navy);">Decision rules</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;">
+        <div style="border-right:1px solid var(--rule);">
+          <div style="padding:10px 14px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);border-bottom:1px solid var(--rule);">🔴 Investigate Immediately</div>
+          <div class="signal-row">
+            <div class="signal-dot" style="background:var(--red)"></div>
+            <div class="signal-label">Research sessions drop >15% week-on-week</div>
+            <div class="signal-action" style="background:var(--red-lt);color:var(--red);">Data issue?</div>
+          </div>
+          <div class="signal-row">
+            <div class="signal-dot" style="background:var(--red)"></div>
+            <div class="signal-label">Source attribution drops below 95%</div>
+            <div class="signal-action" style="background:var(--red-lt);color:var(--red);">Pipeline break</div>
+          </div>
+          <div class="signal-row">
+            <div class="signal-dot" style="background:var(--red)"></div>
+            <div class="signal-label">Premium conversion drops below 5%</div>
+            <div class="signal-action" style="background:var(--red-lt);color:var(--red);">UX review</div>
+          </div>
+          <div class="signal-row">
+            <div class="signal-dot" style="background:var(--red)"></div>
+            <div class="signal-label">Any viral screenshot of wrong data</div>
+            <div class="signal-action" style="background:var(--red-lt);color:var(--red);">All hands</div>
+          </div>
+        </div>
+        <div>
+          <div style="padding:10px 14px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);border-bottom:1px solid var(--rule);">🟢 Celebrate + Double Down</div>
+          <div class="signal-row">
+            <div class="signal-dot" style="background:var(--green)"></div>
+            <div class="signal-label">Research sessions up >20% from pre-election spike</div>
+            <div class="signal-action" style="background:var(--green-lt);color:var(--green);">GTM moment</div>
+          </div>
+          <div class="signal-row">
+            <div class="signal-dot" style="background:var(--green)"></div>
+            <div class="signal-label">Conversion hits 8%+ for two consecutive weeks</div>
+            <div class="signal-action" style="background:var(--green-lt);color:var(--green);">Raise price test</div>
+          </div>
+          <div class="signal-row">
+            <div class="signal-dot" style="background:var(--green)"></div>
+            <div class="signal-label">NGO shares Rajniti data in a published report</div>
+            <div class="signal-action" style="background:var(--green-lt);color:var(--green);">B2B warm lead</div>
+          </div>
+          <div class="signal-row">
+            <div class="signal-dot" style="background:var(--green)"></div>
+            <div class="signal-label">TBE community drives 10K+ installs in one week</div>
+            <div class="signal-action" style="background:var(--green-lt);color:var(--green);">Replicate loop</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="author">
+    <div class="av">S</div>
+    <div>
+      <div class="au-name">Sachin Shukla — Rajniti Portfolio Case Study</div>
+      <div class="au-role">Full-Stack AI Product Engineer → AI PM · Week 6</div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag">#OKRs</span>
+    <span class="tag">#NorthStar</span>
+    <span class="tag">#Metrics</span>
+    <span class="tag">#Rajniti</span>
+    <span class="tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>

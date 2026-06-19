@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajniti — Chapter 4: Trust & Safety Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:     #0D0D0D;
+  --paper:   #F6F1E8;
+  --cream:   #EDE8DC;
+  --rule:    #CEC8BA;
+  --muted:   #7A7060;
+  --navy:    #1A2A4A;
+  --navy-lt: #E8ECF4;
+  --navy-md: #A0B0CC;
+  --saffron: #E06B2A;
+  --saff-lt: #FDF0E8;
+  --saff-md: #F5C4A0;
+  --green:   #1A6B40;
+  --green-lt:#E6F4ED;
+  --green-md:#9FD4BA;
+  --gold:    #B8860B;
+  --gold-lt: #FBF3DC;
+  --red:     #B71C1C;
+  --red-lt:  #FEECEE;
+  --purple:  #5B21B6;
+  --purp-lt: #EDE9FE;
+}
+body{
+  background:var(--paper);
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);width:940px;margin:0 auto;
+}
+
+/* ── COVER ── */
+.cover{
+  background:var(--navy);padding:48px 56px 0;
+  position:relative;overflow:hidden;min-height:340px;
+}
+.cover::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--saffron) 0%,var(--saffron) 33.3%,#fff 33.3%,#fff 66.6%,var(--green) 66.6%);
+}
+.cover::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 90% at 90% 40%,rgba(224,107,42,0.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cover-meta{
+  display:flex;justify-content:space-between;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.14em;color:rgba(255,255,255,0.25);text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding-bottom:12px;margin-bottom:32px;position:relative;z-index:1;
+}
+.chapter-tag{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--saffron);margin-bottom:12px;
+  position:relative;z-index:1;
+}
+.cover-title{
+  font-family:'Playfair Display',serif;font-size:58px;font-weight:900;
+  line-height:0.92;color:#F6F1E8;letter-spacing:-2px;margin-bottom:16px;
+  position:relative;z-index:1;
+}
+.cover-title em{font-style:italic;color:var(--saffron);}
+.cover-thesis{
+  font-size:13px;font-weight:300;color:rgba(246,241,232,0.55);
+  line-height:1.7;max-width:580px;margin-bottom:32px;position:relative;z-index:1;
+}
+.cover-thesis strong{color:rgba(246,241,232,0.85);font-weight:500;}
+.summary-strip{
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:grid;grid-template-columns:repeat(5,1fr);
+  position:relative;z-index:1;
+}
+.sum-cell{
+  padding:14px 0;text-align:center;
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.sum-cell:last-child{border-right:none;}
+.sum-num{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  color:var(--saffron);display:block;
+}
+.sum-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;color:rgba(246,241,232,0.3);
+  text-transform:uppercase;display:block;margin-top:2px;
+}
+
+/* ── BODY ── */
+.body{padding:0 56px 56px;}
+.sec-hdr{
+  display:flex;align-items:center;gap:14px;margin:40px 0 20px;
+}
+.sec-n{
+  font-family:'Playfair Display',serif;font-size:11px;font-style:italic;
+  color:var(--gold);width:22px;flex-shrink:0;
+}
+.sec-t{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+}
+.sec-r{flex:1;height:1px;background:var(--rule);}
+
+/* ── CORE PRINCIPLE ── */
+.principle{
+  background:var(--ink);padding:22px 28px;margin-bottom:28px;
+  display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+}
+.p-icon{
+  font-family:'Playfair Display',serif;font-size:44px;font-style:italic;
+  color:var(--saffron);opacity:0.4;line-height:1;
+}
+.p-label{
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.18em;
+  text-transform:uppercase;color:rgba(246,241,232,0.35);margin-bottom:6px;
+}
+.p-text{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  line-height:1.45;color:#F6F1E8;
+}
+.p-text em{font-style:italic;color:var(--saffron);}
+
+/* ── RISK REGISTER ── */
+.risk-register{
+  background:white;border:1px solid var(--rule);
+  margin-bottom:24px;overflow:hidden;
+}
+.rr-header{
+  display:grid;
+  grid-template-columns:180px 1fr 80px 80px 100px;
+  background:var(--ink);
+}
+.rr-th{
+  padding:9px 12px;
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(246,241,232,0.5);
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.rr-th:last-child{border-right:none;}
+.rr-row{
+  display:grid;
+  grid-template-columns:180px 1fr 80px 80px 100px;
+  border-bottom:1px solid var(--rule);
+  align-items:start;
+}
+.rr-row:last-child{border-bottom:none;}
+.rr-row:nth-child(odd){background:var(--paper);}
+.rr-cell{
+  padding:12px 12px;font-size:10.5px;
+  color:var(--ink);line-height:1.5;
+  border-right:1px solid var(--rule);
+}
+.rr-cell:last-child{border-right:none;}
+.rr-cell.risk-name{font-weight:500;font-size:11px;}
+.severity-badge{
+  display:inline-block;
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;padding:3px 7px;border-radius:2px;
+  margin-top:2px;
+}
+.likelihood-badge{
+  display:inline-block;
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;padding:3px 7px;border-radius:2px;
+}
+
+/* ── POLICY BLOCKS ── */
+.policy-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-bottom:24px;
+}
+.policy-card{
+  background:white;border:1px solid var(--rule);overflow:hidden;
+}
+.policy-header{
+  padding:12px 16px;border-bottom:2px solid;
+}
+.policy-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.16em;text-transform:uppercase;
+  margin-bottom:4px;font-weight:500;
+}
+.policy-title{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;line-height:1.2;
+}
+.policy-body{padding:14px 16px;}
+.policy-rule{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:7px 0;border-bottom:1px solid var(--cream);
+  font-size:11px;
+}
+.policy-rule:last-child{border-bottom:none;}
+.rule-num{
+  font-family:'DM Mono',monospace;font-size:10px;
+  font-weight:500;color:var(--muted);flex-shrink:0;
+  width:20px;padding-top:1px;
+}
+.rule-text{color:var(--ink);line-height:1.5;}
+.rule-text strong{font-weight:500;}
+
+/* ── ATTRIBUTION STANDARDS ── */
+.attribution-block{
+  background:white;border:1px solid var(--rule);
+  margin-bottom:24px;
+}
+.attr-header{
+  padding:14px 20px;background:var(--navy);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.attr-title{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;color:#F6F1E8;
+}
+.attr-tag{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,0.15);
+  padding:4px 10px;color:rgba(246,241,232,0.5);
+}
+.attr-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;
+  border-top:1px solid var(--rule);
+}
+.attr-col{
+  padding:16px 18px;border-right:1px solid var(--rule);
+}
+.attr-col:last-child{border-right:none;}
+.attr-col-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:10px;font-weight:500;
+}
+.attr-rule{
+  display:flex;gap:7px;align-items:flex-start;
+  font-size:10.5px;color:var(--muted);
+  line-height:1.55;margin-bottom:7px;
+}
+.attr-dot{
+  width:6px;height:6px;border-radius:50%;
+  flex-shrink:0;margin-top:4px;
+}
+
+/* ── HALLUCINATION PROTOCOL ── */
+.hallucination-flow{
+  background:white;border:1px solid var(--rule);
+  margin-bottom:24px;overflow:hidden;
+}
+.hall-header{
+  padding:14px 20px;background:var(--red-lt);
+  border-bottom:2px solid var(--red);
+  display:flex;align-items:center;gap:12px;
+}
+.hall-title{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;color:var(--red);
+}
+.hall-sub{font-size:11px;color:var(--muted);}
+.hall-steps{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+}
+.hall-step{
+  padding:14px 14px;border-right:1px solid var(--rule);
+  position:relative;
+}
+.hall-step:last-child{border-right:none;}
+.hall-step-num{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;font-style:italic;
+  color:var(--red);opacity:0.2;line-height:1;margin-bottom:4px;
+}
+.hall-step-time{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--red);margin-bottom:4px;font-weight:500;
+}
+.hall-step-title{
+  font-size:11.5px;font-weight:500;color:var(--ink);
+  margin-bottom:5px;line-height:1.3;
+}
+.hall-step-action{
+  font-size:10px;color:var(--muted);line-height:1.5;
+}
+.hall-arrow{
+  position:absolute;right:-8px;top:50%;
+  transform:translateY(-50%);
+  font-size:12px;color:var(--rule);z-index:1;
+}
+
+/* ── CORRECTION MECHANISM ── */
+.correction-block{
+  background:white;border:1px solid var(--rule);
+  margin-bottom:24px;
+}
+.corr-header{
+  padding:14px 20px;border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.corr-title{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;
+}
+.corr-body{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+}
+.corr-col{
+  padding:16px 20px;border-right:1px solid var(--rule);
+}
+.corr-col:last-child{border-right:none;}
+.corr-col-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+}
+.corr-flow{
+  display:flex;flex-direction:column;gap:6px;
+}
+.corr-step{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:8px 10px;
+  background:var(--paper);
+  border:1px solid var(--rule);
+}
+.corr-step-num{
+  font-family:'DM Mono',monospace;font-size:10px;
+  font-weight:500;color:var(--muted);flex-shrink:0;
+}
+.corr-step-text{font-size:10.5px;color:var(--ink);line-height:1.5;}
+.corr-step-time{
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--saffron);margin-top:2px;
+}
+.sla-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+}
+.sla-card{
+  background:var(--paper);border:1px solid var(--rule);padding:10px 12px;
+}
+.sla-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:4px;
+}
+.sla-val{
+  font-size:16px;font-weight:600;line-height:1.2;margin-bottom:2px;
+}
+.sla-note{font-size:9.5px;color:var(--muted);line-height:1.4;}
+
+/* ── BIAS INVENTORY ── */
+.bias-block{
+  background:white;border:1px solid var(--rule);
+  margin-bottom:24px;
+}
+.bias-row{
+  display:grid;grid-template-columns:200px 1fr auto;
+  align-items:start;padding:14px 18px;
+  border-bottom:1px solid var(--rule);
+}
+.bias-row:last-child{border-bottom:none;}
+.bias-row:first-child{background:var(--ink);}
+.bias-type{font-size:11px;font-weight:500;color:var(--ink);}
+.bias-description{
+  font-size:10.5px;color:var(--muted);line-height:1.55;padding:0 16px;
+}
+.bias-mitigation{
+  font-size:10px;color:var(--green);font-style:italic;
+  line-height:1.5;min-width:160px;text-align:right;
+}
+.bias-th{
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(246,241,232,0.5);
+}
+
+/* ── WHAT WE DONT TEST ── */
+.ethical-line{
+  background:var(--navy);color:#F6F1E8;
+  padding:20px 28px;margin-bottom:24px;
+  display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+}
+.el-icon{
+  font-family:'Playfair Display',serif;
+  font-size:40px;font-style:italic;
+  color:var(--saffron);opacity:0.4;line-height:1;
+}
+.el-label{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(246,241,232,0.35);margin-bottom:6px;
+}
+.el-text{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;line-height:1.45;color:#F6F1E8;
+}
+.el-text em{font-style:italic;color:var(--saffron);}
+
+/* ── TRANSPARENCY OBLIGATIONS ── */
+.transparency-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;
+}
+.trans-card{
+  background:white;border:1px solid var(--rule);padding:16px;
+  border-top:3px solid;
+}
+.trans-num{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:900;font-style:italic;
+  opacity:0.15;line-height:1;margin-bottom:6px;
+}
+.trans-title{
+  font-size:12px;font-weight:500;color:var(--ink);
+  margin-bottom:6px;line-height:1.3;
+}
+.trans-body{
+  font-size:10.5px;color:var(--muted);line-height:1.6;
+}
+.trans-standard{
+  margin-top:8px;padding-top:8px;border-top:1px solid var(--cream);
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.06em;font-weight:500;
+}
+
+/* ── PM RESPONSIBILITY ── */
+.pm-resp{
+  background:var(--gold-lt);border:1px solid #D4A017;
+  padding:20px 24px;margin-bottom:24px;
+}
+.pm-resp-label{
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+}
+.pm-resp-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.pm-resp-item{
+  background:white;border:1px solid #E8C96A;padding:12px 14px;
+}
+.pm-resp-title{
+  font-size:11.5px;font-weight:500;color:var(--ink);
+  margin-bottom:5px;
+}
+.pm-resp-body{
+  font-size:10.5px;color:var(--muted);line-height:1.55;
+}
+
+/* ── CLOSING STATEMENT ── */
+.closing{
+  background:white;border:1.5px solid var(--navy);
+  padding:24px 28px;margin-bottom:28px;
+}
+.closing-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;
+}
+.closing-statement{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  line-height:1.55;color:var(--ink);
+  border-left:4px solid var(--saffron);padding-left:18px;
+}
+.closing-statement em{font-style:italic;color:var(--saffron);}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--cream);border-top:1px solid var(--rule);
+  padding:14px 56px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.author{display:flex;align-items:center;gap:10px;}
+.av{
+  width:32px;height:32px;border-radius:50%;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:13px;font-weight:700;font-style:italic;color:#F6F1E8;
+}
+.au-name{font-size:12px;font-weight:500;}
+.au-role{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.tag{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;border:1px solid var(--rule);
+  padding:3px 8px;color:var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-meta">
+    <span>Rajniti · PM Portfolio Case Study</span>
+    <span>Chapter 4 of 4 · Trust & Safety</span>
+    <span>Sachin Shukla · 2025</span>
+  </div>
+  <div class="chapter-tag">Chapter 4 — Building Responsible AI for Civic Use</div>
+  <div class="cover-title">Trust is not a<br>feature. It is the<br><em>product.</em></div>
+  <div class="cover-thesis">
+    In civic AI, a single wrong data point can influence a voting decision. A hallucinated criminal record. A misrepresented attendance figure. A confidently stated fact that is false. <strong>The Trust & Safety framework is Rajniti's most important product document</strong> — because everything else we have built in this case study only matters if users can trust what they read.
+  </div>
+  <div class="summary-strip">
+    <div class="sum-cell">
+      <span class="sum-num">4</span>
+      <span class="sum-lbl">Policy domains</span>
+    </div>
+    <div class="sum-cell">
+      <span class="sum-num">8</span>
+      <span class="sum-lbl">Risk entries</span>
+    </div>
+    <div class="sum-cell">
+      <span class="sum-num">48h</span>
+      <span class="sum-lbl">Max incident response</span>
+    </div>
+    <div class="sum-cell">
+      <span class="sum-num">100%</span>
+      <span class="sum-lbl">Attribution standard</span>
+    </div>
+    <div class="sum-cell">
+      <span class="sum-num">0</span>
+      <span class="sum-lbl">Features exempt from ethics review</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- PRINCIPLE -->
+  <div class="sec-hdr">
+    <span class="sec-n">I</span>
+    <span class="sec-t">The Governing Principle</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="principle">
+    <div class="p-icon">"</div>
+    <div>
+      <div class="p-label">Why Civic AI Demands a Higher Standard</div>
+      <div class="p-text">
+        When Spotify recommends a song you don't like, the stakes are zero. When Rajniti generates an AI summary that incorrectly attributes a criminal case to an innocent politician, <em>we have potentially influenced a democratic vote with false information.</em> That is not a product bug. It is a civic harm. This framework defines how we prevent it, contain it, and correct it.
+      </div>
+    </div>
+  </div>
+
+  <!-- RISK REGISTER -->
+  <div class="sec-hdr">
+    <span class="sec-n">II</span>
+    <span class="sec-t">AI Risk Register — 8 Identified Risks, Classified and Mitigated</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="risk-register">
+    <div class="rr-header">
+      <div class="rr-th">Risk</div>
+      <div class="rr-th">Description + Rajniti-Specific Impact</div>
+      <div class="rr-th">Severity</div>
+      <div class="rr-th">Likelihood</div>
+      <div class="rr-th">Mitigation</div>
+    </div>
+
+    <div class="rr-row">
+      <div class="rr-cell risk-name">Hallucination — Factual Error</div>
+      <div class="rr-cell">AI generates a false performance summary — incorrect attendance %, fabricated criminal case, wrong asset value. User shares on WhatsApp before correction. Viral spread of misinformation about a candidate.</div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--red-lt);color:var(--red);">Critical</span></div>
+      <div class="rr-cell"><span class="likelihood-badge" style="background:var(--gold-lt);color:var(--gold);">Medium</span></div>
+      <div class="rr-cell" style="font-size:10px;color:var(--muted);">Source primacy. Confidence bounding. 48h correction SLA. Sharing disabled on unverified summaries.</div>
+    </div>
+    <div class="rr-row">
+      <div class="rr-cell risk-name">Hallucination — Tone/Framing Error</div>
+      <div class="rr-cell">AI summary is technically accurate but framed in a politically biased tone — describing a politician's record in a way that reads as partisan attack or unwarranted praise. Damages credibility of the platform.</div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--gold-lt);color:var(--gold);">High</span></div>
+      <div class="rr-cell"><span class="likelihood-badge" style="background:var(--red-lt);color:var(--red);">High</span></div>
+      <div class="rr-cell" style="font-size:10px;color:var(--muted);">Temperature ≤0.2. Prompt enforces neutral tone. Human review of all summaries before first publication.</div>
+    </div>
+    <div class="rr-row">
+      <div class="rr-cell risk-name">Data Bias — Sparse Rural Data</div>
+      <div class="rr-cell">ECI affidavits for rural constituency politicians are less complete and less consistently formatted than urban ones. AI produces richer summaries for urban politicians, creating a systematic quality gap that disadvantages rural voter research.</div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--gold-lt);color:var(--gold);">High</span></div>
+      <div class="rr-cell"><span class="likelihood-badge" style="background:var(--red-lt);color:var(--red);">High</span></div>
+      <div class="rr-cell" style="font-size:10px;color:var(--muted);">Confidence score per summary. "Limited data" label when source coverage is below threshold. Prioritise rural data collection in Q2.</div>
+    </div>
+    <div class="rr-row">
+      <div class="rr-cell risk-name">Data Bias — English Media Skew</div>
+      <div class="rr-cell">Saransh news pipeline ingests predominantly English-language media. Controversy leaderboards will systematically rank politicians covered by English media higher than equally controversial politicians only covered in Hindi/regional press.</div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--gold-lt);color:var(--gold);">High</span></div>
+      <div class="rr-cell"><span class="likelihood-badge" style="background:var(--red-lt);color:var(--red);">High</span></div>
+      <div class="rr-cell" style="font-size:10px;color:var(--muted);">Leaderboard methodology disclosed publicly. Hindi + regional media sources added before leaderboard launch. Block leaderboard until multilingual pipeline is ready.</div>
+    </div>
+    <div class="rr-row">
+      <div class="rr-cell risk-name">Outdated Data Presented as Current</div>
+      <div class="rr-cell">ECI data is not updated in real time. A voter researching before a by-election may see attendance figures from the previous session as the current figure. Decision made on stale data.</div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--gold-lt);color:var(--gold);">High</span></div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--red-lt);color:var(--red);">High</span></div>
+      <div class="rr-cell" style="font-size:10px;color:var(--muted);">Mandatory last-updated timestamp on all data points. Banner alert when data is >30 days old. No AI summary without a visible data freshness indicator.</div>
+    </div>
+    <div class="rr-row">
+      <div class="rr-cell risk-name">Political Party Pressure</div>
+      <div class="rr-cell">A political party or candidate's team identifies a Rajniti summary as unfavourable and applies legal or reputational pressure to remove or amend it. Creates precedent for editorial interference.</div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--red-lt);color:var(--red);">Critical</span></div>
+      <div class="rr-cell"><span class="likelihood-badge" style="background:var(--gold-lt);color:var(--gold);">Medium</span></div>
+      <div class="rr-cell" style="font-size:10px;color:var(--muted);">Written editorial independence policy published publicly. All content changes documented with reason. Legal review partner identified before scale.</div>
+    </div>
+    <div class="rr-row">
+      <div class="rr-cell risk-name">User Misinterpretation of AI Label</div>
+      <div class="rr-cell">Users mistake the AI performance summary for an official government assessment. Share it as "official data." Creates false authority for what is a synthesised interpretation.</div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--gold-lt);color:var(--gold);">High</span></div>
+      <div class="rr-cell"><span class="likelihood-badge" style="background:var(--red-lt);color:var(--red);">High</span></div>
+      <div class="rr-cell" style="font-size:10px;color:var(--muted);">Persistent "AI Analysis" label — not "official record." Sharing template includes disclaimer. Onboarding explains distinction explicitly.</div>
+    </div>
+    <div class="rr-row">
+      <div class="rr-cell risk-name">Correction Velocity Gap</div>
+      <div class="rr-cell">A wrong AI summary is identified and corrected internally — but the original has already been shared widely on WhatsApp. Correction never reaches the users who saw the original. Harm persists after fix.</div>
+      <div class="rr-cell"><span class="severity-badge" style="background:var(--red-lt);color:var(--red);">Critical</span></div>
+      <div class="rr-cell"><span class="likelihood-badge" style="background:var(--gold-lt);color:var(--gold);">Medium</span></div>
+      <div class="rr-cell" style="font-size:10px;color:var(--muted);">Sharing disabled for flagged summaries. Push notification to users who viewed the summary. Public corrections log maintained.</div>
+    </div>
+  </div>
+
+  <!-- ATTRIBUTION STANDARDS -->
+  <div class="sec-hdr">
+    <span class="sec-n">III</span>
+    <span class="sec-t">Source Attribution Standards — Non-Negotiable Rules</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="attribution-block">
+    <div class="attr-header">
+      <div class="attr-title">Every fact has a source. Every source is visible. Every source is clickable.</div>
+      <div class="attr-tag">100% Coverage · Gates Q2</div>
+    </div>
+    <div class="attr-grid">
+      <div class="attr-col">
+        <div class="attr-col-label" style="color:var(--saffron);">What Gets Attributed</div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--saffron)"></div>
+          Every attendance figure — linked to Lok Sabha/Vidhan Sabha session records
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--saffron)"></div>
+          Every asset value — linked to ECI affidavit PDF (page-level anchor)
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--saffron)"></div>
+          Every criminal case disclosure — linked to affidavit and court record where available
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--saffron)"></div>
+          Every AI summary — labelled with source data used, confidence level, and last-updated date
+        </div>
+      </div>
+      <div class="attr-col">
+        <div class="attr-col-label" style="color:var(--navy);">How Attribution is Displayed</div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--navy)"></div>
+          Inline superscript citation on every data point — tap to view source
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--navy)"></div>
+          "AI Analysis" persistent badge on all synthesised summaries — visually distinct from verified facts
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--navy)"></div>
+          Last-updated timestamp visible on every profile — banner alert when data >30 days old
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--navy)"></div>
+          "Limited data available" label when ECI source coverage is below 80% completeness
+        </div>
+      </div>
+      <div class="attr-col">
+        <div class="attr-col-label" style="color:var(--green);">What Is Never Allowed</div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--red)"></div>
+          Presenting AI-generated content without an explicit AI label
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--red)"></div>
+          Publishing a data point without linking to its primary source
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--red)"></div>
+          A/B testing source attribution — this is a product values commitment, not an optimization variable
+        </div>
+        <div class="attr-rule">
+          <div class="attr-dot" style="background:var(--red)"></div>
+          Removing attribution to save screen space or improve visual cleanliness
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HALLUCINATION PROTOCOL -->
+  <div class="sec-hdr">
+    <span class="sec-n">IV</span>
+    <span class="sec-t">Hallucination Response Protocol — 5-Step Incident Procedure</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="hallucination-flow">
+    <div class="hall-header">
+      <div class="hall-title">When AI Gets It Wrong — What Happens in the Next 48 Hours</div>
+      <div class="hall-sub">Applies to any AI-generated content identified as factually incorrect or misleading</div>
+    </div>
+    <div class="hall-steps">
+      <div class="hall-step">
+        <div class="hall-arrow">→</div>
+        <div class="hall-step-num">1</div>
+        <div class="hall-step-time">0–1 Hour</div>
+        <div class="hall-step-title">Flag and Freeze</div>
+        <div class="hall-step-action">Content flagged (by user report, internal review, or automated confidence check). AI summary immediately replaced with "Under Review" state. Sharing disabled for this profile. Raw verified data still visible.</div>
+      </div>
+      <div class="hall-step">
+        <div class="hall-arrow">→</div>
+        <div class="hall-step-num">2</div>
+        <div class="hall-step-time">1–4 Hours</div>
+        <div class="hall-step-title">Classify the Error</div>
+        <div class="hall-step-action">PM and data team classify: hallucination (AI invented), data error (source was wrong), framing error (technically accurate but misleading), or outdated data. Classification determines fix type and communication required.</div>
+      </div>
+      <div class="hall-step">
+        <div class="hall-arrow">→</div>
+        <div class="hall-step-num">3</div>
+        <div class="hall-step-time">4–12 Hours</div>
+        <div class="hall-step-title">Severity Assessment</div>
+        <div class="hall-step-action">How many users viewed it? Was it shared externally? Is an election imminent? Severity score determines: silent fix, user notification, or public correction statement. Higher severity = more public response.</div>
+      </div>
+      <div class="hall-step">
+        <div class="hall-arrow">→</div>
+        <div class="hall-step-num">4</div>
+        <div class="hall-step-time">12–24 Hours</div>
+        <div class="hall-step-title">Correct and Notify</div>
+        <div class="hall-step-action">Corrected summary published. Push notification sent to all users who viewed the affected profile. Correction note visible on profile: "[Date]: AI Summary updated. Previous version contained [error type]."</div>
+      </div>
+      <div class="hall-step">
+        <div class="hall-step-num">5</div>
+        <div class="hall-step-time">24–48 Hours</div>
+        <div class="hall-step-title">Post-Incident Review</div>
+        <div class="hall-step-action">Root cause analysis. Was this a prompt failure, a data pipeline failure, or a model failure? Update prompt constraints, retrain confidence thresholds, or escalate to model provider. Document in public corrections log.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORRECTION MECHANISM -->
+  <div class="sec-hdr">
+    <span class="sec-n">V</span>
+    <span class="sec-t">User Correction Mechanism — Closing the Trust Loop</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="correction-block">
+    <div class="corr-header">
+      <div class="corr-title">A "Report Inaccuracy" button that goes somewhere real</div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">User → Review → Response · Max 48h SLA</div>
+    </div>
+    <div class="corr-body">
+      <div class="corr-col">
+        <div class="corr-col-label">The User Flow</div>
+        <div class="corr-flow">
+          <div class="corr-step">
+            <div class="corr-step-num">01</div>
+            <div>
+              <div class="corr-step-text">User taps "Report Inaccuracy" on any data point or AI summary</div>
+              <div class="corr-step-time">Instant</div>
+            </div>
+          </div>
+          <div class="corr-step">
+            <div class="corr-step-num">02</div>
+            <div>
+              <div class="corr-step-text">Three-option form: Wrong fact / Outdated data / Biased framing. Optional detail field. Submits to internal review queue.</div>
+              <div class="corr-step-time">30 seconds</div>
+            </div>
+          </div>
+          <div class="corr-step">
+            <div class="corr-step-num">03</div>
+            <div>
+              <div class="corr-step-text">User receives confirmation: "Your report has been received. We review every submission within 48 hours."</div>
+              <div class="corr-step-time">Immediate confirmation</div>
+            </div>
+          </div>
+          <div class="corr-step">
+            <div class="corr-step-num">04</div>
+            <div>
+              <div class="corr-step-text">Internal review completes. If error confirmed: user notified with "Your report led to a correction. Thank you." If no error found: user notified with explanation.</div>
+              <div class="corr-step-time">Within 48 hours</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="corr-col">
+        <div class="corr-col-label">SLA Commitments</div>
+        <div class="sla-grid">
+          <div class="sla-card">
+            <div class="sla-label">First response</div>
+            <div class="sla-val" style="color:var(--navy)">Instant</div>
+            <div class="sla-note">Automated confirmation that the report was received and will be reviewed</div>
+          </div>
+          <div class="sla-card">
+            <div class="sla-label">Review complete</div>
+            <div class="sla-val" style="color:var(--saffron)">48 hours</div>
+            <div class="sla-note">Every report reviewed by a human. No automated dismissal.</div>
+          </div>
+          <div class="sla-card">
+            <div class="sla-label">Critical errors</div>
+            <div class="sla-val" style="color:var(--red)">4 hours</div>
+            <div class="sla-note">Reports involving election-imminent profiles. Content frozen immediately.</div>
+          </div>
+          <div class="sla-card">
+            <div class="sla-label">Public log update</div>
+            <div class="sla-val" style="color:var(--green)">Weekly</div>
+            <div class="sla-note">All confirmed corrections published in the public corrections log</div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);font-style:italic;margin-top:12px;padding-top:12px;border-top:1px solid var(--cream);line-height:1.6;">
+          A correction form that goes nowhere is worse than no form at all — it creates false confidence that the product self-corrects. Every report must reach a human. Every reporter must receive a response. This is the minimum standard for a civic information product.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIAS INVENTORY -->
+  <div class="sec-hdr">
+    <span class="sec-n">VI</span>
+    <span class="sec-t">Bias Inventory — Structural Biases We Name Explicitly</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="bias-block">
+    <div class="bias-row">
+      <div class="bias-th" style="color:rgba(246,241,232,0.5);">Bias Type</div>
+      <div class="bias-th" style="color:rgba(246,241,232,0.5);padding:0 16px;">How It Affects Rajniti</div>
+      <div class="bias-th" style="color:rgba(246,241,232,0.5);text-align:right;">Mitigation</div>
+    </div>
+    <div class="bias-row">
+      <div class="bias-type">Selection bias — ECI data completeness</div>
+      <div class="bias-description">Rural constituency politicians have less complete ECI filings. AI produces richer summaries for urban, well-resourced politicians. Systematic quality gap disadvantages voters in underserved constituencies.</div>
+      <div class="bias-mitigation">"Limited data" label below threshold. Rural data pipeline prioritised Q2.</div>
+    </div>
+    <div class="bias-row">
+      <div class="bias-type">Media coverage bias — English-first corpus</div>
+      <div class="bias-description">Saransh news pipeline ingests more English-language media than regional. Controversy scores correlate with English media attention, not actual accountability. Disadvantages rural and regional politicians regardless of their actual record.</div>
+      <div class="bias-mitigation">Leaderboard blocked until Hindi + regional pipeline added. Methodology disclosed publicly.</div>
+    </div>
+    <div class="bias-row">
+      <div class="bias-type">Recency bias — latest session overweights</div>
+      <div class="bias-description">AI summaries trained on most recent session data will overweight short-term performance. A politician who attended every session in a 5-year tenure but missed the last session looks poor in a recency-weighted model.</div>
+      <div class="bias-mitigation">Summaries explicitly state time range. Full tenure view available to premium users. Recency weighting disclosed in methodology.</div>
+    </div>
+    <div class="bias-row">
+      <div class="bias-type">Incumbency bias — more data for incumbents</div>
+      <div class="bias-description">Incumbent politicians have longer, richer ECI data histories than first-time candidates. AI summaries for first-time candidates are necessarily thinner — which may be misread as poor performance rather than limited data history.</div>
+      <div class="bias-mitigation">"First-time candidate" label. Separate comparison criteria for incumbents vs first-time candidates. Explicit disclosure of data vintage.</div>
+    </div>
+  </div>
+
+  <!-- WHAT IS NOT TESTED -->
+  <div class="ethical-line">
+    <div class="el-icon">"</div>
+    <div>
+      <div class="el-label">The Ethical Line — What We Will Not Optimise</div>
+      <div class="el-text">
+        Source attribution is not an A/B test variable. <em>It is a product values commitment.</em> We will not run an experiment that shows some voters unattributed political data to measure whether attribution reduces conversion. Some decisions are made on principle. This is one of them. The same applies to AI labelling, the corrections log, and the 48-hour review SLA.
+      </div>
+    </div>
+  </div>
+
+  <!-- TRANSPARENCY OBLIGATIONS -->
+  <div class="sec-hdr">
+    <span class="sec-n">VII</span>
+    <span class="sec-t">Three Transparency Obligations — What Users Are Owed</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="transparency-grid">
+    <div class="trans-card" style="border-color:var(--saffron);">
+      <div class="trans-num" style="color:var(--saffron);">1</div>
+      <div class="trans-title">Know when they are reading AI vs. verified fact</div>
+      <div class="trans-body">AI-generated content and verified source data must be visually distinct at all times. Not a footnote. Not a settings page. A persistent, always-visible label in the primary content area. Users cannot make informed decisions about AI output if they cannot identify what is AI output.</div>
+      <div class="trans-standard" style="color:var(--saffron);">Standard: Persistent "AI Analysis" badge. Cannot be hidden.</div>
+    </div>
+    <div class="trans-card" style="border-color:var(--navy);">
+      <div class="trans-num" style="color:var(--navy);">2</div>
+      <div class="trans-title">Know when their data was last updated</div>
+      <div class="trans-body">Every politician profile must display the data freshness clearly. When ECI data is more than 30 days old, a visible banner communicates this. A voter who makes a decision based on pre-election session data without knowing it is 6 months old has been misled — not intentionally, but consequentially.</div>
+      <div class="trans-standard" style="color:var(--navy);">Standard: Last-updated timestamp on every profile. Banner alert at 30 days.</div>
+    </div>
+    <div class="trans-card" style="border-color:var(--green);">
+      <div class="trans-num" style="color:var(--green);">3</div>
+      <div class="trans-title">Know that their corrections go somewhere real</div>
+      <div class="trans-body">A correction mechanism that accepts reports but never acts on them is not transparency — it is the appearance of transparency. Every user who submits a report receives a response within 48 hours. Every confirmed correction is published in the public corrections log. The log is linked in the product footer.</div>
+      <div class="trans-standard" style="color:var(--green);">Standard: 48h response SLA. Public corrections log. No silent fixes for errors with civic impact.</div>
+    </div>
+  </div>
+
+  <!-- PM RESPONSIBILITY -->
+  <div class="sec-hdr">
+    <span class="sec-n">VIII</span>
+    <span class="sec-t">PM Responsibility When AI Gets It Wrong</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="pm-resp">
+    <div class="pm-resp-label">The PM owns these four things — not "fixing it quickly"</div>
+    <div class="pm-resp-grid">
+      <div class="pm-resp-item">
+        <div class="pm-resp-title">Incident Classification</div>
+        <div class="pm-resp-body">Hallucination (AI invented), data error (source was wrong), framing error (technically correct but misleading), or outdated data? Each has a different fix, different root cause, and different prevention strategy. Classifying correctly is the PM's first job.</div>
+      </div>
+      <div class="pm-resp-item">
+        <div class="pm-resp-title">Severity Assessment</div>
+        <div class="pm-resp-body">How many users saw it? Was it shared? Is an election in the next 30 days? Severity determines response speed and resource allocation. A wrong AI summary with 3 views and no shares is different from one that was shared in a WhatsApp group of 500 voters two days before polling day.</div>
+      </div>
+      <div class="pm-resp-item">
+        <div class="pm-resp-title">Correction Protocol Decision</div>
+        <div class="pm-resp-body">Silent fix, user notification, or public statement? In civic tech, a silent fix to an error that may have influenced voting behavior is ethically insufficient — even if it is operationally convenient. The PM makes this call, owns it, and documents it.</div>
+      </div>
+      <div class="pm-resp-item">
+        <div class="pm-resp-title">Prevention Investment</div>
+        <div class="pm-resp-body">After every incident: what prompt constraint, confidence threshold, or data pipeline check would have prevented this? The post-incident review is not complete until it produces a specific, implementable change to the system. "We'll be more careful" is not a prevention strategy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="sec-hdr">
+    <span class="sec-n">IX</span>
+    <span class="sec-t">Closing Statement — The Trust Compact</span>
+    <div class="sec-r"></div>
+  </div>
+
+  <div class="closing">
+    <div class="closing-label">What Rajniti Commits to Every Voter Who Uses This Product</div>
+    <div class="closing-statement">
+      Every fact we show you comes from a named, verified source — and you can check it yourself. Every AI summary is labelled as AI and cannot be mistaken for an official record. <em>When we get something wrong, we will tell you, correct it publicly, and explain how we prevented it from happening again.</em> This framework is not a compliance document. It is the proof that Rajniti is serious about the responsibility that comes with helping Indian citizens make better democratic decisions.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="author">
+    <div class="av">S</div>
+    <div>
+      <div class="au-name">Sachin Shukla — Rajniti Portfolio Case Study · Complete</div>
+      <div class="au-role">Full-Stack AI Product Engineer → AI PM · Chapter 4 of 4</div>
+    </div>
+  </div>
+  <div class="tags">
+    <span class="tag">#AIEthics</span>
+    <span class="tag">#ResponsibleAI</span>
+    <span class="tag">#TrustAndSafety</span>
+    <span class="tag">#CivicTech</span>
+    <span class="tag">#Rajniti</span>
+    <span class="tag">#PMPortfolio</span>
+  </div>
+</div>
+
+</body>
+</html>
