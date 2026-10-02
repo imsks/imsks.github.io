@@ -68,6 +68,7 @@ a{color:inherit}
 }
 .hero-lede{font-size:clamp(19px,2.4vw,24px); line-height:1.45; max-width:30ch; margin:0 0 30px; font-weight:600}
 .hero-sub{max-width:52ch; margin:0 0 40px; color:#4A3F10}
+.hero-btns{margin:0 0 38px}
 .hero-rule{height:2px; background:var(--ink); transform-origin:left; margin-bottom:18px}
 .hero-meta{
   display:flex; flex-wrap:wrap; gap:4px 34px; padding-bottom:26px;
@@ -162,6 +163,14 @@ a{color:inherit}
 .payout{background:var(--signal); color:var(--ink); padding:28px 30px; border-radius:3px; margin-bottom:34px}
 .payout h3{font-family:"Archivo",sans-serif; font-size:19px; font-weight:800; margin:0 0 8px}
 .payout p{margin:0; max-width:60ch}
+.group-card{
+  display:block; text-decoration:none; color:var(--paper);
+  border:2px solid rgba(250,248,245,.3); border-radius:3px; padding:24px 26px; margin-bottom:34px;
+}
+.group-card:hover{border-color:var(--signal)}
+.group-card .cl-tag{font-family:"Archivo",sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--signal); margin-bottom:8px}
+.group-card h3{font-family:"Archivo",sans-serif; font-size:clamp(19px,3vw,24px); font-weight:800; letter-spacing:-.02em; margin:0 0 6px}
+.group-card p{margin:0; color:rgba(250,248,245,.72); max-width:62ch}
 .scout-rules{display:grid; grid-template-columns:1fr 1fr; gap:34px}
 .scout-rules h4{font-family:"Archivo",sans-serif; font-size:15px; font-weight:800; margin:0 0 10px}
 .scout-rules ul{margin:0; padding-left:20px; color:rgba(250,248,245,.72)}
@@ -272,6 +281,10 @@ footer a{color:var(--signal); text-decoration:none}
     <h1 id="heroName"></h1>
     <p class="hero-lede" id="heroLede"></p>
     <p class="hero-sub" id="heroSub"></p>
+    <div class="btns hero-btns">
+      <a class="btn" id="btnGroupHero" target="_blank" rel="noopener" href="#"></a>
+      <a class="btn alt" href="#scout">How the payout works</a>
+    </div>
     <div class="hero-rule"></div>
     <div class="hero-meta" id="heroMeta"></div>
   </div>
@@ -346,6 +359,11 @@ footer a{color:var(--signal); text-decoration:none}
         <h3 id="payoutTitle"></h3>
         <p id="payoutBody"></p>
       </div>
+      <a class="group-card" id="groupCard" target="_blank" rel="noopener" href="#">
+        <div class="cl-tag" id="groupTag"></div>
+        <h3 id="groupTitle"></h3>
+        <p id="groupBody"></p>
+      </a>
       <div class="scout-rules">
         <div>
           <h4>Rules of the game</h4>
@@ -358,6 +376,7 @@ footer a{color:var(--signal); text-decoration:none}
       </div>
       <div class="btns">
         <a class="btn" id="btnScout" href="#contact">Send me a collab lead</a>
+        <a class="btn" id="btnGroup" target="_blank" rel="noopener" href="#"></a>
         <a class="btn alt" href="for-brands.html">Open the brand page to pitch with</a>
       </div>
     </div>
@@ -531,6 +550,15 @@ const CONFIG = {
     body: "20% of the paid deal value, sent within 7 days of the brand paying me. No cap, no limit on how many collabs you can bring."
   },
 
+  // WhatsApp group where scouts coordinate and claim brands.
+  scoutGroup: {
+    url: "https://chat.whatsapp.com/KCazRNCVBWHEQjquEVK9AQ?mode=gi_t",
+    cta: "Join the scouts WhatsApp group",
+    tag: "Start here",
+    title: "The scouts WhatsApp group",
+    body: "Where I post which brands are open, which ones are already claimed, and what closed for how much. Join before you start pitching - it's the fastest way to avoid two people chasing the same brand."
+  },
+
   scoutRules: [
     "Get my final sign-off before you lock in rates, dates, or deliverables with the brand.",
     "One brand, one scout. First email with a brand name claims it for 30 days.",
@@ -581,6 +609,7 @@ const CONFIG = {
   },
 
   links: [
+    { label: "WhatsApp - scouts group", url: "https://chat.whatsapp.com/KCazRNCVBWHEQjquEVK9AQ?mode=gi_t" },
     { label: "Instagram - The Boring Founder", url: "https://instagram.com/theboringfounder" },
     { label: "Instagram - Live Interviews", url: "https://instagram.com/liveinterviewswithsachin" },
     { label: "Instagram - The Boring Planks", url: "https://instagram.com/theboringplanks" },
@@ -676,6 +705,14 @@ $('scoutIntro').textContent = CONFIG.scoutIntro;
 $('scoutSteps').innerHTML = CONFIG.scoutSteps.map(s => `<div class="step"><p>${esc(s)}</p></div>`).join('');
 $('payoutTitle').textContent = CONFIG.payout.title;
 $('payoutBody').textContent = CONFIG.payout.body;
+$('groupCard').href = CONFIG.scoutGroup.url;
+$('btnGroup').href = CONFIG.scoutGroup.url;
+$('btnGroupHero').href = CONFIG.scoutGroup.url;
+$('btnGroupHero').textContent = CONFIG.scoutGroup.cta;
+$('btnGroup').textContent = CONFIG.scoutGroup.cta;
+$('groupTag').textContent = CONFIG.scoutGroup.tag;
+$('groupTitle').textContent = CONFIG.scoutGroup.title;
+$('groupBody').textContent = CONFIG.scoutGroup.body;
 $('scoutRules').innerHTML = CONFIG.scoutRules.map(r => `<li>${esc(r)}</li>`).join('');
 $('scoutNos').innerHTML = CONFIG.scoutNos.map(r => `<li>${esc(r)}</li>`).join('');
 
