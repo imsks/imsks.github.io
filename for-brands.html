@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sachin Kumar Shukla - Brand Kit</title>
+<meta name="description" content="Media kit for brands: audience, accounts, packages, usage rights and how to start a collab with Sachin Kumar Shukla.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+
+<!--
+  ============================================================
+  BRAND-FACING PAGE. Everything a brand needs to decide, in
+  one scroll: audience, accounts, packages, proof, process,
+  terms, and a pre-filled brief to email.
+
+  EDIT EVERYTHING FROM THE CONFIG BLOCK AT THE BOTTOM OF THIS
+  FILE (search for: const CONFIG).
+  ============================================================
+-->
+
+<style>
+:root{
+  color-scheme: only light;
+  --signal:#E3B505;
+  --signal-deep:#C09A00;
+  --ink:#14110F;
+  --stone:#6E665E;
+  --paper:#FAF8F5;
+  --line:#DAD3C7;
+  --max:1080px;
+}
+
+*{box-sizing:border-box}
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:calc(72px + env(safe-area-inset-top,0px)); }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Source Serif 4", Georgia, "Times New Roman", serif;
+  font-size:17px;
+  line-height:1.62;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+img{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
+
+.wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background:var(--ink); color:var(--paper);
+  padding-top:env(safe-area-inset-top,0px);
+}
+.nav-in{display:flex; align-items:center; gap:20px; height:58px; max-width:var(--max); margin:0 auto; padding:0 24px}
+.nav-name{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:15px; letter-spacing:-.02em; margin-right:auto}
+.nav a{font-family:"Archivo",system-ui,sans-serif; font-size:13.5px; font-weight:500; text-decoration:none; opacity:.78}
+.nav a:hover{opacity:1}
+.nav a.nav-cta{background:var(--signal); color:var(--ink); opacity:1; font-weight:700; padding:7px 13px; border-radius:2px}
+.nav-links{display:flex; gap:18px; align-items:center}
+@media (max-width:700px){ .nav-links a:not(.nav-cta){display:none} }
+
+/* ---------- hero ---------- */
+.hero{background:var(--signal); border-bottom:2px solid var(--ink); padding:64px 0 0}
+.hero h1{
+  font-family:"Archivo",system-ui,sans-serif;
+  font-weight:800; font-size:clamp(40px,8.4vw,80px); line-height:.94;
+  letter-spacing:-.035em; margin:0 0 26px; max-width:16ch;
+}
+.hero-lede{font-size:clamp(19px,2.4vw,24px); line-height:1.45; max-width:36ch; margin:0 0 36px; font-weight:600}
+.hero-rule{height:2px; background:var(--ink); transform-origin:left; margin-bottom:18px}
+.hero-meta{
+  display:flex; flex-wrap:wrap; gap:4px 34px; padding-bottom:26px;
+  font-family:"Archivo",system-ui,sans-serif; font-size:14px; font-weight:500;
+}
+.hero-meta b{font-weight:800}
+
+/* ---------- section scaffolding ---------- */
+.sec{padding:66px 0; border-bottom:1px solid var(--line)}
+.sec:last-of-type{border-bottom:0}
+.sec-head{margin-bottom:34px; max-width:62ch}
+.sec h2{
+  font-family:"Archivo",system-ui,sans-serif; font-weight:800;
+  font-size:clamp(26px,4vw,38px); letter-spacing:-.03em; line-height:1.05; margin:0 0 12px;
+}
+.sec h2 .num{color:var(--signal-deep); font-size:.55em; vertical-align:top; margin-right:10px; letter-spacing:0}
+.sec-head p{margin:0; color:var(--stone); max-width:58ch}
+
+/* ---------- why ---------- */
+.why{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:28px; margin-top:38px}
+.why-item{border-top:2px solid var(--signal); padding-top:14px}
+.why-item h3{font-family:"Archivo",system-ui,sans-serif; font-size:17px; font-weight:800; margin:0 0 6px; letter-spacing:-.01em}
+.why-item p{margin:0; color:var(--stone); font-size:16px}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line)}
+.stat{background:var(--paper); padding:22px 20px}
+.stat b{display:block; font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:30px; letter-spacing:-.03em; line-height:1.1}
+.stat span{display:block; font-family:"Archivo",system-ui,sans-serif; font-size:12.5px; font-weight:500; color:var(--stone); margin-top:6px}
+
+/* ---------- channels ---------- */
+.chan{border-top:2px solid var(--ink); padding:26px 0; display:grid; grid-template-columns:230px 1fr 190px; gap:30px}
+.chan:last-child{border-bottom:2px solid var(--ink)}
+.chan-handle{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:19px; letter-spacing:-.02em; text-decoration:none; display:inline-block}
+.chan-handle:hover{box-shadow:inset 0 -3px 0 var(--signal)}
+.chan-count{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:30px; letter-spacing:-.03em; line-height:1.1; margin-top:8px}
+.chan-count span{display:block; font-size:12.5px; font-weight:500; color:var(--stone); letter-spacing:0}
+.chan-what{margin:0 0 12px}
+.chan-who{margin:0 0 12px; color:var(--stone); font-size:15.5px}
+.chan-best{margin:0; font-size:15.5px}
+.chan-best b{font-family:"Archivo",system-ui,sans-serif; font-size:12.5px; font-weight:700; display:block; color:var(--stone); letter-spacing:.04em; text-transform:uppercase}
+.chan-fmt{font-family:"Archivo",system-ui,sans-serif; font-size:13.5px; line-height:1.75; color:var(--stone)}
+.chan-fmt b{display:block; color:var(--ink); font-weight:700; margin-bottom:4px}
+.chan-fmt .gap{display:block; height:12px}
+@media (max-width:860px){ .chan{grid-template-columns:1fr; gap:14px} }
+
+/* ---------- chips ---------- */
+.chips{display:flex; flex-wrap:wrap; gap:9px}
+.chip{
+  font-family:"Archivo",system-ui,sans-serif; font-size:14px; font-weight:600;
+  border:1.5px solid var(--ink); border-radius:999px; padding:7px 15px; background:transparent;
+}
+.chip.hot{background:var(--signal); border-color:var(--signal)}
+
+/* ---------- packages ---------- */
+.packs{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px}
+.pack{border:2px solid var(--ink); border-radius:3px; padding:26px 24px; display:flex; flex-direction:column}
+.pack.feature{background:var(--signal); border-color:var(--signal)}
+.pack-tag{font-family:"Archivo",system-ui,sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--signal-deep); margin-bottom:10px}
+.pack.feature .pack-tag{color:#4A3F10}
+.pack h3{font-family:"Archivo",system-ui,sans-serif; font-size:20px; font-weight:800; letter-spacing:-.02em; margin:0 0 14px}
+.pack-price{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:clamp(30px,4.6vw,40px); letter-spacing:-.035em; line-height:1; margin:0 0 4px}
+.pack-unit{font-family:"Archivo",system-ui,sans-serif; font-size:13px; font-weight:500; color:var(--stone); margin:0 0 18px}
+.pack.feature .pack-unit{color:#4A3F10}
+.pack ul{margin:0 0 20px; padding-left:19px}
+.pack li{font-size:15.5px; margin-bottom:6px}
+.pack-foot{margin-top:auto; border-top:1.5px solid var(--ink); padding-top:12px; font-family:"Archivo",system-ui,sans-serif; font-size:13px; font-weight:500; color:var(--stone)}
+.pack.feature .pack-foot{color:#4A3F10}
+.pack-foot b{font-weight:700; color:var(--ink)}
+
+.priceline{
+  display:flex; flex-wrap:wrap; gap:8px 26px; align-items:baseline;
+  background:var(--ink); color:var(--paper); padding:18px 24px; border-radius:3px; margin-top:22px;
+  font-family:"Archivo",system-ui,sans-serif; font-size:14px; font-weight:500;
+}
+.priceline b{color:var(--signal); font-weight:700}
+
+/* ---------- addons ---------- */
+.deliv{border-top:1px solid var(--line); padding:20px 0; display:grid; grid-template-columns:260px 1fr 130px; gap:24px; align-items:baseline}
+.deliv:last-child{border-bottom:1px solid var(--line)}
+.deliv-name{font-family:"Archivo",system-ui,sans-serif; font-weight:700; font-size:17px}
+.deliv-desc{margin:0; color:var(--stone); font-size:16px}
+.deliv-rate{font-family:"Archivo",system-ui,sans-serif; font-weight:700; font-size:14px; text-align:right}
+@media (max-width:760px){ .deliv{grid-template-columns:1fr; gap:6px} .deliv-rate{text-align:left} }
+
+/* ---------- reels ---------- */
+.reel-group{margin-bottom:38px}
+.reel-group h3{font-family:"Archivo",system-ui,sans-serif; font-size:15px; font-weight:800; margin:0 0 14px; letter-spacing:-.01em}
+.reel-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(188px,1fr)); gap:14px}
+.reel{
+  display:block; text-decoration:none; background:var(--ink); color:var(--paper);
+  aspect-ratio:9/13; padding:16px; position:relative; border-radius:3px; overflow:hidden;
+}
+.reel:nth-child(3n+2){background:#243028}
+.reel:nth-child(4n+3){background:#3A2E1C}
+.reel-title{font-family:"Archivo",system-ui,sans-serif; font-weight:700; font-size:16px; line-height:1.25; letter-spacing:-.01em}
+.reel-note{font-size:14px; color:rgba(250,248,245,.62); margin-top:8px; line-height:1.4}
+.reel-play{
+  position:absolute; left:16px; bottom:14px; font-family:"Archivo",sans-serif;
+  font-size:12.5px; font-weight:700; color:var(--signal);
+}
+.reel:hover .reel-play{text-decoration:underline}
+.reel.empty{background:transparent; color:var(--stone); border:1.5px dashed var(--line); display:flex; align-items:center; justify-content:center; text-align:center; font-size:14px; padding:20px}
+
+/* ---------- terms ---------- */
+.terms{display:grid; grid-template-columns:1fr 1fr; gap:0 46px}
+.term{border-top:1px solid var(--line); padding:16px 0}
+.term h4{font-family:"Archivo",sans-serif; font-size:15px; font-weight:800; margin:0 0 4px}
+.term p{margin:0; color:var(--stone); font-size:16px}
+@media (max-width:760px){ .terms{grid-template-columns:1fr} }
+
+.nos{margin:34px 0 0; padding-left:20px; color:var(--stone)}
+.nos li{margin-bottom:7px}
+
+/* ---------- buttons ---------- */
+.btns{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
+.btn{
+  font-family:"Archivo",system-ui,sans-serif; font-weight:700; font-size:15px;
+  text-decoration:none; padding:13px 22px; border-radius:2px; border:2px solid var(--ink);
+  background:var(--ink); color:var(--paper); display:inline-block;
+}
+.btn.alt{background:transparent; color:var(--ink)}
+
+/* ---------- cross-link card ---------- */
+.crosslink{
+  display:block; text-decoration:none; border:2px solid var(--ink); border-radius:3px;
+  padding:26px 28px; background:transparent;
+}
+.crosslink:hover{background:var(--signal); border-color:var(--signal)}
+.crosslink .cl-tag{font-family:"Archivo",sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--signal-deep); margin-bottom:8px}
+.crosslink:hover .cl-tag{color:#4A3F10}
+.crosslink h3{font-family:"Archivo",sans-serif; font-size:clamp(20px,3vw,26px); font-weight:800; letter-spacing:-.02em; margin:0 0 8px}
+.crosslink p{margin:0; color:var(--stone); max-width:60ch}
+.crosslink:hover p{color:#4A3F10}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:start}
+.mailbox{font-family:"Archivo",sans-serif; font-weight:800; font-size:clamp(20px,3.4vw,30px); letter-spacing:-.025em; text-decoration:none; display:inline-block; word-break:break-all}
+.mailbox:hover{box-shadow:inset 0 -4px 0 var(--signal)}
+.mail-label{font-family:"Archivo",sans-serif; font-size:13px; font-weight:700; color:var(--stone); margin:0 0 4px}
+.mail-row{margin-bottom:24px}
+@media (max-width:760px){ .contact-grid{grid-template-columns:1fr; gap:26px} }
+
+/* ---------- footer ---------- */
+footer{background:var(--ink); color:rgba(250,248,245,.6); padding:30px 0; font-size:14px}
+footer .wrap{display:flex; flex-wrap:wrap; gap:12px 26px; justify-content:space-between}
+footer a{color:var(--signal); text-decoration:none}
+
+@media (prefers-reduced-motion: no-preference){
+  .hero-rule{animation:draw .7s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <span class="nav-name" id="navName"></span>
+    <div class="nav-links">
+      <a href="#audience">Audience</a>
+      <a href="#channels">Accounts</a>
+      <a href="#pricing">Rates</a>
+      <a href="#proof">Proof</a>
+      <a href="#terms">Terms</a>
+      <a class="nav-cta" href="#contact">Start a collab</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1 id="heroName"></h1>
+    <p class="hero-lede" id="heroLede"></p>
+    <div class="hero-rule"></div>
+    <div class="hero-meta" id="heroMeta"></div>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="audience">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="num">01</span>Who you reach</h2>
+        <p id="audienceIntro"></p>
+      </div>
+      <div class="stats" id="audienceStats"></div>
+      <div class="why" id="whyList"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="channels">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="num">02</span>The accounts</h2>
+        <p id="channelsIntro"></p>
+      </div>
+      <div id="channelList"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="pricing">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="num">03</span>Rates</h2>
+        <p id="packsIntro"></p>
+      </div>
+      <div class="packs" id="packList"></div>
+      <div class="priceline" id="priceLine"></div>
+
+      <div class="sec-head" style="margin:46px 0 16px">
+        <h2 style="font-size:clamp(20px,3vw,26px)">Add-ons</h2>
+      </div>
+      <div id="addonList"></div>
+
+      <div class="sec-head" style="margin:46px 0 16px">
+        <h2 style="font-size:clamp(20px,3vw,26px)">Categories that fit</h2>
+      </div>
+      <div class="chips" id="categories"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="proof">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="num">04</span>Proof</h2>
+        <p id="reelsIntro"></p>
+      </div>
+      <div class="reel-grid" id="reelGrid"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="terms">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="num">05</span>Terms</h2>
+      </div>
+      <div class="terms" id="termList"></div>
+      <ul class="nos" id="termNos"></ul>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2><span class="num">06</span>Start a collab</h2>
+        <p id="contactIntro"></p>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <p class="mail-label">Brands and agencies</p>
+          <a class="mailbox" id="mailBrand" href="#"></a>
+          <div class="btns">
+            <a class="btn" id="btnBrand" href="#">Email a brief</a>
+            <a class="btn alt" id="btnMediaKit" href="#">Request insights pack</a>
+          </div>
+        </div>
+        <div>
+          <p class="mail-label" style="margin-bottom:10px">Also here</p>
+          <div class="chips" id="links"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:44px">
+        <a class="crosslink" id="crossLink" href="for-brand-managers.html">
+          <div class="cl-tag" id="clTag"></div>
+          <h3 id="clTitle"></h3>
+          <p id="clBody"></p>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span id="footLeft"></span>
+    <span id="footRight"></span>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   CONFIG - EDIT ONLY THIS BLOCK.
+   ========================================================================== */
+const CONFIG = {
+
+  name: "144k people trying to get good at something hard",
+  shortName: "Sachin - Brand Kit",
+
+  hero: {
+    lede: "Rates, audience and terms. No call needed to get a number.",
+    meta: [
+      ["~144,000", "combined reach"],
+      ["3", "accounts"],
+      ["Bangalore", "based in"],
+      ["2 hours", "reply time"],
+      ["Barter + paid", "open to"]
+    ]
+  },
+
+  audienceIntro: "From Instagram insights, rounded. Screenshot pack on request.",
+
+  audienceStats: [
+    ["~144,000", "Combined followers"],
+    ["18-28", "Core age band"],
+    ["78%", "India"],
+    ["Tier 2-3", "Majority geography"],
+    ["Professionals + Students", "Primary occupation"],
+    ["Hindi + English", "Content language"]
+  ],
+
+  // Three lines of positioning. Why this audience converts.
+  why: [
+    { title: "High intent, not idle scrolling", body: "They're preparing for interviews, learning a stack, building a habit. Already in buying mode for anything that helps." },
+    { title: "Zero paid acquisition, ever", body: "Every follower arrived because something on the account was useful. That's why a recommendation lands instead of getting scrolled past." },
+    { title: "Process, not lifestyle", body: "The product shows up inside real work - the desk, the gym, the prep session. It looks used, because it is." }
+  ],
+
+  channelsIntro: "Pick the one that matches the product instead of buying all three.",
+
+  channels: [
+    {
+      handle: "@theboringfounder",
+      url: "https://instagram.com/theboringfounder",
+      count: "136,000",
+      countLabel: "followers",
+      what: "Tech careers and interview prep. Students and early-career engineers across India, mostly tier-2 and tier-3.",
+      best: "Reach plays. Edtech, dev tools, laptops and peripherals, hiring platforms.",
+      formats: "Reels, carousels, stories, lives"
+    },
+    {
+      handle: "@liveinterviewswithsachin",
+      url: "https://instagram.com/liveinterviewswithsachin",
+      count: "6,700",
+      countLabel: "followers",
+      what: "Unscripted live interviews. Small audience, actively job-hunting, extremely high intent.",
+      best: "Conversion plays. Interview prep, resume tools, hiring and assessment platforms.",
+      formats: "Live sponsorship, clips, pinned mentions"
+    },
+    {
+      handle: "@theboringplanks",
+      url: "https://instagram.com/theboringplanks",
+      count: "1,100",
+      countLabel: "followers",
+      what: "Gym, running, AI product work, daily logs. Smallest audience, closest relationship.",
+      best: "Credibility plays. Fitness gear, running, wearables, desk setup, everyday carry.",
+      formats: "Reels, stories, 30-day usage logs"
+    }
+  ],
+
+  packsIntro: "Published so you can budget without a call. INR, excluding GST. Barter considered for products I'd use daily.",
+
+  // >>> CHANGE THESE NUMBERS TO YOUR ACTUAL RATES. <<<
+  packages: [
+    {
+      tag: "Most common",
+      title: "Single integration",
+      price: "Rs 35,000",
+      unit: "per reel, one account",
+      items: [
+        "60-90s reel, scripted by me",
+        "2 supporting story frames with link",
+        "Pinned comment with your link or code",
+        "1 revision round",
+        "30 days organic usage rights"
+      ],
+      foot: "Live in <b>10-14 days</b>",
+      feature: false
+    },
+    {
+      tag: "Highest intent",
+      title: "Live interview sponsorship",
+      price: "Rs 25,000",
+      unit: "per live session",
+      items: [
+        "Open and mid-session mention",
+        "Brand name in session title and caption",
+        "Link sticker during the live",
+        "2 cut-down clips posted after",
+        "30 days clip usage rights"
+      ],
+      foot: "Live in <b>7-10 days</b>",
+      feature: true
+    },
+    {
+      tag: "Deepest association",
+      title: "Quarterly ambassador",
+      price: "Rs 1,20,000",
+      unit: "per quarter, across accounts",
+      items: [
+        "4 integrated reels over 3 months",
+        "Monthly story series",
+        "One 30-day honest usage log",
+        "Category exclusivity for the term",
+        "90 days paid + organic usage rights"
+      ],
+      foot: "Rolling, <b>2 slots</b> at a time",
+      feature: false
+    }
+  ],
+
+  // One-line process strip. Deliberately short.
+  priceLine: [
+    "Brief <b>&rarr;</b> concept <b>&rarr;</b> shoot <b>&rarr;</b> live",
+    "<b>50/50</b> payment, on confirm and on publish",
+    "Insights sent at <b>48h</b> and <b>7 days</b>"
+  ],
+
+  addons: [
+    { name: "Paid usage / whitelisting", desc: "Spark Ads on your handle, beyond the included organic window.", rate: "+40%" },
+    { name: "Category exclusivity", desc: "No direct competitor for an agreed window.", rate: "+30%" },
+    { name: "Rush delivery", desc: "Live in under 7 days.", rate: "+25%" },
+    { name: "Cross-post to all 3 accounts", desc: "Adapted per account, not copy-pasted.", rate: "+60%" },
+    { name: "Raw footage handover", desc: "Unedited clips for your own edits.", rate: "Rs 10,000" },
+    { name: "Integration demo build", desc: "For dev tools - I'm an engineer, I can ship a real demo alongside the post.", rate: "Ask" }
+  ],
+
+  categories: [
+    { label: "Interview prep + hiring", hot: true },
+    { label: "AI and dev tools", hot: true },
+    { label: "Desk and office setup", hot: true },
+    { label: "Gym and home workout gear", hot: true },
+    { label: "Running", hot: true },
+    { label: "Remote work travel", hot: true },
+    { label: "Productivity apps", hot: true },
+    { label: "Learning and edtech", hot: true },
+    { label: "Sketching and stationery", hot: false },
+    { label: "Everyday carry", hot: false }
+  ],
+
+  reelsIntro: "The format an integration would sit inside.",
+
+  reels: [
+    { title: "System design interview teardown", note: "HLD and LLD prep", url: "https://www.instagram.com/reel/DdbcF1nIY7z/?stkn=MmNldGh0eTFhZDY5" },
+    { title: "Resume rewrite on camera", note: "Before and after, line by line", url: "https://www.instagram.com/reel/DTQDfWXkvKl/?stkn=MW4zZmhlbzV4MWN5ZQ==" },
+    { title: "LIVE interview, full length", note: "No cuts", url: "https://www.instagram.com/reel/DZxNyDBiOj6/?stkn=M2RhYjFvZTg5cXo5" },
+    { title: "Working from the mountains", note: "Remote work setup", url: "https://www.instagram.com/reel/DaVK6CshCxJ/?stkn=NGE3azQxeWRxenY=" },
+    { title: "Learning anything with AI", note: "Workflow walkthrough", url: "https://www.instagram.com/reel/Dcdtp1Lh5U1/?stkn=MTd6NG92Y2phNnI3bw==" },
+    { title: "Tools I actually use daily", note: "Stack walkthrough", url: "https://www.instagram.com/reel/Ddg9NRohu5L/?stkn=cmJhZTJhN3lhYjc=" }
+  ],
+
+  terms: [
+    { q: "Usage rights", a: "30 days organic on your handles included. Paid usage and whitelisting are an add-on." },
+    { q: "Script approval", a: "I write it. You approve facts, claims and legal language. I don't read brand scripts verbatim." },
+    { q: "Revisions", a: "One round on anything factual, legal or brand-safety related. Subjective re-edits are billed." },
+    { q: "Payment", a: "50% to confirm the date, 50% within 7 days of publishing. Bank transfer or UPI, GST invoice provided." },
+    { q: "Disclosure", a: "Every paid or gifted collab is disclosed per ASCI guidelines. Non-negotiable." },
+    { q: "Performance", a: "I guarantee the deliverable and the date, not view counts. A badly underperforming post gets one free re-cut." }
+  ],
+
+  termNos: [
+    "Betting, gambling and trading-tip apps",
+    "Crypto token promotions",
+    "Anything I haven't personally used",
+    "Courses promising job outcomes they can't deliver"
+  ],
+
+  contactIntro: "Send the brief and you get a yes or no, plus a quote, within 2 hours.",
+
+  email: {
+    brand: "sachinkshuklaoo7@gmail.com"
+  },
+
+  mailTemplates: {
+    brand: {
+      subject: "Collab brief: [Your brand]",
+      body: [
+        "Brand and product:",
+        "Website:",
+        "Package (single integration / live sponsorship / quarterly ambassador):",
+        "Account (founder / live interviews / planks):",
+        "Goal (awareness / signups / sales / installs):",
+        "Budget or barter:",
+        "Target publish window:",
+        "Add-ons needed (paid usage / exclusivity / rush):",
+        "",
+        "Your name and role:"
+      ].join("\n")
+    },
+    mediaKit: {
+      subject: "Insights pack request: [Your brand]",
+      body: [
+        "Brand:",
+        "Your name and role:",
+        "What you need (audience screenshots / past performance):",
+        "Which account(s):"
+      ].join("\n")
+    }
+  },
+
+  links: [
+    { label: "The Boring Founder", url: "https://instagram.com/theboringfounder" },
+    { label: "Live Interviews", url: "https://instagram.com/liveinterviewswithsachin" },
+    { label: "The Boring Planks", url: "https://instagram.com/theboringplanks" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/imsks" }
+  ],
+
+  // Card linking across to the scout page.
+  crossLink: {
+    url: "for-brand-managers.html",
+    tag: "Not a brand?",
+    title: "Bring me a collab, get paid for it",
+    body: "Separate page for community scouts - payout, rules and the lead format."
+  },
+
+  footer: {
+    left: "Sachin Kumar Shukla - brand kit",
+    right: "Last updated: October 2026"
+  }
+};
+
+/* ==========================================================================
+   RENDER - you don't need to edit below this line.
+   ========================================================================== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const mailto = (addr, t) =>
+  `mailto:${addr}?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(t.body)}`;
+
+$('navName').textContent = CONFIG.shortName;
+$('heroName').textContent = CONFIG.name;
+$('heroLede').textContent = CONFIG.hero.lede;
+$('heroMeta').innerHTML = CONFIG.hero.meta
+  .map(([v, l]) => `<span><b>${esc(v)}</b> ${esc(l)}</span>`).join('');
+
+$('audienceIntro').textContent = CONFIG.audienceIntro;
+$('audienceStats').innerHTML = CONFIG.audienceStats
+  .map(([v, l]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('');
+$('whyList').innerHTML = CONFIG.why
+  .map(w => `<div class="why-item"><h3>${esc(w.title)}</h3><p>${esc(w.body)}</p></div>`).join('');
+
+$('channelsIntro').textContent = CONFIG.channelsIntro;
+$('channelList').innerHTML = CONFIG.channels.map(c => `
+  <div class="chan">
+    <div>
+      <a class="chan-handle" href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.handle)}</a>
+      <div class="chan-count">${esc(c.count)}<span>${esc(c.countLabel)}</span></div>
+    </div>
+    <div>
+      <p class="chan-what">${esc(c.what)}</p>
+      <p class="chan-best"><b>Best for</b>${esc(c.best)}</p>
+    </div>
+    <div class="chan-fmt"><b>Formats</b>${esc(c.formats)}</div>
+  </div>`).join('');
+
+$('packsIntro').textContent = CONFIG.packsIntro;
+$('packList').innerHTML = CONFIG.packages.map(p => `
+  <div class="pack${p.feature ? ' feature' : ''}">
+    <div class="pack-tag">${esc(p.tag)}</div>
+    <h3>${esc(p.title)}</h3>
+    <p class="pack-price">${esc(p.price)}</p>
+    <p class="pack-unit">${esc(p.unit)}</p>
+    <ul>${p.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+    <div class="pack-foot">${p.foot}</div>
+  </div>`).join('');
+$('priceLine').innerHTML = CONFIG.priceLine.map(l => `<span>${l}</span>`).join('');
+
+$('addonList').innerHTML = CONFIG.addons.map(d => `
+  <div class="deliv">
+    <div class="deliv-name">${esc(d.name)}</div>
+    <p class="deliv-desc">${esc(d.desc)}</p>
+    <div class="deliv-rate">${esc(d.rate)}</div>
+  </div>`).join('');
+
+$('categories').innerHTML = CONFIG.categories
+  .map(c => `<span class="chip${c.hot ? ' hot' : ''}">${esc(c.label)}</span>`).join('');
+
+$('reelsIntro').textContent = CONFIG.reelsIntro;
+$('reelGrid').innerHTML = CONFIG.reels.map(r => `
+  <a class="reel" href="${esc(r.url)}" target="_blank" rel="noopener">
+    <div class="reel-title">${esc(r.title)}</div>
+    <div class="reel-note">${esc(r.note)}</div>
+    <div class="reel-play">Watch on Instagram</div>
+  </a>`).join('');
+
+$('termList').innerHTML = CONFIG.terms
+  .map(t => `<div class="term"><h4>${esc(t.q)}</h4><p>${esc(t.a)}</p></div>`).join('');
+$('termNos').innerHTML = CONFIG.termNos.map(n => `<li>${esc(n)}</li>`).join('');
+
+$('contactIntro').textContent = CONFIG.contactIntro;
+const brandLink = mailto(CONFIG.email.brand, CONFIG.mailTemplates.brand);
+$('btnBrand').href = brandLink;
+$('mailBrand').href = brandLink;
+$('mailBrand').textContent = CONFIG.email.brand;
+$('btnMediaKit').href = mailto(CONFIG.email.brand, CONFIG.mailTemplates.mediaKit);
+
+$('links').innerHTML = CONFIG.links
+  .map(l => `<a class="chip" style="text-decoration:none" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('');
+
+$('crossLink').href = CONFIG.crossLink.url;
+$('clTag').textContent = CONFIG.crossLink.tag;
+$('clTitle').textContent = CONFIG.crossLink.title;
+$('clBody').textContent = CONFIG.crossLink.body;
+
+$('footLeft').textContent = CONFIG.footer.left;
+$('footRight').textContent = CONFIG.footer.right;
+</script>
+</body>
+</html>
