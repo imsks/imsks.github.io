@@ -61,7 +61,6 @@ a{color:inherit}
 .nav a:hover{opacity:1}
 .nav a.nav-cta{background:var(--signal); color:var(--ink); opacity:1; font-weight:700; padding:7px 13px; border-radius:2px}
 .nav-links{display:flex; gap:18px; align-items:center}
-@media (max-width:700px){ .nav-links a:not(.nav-cta){display:none} }
 
 /* ---------- hero ---------- */
 .hero{background:var(--signal); border-bottom:2px solid var(--ink); padding:64px 0 0}
@@ -90,13 +89,13 @@ a{color:inherit}
 .sec-head p{margin:0; color:var(--stone); max-width:58ch}
 
 /* ---------- why ---------- */
-.why{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:28px; margin-top:38px}
+.why{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr)); gap:28px; margin-top:38px}
 .why-item{border-top:2px solid var(--signal); padding-top:14px}
 .why-item h3{font-family:"Archivo",system-ui,sans-serif; font-size:17px; font-weight:800; margin:0 0 6px; letter-spacing:-.01em}
 .why-item p{margin:0; color:var(--stone); font-size:16px}
 
 /* ---------- stat strip ---------- */
-.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line)}
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr)); gap:1px; background:var(--line); border:1px solid var(--line)}
 .stat{background:var(--paper); padding:22px 20px}
 .stat b{display:block; font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:30px; letter-spacing:-.03em; line-height:1.1}
 .stat span{display:block; font-family:"Archivo",system-ui,sans-serif; font-size:12.5px; font-weight:500; color:var(--stone); margin-top:6px}
@@ -104,7 +103,7 @@ a{color:inherit}
 /* ---------- channels ---------- */
 .chan{border-top:2px solid var(--ink); padding:26px 0; display:grid; grid-template-columns:230px 1fr 190px; gap:30px}
 .chan:last-child{border-bottom:2px solid var(--ink)}
-.chan-handle{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:19px; letter-spacing:-.02em; text-decoration:none; display:inline-block}
+.chan-handle{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:19px; letter-spacing:-.02em; text-decoration:none; display:inline-block; overflow-wrap:anywhere}
 .chan-handle:hover{box-shadow:inset 0 -3px 0 var(--signal)}
 .chan-count{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:30px; letter-spacing:-.03em; line-height:1.1; margin-top:8px}
 .chan-count span{display:block; font-size:12.5px; font-weight:500; color:var(--stone); letter-spacing:0}
@@ -126,7 +125,7 @@ a{color:inherit}
 .chip.hot{background:var(--signal); border-color:var(--signal)}
 
 /* ---------- packages ---------- */
-.packs{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px}
+.packs{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr)); gap:18px}
 .pack{border:2px solid var(--ink); border-radius:3px; padding:26px 24px; display:flex; flex-direction:column}
 .pack.feature{background:var(--signal); border-color:var(--signal)}
 .pack-tag{font-family:"Archivo",system-ui,sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--signal-deep); margin-bottom:10px}
@@ -159,7 +158,7 @@ a{color:inherit}
 /* ---------- reels ---------- */
 .reel-group{margin-bottom:38px}
 .reel-group h3{font-family:"Archivo",system-ui,sans-serif; font-size:15px; font-weight:800; margin:0 0 14px; letter-spacing:-.01em}
-.reel-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(188px,1fr)); gap:14px}
+.reel-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(188px,100%),1fr)); gap:14px}
 .reel{
   display:block; text-decoration:none; background:var(--ink); color:var(--paper);
   aspect-ratio:9/13; padding:16px; position:relative; border-radius:3px; overflow:hidden;
@@ -218,6 +217,46 @@ a{color:inherit}
 footer{background:var(--ink); color:rgba(250,248,245,.6); padding:30px 0; font-size:14px}
 footer .wrap{display:flex; flex-wrap:wrap; gap:12px 26px; justify-content:space-between}
 footer a{color:var(--signal); text-decoration:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .wrap, .nav-in{padding:0 20px}
+}
+@media (max-width:700px){
+  body{font-size:16px}
+  .wrap, .nav-in{padding:0 18px}
+
+  /* nav collapses into one scrollable row */
+  .nav-in{height:54px; gap:14px}
+  .nav-name{display:none}
+  .nav-links{width:100%; min-width:0; gap:16px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav a{white-space:nowrap}
+
+  .hero{padding-top:44px}
+  .hero h1{font-size:clamp(30px,10vw,52px); margin-bottom:20px; overflow-wrap:break-word}
+  .hero-lede{margin-bottom:28px}
+  .hero-meta{gap:2px 22px; font-size:13px}
+
+  .sec{padding:44px 0}
+  .sec-head{margin-bottom:24px}
+
+  .why{gap:22px; margin-top:28px}
+  .packs{grid-template-columns:1fr}
+  .pack{padding:22px 20px}
+  .priceline{flex-direction:column; gap:6px; padding:16px 18px}
+
+  .reel-grid{grid-template-columns:1fr 1fr; gap:10px}
+  .reel{padding:13px}
+  .reel-title{font-size:15px}
+  .reel-note{font-size:13px}
+  .reel-play{left:13px; bottom:11px}
+
+  .btns{gap:10px}
+  .btn{flex:1 1 100%; text-align:center}
+  .crosslink{padding:20px}
+  footer .wrap{flex-direction:column; gap:6px}
+}
 
 @media (prefers-reduced-motion: no-preference){
   .hero-rule{animation:draw .7s cubic-bezier(.2,.7,.3,1) both}
