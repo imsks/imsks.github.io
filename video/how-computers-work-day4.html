@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>How Computers Work — Day 4: Binary, and Why Base-2 (9:16)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  body.playing { cursor: none; }
+  #cv { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: block; background: #000; }
+  #ui { position: fixed; inset: 0; z-index: 10; display: grid; place-content: center; justify-items: center; gap: 18px;
+        background: rgba(0,0,0,.6); font-family: "Inter", system-ui, sans-serif; text-align: center; }
+  #ui button { font: 400 20px/1 "Inter", system-ui, sans-serif; padding: 16px 40px; border: 1px solid rgba(255,255,255,.5);
+               border-radius: 999px; background: transparent; color: #fff; cursor: pointer; letter-spacing: .08em; }
+  #ui p { margin: 0; font-size: 13px; color: #8a8f99; }
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="ui">
+  <button id="play" type="button">▶ Play</button>
+  <p>Space: play / replay · F: fullscreen · ?at=38 starts at a time (seconds)</p>
+</div>
+
+<script>
+(() => {
+  const W = 1080, H = 1920, DURATION = 68;
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  cv.width = W; cv.height = H;
+
+  function fit() {
+    const s = Math.min(innerWidth / W, innerHeight / H);
+    cv.style.width = W * s + 'px';
+    cv.style.height = H * s + 'px';
+  }
+  addEventListener('resize', fit); fit();
+
+  // ---------- math ----------
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const ease = u => (u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+  const expo = u => (u >= 1 ? 1 : 1 - Math.pow(2, -10 * u));
+  const ss = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
+  const win = (t, a, b, c, d) => ss(a, b, t) * (1 - ss(c, d, t));
+  const wob = (s, t, amp) => amp * (Math.sin(t * 1.31 + s * 12.9) + .6 * Math.sin(t * 2.73 + s * 7.13) + .35 * Math.sin(t * 5.17 + s * 3.31)) / 1.95;
+  const hash = (a, b, c) => { const x = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453; return x - Math.floor(x); };
+  function keyed(t, keys, fn = ease) {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      if (t <= keys[i][0]) return lerp(keys[i - 1][1], keys[i][1], fn((t - keys[i - 1][0]) / (keys[i][0] - keys[i - 1][0])));
+    }
+    return keys[keys.length - 1][1];
+  }
+
+  // ---------- colours: blue-white = 1 / on, amber = 0 / off (carried over from Day 2's N/P mapping) ----------
+  const WHITE = '255,255,255', BLUE = '160,210,255', AMBER = '255,176,64';
+  const col = (rgb, a) => `rgba(${rgb},${a})`;
+
+  // Background zones; each cross-fade is offset from the nearest content cut
+  const ZONES = [[5, 5, 8], [8, 6, 5], [10, 10, 12], [0, 0, 0]];
+  const ZONE_FADES = [[17, 19.5], [35, 37.5], [53, 55.5]];
+  function background(t) {
+    let c = ZONES[0];
+    ZONE_FADES.forEach(([a, b], i) => { const u = ss(a, b, t); c = c.map((v, k) => lerp(v, ZONES[i + 1][k], u)); });
+    return `rgb(${c.map(Math.round).join(',')})`;
+  }
+
+  // ---------- primitives ----------
+  const SPR = {};
+  function sprite(rgb) {
+    if (SPR[rgb]) return SPR[rgb];
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(255,255,255,1)');
+    gr.addColorStop(.16, col(rgb, 1));
+    gr.addColorStop(.26, col(rgb, .45));
+    gr.addColorStop(.5, col(rgb, .1));
+    gr.addColorStop(1, col(rgb, 0));
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+    return (SPR[rgb] = c);
+  }
+  function dot(x, y, r, rgb, a) {
+    if (a <= .003) return;
+    ctx.globalAlpha = Math.min(1, a);
+    const s = r * 6;
+    ctx.drawImage(sprite(rgb), x - s / 2, y - s / 2, s, s);
+    ctx.globalAlpha = 1;
+  }
+  function ring(x, y, r, rgb, a, w) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = w;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  }
+  function line(x1, y1, x2, y2, rgb, a, w) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = w;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  }
+  function cam(cx, cy, s) { ctx.setTransform(s, 0, 0, s, W / 2 - cx * s, H / 2 - cy * s); }
+  function screen() { ctx.setTransform(1, 0, 0, 1, 0, 0); }
+  function text(str, x, y, a, size = 40, rgb = WHITE, serif = false) {
+    if (a <= .003) return;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.font = serif ? `400 ${size}px Georgia, "Times New Roman", serif` : `300 ${size}px Inter, "Helvetica Neue", Arial, sans-serif`;
+    ctx.letterSpacing = size >= 36 ? '1.5px' : '0.5px';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = col(rgb, Math.min(1, a));
+    ctx.fillText(str, x, y);
+    ctx.globalCompositeOperation = 'lighter';
+  }
+  const label = (str, x, y, a, size = 40) => text(str, x, y + (1 - a) * 8, .9 * a, size);
+
+  // ======================================================================
+  // Segment A — why two levels, not ten (0–16)
+  // ======================================================================
+  const LX0 = 170, LX1 = 990, SLICES = 30;
+
+  function scene1(t) {
+    if (t >= 5) return;
+    const A = ss(0, 1.2, t);
+    const p = .5 + .35 * Math.sin(t * .8), level = .7 + .3 * Math.sin(t * 1.1) * Math.sin(t * .37 + 1);
+    const g = ctx.createLinearGradient(90, 0, 990, 0);
+    for (let k = 0; k <= 10; k++) {
+      const u = k / 10;
+      g.addColorStop(u, col(WHITE, (.12 + .88 * ss(p - .45, p + .45, u)) * level));
+    }
+    ctx.strokeStyle = g;
+    for (const [w, a] of [[16, .06], [7, .18], [2, 1]]) {
+      ctx.globalAlpha = a * A; ctx.lineWidth = w;
+      ctx.beginPath(); ctx.moveTo(90, 960); ctx.lineTo(990, 960); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // a band drawn as vertical slices so noise can tear it apart
+  function band(x0, x1, y, h, rgb, a, amp, seed, t) {
+    if (a <= .003) return;
+    const sw = (x1 - x0) / SLICES, frame = Math.floor(t * 30);
+    ctx.fillStyle = col(rgb, a);
+    for (let s = 0; s < SLICES; s++) {
+      const off = amp ? (hash(seed, s, frame) - .5) * 2 * amp : 0;
+      const xa = Math.round(x0 + s * sw), xb = Math.round(x0 + (s + 1) * sw);
+      ctx.fillRect(xa, y - h / 2 + off, xb - xa, h);
+    }
+  }
+
+  const DOT2 = [[6.6, 1360], [7.6, 985], [8.7, 935], [9.7, 560]];
+  function scene2(t) {
+    if (t < 5 || t >= 10) return;
+    const sp = ease(ss(5, 6, t));
+    const burst = win(t, 7.3, 7.7, 8.7, 9.1);
+    const x0 = lerp(90, LX0, sp), x1 = LX1;
+    const bk = k => .04 + k * .036;
+    for (let k = 0; k < 10; k++) {
+      const y = lerp(960, 1320 - k * 80, sp), h = lerp(2, 46, sp);
+      const fragile = k === 4 || k === 5;
+      let b = bk(k);
+      if (fragile) b = lerp(b, (bk(4) + bk(5)) / 2, .8 * burst) + (hash(k, 1, Math.floor(t * 20)) - .5) * .18 * burst;
+      else b += (hash(k, 2, Math.floor(t * 12)) - .5) * .03;
+      band(x0, x1, y, h, WHITE, Math.max(0, b), 2.5 + (fragile ? 26 * burst : 0), k + 1, t);
+      const na = .55 * ss(5.8 + k * .06, 6.3 + k * .06, t);
+      text(String(k), 120 + (fragile ? (hash(k, 3, Math.floor(t * 24)) - .5) * 10 * burst : 0), y, na, 28);
+    }
+    // glitch scanlines tearing across the 4 / 5 boundary
+    if (burst > 0) {
+      const f = Math.floor(t * 24);
+      for (let i = 0; i < 5; i++) {
+        if (hash(i, 7, f) > .6) continue;
+        line(LX0, 920 + hash(i, 8, f) * 80, LX1, 920 + hash(i, 8, f) * 80, WHITE, .25 * burst, 1 + 2 * hash(i, 9, f));
+      }
+    }
+    if (t > 6.4) {
+      const yAt = tt => keyed(tt, DOT2) + (hash(5, 5, Math.floor(tt * 24)) - .5) * 56 * win(tt, 7.3, 7.7, 8.7, 9.1);
+      for (let k = 1; k <= 6; k++) dot(580, yAt(t - k * .03), 2.5, WHITE, (1 - k / 6) * .3);
+      dot(580 + (hash(6, 6, Math.floor(t * 24)) - .5) * 14 * burst, yAt(t), 5, WHITE, ss(6.4, 6.7, t));
+    }
+  }
+
+  const BAND1 = 700, BAND0 = 1220;
+  const SNAPS = [[10.6, BAND1], [11.4, BAND0], [12.2, BAND1], [12.9, BAND0], [13.5, BAND1]];
+  function scene3(t) {
+    if (t < 10 || t >= 16.3) return;
+    const A = 1 - ss(15.7, 16.3, t);
+    const z = ease(ss(14, 14.8, t));
+    cam(540, lerp(960, BAND1, z), lerp(1, 2.4, z));
+
+    let y = 960, pulse1 = 0, pulse0 = 0;
+    for (const [T, target] of SNAPS) {
+      if (t < T) break;
+      y = lerp(y, target, expo((t - T) / .2));
+      const land = Math.exp(-Math.max(0, t - T - .2) * 5) * (t >= T + .2 ? 1 : 0);
+      if (target === BAND1) pulse1 = Math.max(pulse1, land); else pulse0 = Math.max(pulse0, land);
+    }
+    // same noise as before — now trivially small against the gap
+    band(LX0, LX1, BAND1, 140, BLUE, (.07 + .1 * pulse1) * A, 0, 0, t);
+    band(LX0, LX1, BAND1, 120, BLUE, (.45 + .3 * pulse1) * A, 4, 11, t);
+    band(LX0, LX1, BAND0, 120, AMBER, (.14 + .2 * pulse0) * A, 4, 12, t);
+    text('1', 120, BAND1, .55 * A, 28);
+    text('0', 120, BAND0, .55 * A, 28);
+    if (t > 10.25) dot(580, y, 5, y < 960 ? BLUE : y > 960 ? AMBER : WHITE, A * ss(10.25, 10.4, t));
+
+    screen();
+    label('Noise can’t fake a jump this big.', 540, 1580, A * win(t, 11.9, 12.6, 13.6, 14.2), 38);
+    label('0 or 1 — a bit.', 540, 1400, A * win(t, 14.5, 15, 15.6, 16.1), 44);
+  }
+
+  // ======================================================================
+  // Segment B — place value and hex (16–34)
+  // ======================================================================
+  const ROW_Y = 960, SQ = 70, NX = i => 540 + (i - 3.5) * 112;
+  const VALUES = [128, 64, 32, 16, 8, 4, 2, 1];
+  const BITS = [0, 1, 0, 0, 1, 0, 0, 1];           // 73
+  const FLIP = { 1: 22.6, 4: 23.8, 7: 25.0 };
+  const HEX = ['4', '9'];                           // 0100 1001 → 0x49
+  const SUM_STEPS = [[22.6, 0, 64], [23.8, 64, 72], [25.0, 72, 73]];
+  const sumAt = t => SUM_STEPS.reduce((v, [tt, a, b]) => (t >= tt ? Math.round(lerp(a, b, ease(clamp((t - tt) / .45)))) : v), 0);
+
+  function square(x, y, size, on, a, rot = 0, pulse = 0) {
+    if (a <= .003) return;
+    ctx.save(); ctx.translate(x, y); if (rot) ctx.rotate(rot);
+    ctx.beginPath(); ctx.roundRect(-size / 2, -size / 2, size, size, size * .1);
+    ctx.lineWidth = 2;
+    if (on < 1) { ctx.fillStyle = col(AMBER, .1 * a * (1 - on)); ctx.fill(); ctx.strokeStyle = col(AMBER, .5 * a * (1 - on)); ctx.stroke(); }
+    if (on > 0) { ctx.fillStyle = col(BLUE, .8 * a * on); ctx.fill(); ctx.strokeStyle = col(WHITE, .85 * a * on); ctx.stroke(); }
+    ctx.restore();
+    if (on > 0) dot(x, y, size * .5, BLUE, (.3 + .5 * pulse) * a * on);
+  }
+  function diamond(x, y, size, a) {
+    if (a <= .003) return;
+    ctx.save(); ctx.translate(x, y); ctx.rotate(Math.PI / 4);
+    ctx.beginPath(); ctx.roundRect(-size / 2, -size / 2, size, size, 4);
+    ctx.fillStyle = col(WHITE, .06 * a); ctx.fill();
+    ctx.strokeStyle = col(WHITE, .85 * a); ctx.lineWidth = 2; ctx.stroke();
+    ctx.restore();
+    dot(x, y, size * .6, WHITE, .1 * a);
+  }
+  function sumText(v, y, a) {
+    if (a <= .003) return;
+    ctx.shadowColor = col(BLUE, .7 * a); ctx.shadowBlur = 26;
+    text(String(v), 540, y, .95 * a, 72);
+    ctx.shadowBlur = 0; ctx.shadowColor = 'transparent';
+  }
+
+  function rowCam(t) {
+    if (t < 25.6) return [540, 960, 1];
+    if (t < 28) { const e = ease(ss(25.6, 28, t)); return [540, lerp(960, 1080, e), lerp(1, 1.25, e)]; }
+    const e = ease(ss(28, 29.4, t));
+    return [540, lerp(1080, 960, e), lerp(1.25, .92, e)];
+  }
+
+  function rowScene(t) {
+    if (t < 16 || t >= 34.2) return;
+    const A = 1 - ss(33.6, 34.2, t);
+    cam(...rowCam(t));
+
+    line(NX(0) - 60, ROW_Y, NX(7) + 60, ROW_Y, WHITE, .08 * A * ss(16.3, 17.2, t) * (1 - ss(29.6, 30.2, t)), 1);
+    const sep = ease(ss(28.8, 29.6, t)) * 34;
+    const centers = [(NX(0) + NX(3)) / 2 - sep, (NX(4) + NX(7)) / 2 + sep];
+    const numA = A * (1 - ss(29.6, 30.2, t));
+
+    for (let i = 0; i < 8; i++) {
+      const ai = ss(16.4 + i * .18, 16.85 + i * .18, t), g = i < 4 ? 0 : 1;
+      const k = Math.abs(i - (g ? 5.5 : 1.5));
+      const u = ease(ss(30 + k * .08, 30.8 + k * .08, t));
+      const x = lerp(NX(i) + (g ? sep : -sep), centers[g], u);
+      const ft = FLIP[i];
+      const on = ft ? ss(ft, ft + .22, t) : 0;
+      const pulse = ft && t >= ft ? Math.exp(-(t - ft) * 4) : 0;
+      square(x, ROW_Y, SQ * lerp(.6, 1, ease(ai)) * lerp(1, .5, u), on, A * ai * (1 - ss(.7, 1, u)), u * Math.PI / 4, pulse);
+      if (ft && t >= ft && t < ft + .7) { const v = (t - ft) / .7; ring(x, ROW_Y, SQ * .6 + 50 * v, BLUE, (1 - v) * .7 * A, 2); }
+      text(String(VALUES[i]), NX(i), 878, .5 * numA * ss(18 + i * .12, 18.4 + i * .12, t), 26);
+      if (ft && t >= ft && t < ft + 1.1) { const v = (t - ft) / 1.1; text(String(VALUES[i]), NX(i), 878 - 80 * v, (1 - v) * .95 * A, 30, BLUE); }
+    }
+    sumText(sumAt(t), 1130, A * ss(22.6, 22.9, t) * (1 - ss(28.2, 28.8, t)));
+
+    const dv = ease(ss(28.6, 29.1, t));
+    line(540, ROW_Y - 70 * dv, 540, ROW_Y + 70 * dv, WHITE, .45 * A, 1.5);
+    const da = ss(30.6, 31.1, t);
+    centers.forEach((cx, g) => {
+      diamond(cx, ROW_Y, 100 * lerp(.6, 1, ease(da)), A * da);
+      text(HEX[g], cx, ROW_Y + 2, A * ss(30.9, 31.3, t), 54);
+    });
+
+    screen();
+    label('Four bits, one symbol — always.', 540, 1320, A * win(t, 31.4, 32, 33.3, 33.9), 38);
+  }
+
+  // ======================================================================
+  // Segments C & D — same bits, different agreements; the field of rows (33.6–68)
+  // ======================================================================
+  const LETTER = 'I';                               // ASCII 73
+  const J = [540, 770], STEM0 = 918;
+  const ENDS = [[250, 540], [540, 490], [830, 540]];
+  const ICONS = [[250, 470], [540, 420], [830, 470]];
+  const PULSES = [40.2, 41.8, 43.4];
+  const PX = 1030, PY = 1830, GRID_C = [540 + PX / 2, 780 + PY / 2];
+  const S_GRID = .105;
+
+  function pulseInfo(t) {
+    const pts = [], flash = [0, 0, 0];
+    let src = 0;
+    for (const T of PULSES) {
+      const tau = t - T;
+      if (tau >= 0) src += Math.exp(-tau * 5);
+      if (tau < 0 || tau > 1.4) continue;
+      for (let k = 0; k < 6; k++) {
+        const tk = tau - k * .03, a = 1 - k / 6;
+        if (tk < 0) continue;
+        if (tk < .35) pts.push([540, lerp(STEM0, J[1], tk / .35), a]);
+        else if (tk < 1.05) { const u = (tk - .35) / .7; ENDS.forEach(e => pts.push([lerp(J[0], e[0], u), lerp(J[1], e[1], u), a])); }
+      }
+      if (tau >= 1.05) flash.fill(1 - (tau - 1.05) / .35);
+    }
+    return { pts, flash, src };
+  }
+
+  function icon(kind, x, y, a, flash, scale = 1) {
+    if (a <= .003) return;
+    if (flash > 0) dot(x, y, 34 * scale, kind === 0 ? WHITE : BLUE, .5 * flash * a);
+    if (kind === 0) {
+      ctx.beginPath(); ctx.roundRect(x - 46 * scale, y - 46 * scale, 92 * scale, 92 * scale, 10 * scale);
+      ctx.strokeStyle = col(WHITE, .3 * a); ctx.lineWidth = 1.5; ctx.stroke();
+      text(LETTER, x, y + 3 * scale, .95 * a, 64 * scale, WHITE, true);
+    } else if (kind === 1) {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = `rgba(73,73,73,${a})`;           // brightness 73 / 255
+      ctx.fillRect(x - 40 * scale, y - 40 * scale, 80 * scale, 80 * scale);
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.strokeStyle = col(WHITE, .3 * a); ctx.lineWidth = 1.5;
+      ctx.strokeRect(x - 40 * scale, y - 40 * scale, 80 * scale, 80 * scale);
+    } else {
+      ['230,90,90', '90,200,120', '90,140,240'].forEach((c, i) => {
+        ctx.fillStyle = col(c, .75 * a);
+        ctx.fillRect(x + (-48 + i * 33) * scale, y - 36 * scale, 30 * scale, 72 * scale);
+      });
+    }
+  }
+
+  function meaningCam(t) {
+    if (t < 46) return [540, 960, 1];
+    if (t < 52) { const e = ease(ss(46, 47.4, t)); return [540, lerp(960, 690, e), lerp(1, 1.3, e)]; }
+    const p = ease(ss(52, 53.6, t));
+    const s = Math.exp(lerp(Math.log(1.3), Math.log(S_GRID), p)) * (1 - .05 * ss(53.6, 58, t));
+    const cx = lerp(540, GRID_C[0], p), cy = lerp(690, GRID_C[1], p);
+    if (t < 59) return [cx, cy, s];
+    const q = ease(ss(59, 61, t));
+    return [lerp(cx, 540, q), lerp(cy, 960, q), Math.exp(lerp(Math.log(s), 0, q))];
+  }
+
+  function drawCell(ix, iy, cx, cy, s, t, a) {
+    const ox = ix * PX, oy = iy * PY;
+    const X = x => W / 2 + (x + ox - cx) * s, Y = y => H / 2 + (y + oy - cy) * s;
+    if (X(NX(7) + 60) < -10 || X(NX(0) - 60) > W + 10 || Y(1000) < -10 || Y(400) > H + 10) return;
+    const h = SQ * s / 2;
+    for (let b = 0; b < 8; b++) {
+      const rate = .5 + 1.8 * hash(ix, iy, b + 20), slot = Math.floor(t * rate + 7 * hash(ix, iy, b + 40));
+      const on = hash(ix * 13 + b, iy * 7, slot) < .45;
+      ctx.fillStyle = on ? col(BLUE, .85 * a) : col(AMBER, .22 * a);
+      ctx.fillRect(X(NX(b)) - h, Y(ROW_Y) - h, 2 * h, 2 * h);
+    }
+    if (hash(ix, iy, 9) < .3) {
+      const ia = a * (.45 + .25 * Math.sin(t * (1 + hash(ix, iy, 11) * 2) + ix));
+      line(X(540), Y(STEM0), X(540), Y(520), WHITE, .25 * a, 1);
+      const kind = Math.floor(hash(ix, iy, 10) * 3);
+      if (kind === 0) text(String.fromCharCode(65 + Math.floor(hash(ix, iy, 12) * 26)), X(540), Y(470), ia, Math.max(7, 64 * s), WHITE, true);
+      else icon(kind, X(540), Y(470), ia, 0, s);
+    }
+  }
+
+  function meaning(t) {
+    if (t < 33.6) return;
+    const A = ss(33.6, 34.3, t) * (1 - ss(66.5, 68, t));
+    const [cx, cy, s] = meaningCam(t);
+
+    if (t >= 52 && t < 59.5) {
+      screen();
+      const ga = ss(52.3, 53, t) * (1 - ss(58, 59.2, t));
+      for (let ix = -6; ix <= 6; ix++) for (let iy = -6; iy <= 6; iy++) {
+        if (ix || iy) drawCell(ix, iy, cx, cy, s, t, ga);
+      }
+    }
+
+    cam(cx, cy, s);
+    const { pts, flash, src } = pulseInfo(t);
+    const bA = A * (1 - ss(58, 59, t));
+    const ps = ease(ss(38.3, 38.8, t)), pb = ease(ss(38.8, 39.5, t));
+    line(540, STEM0, 540, lerp(STEM0, J[1], ps), WHITE, .35 * bA, 1.5);
+    ENDS.forEach(e => line(J[0], J[1], lerp(J[0], e[0], pb), lerp(J[1], e[1], pb), WHITE, .35 * bA, 1.5));
+    dot(J[0], J[1], 4, WHITE, .8 * bA * ss(38.7, 38.9, t));
+    ICONS.forEach(([x, y], k) => icon(k, x, y, bA * ss(39.3 + k * .15, 39.8 + k * .15, t), flash[k]));
+    for (const [x, y, a] of pts) dot(x, y, 5 * a + 1, BLUE, a * A);
+
+    for (let i = 0; i < 8; i++) square(NX(i), ROW_Y, SQ, BITS[i], A, 0, BITS[i] ? .6 * src : 0);
+    for (let i = 0; i < 8; i++) text(String(VALUES[i]), NX(i), 878, .5 * A * (1 - ss(52, 52.5, t)), 26);
+    sumText(73, 1130, A * ((1 - ss(52, 52.5, t)) + .55 * ss(61, 62, t)));
+    label('The bits never changed.', 540, 1270, A * win(t, 42.4, 43.2, 46, 46.6), 38);
+
+    screen();
+    label('Only the agreement changes.', 540, 470, A * win(t, 47.2, 48.2, 51.6, 52.2), 44);
+    const ca = A * ss(63.2, 64.4, t);
+    label('Not a number. Not a letter. Not a colour.', 540, 1250, ca, 34);
+    label('Just bits — and an agreement.', 540, 1305, ca, 34);
+  }
+
+  // ---------- frame ----------
+  function render(t) {
+    screen();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = background(t);
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    scene1(t);
+    scene2(t);
+    scene3(t);
+    rowScene(t);
+    meaning(t);
+    screen();
+  }
+  // exposed so frames can be captured deterministically (e.g. Playwright → ffmpeg)
+  window.renderFrame = render;
+
+  // ---------- playback ----------
+  const ui = document.getElementById('ui'), playBtn = document.getElementById('play');
+  let start = 0, raf = 0;
+  function loop(now) {
+    const t = (now - start) / 1000;
+    render(Math.min(t, DURATION));
+    if (t < DURATION) raf = requestAnimationFrame(loop);
+    else { document.body.classList.remove('playing'); playBtn.textContent = '↻ Replay'; ui.hidden = false; }
+  }
+  async function play() {
+    await Promise.all([document.fonts.load('300 40px Inter'), document.fonts.load('400 40px Georgia')]);
+    const from = clamp(parseFloat(new URLSearchParams(location.search).get('at')) || 0, 0, DURATION);
+    cancelAnimationFrame(raf);
+    ui.hidden = true;
+    document.body.classList.add('playing');
+    start = performance.now() - from * 1000;
+    raf = requestAnimationFrame(loop);
+  }
+  render(0);
+  playBtn.addEventListener('click', play);
+  addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); play(); }
+    else if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

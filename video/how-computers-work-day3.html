@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>How Computers Work — Day 3: The Transistor as a Switch (9:16)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  body.playing { cursor: none; }
+  #cv { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: block; background: #000; }
+  #ui { position: fixed; inset: 0; z-index: 10; display: grid; place-content: center; justify-items: center; gap: 18px;
+        background: rgba(0,0,0,.6); font-family: "Inter", system-ui, sans-serif; text-align: center; }
+  #ui button { font: 400 20px/1 "Inter", system-ui, sans-serif; padding: 16px 40px; border: 1px solid rgba(255,255,255,.5);
+               border-radius: 999px; background: transparent; color: #fff; cursor: pointer; letter-spacing: .08em; }
+  #ui p { margin: 0; font-size: 13px; color: #8a8f99; }
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="ui">
+  <button id="play" type="button">▶ Play</button>
+  <p>Space: play / replay · F: fullscreen · ?at=28 starts at a time (seconds)</p>
+</div>
+
+<script>
+(() => {
+  const W = 1080, H = 1920, DURATION = 65.5;
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  cv.width = W; cv.height = H;
+
+  function fit() {
+    const s = Math.min(innerWidth / W, innerHeight / H);
+    cv.style.width = W * s + 'px';
+    cv.style.height = H * s + 'px';
+  }
+  addEventListener('resize', fit); fit();
+
+  // ---------- math ----------
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const ease = u => (u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+  const ss = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
+  const win = (t, a, b, c, d) => ss(a, b, t) * (1 - ss(c, d, t));
+  const mod = (a, m) => ((a % m) + m) % m;
+  const wob = (s, t, amp) => amp * (Math.sin(t * 1.31 + s * 12.9) + .6 * Math.sin(t * 2.73 + s * 7.13) + .35 * Math.sin(t * 5.17 + s * 3.31)) / 1.95;
+  const hash = (a, b, c) => { const x = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453; return x - Math.floor(x); };
+  function mulberry32(a) {
+    return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  const R = mulberry32(20261005);
+  const rr = (a, b) => a + R() * (b - a);
+
+  // ---------- colours (Day 2 grammar): blue-white = N / electron-rich, amber = P / hole-rich, white/grey otherwise ----------
+  const WHITE = '255,255,255', GREY = '185,190,200', BLUE = '160,210,255', AMBER = '255,176,64';
+  const BLUE_T = '205,228,255', AMBER_T = '255,214,160';
+  const col = (rgb, a) => `rgba(${rgb},${a})`;
+
+  // ---------- drawing primitives ----------
+  const SPR = {};
+  function sprite(rgb) {
+    if (SPR[rgb]) return SPR[rgb];
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(255,255,255,1)');
+    gr.addColorStop(.16, col(rgb, 1));
+    gr.addColorStop(.26, col(rgb, .45));
+    gr.addColorStop(.5, col(rgb, .1));
+    gr.addColorStop(1, col(rgb, 0));
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+    return (SPR[rgb] = c);
+  }
+  function dot(x, y, r, rgb, a) {
+    if (a <= .003) return;
+    ctx.globalAlpha = Math.min(1, a);
+    const s = r * 6;
+    ctx.drawImage(sprite(rgb), x - s / 2, y - s / 2, s, s);
+    ctx.globalAlpha = 1;
+  }
+  function ring(x, y, r, rgb, a, w) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = w;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  }
+  function line(x0, y0, x1, y1, rgb, a, w) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = w;
+    ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+  }
+
+  let CAM = { x: W / 2, y: H / 2, s: 1 };
+  function cam(cx, cy, s) { CAM = { x: cx, y: cy, s }; ctx.setTransform(s, 0, 0, s, W / 2 - cx * s, H / 2 - cy * s); }
+  function screen() { ctx.setTransform(1, 0, 0, 1, 0, 0); }
+  const proj = (x, y) => [W / 2 + (x - CAM.x) * CAM.s, H / 2 + (y - CAM.y) * CAM.s];
+
+  function label(parts, x, y, a, size = 40, align = 'center') {
+    if (a <= .003) return;
+    ctx.font = `300 ${size}px Inter, "Helvetica Neue", Arial, sans-serif`;
+    ctx.letterSpacing = '1.5px';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    const ws = parts.map(p => ctx.measureText(p[0]).width), total = ws.reduce((s, w) => s + w, 0);
+    let px = align === 'center' ? x - total / 2 : x;
+    const py = y + (1 - a) * 8;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = `rgba(0,0,0,${.72 * a})`;
+    ctx.beginPath(); ctx.roundRect(px - 24, py - size * .75, total + 48, size * 1.5, 10); ctx.fill();
+    parts.forEach((p, i) => { ctx.fillStyle = col(p[1], .9 * a); ctx.fillText(p[0], px, py); px += ws[i]; });
+    ctx.globalCompositeOperation = 'lighter';
+  }
+  // quiet annotation: a thin line that grows upward from a world point, label sits at its tip
+  function annot(text, wx, wy0, wy1, p, a) {
+    if (a <= .003) return;
+    const [x, y0] = proj(wx, wy0), [, y1] = proj(wx, wy1), ye = lerp(y0, y1, ease(p));
+    line(x, y0, x, ye, WHITE, .45 * a, 1.2);
+    dot(x, y0, 2.2, WHITE, .7 * a);
+    label([[text, WHITE]], x, y1 - 26, a * ss(.85, 1, p), 32);
+  }
+
+  // ======================================================================
+  // Geometry (world space). Silicon surface at SURF; source / drain are half-ellipse N islands.
+  // ======================================================================
+  const SURF = 700;
+  const SLAB = [-320, SURF, 1400, 2000];
+  const SRC = { cx: 270, rx: 135, ry: 200 }, DRN = { cx: 810, rx: 135, ry: 200 };
+  const inIsland = (I, x, y, m = 0) => y >= SURF - 1 && ((x - I.cx) / (I.rx + m)) ** 2 + ((y - SURF) / (I.ry + m)) ** 2 < 1;
+  const depthAt = x => {
+    for (const I of [SRC, DRN]) { const u = (x - I.cx) / I.rx; if (Math.abs(u) < 1) return I.ry * Math.sqrt(1 - u * u); }
+    return 0;
+  };
+  const CH = [405, 675], CH_DEPTH = 34, CH_Y = SURF + 16;
+  const OX = [370, 710], OX_Y = [SURF - 34, SURF - 1];
+  const GX = [380, 700], GATE_Y = [SURF - 70, SURF - 37];
+  const region = (x, y) => (inIsland(SRC, x, y) || inIsland(DRN, x, y) ? 1 : x > CH[0] && x < CH[1] && y < SURF + CH_DEPTH ? 2 : 0);
+
+  // lattice (2D projection of the diamond structure, same as Day 2) batched by region
+  const bondP = [new Path2D(), new Path2D(), new Path2D()], atomP = [new Path2D(), new Path2D(), new Path2D()];
+  {
+    const d = 44, k = d * Math.SQRT1_2, cx = 540, cy = SURF, map = new Map(), nodes = [];
+    const N = Math.ceil((Math.abs(SLAB[0] - cx) + Math.abs(SLAB[3] - cy)) / k) + 2;
+    for (let i = -N; i <= N; i++) for (let j = -N; j <= N; j++) {
+      const x = cx + (i - j) * k, y = cy + (i + j) * k;
+      if (x < SLAB[0] || x > SLAB[2] || y < SLAB[1] - .5 || y > SLAB[3]) continue;
+      const n = { i, j, x, y }; map.set(i + ',' + j, n); nodes.push(n);
+    }
+    for (const n of nodes) {
+      for (const [di, dj] of [[1, 0], [0, 1]]) {
+        const m = map.get((n.i + di) + ',' + (n.j + dj));
+        if (!m) continue;
+        const p = bondP[region((n.x + m.x) / 2, (n.y + m.y) / 2)];
+        p.moveTo(n.x, n.y); p.lineTo(m.x, m.y);
+      }
+      const p = atomP[region(n.x, n.y)];
+      p.moveTo(n.x + 2.6, n.y); p.arc(n.x, n.y, 2.6, 0, Math.PI * 2);
+    }
+  }
+  const SLAB_RECT = new Path2D(); SLAB_RECT.rect(SLAB[0], SLAB[1], SLAB[2] - SLAB[0], SLAB[3] - SLAB[1]);
+  const ISL = new Path2D();
+  for (const I of [SRC, DRN]) { ISL.moveTo(I.cx + I.rx, SURF); ISL.ellipse(I.cx, SURF, I.rx, I.ry, 0, 0, Math.PI * 2); }
+  const CHR = new Path2D(); CHR.rect(CH[0], SURF, CH[1] - CH[0], CH_DEPTH);
+  const WASH = new Path2D(); WASH.addPath(SLAB_RECT); WASH.addPath(ISL); WASH.addPath(CHR);
+
+  // carriers
+  const HOLES = [];
+  while (HOLES.length < 66) {
+    const x = rr(-60, 1140), y = rr(SURF + 18, 1900);
+    if (!inIsland(SRC, x, y, 16) && !inIsland(DRN, x, y, 16) && !(x > CH[0] - 10 && x < CH[1] + 10 && y < SURF + 300)) HOLES.push({ x, y, s: R(), d: R() });
+  }
+  for (let i = 0; i < 12; i++) HOLES.push({ x: rr(CH[0] + 10, CH[1] - 10), y: rr(SURF + 20, SURF + 250), s: R(), d: R() });
+
+  const ISLE = [];
+  for (const I of [SRC, DRN]) {
+    let n = 0;
+    while (n < 24) {
+      const x = rr(I.cx - I.rx, I.cx + I.rx), y = rr(SURF + 10, SURF + I.ry);
+      if (((x - I.cx) / (I.rx * .88)) ** 2 + ((y - SURF) / (I.ry * .88)) ** 2 < 1) { ISLE.push({ x, y, s: R() }); n++; }
+    }
+  }
+  // scattered minority electrons in the P body; the ones under the gate are the ones the field will gather
+  const MINOR = [...Array(16)].map(() => ({ x: rr(CH[0] + 10, CH[1] - 10), y: rr(SURF + 120, SURF + 540), s: R(), d: R() }))
+    .sort((a, b) => a.x - b.x);
+  MINOR.forEach((e, i) => { e.tx = CH[0] + 14 + i * (CH[1] - CH[0] - 28) / (MINOR.length - 1); });
+  const AMBIENT = [];
+  while (AMBIENT.length < 9) {
+    const x = rr(-40, 1120), y = rr(SURF + 60, 1880);
+    if (!inIsland(SRC, x, y, 30) && !inIsland(DRN, x, y, 30) && (Math.abs(x - 540) > 230 || y > SURF + 620)) AMBIENT.push({ x, y, s: R() });
+  }
+
+  // ---------- master timeline: each forward ramp has a mirrored reverse ramp in Scene 9 (same curve) ----------
+  const gateIn = t => ss(16.6, 17.8, t);
+  const oxideIn = t => ss(17.6, 18.8, t);
+  const gateCharge = t => win(t, 22.4, 23.8, 47.3, 48.7);
+  const fieldP = t => win(t, 28.3, 31.0, 47.8, 49.4);
+  const holeP = (h, t) => win(t, 29.8 + h.d * 1.2, 32.4 + h.d * 1.2, 48.8 + h.d * .5, 50.6 + h.d * .5);
+  const pullP = (e, t) => win(t, 30.4 + e.d * 1.4, 33.2 + e.d * 1.4, 49.0 + e.d * .5, 50.8 + e.d * .5);
+  const gathered = t => win(t, 34.4, 35.2, 49.6, 50.4);
+  const channel = t => win(t, 35.0, 36.4, 48.2, 49.4);
+  const convert = t => win(t, 35.4, 37.0, 48.4, 49.8);
+
+  // current: speed ramps up (release) and down; position is the integral so seeking with ?at= stays exact
+  const V = 430, vel = t => V * ss(41.0, 42.8, t) * (1 - ss(48.0, 49.8, t));
+  const SDT = .01, STAB = new Float32Array(Math.ceil(DURATION / SDT) + 2);
+  for (let i = 1; i < STAB.length; i++) STAB[i] = STAB[i - 1] + vel((i - .5) * SDT) * SDT;
+  const distAt = t => { const f = clamp(t / SDT, 0, STAB.length - 1.001), i = Math.floor(f); return lerp(STAB[i], STAB[i + 1], f - i); };
+  const STREAM = [...Array(40)].map((_, i) => ({ ph: (i + R() * .6) / 40, fr: R(), s: R() }));
+  const FLOW_L = 780, FLOW_X0 = 150;
+  function streamPos(e, t) {
+    const x = FLOW_X0 + mod(e.ph * FLOW_L + distAt(t), FLOW_L), dep = Math.max(0, depthAt(x) - 30);
+    return { x: x + wob(e.s, t, 2), y: CH_Y + e.fr * dep * .8 + wob(e.s + 3, t * 1.6, dep > 0 ? 4 : 2) };
+  }
+
+  // camera: still → slow zoom to islands → slight pull back → slowest push during the field shot → settle
+  const CAMK = [
+    [0, 540, 960, 1], [4.8, 540, 960, 1], [10.6, 540, 830, 1.28], [16.2, 540, 830, 1.28],
+    [19.4, 540, 800, 1.18], [28.0, 540, 800, 1.18], [35.0, 540, 770, 1.55], [38.6, 540, 800, 1.22], [99, 540, 800, 1.22]
+  ];
+  function camAt(t) {
+    for (let i = 1; i < CAMK.length; i++) {
+      if (t <= CAMK[i][0]) {
+        const a = CAMK[i - 1], b = CAMK[i], u = ease(clamp((t - a[0]) / (b[0] - a[0])));
+        return [lerp(a[1], b[1], u), lerp(a[2], b[2], u), lerp(a[3], b[3], u)];
+      }
+    }
+    return CAMK[CAMK.length - 1].slice(1);
+  }
+
+  // Scene 3 — two electrons try to cross and die in the P gap
+  const PROBES = [{ t0: 11.4, x0: 352, y0: SURF + 62, s: .3 }, { t0: 13.7, x0: 345, y0: SURF + 104, s: .7 }];
+  const PROBE_TAU = .75, PROBE_RUN = 150;
+  function probePos(P, t) {
+    const tau = Math.max(0, t - P.t0 - .35);
+    return { x: P.x0 + PROBE_RUN * (1 - Math.exp(-tau / PROBE_TAU)), y: P.y0 + wob(P.s * 9, t, 3) };
+  }
+
+  // ======================================================================
+  // Scenes 1–9 — the device
+  // ======================================================================
+  function drawSlab(A, conv) {
+    ctx.save();
+    ctx.clip(SLAB_RECT);
+    ctx.fillStyle = col(AMBER, .05 * A); ctx.fill(WASH, 'evenodd');
+    ctx.fillStyle = col(BLUE, .08 * A); ctx.fill(ISL);
+    ctx.fillStyle = col(AMBER, .05 * A * (1 - conv)); ctx.fill(CHR);
+    ctx.fillStyle = col(BLUE, .09 * A * conv); ctx.fill(CHR);
+    ctx.restore();
+
+    ctx.lineWidth = 1.1;
+    ctx.strokeStyle = col(AMBER, .15 * A); ctx.stroke(bondP[0]);
+    ctx.strokeStyle = col(BLUE, .26 * A); ctx.stroke(bondP[1]);
+    if (conv < 1) { ctx.strokeStyle = col(AMBER, .15 * A * (1 - conv)); ctx.stroke(bondP[2]); }
+    if (conv > 0) { ctx.strokeStyle = col(BLUE, .26 * A * conv); ctx.stroke(bondP[2]); }
+    ctx.fillStyle = col(AMBER_T, .3 * A); ctx.fill(atomP[0]);
+    ctx.fillStyle = col(BLUE_T, .55 * A); ctx.fill(atomP[1]);
+    if (conv < 1) { ctx.fillStyle = col(AMBER_T, .3 * A * (1 - conv)); ctx.fill(atomP[2]); }
+    if (conv > 0) { ctx.fillStyle = col(BLUE_T, .55 * A * conv); ctx.fill(atomP[2]); }
+    line(SLAB[0], SURF, SLAB[2], SURF, WHITE, .1 * A, 1.2);
+  }
+
+  function holeAt(h, t, calm) {
+    const c = ease(holeP(h, t));
+    const w = (1 - ss(150, 230, Math.abs(h.x - 540))) * (1 - ss(280, 420, h.y - SURF));
+    return {
+      x: h.x + Math.sign(h.x - 540) * (30 + 90 * h.s) * w * c + wob(h.s, t, 2.5 * calm),
+      y: h.y + (220 + 160 * h.d - (h.y - SURF) * .5) * w * c + wob(h.s + 4, t, 2.5 * calm)
+    };
+  }
+  function drawHoles(t, A, calm) {
+    if (A <= .003) return;
+    const ps = HOLES.map(h => holeAt(h, t, calm));
+    // a hole is a gap in the lattice: punch it out, then outline it
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = `rgba(0,0,0,${.9 * A})`;
+    ctx.beginPath();
+    for (const p of ps) { ctx.moveTo(p.x + 6, p.y); ctx.arc(p.x, p.y, 6, 0, Math.PI * 2); }
+    ctx.fill();
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.strokeStyle = col(AMBER, .8 * A); ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (const p of ps) { ctx.moveTo(p.x + 8, p.y); ctx.arc(p.x, p.y, 8, 0, Math.PI * 2); }
+    ctx.stroke();
+    for (const p of ps) dot(p.x, p.y, 3.5, AMBER, .22 * A);
+  }
+
+  function minorAt(e, t, calm) {
+    const c = ease(pullP(e, t)), w = wob(e.s, t, 3 * calm * (1 - .8 * c)), w2 = wob(e.s + 5, t, 3 * calm * (1 - .8 * c));
+    return { x: lerp(e.x, e.tx, ss(.15, 1, c)) + w, y: lerp(e.y, CH_Y, c) + w2 };
+  }
+
+  function drawGate(t, A) {
+    const ga = gateIn(t), a = A * ga;
+    if (a <= .003) return;
+    const [x0, x1] = GX, dy = -(1 - ease(ga)) * 46, y0 = GATE_Y[0] + dy, y1 = GATE_Y[1] + dy, w = x1 - x0, h = y1 - y0;
+    const body = new Path2D(); body.roundRect(x0, y0, w, h, 4);
+
+    // metallic body: bright top edge, darker middle, secondary highlight low — reads as polished metal, not lattice
+    const g = ctx.createLinearGradient(0, y0, 0, y1);
+    g.addColorStop(0, col(WHITE, .55 * a)); g.addColorStop(.16, col(GREY, .32 * a)); g.addColorStop(.55, col(GREY, .1 * a));
+    g.addColorStop(.82, col(GREY, .24 * a)); g.addColorStop(1, col(WHITE, .3 * a));
+    ctx.fillStyle = g; ctx.fill(body);
+    ctx.save(); ctx.clip(body);
+    const sx = x0 - 160 + mod(t * 75, w + 320), sg = ctx.createLinearGradient(sx - 70, 0, sx + 70, 0);
+    sg.addColorStop(0, col(WHITE, 0)); sg.addColorStop(.5, col(WHITE, .2 * a)); sg.addColorStop(1, col(WHITE, 0));
+    ctx.fillStyle = sg; ctx.fillRect(x0, y0, w, h);
+    ctx.restore();
+    ctx.strokeStyle = col(WHITE, .38 * a); ctx.lineWidth = 1.2; ctx.stroke(body);
+
+    // Scene 5 — charging: glow builds from both edges inward
+    const gp = gateCharge(t);
+    if (gp > 0) {
+      const I = u => ss(0, .3, gp * 1.3 - (1 - Math.abs(u - .5) * 2));
+      const lg = ctx.createLinearGradient(x0, 0, x1, 0);
+      for (let i = 0; i <= 24; i++) lg.addColorStop(i / 24, col(BLUE_T, .8 * a * I(i / 24)));
+      ctx.fillStyle = lg; ctx.fill(body);
+      for (let x = x0 + 12; x <= x1 - 12; x += 24) dot(x, (y0 + y1) / 2, 11, BLUE_T, .32 * a * I((x - x0) / w));
+    }
+  }
+
+  function drawOxide(t, A) {
+    const oa = oxideIn(t), a = A * oa;
+    if (a <= .003) return;
+    const [x0, x1] = OX, [y0, y1] = OX_Y, hw = (x1 - x0) / 2 * ease(oa), h = y1 - y0;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(540 - hw, y0, hw * 2, h); ctx.clip();
+    ctx.fillStyle = col(WHITE, .035 * a); ctx.fillRect(x0, y0, x1 - x0, h);
+    ctx.strokeStyle = col(WHITE, .22 * a); ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let x = x0 - h; x < x1 + h; x += 10) { ctx.moveTo(x, y1); ctx.lineTo(x + h, y0); ctx.moveTo(x, y0); ctx.lineTo(x + h, y1); }
+    ctx.stroke();
+    ctx.restore();
+    line(540 - hw, y0, 540 + hw, y0, WHITE, .42 * a, 1.2);
+    line(540 - hw, y1, 540 + hw, y1, WHITE, .42 * a, 1.2);
+  }
+
+  const FIELD_X = [...Array(9)].map((_, i) => CH[0] + 9 + i * (CH[1] - CH[0] - 18) / 8);
+  function drawField(t, A) {
+    const fp = fieldP(t);
+    if (fp <= 0) return;
+    const top = GATE_Y[1] + 1, bot = SURF + 330, head = lerp(top, bot, ease(fp));
+    for (const x of FIELD_X) {
+      const g = ctx.createLinearGradient(0, top, 0, bot);
+      g.addColorStop(0, col(WHITE, .5 * A)); g.addColorStop(.3, col(WHITE, .32 * A)); g.addColorStop(1, col(WHITE, .05 * A));
+      ctx.strokeStyle = g;
+      ctx.lineWidth = 7; ctx.globalAlpha = .18; ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, head); ctx.stroke();
+      ctx.lineWidth = 1.4; ctx.globalAlpha = 1; ctx.stroke();
+      // slow pulses travelling down the line: the field "reaching" through the glass
+      for (let k = 0; k < 3; k++) {
+        const y = top + mod(t * 85 + k * (bot - top) / 3 + x * 1.7, bot - top);
+        if (y < head) dot(x, y, 2.6, WHITE, .4 * A * (1 - (y - top) / (bot - top)));
+      }
+      dot(x, head, 3.2, WHITE, .5 * A * (1 - .5 * ss(.9, 1, fp)));
+    }
+  }
+
+  function plus(x, y, r, a) {
+    if (a <= .003) return;
+    line(x - r, y, x + r, y, WHITE, .85 * a, 2.4);
+    line(x, y - r, x, y + r, WHITE, .85 * a, 2.4);
+    dot(x, y, r, BLUE_T, .22 * a);
+  }
+
+  function device(t) {
+    const A = ss(.3, 2.2, t), calm = ss(4.5, 6.5, t);
+    const [cx, cy, cs] = camAt(t);
+    cam(cx, cy, cs);
+    const conv = convert(t), ch = channel(t);
+
+    drawSlab(A, conv);
+    drawHoles(t, A, calm);
+
+    for (const e of AMBIENT) dot(e.x + wob(e.s, t, 3 * calm), e.y + wob(e.s + 2, t, 3 * calm), 3, BLUE, .5 * A);
+    for (const e of ISLE) dot(e.x + wob(e.s, t, 4 * calm), e.y + wob(e.s + 7, t, 4 * calm), 3.6, BLUE, .85 * A);
+
+    // minority electrons pulled to the surface (Scene 6), merge into the channel (Scene 7), scatter back (Scene 9)
+    const gb = gathered(t);
+    for (const e of MINOR) {
+      const p = minorAt(e, t, calm), moving = pullP(e, t) > 0 && pullP(e, t) < 1;
+      if (moving) for (let k = 1; k <= 8; k++) { const q = minorAt(e, t - k * .06, calm); dot(q.x, q.y, 2.2, BLUE, (1 - k / 8) * .3 * A); }
+      dot(p.x, p.y, 3.6 + gb, BLUE, A * (.65 + .3 * gb) * (1 - .6 * ch));
+    }
+
+    // Scene 3 — attempts that die in the gap
+    for (const P of PROBES) {
+      if (t < P.t0 || t > P.t0 + 3) continue;
+      const pa = A * ss(P.t0, P.t0 + .35, t);
+      for (let k = 1; k <= 14; k++) {
+        const q = probePos(P, t - k * .05);
+        dot(q.x, q.y, 2.4, BLUE, (1 - k / 14) * .4 * pa * (1 - ss(418, 478, q.x)));
+      }
+      const p = probePos(P, t);
+      dot(p.x, p.y, 4.6, BLUE, pa * (1 - ss(418, 478, p.x)) * (1 + .6 * (1 - ss(P.t0, P.t0 + .5, t))));
+      const tDie = P.t0 + .35 + PROBE_TAU * Math.log(PROBE_RUN / (PROBE_RUN - (470 - P.x0))), u = (t - tDie) / .7;
+      if (u > 0 && u < 1) ring(470, p.y, 5 + 12 * u, AMBER, .45 * (1 - u) * A, 1.5);
+    }
+
+    // Scene 7 — the channel strip
+    if (ch > 0) {
+      const pulse = 1 + .14 * Math.sin(t * 2.6);
+      ctx.fillStyle = col(BLUE, .26 * ch * pulse * A); ctx.fillRect(CH[0] - 10, CH_Y - 11, CH[1] - CH[0] + 20, 22);
+      line(CH[0] - 10, CH_Y, CH[1] + 10, CH_Y, WHITE, .65 * ch * A, 2.4);
+      for (let x = CH[0]; x <= CH[1]; x += 22) dot(x, CH_Y, 9, BLUE, .2 * ch * A * (1 + .4 * Math.sin(t * 3 - x * .03)));
+    }
+
+    // Scene 8 — the current
+    const sa = A * ss(40.6, 41.2, t) * (1 - ss(50.6, 51.4, t));
+    if (sa > 0) {
+      const v = vel(t) / V;
+      for (const e of STREAM) {
+        const p = streamPos(e, t), gapW = ss(CH[0] - 10, CH[0] + 10, p.x) * (1 - ss(CH[1] - 10, CH[1] + 10, p.x));
+        const a = sa * ss(FLOW_X0, FLOW_X0 + 35, p.x) * (1 - ss(FLOW_X0 + FLOW_L - 35, FLOW_X0 + FLOW_L, p.x)) * (1 - gapW * (1 - ch));
+        for (let k = 1; k <= 4; k++) dot(p.x - k * 9 * v, p.y, 2.4, BLUE, (1 - k / 5) * .35 * a * v);
+        dot(p.x, p.y, 4, BLUE, a);
+      }
+    }
+
+    drawOxide(t, A);
+    drawGate(t, A);
+
+    // Scene 4 — dotted line: related, not touching
+    const da = A * win(t, 18.6, 19.3, 28.2, 28.9);
+    if (da > 0) {
+      ctx.setLineDash([3, 9]);
+      line(540, GATE_Y[1] + 3, 540, SURF + 44, WHITE, .35 * da, 1.4);
+      ctx.setLineDash([]);
+    }
+
+    drawField(t, A);
+    for (let i = 0; i < 7; i++) {
+      const pa = A * win(t, 24 + i * .18, 24.6 + i * .18, 47.0 + i * .05, 47.5 + i * .05);
+      plus(GX[0] + 30 + i * (GX[1] - GX[0] - 60) / 6, GATE_Y[0] - 26 + wob(i, t, 2), 9, pa);
+    }
+
+    screen();
+    const out = 1 - ss(27.6, 28.2, t);
+    annot('Source', 200, SURF + 40, SURF - 150, ss(6.0, 6.8, t), out * ss(6.0, 6.3, t));
+    annot('Drain', 880, SURF + 40, SURF - 150, ss(6.4, 7.2, t), out * ss(6.4, 6.7, t));
+    annot('No path', 540, SURF + 30, SURF - 100, ss(7.8, 8.6, t), (1 - ss(15.8, 16.4, t)) * ss(7.8, 8.1, t));
+    const [gx, gy] = proj(GX[1] + 22, (GATE_Y[0] + GATE_Y[1]) / 2);
+    label([['Gate', WHITE]], gx + 24, gy, out * ss(19.2, 19.9, t), 32, 'left');
+    const [px, py] = proj(540, SURF + 190);
+    label([['A path, made on demand', WHITE]], px, py, win(t, 37.0, 37.8, 46.6, 47.2), 34);
+  }
+
+  // ======================================================================
+  // Scenes 10–11 — line diagram, then a field of them
+  // ======================================================================
+  function strokeOn(path, len, p) {
+    if (p <= 0) return;
+    if (p < 1) { ctx.setLineDash([len, len]); ctx.lineDashOffset = len * (1 - p); }
+    ctx.stroke(path);
+    ctx.setLineDash([]); ctx.lineDashOffset = 0;
+  }
+  // unit coordinates: 100 wide, surface at v = -5; vertically centred on v = 7.5
+  function drawUnit(cx, cy, k, A, o = {}) {
+    if (A <= .003) return;
+    const X = u => cx + u * k, Y = v => cy + (v - 7.5) * k;
+    const p = o.draw ?? 1, on = o.on || 0, seg = (a, b) => clamp((p - a) / (b - a));
+    ctx.lineWidth = clamp(k * .32, 1, 1.6);
+    ctx.strokeStyle = col(WHITE, .75 * A);
+    let q = new Path2D(); q.rect(X(-50), Y(-5), 100 * k, 36 * k); strokeOn(q, 272 * k, seg(0, .4));
+    for (const sx of [-31, 31]) { q = new Path2D(); q.ellipse(X(sx), Y(-5), 15 * k, 12 * k, 0, 0, Math.PI); strokeOn(q, 44 * k, seg(.25, .6)); }
+    q = new Path2D(); q.rect(X(-20), Y(-10), 40 * k, 5 * k); strokeOn(q, 90 * k, seg(.45, .72));
+    if (o.hatch) {
+      const ha = seg(.62, .85);
+      ctx.save(); ctx.clip(q);
+      ctx.strokeStyle = col(WHITE, .3 * A * ha); ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let u = -25; u < 20; u += 1.6) { ctx.moveTo(X(u), Y(-5)); ctx.lineTo(X(u + 5), Y(-10)); ctx.moveTo(X(u), Y(-10)); ctx.lineTo(X(u + 5), Y(-5)); }
+      ctx.stroke(); ctx.restore();
+      ctx.lineWidth = clamp(k * .32, 1, 1.6); ctx.strokeStyle = col(WHITE, .75 * A);
+    }
+    q = new Path2D(); q.rect(X(-19), Y(-16), 38 * k, 6 * k); strokeOn(q, 88 * k, seg(.6, .88));
+    const ca = seg(.85, 1);
+    if (on < 1) {
+      ctx.setLineDash([1.6 * k, 1.6 * k]);
+      line(X(-15), Y(-2.5), X(15), Y(-2.5), WHITE, .5 * A * ca * (1 - on), clamp(k * .3, 1, 1.5));
+      ctx.setLineDash([]);
+    }
+    if (on > 0) {
+      ctx.fillStyle = col(WHITE, .85 * on * A); ctx.fill(q);
+      dot(X(0), Y(-13), 12 * k, WHITE, .14 * on * A);
+      line(X(-17), Y(-2.5), X(17), Y(-2.5), BLUE, .95 * on * A, Math.max(2, 1.1 * k));
+      dot(X(0), Y(-2.5), 16 * k, BLUE, .3 * on * A);
+    }
+  }
+
+  const DIAG_K = 4.4, GRID_K = .8, CELL_W = 90, CELL_H = 160, MAIN = [5, 5];
+  function scene10(t) {
+    screen();
+    drawUnit(540, 960, DIAG_K, 1, { draw: clamp((t - 52.3) / 1.8), hatch: true });
+    const out = 1 - ss(56.4, 56.9, t);
+    label([['MOSFET', WHITE]], 540, 1150, out * ss(54.2, 54.9, t), 48);
+    label([['A small voltage controls a big one.', WHITE]], 540, 1228, out * ss(55.0, 55.7, t), 30);
+  }
+
+  function scene11(t) {
+    screen();
+    const q = ease(ss(57.3, 60.6, t)), Z = Math.exp(lerp(Math.log(DIAG_K / GRID_K), 0, q));
+    const mx = CELL_W / 2 + MAIN[0] * CELL_W, my = CELL_H / 2 + MAIN[1] * CELL_H;
+    const cx = lerp(mx, W / 2, q), cy = lerp(my, H / 2, q), k = GRID_K * Z, ga = ss(57.1, 57.9, t);
+    for (let i = 0; i < 12; i++) for (let j = 0; j < 12; j++) {
+      const sx = W / 2 + Z * (CELL_W / 2 + i * CELL_W - cx), sy = H / 2 + Z * (CELL_H / 2 + j * CELL_H - cy);
+      if (sx < -55 * k || sx > W + 55 * k || sy < -30 * k || sy > H + 30 * k) continue;
+      const main = i === MAIN[0] && j === MAIN[1];
+      const rate = .6 + 2.2 * hash(i, j, 0), slot = Math.floor(t * rate + hash(i, j, 1) * 10);
+      let on = hash(i, j, slot + 3) < .28 ? 1 : 0;
+      if (main && t < 58.4) on = 0;
+      drawUnit(sx, sy, k, main ? 1 : ga, { hatch: k > 2.5, on });
+    }
+  }
+
+  // ======================================================================
+  // Scene 12 — close
+  // ======================================================================
+  function scene12(t) {
+    screen();
+    label([['This is the atom of computing.', WHITE]], 540, 960, win(t, 62.2, 62.8, 64.8, 65.4), 40);
+  }
+
+  // ---------- frame ----------
+  function render(t) {
+    screen();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    if (t < 52) device(t);
+    else if (t < 57) scene10(t);
+    else if (t < 62) scene11(t);
+    else scene12(t);
+  }
+  // exposed so frames can be captured deterministically (e.g. Playwright → ffmpeg)
+  window.renderFrame = render;
+
+  // ---------- playback ----------
+  const ui = document.getElementById('ui'), playBtn = document.getElementById('play');
+  let start = 0, raf = 0;
+  function loop(now) {
+    const t = (now - start) / 1000;
+    render(Math.min(t, DURATION));
+    if (t < DURATION) raf = requestAnimationFrame(loop);
+    else { document.body.classList.remove('playing'); playBtn.textContent = '↻ Replay'; ui.hidden = false; }
+  }
+  async function play() {
+    await document.fonts.load('300 40px Inter');
+    const from = clamp(parseFloat(new URLSearchParams(location.search).get('at')) || 0, 0, DURATION);
+    cancelAnimationFrame(raf);
+    ui.hidden = true;
+    document.body.classList.add('playing');
+    start = performance.now() - from * 1000;
+    raf = requestAnimationFrame(loop);
+  }
+  render(0);
+  playBtn.addEventListener('click', play);
+  addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); play(); }
+    else if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>
