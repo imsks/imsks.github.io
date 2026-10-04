@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dos &amp; Don’ts of a Good Resume — 9:16 kinetic type</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,500;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #1A1D24; --red: #FF4D4D; --green: #00D084; --ink: #F5F6F8; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  body { font-family: "Inter", "Poppins", "Helvetica Neue", Arial, sans-serif; color: var(--ink);
+         -webkit-font-smoothing: antialiased; }
+  body.playing { cursor: none; }
+
+  #stage { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; overflow: hidden;
+           background: var(--bg); transform: translate(-50%, -50%) scale(var(--s, .4)); }
+
+  .scene { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center;
+           justify-content: center; text-align: center; padding: 0 90px; overflow: hidden; }
+  .scene.on { display: flex; }
+  .dont { --accent: var(--red); }
+  .do   { --accent: var(--green); }
+  .g { color: var(--green); }
+  .r { color: var(--red); }
+  .hl { color: var(--accent); }
+
+  .cam { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .tint { position: absolute; inset: 0; z-index: 0;
+          background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%); }
+  .flash { position: absolute; inset: 0; z-index: 10; pointer-events: none; background: var(--accent);
+           animation: flash .45s ease-out both; }
+
+  .icon { width: 170px; height: 170px; margin: 0 auto 36px; }
+  .icon svg { width: 100%; height: 100%; overflow: visible; }
+  .icon svg * { fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round;
+                stroke-dasharray: 100; stroke-dashoffset: 100; animation: draw .35s cubic-bezier(.6,0,.2,1) .05s forwards; }
+  .icon .p2 { animation-delay: .25s; }
+  .icon .p3 { animation-delay: .38s; }
+
+  .tag { display: inline-block; font-size: 40px; font-weight: 900; letter-spacing: .14em; color: var(--accent);
+         border: 4px solid var(--accent); border-radius: 999px; padding: 10px 34px; margin-bottom: 44px;
+         animation: pop .35s cubic-bezier(.34,1.56,.64,1) .12s both; }
+  .row { display: flex; align-items: center; justify-content: center; gap: 28px; margin-bottom: 34px; }
+  .row .tag { margin-bottom: 0; }
+  .icon.sm { width: 110px; height: 110px; margin: 0; }
+
+  .headline { font-size: 92px; font-weight: 800; line-height: 1.08; letter-spacing: -.025em; margin: 0; max-width: 900px; }
+  .headline.mid { font-size: 80px; }
+
+  /* word-by-word reveal (stagger 0.1s) */
+  .w { display: inline-block; animation-name: var(--wanim, rise); animation-duration: var(--wdur, .45s);
+       animation-timing-function: cubic-bezier(.22,1,.36,1); animation-fill-mode: both;
+       animation-delay: calc(var(--d, 0s) + var(--i) * .1s); }
+  .rise { animation: rise .5s cubic-bezier(.22,1,.36,1) var(--d, 0s) both; }
+
+  /* char-by-char assemble */
+  .ch { display: inline-block; animation: assemble .6s cubic-bezier(.34,1.56,.64,1) calc(var(--i) * 22ms) both; }
+  .ch.sp { display: inline; white-space: pre; animation: none; }
+
+  .rule { width: 520px; height: 5px; border-radius: 3px; background: var(--ink); margin: 56px auto 0;
+          transform-origin: left; animation: grow var(--rd, .5s) cubic-bezier(.7,0,.2,1) var(--d, 0s) both; }
+
+  .strk { position: relative; display: inline-block; }
+  .strk::after { content: ""; position: absolute; left: -2%; width: 104%; top: 50%; height: 7px; margin-top: -3px;
+                 border-radius: 4px; background: var(--accent); transform: scaleX(0); transform-origin: left;
+                 animation: grow .4s cubic-bezier(.7,0,.3,1) var(--sd, 0s) forwards; }
+
+  /* Scene 1 — hook */
+  .fromblack { position: absolute; inset: 0; z-index: 5; background: #000; animation: fadeout .5s ease-out forwards; }
+  .hook1 { font-size: 76px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #C9CCD3; }
+  .punch { margin: 10px 0 40px; animation: punch .5s cubic-bezier(.2,.9,.3,1) var(--d, 0s) both; }
+  .glitch { font-weight: 900; line-height: .9; animation: glitch .75s steps(1, end) .8s both; }
+  .g6 { font-size: 380px; color: var(--red); letter-spacing: -.04em; }
+  .gsec { font-size: 170px; letter-spacing: -.02em; }
+  .hook-sub { font-size: 54px; font-weight: 500; line-height: 1.3; color: #C9CCD3; margin: 0; max-width: 860px; }
+  .hook-sub b { font-weight: 900; }
+
+  /* Scene 2 — title */
+  .t1 { font-size: 170px; font-weight: 900; line-height: .95; letter-spacing: -.03em; }
+  .t2 { font-size: 62px; font-weight: 800; letter-spacing: .14em; margin-top: 30px; }
+
+  /* Scene 3 */
+  .shake { display: inline-block; animation: shake .14s linear 1s infinite; }
+  .example { font-size: 48px; font-style: italic; font-weight: 500; line-height: 1.5; color: rgba(245,246,248,.5); margin: 70px 0 0; }
+
+  /* Scene 4 */
+  .excard { margin-top: 70px; padding: 44px 52px; border-radius: 28px; text-align: left;
+            font-size: 58px; font-weight: 700; line-height: 1.25;
+            border: 3px solid color-mix(in srgb, var(--accent) 60%, transparent);
+            background: color-mix(in srgb, var(--accent) 10%, transparent);
+            animation: pop .4s cubic-bezier(.34,1.56,.64,1) var(--d, 0s) both; }
+  .exlabel { font-size: 28px; font-weight: 800; letter-spacing: .2em; color: var(--accent); margin-bottom: 16px; }
+  .pulse { display: inline-block; color: var(--accent); font-weight: 900; animation: pulse .75s cubic-bezier(.3,0,.3,1) 1.8s both; }
+
+  /* Scene 5 */
+  .sub { font-size: 72px; font-weight: 700; color: rgba(245,246,248,.6); margin: 0 0 40px; }
+  .results { display: inline-block; font-size: 148px; font-weight: 900; letter-spacing: -.03em; color: transparent;
+             background: linear-gradient(90deg, var(--green) 0 50%, var(--ink) 50% 100%);
+             background-size: 200% 100%; background-position: 100% 0;
+             -webkit-background-clip: text; background-clip: text;
+             animation: sweep .9s cubic-bezier(.65,0,.35,1) 2.1s forwards; }
+
+  /* Scene 6 */
+  .verbs { display: flex; flex-wrap: wrap; justify-content: center; gap: 34px 30px; margin-top: 70px; max-width: 900px; }
+  .stamp { font-size: 76px; font-weight: 900; text-transform: uppercase; color: var(--accent);
+           border: 7px solid var(--accent); border-radius: 16px; padding: 6px 30px;
+           animation: stamp .3s cubic-bezier(.55,0,.75,.4) var(--d) both; }
+
+  /* Scenes 7 & 8 — resume wireframe */
+  .hdr { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; }
+  .topfade { position: absolute; left: 0; right: 0; top: 0; height: 860px; z-index: 2;
+             background: linear-gradient(var(--bg) 62%, transparent); }
+  .s7 .headline { text-shadow: 0 6px 30px rgba(0,0,0,.85); }
+  .paper { position: relative; z-index: 1; flex-shrink: 0; width: 680px; height: 900px; margin-top: 60px;
+           background: #F4F5F7; border-radius: 18px; box-shadow: 0 40px 120px rgba(0,0,0,.55); }
+  .paper-in { position: absolute; inset: 0; }
+  .blk { position: absolute; border-radius: 5px; background: #8E95A2; mix-blend-mode: multiply; opacity: .92;
+         left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); width: calc(var(--mw) * 1%); height: calc(var(--h) * 1%);
+         transform: rotate(calc(var(--mr) * 1deg)); }
+  .blk.title { background: var(--bg); }
+  .blk.head  { background: #4A505C; }
+  .blk.rule  { background: #C3C8D0; }
+  .blk.chip  { background: transparent; border: 3px solid #8E95A2; border-radius: 999px; box-sizing: border-box; }
+  .s7 .paper { transform-origin: 42% 28%; animation: crowd 3.3s cubic-bezier(.55,0,.85,.45) .5s both; }
+  .s7 .paper-in { animation: shake .1s linear 2.5s infinite; }
+  .s8 .blk { animation: tidy .95s cubic-bezier(.34,1.2,.5,1) calc(.7s + var(--i) * 35ms) both; }
+  .s8 .blk.extra { animation: vanish .35s ease-in calc(.35s + (var(--i) - 20) * 12ms) both; }
+  .breathe { display: inline-block; color: var(--accent); animation: breathe 1.6s cubic-bezier(.22,1,.36,1) 2.2s both; }
+
+  /* Scene 9 — rapid-fire cards */
+  .card { color: #fff; }
+  .card.dont { background: var(--red); }
+  .card.do { background: var(--green); color: #0F1D17; }
+  .card .cam { animation: cardpunch .8s linear both; }
+  .card .icon { width: 150px; height: 150px; margin-bottom: 20px; }
+  .card .icon svg * { stroke: currentColor; animation-duration: .18s; animation-delay: 0s; }
+  .card .icon .p2 { animation-delay: .1s; }
+  .card .icon .p3 { animation-delay: .16s; }
+  .yn { font-size: 64px; font-weight: 900; letter-spacing: .2em; opacity: .85; margin-bottom: 6px; }
+  .big { font-size: 150px; font-weight: 900; line-height: .95; letter-spacing: -.03em; }
+
+  /* Scene 10 — close */
+  .close1 { font-size: 96px; font-weight: 800; letter-spacing: -.025em; line-height: 1.1; margin: 0; }
+  .close2 { font-size: 170px; font-weight: 900; letter-spacing: -.035em; margin: 20px 0 0;
+            animation: slowfade 1.6s cubic-bezier(.25,.1,.25,1) 1.3s both; }
+  .endcard { display: flex; flex-direction: column; align-items: center; animation: fadein .7s ease both; }
+  .logo { width: 220px; height: 220px; border-radius: 50%; border: 5px solid var(--green); display: grid; place-items: center;
+          font-size: 44px; font-weight: 900; letter-spacing: .1em; color: var(--green); margin-bottom: 44px; }
+  .handle { font-size: 72px; font-weight: 800; }
+  .follow { font-size: 40px; font-weight: 500; color: #9AA0AC; margin-top: 18px; }
+  .blackout { position: absolute; inset: 0; z-index: 20; background: #000; opacity: 0; animation: fadein 1s ease-in 1.7s forwards; }
+
+  /* UI (outside the 9:16 frame) */
+  #ui { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; justify-items: center; gap: 18px; text-align: center;
+        background: rgba(0,0,0,.6); font-family: "Inter", system-ui, sans-serif; }
+  #ui button { font: 800 22px/1 "Inter", system-ui, sans-serif; padding: 18px 44px; border: 0; border-radius: 999px;
+               background: var(--green); color: #0F1D17; cursor: pointer; }
+  #ui p { margin: 0; font-size: 14px; color: #9AA0AC; }
+
+  @keyframes flash     { 0% { opacity: .8; } 100% { opacity: 0; } }
+  @keyframes draw      { to { stroke-dashoffset: 0; } }
+  @keyframes pop       { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }
+  @keyframes rise      { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: none; } }
+  @keyframes slam      { 0% { opacity: 0; transform: scale(2.6); } 55% { opacity: 1; } 100% { opacity: 1; transform: scale(1); } }
+  @keyframes slide     { from { opacity: 0; transform: translateX(-520px); } to { opacity: 1; transform: none; } }
+  @keyframes fadein    { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeout   { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes zoomin    { from { opacity: 0; transform: scale(.25); } to { opacity: 1; transform: none; } }
+  @keyframes zoomout   { from { transform: scale(var(--z0, 1.3)); } to { transform: scale(1); } }
+  @keyframes camzoom   { from { transform: scale(1); } to { transform: scale(1.2); } }
+  @keyframes grow      { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes punch     { 0% { opacity: 0; transform: scale(3.2); } 55% { opacity: 1; transform: scale(.88); }
+                         75% { transform: scale(1.06); } 100% { opacity: 1; transform: scale(1); } }
+  @keyframes glitch    { 0%   { transform: none; text-shadow: none; opacity: 1; }
+                         12%  { transform: translate(-10px,3px) skewX(-10deg); text-shadow: 8px 0 var(--red), -8px 0 #00E5FF; }
+                         24%  { opacity: .25; }
+                         32%  { opacity: 1; transform: translate(8px,-4px); text-shadow: -12px 0 var(--red), 10px 0 #00E5FF; }
+                         46%  { transform: translate(-4px,0) skewX(6deg); text-shadow: 4px 0 var(--red), -4px 0 #00E5FF; }
+                         58%  { opacity: .5; }
+                         66%  { opacity: 1; transform: translate(3px,2px); text-shadow: -6px 0 var(--red); }
+                         80%  { transform: none; text-shadow: 2px 0 var(--red), -2px 0 #00E5FF; }
+                         100% { transform: none; text-shadow: none; opacity: 1; } }
+  @keyframes assemble  { from { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--tr)) scale(.3); }
+                         to { opacity: 1; transform: none; } }
+  @keyframes shake     { 0% { transform: translate(0,0); } 25% { transform: translate(-4px,2px) rotate(-1.5deg); }
+                         50% { transform: translate(3px,-2px) rotate(1deg); } 75% { transform: translate(-2px,-1px) rotate(-.5deg); }
+                         100% { transform: translate(0,0); } }
+  @keyframes pulse     { 0% { transform: scale(1); } 40% { transform: scale(1.3); text-shadow: 0 0 40px rgba(0,208,132,.6); }
+                         100% { transform: scale(1); } }
+  @keyframes sweep     { to { background-position: 0 0; } }
+  @keyframes stamp     { 0% { opacity: 0; transform: scale(2.4) rotate(var(--r0)); }
+                         70% { opacity: 1; transform: scale(.94) rotate(0); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+  @keyframes crowd     { from { transform: scale(1) rotate(0); } to { transform: scale(2.8) rotate(-5deg); } }
+  @keyframes tidy      { from { left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); width: calc(var(--mw) * 1%);
+                                transform: rotate(calc(var(--mr) * 1deg)); }
+                         to   { left: calc(var(--cx) * 1%); top: calc(var(--cy) * 1%); width: calc(var(--cw) * 1%);
+                                transform: rotate(0deg); } }
+  @keyframes vanish    { to { opacity: 0; transform: scale(.6) rotate(calc(var(--mr) * 1deg)); } }
+  @keyframes breathe   { from { letter-spacing: 0; } to { letter-spacing: .16em; } }
+  @keyframes cardpunch { 0% { transform: scale(.5); } 12% { transform: scale(1); } 100% { transform: scale(1.08); } }
+  @keyframes slowfade  { from { opacity: 0; filter: blur(14px); transform: translateY(16px); }
+                         to { opacity: 1; filter: blur(0); transform: none; } }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1 · Hook (0:00–0:03) -->
+  <section class="scene" data-at="0">
+    <div class="fromblack"></div>
+    <div class="cam" style="animation: zoomin .55s cubic-bezier(.2,.9,.25,1) both">
+      <div class="hook1" data-words style="--d:.05s">Your Resume Has</div>
+      <div class="punch" style="--d:.4s">
+        <div class="glitch g6">6</div>
+        <div class="glitch gsec">SECONDS</div>
+      </div>
+      <p class="hook-sub" data-words style="--d:1.5s">Before a recruiter decides <b class="g">YES</b> or <b class="r">NO.</b></p>
+    </div>
+  </section>
+
+  <!-- 2 · Title card (0:03–0:05) -->
+  <section class="scene" data-at="3">
+    <div class="cam" style="--z0:1.3; animation: zoomout 2s cubic-bezier(.16,1,.3,1) both">
+      <div data-split>
+        <div class="t1"><span class="g">DOS</span> &amp;</div>
+        <div class="t1 r">DON’TS</div>
+        <div class="t2">OF A GOOD RESUME</div>
+      </div>
+      <div class="rule" style="--d:1.1s"></div>
+    </div>
+  </section>
+
+  <!-- 3 · DON'T #1 (0:05–0:09) -->
+  <section class="scene dont" data-at="5">
+    <div class="tint"></div><div class="flash"></div>
+    <div class="cam" style="transform-origin: 50% 45%; animation: camzoom 3.4s cubic-bezier(.4,0,.6,1) .6s both">
+      <div class="icon" data-icon="x"></div>
+      <div class="tag">DON’T</div>
+      <h2 class="headline" data-words style="--d:.25s; --wanim:slam; --wdur:.3s">Use a <span class="hl shake">generic</span> “Objective” statement.</h2>
+      <p class="example rise" style="--d:1.2s"><span class="strk" style="--sd:1.9s">“Hardworking team player</span><br><span class="strk" style="--sd:2.15s">seeking growth opportunities…”</span></p>
+    </div>
+  </section>
+
+  <!-- 4 · DO #1 (0:09–0:13) -->
+  <section class="scene do" data-at="9">
+    <div class="tint"></div><div class="flash"></div>
+    <div class="cam">
+      <div class="icon" data-icon="check"></div>
+      <div class="tag">DO</div>
+      <h2 class="headline" data-words style="--d:.3s; --wanim:slide">Open with a <span class="hl">measurable</span> achievement.</h2>
+      <div class="excard" style="--d:1.15s"><div class="exlabel">EXAMPLE</div>Increased user retention by <span class="pulse">34%</span> in 6 months</div>
+    </div>
+  </section>
+
+  <!-- 5 · DON'T #2 (0:13–0:17) -->
+  <section class="scene dont" data-at="13">
+    <div class="tint"></div><div class="flash"></div>
+    <div class="cam">
+      <div class="icon" data-icon="x"></div>
+      <div class="tag">DON’T</div>
+      <p class="sub" data-words style="--d:.3s">List <span class="strk" style="--sd:1s">responsibilities.</span></p>
+      <h2 class="headline" data-words style="--d:1.15s; --wanim:slam; --wdur:.32s; font-size:110px">List<br><span class="results">RESULTS.</span></h2>
+    </div>
+  </section>
+
+  <!-- 6 · DO #2 (0:17–0:21) -->
+  <section class="scene do" data-at="17">
+    <div class="tint"></div><div class="flash"></div>
+    <div class="cam">
+      <div class="icon" data-icon="check"></div>
+      <div class="tag">DO</div>
+      <h2 class="headline" data-words style="--d:.3s">Use <span class="hl">action verbs</span> —</h2>
+      <div class="verbs">
+        <span class="stamp" style="--d:1.1s;  --r0:-14deg">Built</span>
+        <span class="stamp" style="--d:1.25s; --r0:12deg">Led</span>
+        <span class="stamp" style="--d:1.4s;  --r0:-10deg">Shipped</span>
+        <span class="stamp" style="--d:1.55s; --r0:16deg">Scaled</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · DON'T #3 (0:21–0:25) -->
+  <section class="scene dont s7" data-at="21">
+    <div class="tint"></div><div class="topfade"></div>
+    <div class="hdr">
+      <div class="row"><div class="icon sm" data-icon="x"></div><div class="tag">DON’T</div></div>
+      <h2 class="headline mid" data-words style="--d:.25s; --wanim:slam; --wdur:.3s">Cram <span class="hl">everything</span> onto one dense page.</h2>
+    </div>
+    <div class="paper" id="messy"><div class="paper-in"></div></div>
+    <div class="flash"></div>
+  </section>
+
+  <!-- 8 · DO #3 (0:25–0:29) -->
+  <section class="scene do s8" data-at="25">
+    <div class="tint"></div>
+    <div class="hdr">
+      <div class="row"><div class="icon sm" data-icon="check"></div><div class="tag">DO</div></div>
+      <h2 class="headline mid" data-words style="--d:.25s">White space is your <span class="hl">friend.</span></h2>
+      <p class="sub" data-words style="--d:1.9s; margin:24px 0 0">Let it <span class="breathe">breathe.</span></p>
+    </div>
+    <div class="paper" id="tidy"><div class="paper-in"></div></div>
+    <div class="flash"></div>
+  </section>
+
+  <!-- 9 · Rapid-fire recap (0:29–0:34), 0.8s per card -->
+  <section class="scene card dont" data-at="29"><div class="cam"><div class="icon" data-icon="x"></div><div class="yn">NO</div><div class="big">typos.</div></div></section>
+  <section class="scene card do" data-at="29.8"><div class="cam"><div class="icon" data-icon="check"></div><div class="yn">YES</div><div class="big">metrics.</div></div></section>
+  <section class="scene card dont" data-at="30.6"><div class="cam"><div class="icon" data-icon="x"></div><div class="yn">NO</div><div class="big">fluff.</div></div></section>
+  <section class="scene card do" data-at="31.4"><div class="cam"><div class="icon" data-icon="check"></div><div class="yn">YES</div><div class="big">clarity.</div></div></section>
+  <section class="scene card dont" data-at="32.2"><div class="cam"><div class="icon" data-icon="x"></div><div class="yn">NO</div><div class="big">3-page essays.</div></div></section>
+  <section class="scene card do" data-at="33"><div class="cam"><div class="icon" data-icon="check"></div><div class="yn">YES</div><div class="big">tailored per role.</div></div></section>
+
+  <!-- 10 · Closing (0:33.8–0:37.3) -->
+  <section class="scene" data-at="33.8">
+    <div class="cam" style="--z0:1.35; animation: zoomout 3.5s cubic-bezier(.16,1,.3,1) both">
+      <h2 class="close1" data-words style="--d:.2s">A Resume Isn’t a List.</h2>
+      <h2 class="close2">It’s <span class="g">Proof.</span></h2>
+      <div class="rule" style="--d:2.4s; --rd:1.1s"></div>
+    </div>
+  </section>
+
+  <!-- End card (0:37.3–0:40) -->
+  <section class="scene" data-at="37.3">
+    <div class="endcard">
+      <div class="logo">LOGO</div>
+      <div class="handle">@yourhandle</div>
+      <div class="follow">Follow for more career tips</div>
+    </div>
+    <div class="blackout"></div>
+  </section>
+</div>
+
+<div id="ui">
+  <button id="play" type="button">▶ Play</button>
+  <p>Space: play / replay · M: mute · F: fullscreen · ?at=13 starts at a scene</p>
+</div>
+
+<script>
+(() => {
+  const DURATION = 40;
+  const stage = document.getElementById('stage');
+  const ui = document.getElementById('ui');
+  const playBtn = document.getElementById('play');
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  function fit() { stage.style.setProperty('--s', Math.min(innerWidth / 1080, innerHeight / 1920)); }
+  addEventListener('resize', fit); fit();
+
+  // Icons
+  const ICONS = {
+    x: '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" pathLength="100"/><path class="p2" d="M35 35L65 65" pathLength="100"/><path class="p3" d="M65 35L35 65" pathLength="100"/></svg>',
+    check: '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" pathLength="100"/><path class="p2" d="M30 52L44 66L71 37" pathLength="100"/></svg>'
+  };
+  document.querySelectorAll('[data-icon]').forEach(el => { el.innerHTML = ICONS[el.dataset.icon]; });
+
+  // Word split: each word (or inline element) becomes a staggered .w span
+  document.querySelectorAll('[data-words]').forEach(root => {
+    let i = 0;
+    const out = document.createDocumentFragment();
+    const word = node => {
+      const s = document.createElement('span');
+      s.className = 'w';
+      s.style.setProperty('--i', i++);
+      s.append(node);
+      out.append(s);
+    };
+    [...root.childNodes].forEach(n => {
+      if (n.nodeType === Node.TEXT_NODE) {
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) out.append(' ');
+          else word(part);
+        });
+      } else if (n.nodeName === 'BR') out.append(n);
+      else word(n);
+    });
+    root.replaceChildren(out);
+  });
+
+  // Char split: letters fly in from screen edges
+  document.querySelectorAll('[data-split]').forEach(root => {
+    let i = 0;
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === Node.ELEMENT_NODE) return walk(n);
+      if (n.nodeType !== Node.TEXT_NODE || /^\s*\n\s*$/.test(n.textContent)) return;
+      const frag = document.createDocumentFragment();
+      for (const ch of n.textContent) {
+        const s = document.createElement('span');
+        s.className = ch === ' ' ? 'ch sp' : 'ch';
+        s.textContent = ch;
+        if (ch !== ' ') {
+          const a = rnd(0, Math.PI * 2);
+          s.style.setProperty('--tx', Math.round(Math.cos(a) * 1100) + 'px');
+          s.style.setProperty('--ty', Math.round(Math.sin(a) * 1500) + 'px');
+          s.style.setProperty('--tr', Math.round(rnd(-200, 200)) + 'deg');
+          s.style.setProperty('--i', i++);
+        }
+        frag.append(s);
+      }
+      n.replaceWith(frag);
+    });
+    walk(root);
+  });
+
+  // Resume wireframe: shared block data → cluttered (scene 7) and tidy (scene 8)
+  const CLEAN = [
+    ['title', 8, 6, 46, 4.2], ['head', 8, 11.6, 30, 1.8], ['line', 8, 15.2, 62, 1.3], ['rule', 8, 19.5, 84, .4],
+    ['head', 8, 24, 24, 2], ['line', 8, 29, 84, 1.3], ['line', 8, 32.4, 78, 1.3], ['line', 8, 35.8, 70, 1.3],
+    ['head', 8, 42.5, 28, 2], ['line', 8, 47.5, 84, 1.3], ['line', 8, 50.9, 80, 1.3], ['line', 8, 54.3, 74, 1.3], ['line', 8, 57.7, 60, 1.3],
+    ['head', 8, 64.5, 20, 2], ['line', 8, 69.5, 82, 1.3], ['line', 8, 72.9, 64, 1.3],
+    ['chip', 8, 81, 17, 3.4], ['chip', 28, 81, 17, 3.4], ['chip', 48, 81, 17, 3.4], ['chip', 68, 81, 17, 3.4]
+  ];
+  const blocks = CLEAN.map(([type, cx, cy, cw, h]) => {
+    const mx = Math.max(1, cx * .5 + rnd(-3, 12));
+    return { type, cx, cy, cw, h, mx, my: 2 + cy * .6 + rnd(-2.5, 2.5), mw: Math.min(cw * rnd(1.05, 1.4), 99 - mx), mr: rnd(-3.5, 3.5) };
+  });
+  for (let k = 0; k < 20; k++) {
+    const mx = rnd(1, 30);
+    blocks.push({ type: 'line extra', h: rnd(1.1, 1.7), mx, my: 50 + k * 2.3 + rnd(-1.5, 1.5), mw: Math.min(rnd(40, 95), 99 - mx), mr: rnd(-3, 3) });
+  }
+  ['#messy .paper-in', '#tidy .paper-in'].forEach(sel => {
+    const host = document.querySelector(sel);
+    blocks.forEach((b, i) => {
+      const d = document.createElement('div');
+      d.className = 'blk ' + b.type;
+      for (const k of ['cx', 'cy', 'cw', 'h', 'mx', 'my', 'mw', 'mr']) {
+        if (b[k] !== undefined) d.style.setProperty('--' + k, b[k].toFixed(2));
+      }
+      d.style.setProperty('--i', i);
+      host.append(d);
+    });
+  });
+
+  const scenes = [...document.querySelectorAll('.scene')].map(el => ({ el, at: +el.dataset.at }));
+
+  // ---------- Audio (synthesized; no external files) ----------
+  let ctx, master, bus, noiseBuf, muted = false;
+
+  function initAudio() {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain();
+    master.gain.value = muted ? 0 : .9;
+    master.connect(ctx.destination);
+    noiseBuf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+    const data = noiseBuf.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+  }
+
+  function newBuses() {
+    const sfx = ctx.createGain(), music = ctx.createGain();
+    music.gain.value = .5;
+    sfx.connect(master); music.connect(master);
+    return { sfx, music };
+  }
+
+  function tone(out, t, f, { f2, dur = .3, type = 'sine', gain = .4, attack = .004 } = {}) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(f, t);
+    if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+    g.gain.setValueAtTime(.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain, t + attack);
+    g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g).connect(out);
+    o.start(t); o.stop(t + dur + .05);
+  }
+
+  function noise(out, t, { type = 'bandpass', f = 1000, f2, q = 1, dur = .2, gain = .3, attack = .003 } = {}) {
+    const src = ctx.createBufferSource(), filt = ctx.createBiquadFilter(), g = ctx.createGain();
+    src.buffer = noiseBuf;
+    filt.type = type; filt.Q.value = q;
+    filt.frequency.setValueAtTime(f, t);
+    if (f2) filt.frequency.exponentialRampToValueAtTime(f2, t + dur);
+    g.gain.setValueAtTime(.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain, t + attack);
+    g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    src.connect(filt).connect(g).connect(out);
+    src.start(t); src.stop(t + dur + .05);
+  }
+
+  const sfx = {
+    whoosh: (o, t, d = .45) => noise(o, t, { f: 300, f2: 3500, q: 1.2, dur: d, gain: .45, attack: d * .65 }),
+    thud: (o, t) => { tone(o, t, 120, { f2: 35, dur: .55, gain: .95 }); noise(o, t, { type: 'lowpass', f: 500, dur: .15, gain: .4 }); },
+    chime: (o, t) => { tone(o, t, 1318.5, { dur: 1, gain: .2 }); tone(o, t + .07, 1975.5, { dur: .8, gain: .13 }); tone(o, t + .07, 2637, { dur: .5, gain: .05 }); },
+    stamp: (o, t) => { tone(o, t, 180, { f2: 60, dur: .2, gain: .7 }); noise(o, t, { f: 2200, q: .7, dur: .06, gain: .35 }); },
+    glitch: (o, t) => { for (let k = 0; k < 7; k++) tone(o, t + k * .055, rnd(180, 1800), { type: 'square', dur: .035, gain: .07 }); }
+  };
+
+  const CUES = [
+    [0, 'whoosh', .5], [.4, 'thud'], [.8, 'glitch'], [3, 'whoosh', .45],
+    [5, 'thud'], [9, 'chime'], [13, 'thud'], [17, 'chime'],
+    [18.1, 'stamp'], [18.25, 'stamp'], [18.4, 'stamp'], [18.55, 'stamp'],
+    [21, 'thud'], [21.5, 'whoosh', 1.4], [25, 'chime'], [25.7, 'whoosh', .7],
+    ...[0, 1, 2, 3, 4, 5].map(i => [29 + i * .8, i % 2 ? 'chime' : 'thud']),
+    [33.8, 'whoosh', 1.8], [37.3, 'chime']
+  ];
+
+  function scheduleMusic(out, t0, from) {
+    const prog = [55, 43.65, 65.41, 49];
+    let t = .4, beat = 0;
+    while (t < 33.6) {
+      const bpm = 108 + 20 * Math.min(t / 29, 1), spb = 60 / bpm;
+      if (t >= from) {
+        const T = t0 + t;
+        tone(out, T, 140, { f2: 42, dur: .3, gain: .5 });
+        if (beat % 2) noise(out, T, { f: 1600, q: .8, dur: .13, gain: .22 });
+        noise(out, T + spb / 2, { type: 'highpass', f: 7500, dur: .04, gain: .1 });
+        if (t >= 29) {
+          noise(out, T + spb / 4, { type: 'highpass', f: 7500, dur: .03, gain: .06 });
+          noise(out, T + spb * .75, { type: 'highpass', f: 7500, dur: .03, gain: .06 });
+        }
+        tone(out, T + spb / 2, prog[Math.floor(beat / 4) % 4] * 2, { type: 'triangle', dur: .22, gain: .3 });
+      }
+      t += spb; beat++;
+    }
+    // Soft pad under the closing line
+    const start = t0 + Math.max(33.8, from), end = t0 + DURATION;
+    [220, 261.63, 329.63, 493.88].forEach(f => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0, start);
+      g.gain.linearRampToValueAtTime(.05, start + 1.2);
+      g.gain.setValueAtTime(.05, end - 1.5);
+      g.gain.linearRampToValueAtTime(0, end);
+      o.connect(g).connect(out);
+      o.start(start); o.stop(end + .1);
+    });
+  }
+
+  // ---------- Playback ----------
+  let t0 = 0, cur = -1, raf = 0;
+
+  function render(t) {
+    let idx = -1;
+    scenes.forEach((s, i) => { if (t >= s.at) idx = i; });
+    if (idx !== cur) {
+      if (cur >= 0) scenes[cur].el.classList.remove('on');
+      if (idx >= 0) scenes[idx].el.classList.add('on');
+      cur = idx;
+    }
+  }
+
+  function loop() {
+    const t = ctx.currentTime - t0;
+    render(t);
+    if (t < DURATION) raf = requestAnimationFrame(loop);
+    else { document.body.classList.remove('playing'); playBtn.textContent = '↻ Replay'; ui.hidden = false; }
+  }
+
+  async function play() {
+    if (!ctx) initAudio();
+    if (ctx.state === 'suspended') await ctx.resume();
+    await document.fonts.ready;
+
+    const req = parseFloat(new URLSearchParams(location.search).get('at')) || 0;
+    const from = scenes.reduce((acc, s) => (s.at <= req ? s.at : acc), 0);
+
+    if (bus) { bus.sfx.disconnect(); bus.music.disconnect(); }
+    bus = newBuses();
+    cancelAnimationFrame(raf);
+    scenes.forEach(s => s.el.classList.remove('on'));
+    cur = -1;
+    void stage.offsetWidth;
+
+    t0 = ctx.currentTime + .15 - from;
+    CUES.forEach(([at, name, arg]) => { if (at >= from) sfx[name](bus.sfx, t0 + at, arg); });
+    scheduleMusic(bus.music, t0, from);
+
+    ui.hidden = true;
+    document.body.classList.add('playing');
+    raf = requestAnimationFrame(loop);
+  }
+
+  playBtn.addEventListener('click', play);
+  addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); play(); }
+    else if (e.key === 'm' || e.key === 'M') { muted = !muted; if (master) master.gain.value = muted ? 0 : .9; }
+    else if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>
