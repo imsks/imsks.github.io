@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>How Computers Work — Day 2: Why Silicon (9:16)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  body.playing { cursor: none; }
+  #cv { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: block; background: #000; }
+  #ui { position: fixed; inset: 0; z-index: 10; display: grid; place-content: center; justify-items: center; gap: 18px;
+        background: rgba(0,0,0,.6); font-family: "Inter", system-ui, sans-serif; text-align: center; }
+  #ui button { font: 400 20px/1 "Inter", system-ui, sans-serif; padding: 16px 40px; border: 1px solid rgba(255,255,255,.5);
+               border-radius: 999px; background: transparent; color: #fff; cursor: pointer; letter-spacing: .08em; }
+  #ui p { margin: 0; font-size: 13px; color: #8a8f99; }
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="ui">
+  <button id="play" type="button">▶ Play</button>
+  <p>Space: play / replay · F: fullscreen · ?at=42 starts at a time (seconds)</p>
+</div>
+
+<script>
+(() => {
+  const W = 1080, H = 1920, DURATION = 58;
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  cv.width = W; cv.height = H;
+
+  function fit() {
+    const s = Math.min(innerWidth / W, innerHeight / H);
+    cv.style.width = W * s + 'px';
+    cv.style.height = H * s + 'px';
+  }
+  addEventListener('resize', fit); fit();
+
+  // ---------- math ----------
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const ease = u => (u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+  const ss = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
+  const win = (t, a, b, c, d) => ss(a, b, t) * (1 - ss(c, d, t));
+  const mod = (a, m) => ((a % m) + m) % m;
+  const wob = (s, t, amp) => amp * (Math.sin(t * 1.31 + s * 12.9) + .6 * Math.sin(t * 2.73 + s * 7.13) + .35 * Math.sin(t * 5.17 + s * 3.31)) / 1.95;
+  const hash = (a, b, c) => { const x = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453; return x - Math.floor(x); };
+  function mulberry32(a) {
+    return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  const R = mulberry32(20261004);
+  const rr = (a, b) => a + R() * (b - a);
+
+  // ---------- colours: blue-white = electron-rich (N), amber = hole-rich (P); nothing else is coloured ----------
+  const WHITE = '255,255,255', GREY = '185,190,200', BLUE = '160,210,255', AMBER = '255,176,64';
+  const BLUE_T = '205,228,255', AMBER_T = '255,214,160';
+  const col = (rgb, a) => `rgba(${rgb},${a})`;
+
+  // ---------- drawing primitives ----------
+  const SPR = {};
+  function sprite(rgb) {
+    if (SPR[rgb]) return SPR[rgb];
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(255,255,255,1)');
+    gr.addColorStop(.16, col(rgb, 1));
+    gr.addColorStop(.26, col(rgb, .45));
+    gr.addColorStop(.5, col(rgb, .1));
+    gr.addColorStop(1, col(rgb, 0));
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+    return (SPR[rgb] = c);
+  }
+  function dot(x, y, r, rgb, a) {
+    if (a <= .003) return;
+    ctx.globalAlpha = Math.min(1, a);
+    const s = r * 6;
+    ctx.drawImage(sprite(rgb), x - s / 2, y - s / 2, s, s);
+    ctx.globalAlpha = 1;
+  }
+  function ring(x, y, r, rgb, a, w) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = w;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  }
+  function segLine(ax, ay, bx, by, gaps, gw, rgb, a, w) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = w;
+    ctx.beginPath();
+    let u0 = 0;
+    for (const g of gaps.sort()) {
+      ctx.moveTo(lerp(ax, bx, u0), lerp(ay, by, u0));
+      ctx.lineTo(lerp(ax, bx, g - gw), lerp(ay, by, g - gw));
+      u0 = g + gw;
+    }
+    ctx.moveTo(lerp(ax, bx, u0), lerp(ay, by, u0));
+    ctx.lineTo(bx, by);
+    ctx.stroke();
+  }
+  function cam(cx, cy, s) { ctx.setTransform(s, 0, 0, s, W / 2 - cx * s, H / 2 - cy * s); }
+  function screen() { ctx.setTransform(1, 0, 0, 1, 0, 0); }
+
+  function label(parts, x, y, a, size = 40, align = 'center') {
+    if (a <= .003) return;
+    ctx.font = `300 ${size}px Inter, "Helvetica Neue", Arial, sans-serif`;
+    ctx.letterSpacing = '1.5px';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    const ws = parts.map(p => ctx.measureText(p[0]).width), total = ws.reduce((s, w) => s + w, 0);
+    let px = align === 'center' ? x - total / 2 : x;
+    const py = y + (1 - a) * 8;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = `rgba(0,0,0,${.72 * a})`;
+    ctx.beginPath(); ctx.roundRect(px - 24, py - size * .75, total + 48, size * 1.5, 10); ctx.fill();
+    parts.forEach((p, i) => { ctx.fillStyle = col(p[1], .9 * a); ctx.fillText(p[0], px, py); px += ws[i]; });
+    ctx.globalCompositeOperation = 'lighter';
+  }
+
+  // ---------- lattice: 2D projection of silicon's diamond structure, 4 bonds per atom ----------
+  function makeLattice(cx, cy, d, box) {
+    const k = d * Math.SQRT1_2, map = new Map(), nodes = [], bonds = [];
+    const reach = Math.max(...[[box[0], box[1]], [box[2], box[1]], [box[0], box[3]], [box[2], box[3]]]
+      .map(([x, y]) => Math.abs(x - cx) + Math.abs(y - cy)));
+    const N = Math.ceil(reach / k) + 1;
+    for (let i = -N; i <= N; i++) for (let j = -N; j <= N; j++) {
+      const x = cx + (i - j) * k, y = cy + (i + j) * k;
+      if (x < box[0] || x > box[2] || y < box[1] || y > box[3]) continue;
+      const n = { i, j, x, y, seed: R() };
+      map.set(i + ',' + j, n); nodes.push(n);
+    }
+    for (const n of nodes) for (const [di, dj] of [[1, 0], [0, 1]]) {
+      const m = map.get((n.i + di) + ',' + (n.j + dj));
+      if (m) bonds.push({ a: n, b: m, seed: R(), slots: [{ u: .36, seed: R() }, { u: .64, seed: R() }] });
+    }
+    return { nodes, bonds, map };
+  }
+  const ZERO = [0, 0];
+  function drawLattice(L, o) {
+    const t = o.t || 0, A = o.alpha ?? 1, jit = o.jit || 0, off = o.offset || (() => ZERO);
+    const atomR = o.atomR || 7, slotR = o.slotR || 3.2, bondW = o.bondW || 1.6;
+    for (const b of L.bonds) {
+      const [dxa, dya] = off(b.a), [dxb, dyb] = off(b.b);
+      const ax = b.a.x + dxa, ay = b.a.y + dya, bx = b.b.x + dxb, by = b.b.y + dyb;
+      const a = A * (o.mask ? o.mask((ax + bx) / 2, (ay + by) / 2) : 1) * (o.bondAlpha ? o.bondAlpha(b) : 1);
+      if (a <= .003) continue;
+      const sh = o.shimmer ? o.shimmer(b) : 0;
+      const fl = sh ? 1 + sh * .9 * Math.sin(t * 31 + b.seed * 40) * Math.sin(t * 13.7 + b.seed * 9) : 1;
+      const gaps = [];
+      for (const s of b.slots) if (o.empty && o.empty.has(s)) gaps.push(s.u);
+      segLine(ax, ay, bx, by, gaps, o.gapW || .09, o.bondRgb ? o.bondRgb(b) : WHITE, .26 * a * fl, bondW);
+      const j = jit + sh * 4;
+      for (const s of b.slots) {
+        if (o.empty && o.empty.has(s)) continue;
+        const sx = lerp(ax, bx, s.u) + (j ? wob(s.seed * 50, t * 3, j) : 0);
+        const sy = lerp(ay, by, s.u) + (j ? wob(s.seed * 50 + 5, t * 3, j) : 0);
+        dot(sx, sy, slotR, WHITE, .8 * a * fl);
+      }
+    }
+    for (const n of L.nodes) {
+      const [dx, dy] = off(n), x = n.x + dx, y = n.y + dy;
+      const a = A * (o.mask ? o.mask(x, y) : 1) * (o.atomAlpha ? o.atomAlpha(n) : 1);
+      if (a <= .003) continue;
+      dot(x + (jit ? wob(n.seed * 30, t * 2, jit * .5) : 0), y, atomR, o.atomRgb ? o.atomRgb(n) : WHITE, .95 * a);
+    }
+  }
+  const rectMask = (r, f) => (x, y) => {
+    const dx = Math.max(r[0] - x, 0, x - r[2]), dy = Math.max(r[1] - y, 0, y - r[3]);
+    return 1 - ss(0, f, Math.hypot(dx, dy));
+  };
+  const slotPos = (b, s) => ({ x: lerp(b.a.x, b.b.x, s.u), y: lerp(b.a.y, b.b.y, s.u) });
+  const findBond = (L, n, m) => L.bonds.find(b => (b.a === n && b.b === m) || (b.a === m && b.b === n));
+  function slotNear(b, node) {
+    const [s0, s1] = b.slots, p0 = slotPos(b, s0), p1 = slotPos(b, s1);
+    return Math.hypot(p0.x - node.x, p0.y - node.y) < Math.hypot(p1.x - node.x, p1.y - node.y) ? s0 : s1;
+  }
+
+  // ======================================================================
+  // Scene 1 — single atom (0–3)
+  // ======================================================================
+  function scene1(t) {
+    const A = win(t, 0, 1.1, 2.5, 3.3);
+    if (A <= 0) return;
+    cam(540, 960, 1 + .12 * t / 3.3);
+    const p = Math.sin(t * 3.2);
+    dot(540, 960, 13 * (1 + .08 * p), WHITE, A * (.85 + .15 * p));
+    ring(540, 960, 150, WHITE, .1 * A * ss(.3, 1.3, t), 1.2);
+    for (let k = 0; k < 4; k++) {
+      const th = t * .85 + k * Math.PI / 2;
+      dot(540 + 150 * Math.cos(th) + wob(k, t, 1.5), 960 + 150 * Math.sin(th) + wob(k + 9, t, 1.5), 3.6, WHITE, .55 * A * ss(.4, 1.4, t));
+    }
+  }
+
+  // ======================================================================
+  // Scenes 2–4 — three materials → zoom into semiconductor → N-type doping (3–19)
+  // World zones: conductor 0–600, insulator 600–1200, semiconductor 1200–1800
+  // ======================================================================
+  const COND = {
+    atoms: [], e: [...Array(24)].map(() => ({ x0: rr(0, 560), y0: rr(0, 780), vx: rr(-180, 180), vy: rr(-160, 160), s: R() }))
+  };
+  for (let i = 0; i < 5; i++) for (let j = 0; j < 7; j++) {
+    COND.atoms.push({ x: 60 + i * 120 + rr(-14, 14), y: 590 + j * 125 + rr(-14, 14), s: R() });
+  }
+  const INS = makeLattice(900, 960, 100, [600, 500, 1200, 1420]);
+  const insMask = rectMask([640, 600, 1160, 1320], 30);
+  const SEMI = makeLattice(1500, 960, 100, [780, -60, 2220, 1980]);
+  const semiZone = [1240, 600, 1760, 1320], semiFull = [700, -200, 2300, 2120];
+  const SHIM = new Set(SEMI.bonds
+    .filter(b => { const x = (b.a.x + b.b.x) / 2, y = (b.a.y + b.b.y) / 2; return x > 1280 && x < 1720 && y > 650 && y < 1270; })
+    .sort(() => R() - .5).slice(0, 6));
+  const DOP = SEMI.map.get('0,0');
+
+  const CAM_X = [[0, 300], [4.8, 300], [5.7, 900], [7.0, 900], [7.9, 1500]];
+  function keyed(t, keys) {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (let i = 1; i < keys.length; i++) {
+      if (t <= keys[i][0]) return lerp(keys[i - 1][1], keys[i][1], ease((t - keys[i - 1][0]) / (keys[i][0] - keys[i - 1][0])));
+    }
+    return keys[keys.length - 1][1];
+  }
+
+  function fifthPos(t) {
+    if (t < 15.8) return { x: DOP.x + wob(1, t, 5), y: DOP.y - 46 + wob(2, t, 5) };
+    const tau = t - 15.8, f = tau - .6 * (1 - Math.exp(-tau / .6));
+    return {
+      x: DOP.x + 95 * f + 22 * Math.sin(1.4 * tau) + wob(1, t, 5),
+      y: DOP.y - 46 - 55 * f + 30 * (Math.sin(tau + .5) - Math.sin(.5)) + wob(2, t, 5)
+    };
+  }
+
+  function materials(t) {
+    const A = ss(2.7, 3.6, t) * (1 - ss(19, 19.6, t));
+    if (A <= 0) return;
+    cam(keyed(t, CAM_X), 960, 1 + .6 * ease(ss(10, 11.3, t)));
+    const side = A * (1 - ss(10, 10.8, t));
+
+    if (side > 0) {
+      // Conductor: loose atoms, electrons roam freely
+      for (const a of COND.atoms) dot(a.x + wob(a.s, t, 1.2), a.y + wob(a.s + 1, t, 1.2), 6, GREY, .55 * side);
+      for (const e of COND.e) {
+        const x = 20 + mod(e.x0 + e.vx * t + 45 * Math.sin(t * 1.9 + e.s * 20), 560);
+        const y = 580 + mod(e.y0 + e.vy * t + 45 * Math.sin(t * 1.4 + e.s * 11), 780);
+        const ea = ss(20, 50, x) * (1 - ss(550, 580, x)) * ss(580, 620, y) * (1 - ss(1320, 1360, y));
+        dot(x, y, 3.4, WHITE, .9 * side * ea);
+      }
+      // Insulator: locked, motionless
+      drawLattice(INS, { alpha: side, mask: insMask });
+      // soft dividers
+      for (const x of [600, 1200]) {
+        const g = ctx.createLinearGradient(0, 420, 0, 1500);
+        g.addColorStop(0, col(WHITE, 0)); g.addColorStop(.5, col(WHITE, .16 * side)); g.addColorStop(1, col(WHITE, 0));
+        ctx.fillStyle = g; ctx.fillRect(x - .75, 420, 1.5, 1080);
+      }
+    }
+
+    // Semiconductor: same lattice, a few bonds almost breaking; then expands to fill frame
+    const p3 = ease(ss(10.1, 11.3, t));
+    const rect = semiZone.map((v, i) => lerp(v, semiFull[i], p3));
+    const shim = 1 - ss(9.9, 10.4, t);
+    drawLattice(SEMI, {
+      t, alpha: A, mask: rectMask(rect, lerp(30, 200, p3)),
+      shimmer: b => (SHIM.has(b) ? shim : 0),
+      jit: ss(14, 15, t),
+      atomRgb: n => (n === DOP && t > 14.4 ? BLUE : WHITE)
+    });
+
+    // Scene 4 — N-type: dopant pulse + a fifth electron that fits nowhere
+    if (t > 14.4) {
+      const u = clamp((t - 14.4) / .8);
+      if (u < 1) { ring(DOP.x, DOP.y, 10 + 70 * u, BLUE, (1 - u) * .8 * A, 2.5); dot(DOP.x, DOP.y, 7 * (1 + 1.2 * (1 - u)), BLUE, (1 - u) * A); }
+    }
+    if (t > 14.9) {
+      const tau = t - 15.8;
+      for (let k = 1; k <= 28 && tau - k * .06 > 0; k++) {
+        const p = fifthPos(t - k * .06);
+        dot(p.x, p.y, 2.6, BLUE, (1 - k / 28) * .5 * A);
+      }
+      const p = fifthPos(t);
+      dot(p.x, p.y, 4.5, BLUE, A * ss(14.9, 15.2, t));
+    }
+
+    if (side > 0) {
+      label([['Conductor', WHITE]], 300, 1450, side * ss(3.9, 4.6, t) * (1 - ss(9.6, 10.2, t)));
+      label([['Insulator', WHITE]], 900, 1450, side * ss(5.8, 6.5, t) * (1 - ss(9.6, 10.2, t)));
+      label([['Semiconductor', WHITE]], 1500, 1450, side * ss(8.0, 8.7, t) * (1 - ss(9.6, 10.2, t)));
+    }
+    screen();
+    label([['N-type', BLUE], [' — one electron too many', WHITE]], 540, 1640, A * win(t, 15.3, 16, 18.4, 19.2));
+  }
+
+  // ======================================================================
+  // Scene 5 — P-type: a hole that travels as a pattern (19–24)
+  // ======================================================================
+  const P5 = makeLattice(540, 960, 160, [-140, -140, 1220, 2060]);
+  const PATH5 = ['-2,1', '-1,1', '-1,0', '0,0', '0,-1', '1,-1', '1,-2', '2,-2'].map(k => P5.map.get(k));
+  const SLOTS5 = PATH5.slice(0, -1).map((n, k) => { const b = findBond(P5, n, PATH5[k + 1]); return { b, s: slotNear(b, n) }; });
+  const HOP0 = 20.8, HOPDT = .42, HOPDUR = .34, HOPS = SLOTS5.length - 1;
+
+  function scene5(t) {
+    const A = win(t, 19, 19.6, 24, 24.6);
+    if (A <= 0) return;
+    screen();
+    const dop = PATH5[0], empty = new Set();
+    let moving = null, hole = null;
+    if (t >= 20.1) {
+      let done = 0;
+      for (let k = 0; k < HOPS; k++) if (t >= HOP0 + k * HOPDT + HOPDUR) done = k + 1;
+      const here = SLOTS5[done];
+      empty.add(here.s);
+      hole = slotPos(here.b, here.s);
+      if (done < HOPS && t >= HOP0 + done * HOPDT) {
+        // one electron steps back one bond; the hole steps forward
+        const u = ease((t - HOP0 - done * HOPDT) / HOPDUR), from = SLOTS5[done + 1], N = PATH5[done + 1];
+        empty.add(from.s);
+        const P0 = slotPos(from.b, from.s), P2 = hole;
+        moving = {
+          x: (1 - u) * (1 - u) * P0.x + 2 * u * (1 - u) * N.x + u * u * P2.x + wob(done, t * 4, 1.5),
+          y: (1 - u) * (1 - u) * P0.y + 2 * u * (1 - u) * N.y + u * u * P2.y + wob(done + 3, t * 4, 1.5)
+        };
+        hole = { x: lerp(P2.x, P0.x, u), y: lerp(P2.y, P0.y, u) };
+      }
+    }
+    drawLattice(P5, { t, alpha: A, jit: 1.2, empty, atomR: 11, slotR: 5, bondW: 2.5, atomRgb: n => (n === dop && t > 19.7 ? AMBER : WHITE) });
+
+    if (t > 19.7 && t < 20.5) { const u = (t - 19.7) / .8; ring(dop.x, dop.y, 14 + 90 * u, AMBER, (1 - u) * .8 * A, 3); dot(dop.x, dop.y, 11 * (1 + (1 - u)), AMBER, (1 - u) * A); }
+    if (t >= 20.1 && t < 20.45) { const p = slotPos(SLOTS5[0].b, SLOTS5[0].s); dot(p.x, p.y, 5, WHITE, .8 * A * (1 - (t - 20.1) / .35)); }
+    if (moving) dot(moving.x, moving.y, 5, WHITE, .95 * A);
+    if (hole) { const ha = A * ss(20.1, 20.5, t); ring(hole.x, hole.y, 13, AMBER, .75 * ha, 2.2); dot(hole.x, hole.y, 6, AMBER, .3 * ha); }
+
+    label([['P-type', AMBER], [' — a hole, not a thing — a pattern', WHITE]], 540, 1640, A * win(t, 21, 21.7, 23.5, 24.2), 38);
+  }
+
+  // ======================================================================
+  // Scene 6 — the junction and its depletion region (24–30)
+  // ======================================================================
+  const SEAM = 540, STRIP = 120;
+  const L6 = makeLattice(571.8, 960, 90, [-160, -160, 1240, 2080]);
+  const NE6 = [...Array(46)].map(() => ({ x: rr(10, 525), y: rr(240, 1680), s: R(), n: true }));
+  const PH6 = [...Array(46)].map(() => ({ x: rr(555, 1070), y: rr(240, 1680), s: R(), n: false }));
+  const FLASH6 = [];
+  {
+    const nIn = NE6.filter(c => c.x > SEAM - STRIP).sort((a, b) => a.y - b.y);
+    const pIn = PH6.filter(c => c.x < SEAM + STRIP).sort((a, b) => a.y - b.y);
+    const np = Math.min(nIn.length, pIn.length);
+    for (let i = 0; i < np; i++) {
+      const ta = 25.8 + i / np * 1.1 + rr(0, .12), m = { x: SEAM, y: (nIn[i].y + pIn[i].y) / 2 };
+      nIn[i].ta = pIn[i].ta = ta; nIn[i].m = pIn[i].m = m;
+      FLASH6.push({ ...m, ta });
+    }
+    [...nIn.slice(np), ...pIn.slice(np)].forEach(c => { c.fade = true; });
+  }
+
+  function scene6(t) {
+    const A = win(t, 24, 24.4, 29.6, 30.6);
+    if (A <= 0) return;
+    const e = ease(ss(24, 25.7, t)), slide = (1 - e) * 760;
+    const zp = ease(ss(27.6, 30, t)), dep = ss(26.5, 27.4, t);
+    const offX = isN => (isN ? -slide : slide);
+    const fade = x => (1 - .82 * dep * (1 - ss(STRIP - 10, STRIP + 15, Math.abs(x - SEAM)))) * (1 - .45 * zp * ss(150, 260, Math.abs(x - SEAM)));
+    const isN = n => n.x < SEAM;
+    cam(SEAM, 960, 1 + .55 * zp);
+
+    drawLattice(L6, {
+      t, alpha: A, jit: .8,
+      offset: n => [offX(isN(n)), 0],
+      bondRgb: b => (isN(b.a) !== isN(b.b) ? WHITE : isN(b.a) ? BLUE : AMBER),
+      bondAlpha: b => (isN(b.a) !== isN(b.b) ? ss(25.5, 25.9, t) : 1) * fade((b.a.x + b.b.x) / 2),
+      atomRgb: n => (isN(n) ? BLUE_T : AMBER_T),
+      atomAlpha: n => .7 * fade(n.x),
+      atomR: 5, slotR: 2.4, bondW: 1.3
+    });
+
+    for (const c of [...NE6, ...PH6]) {
+      if (c.ta && t >= c.ta) continue;
+      let x = c.x + offX(c.n) + wob(c.s, t, 7), y = c.y + wob(c.s + 2, t, 7);
+      if (c.ta) { const u = ss(c.ta - .55, c.ta, t); x = lerp(x, c.m.x, u * u); y = lerp(y, c.m.y, u * u); }
+      const a = A * fade(c.x) * (c.fade ? 1 - ss(26.4, 27, t) : 1);
+      if (c.n) dot(x, y, 4.6, BLUE, .95 * a);
+      else { ring(x, y, 7, AMBER, .9 * a, 2); dot(x, y, 4, AMBER, .25 * a); }
+    }
+    for (const f of FLASH6) {
+      const u = (t - f.ta) / .4;
+      if (u < 0 || u > 1) continue;
+      dot(f.x, f.y, 4 + 14 * u, WHITE, (1 - u) * A);
+      ring(f.x, f.y, 6 + 26 * u, WHITE, .5 * (1 - u) * A, 1.5);
+    }
+    screen();
+    label([['Depletion region', WHITE]], 540, 960, A * win(t, 27.4, 28.2, 29.6, 30.4), 34);
+  }
+
+  // ======================================================================
+  // Scenes 7–10 — gate / source / drain, the switch, and the field of switches (30–55)
+  // ======================================================================
+  const DEV = makeLattice(540, 1040, 36, [160, 860, 920, 1220]);
+  const region = x => (x < 400 ? 0 : x < 680 ? 1 : 2);
+  const devBond = [new Path2D(), new Path2D(), new Path2D()], devAtom = [new Path2D(), new Path2D(), new Path2D()];
+  for (const b of DEV.bonds) { const p = devBond[region((b.a.x + b.b.x) / 2)]; p.moveTo(b.a.x, b.a.y); p.lineTo(b.b.x, b.b.y); }
+  for (const n of DEV.nodes) { const p = devAtom[region(n.x)]; p.moveTo(n.x + 2.4, n.y); p.arc(n.x, n.y, 2.4, 0, Math.PI * 2); }
+  const DE = [...Array(72)].map(() => {
+    const inS = R() < .5;
+    return { x0: inS ? rr(175, 385) : rr(695, 905), y0: rr(880, 1200), s: R(), v: rr(430, 560) };
+  });
+  const CH_Y = 873, GATE_Y = 752;
+
+  function electronPos(e, t) {
+    if (t < 42) return { x: e.x0 + wob(e.s, t, 5), y: e.y0 + wob(e.s + 4, t, 5), a: 1 };
+    const X = 160 + mod(e.x0 - 160 + e.v * (t - 42), 760);
+    const w = ss(330, 405, X) * (1 - ss(675, 750, X));
+    return {
+      x: X + wob(e.s, t, 3),
+      y: lerp(e.y0 + wob(e.s + 4, t, 5), CH_Y + wob(e.s + 9, t * 2, 5), w),
+      a: ss(160, 190, X) * (1 - ss(890, 920, X))
+    };
+  }
+  function probePos(t) {
+    const tau = t - 37.4;
+    const x = 290 + 104 * (1 - Math.pow(1 - clamp(tau / 1.9), 3)) - (tau > 1.9 ? 3 * Math.abs(Math.sin(tau * 9)) : 0);
+    return { x, y: 1040 + wob(7, t, 4) };
+  }
+
+  function drawDevice(t, A, sc) {
+    if (A <= .003) return;
+    cam(540, 960, sc);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = col(BLUE, .2 * A); ctx.stroke(devBond[0]); ctx.stroke(devBond[2]);
+    ctx.strokeStyle = col(AMBER, .07 * A); ctx.stroke(devBond[1]);
+    ctx.fillStyle = col(BLUE_T, .5 * A); ctx.fill(devAtom[0]); ctx.fill(devAtom[2]);
+    ctx.fillStyle = col(AMBER_T, .18 * A); ctx.fill(devAtom[1]);
+
+    for (const e of DE) { const p = electronPos(e, t); dot(p.x, p.y, 3.6, BLUE, .9 * A * p.a); }
+
+    // Scene 8 — one electron tries to cross and stalls at the barrier
+    if (t > 37.2 && t < 40.4) {
+      const pa = A * ss(37.2, 37.6, t) * (1 - ss(39.6, 40.4, t));
+      for (let k = 1; k <= 14; k++) { const p = probePos(t - k * .05); dot(p.x, p.y, 2.4, BLUE, (1 - k / 14) * .45 * pa); }
+      const p = probePos(t);
+      dot(p.x, p.y, 4.8, BLUE, pa);
+    }
+
+    // Gate (fades in during Scene 7, snaps on at exactly 42.0)
+    const ga = ss(31.3, 32.2, t), gy = GATE_Y - (1 - ga) * 24, on = t >= 42, pulse = on ? Math.exp(-(t - 42) * 8) : 0;
+    ctx.beginPath(); ctx.roundRect(400, gy, 280, 16, 8);
+    if (on) {
+      ctx.fillStyle = col(WHITE, A); ctx.fill();
+      for (let x = 410; x <= 670; x += 26) dot(x, gy + 8, 9 * (1 + pulse), WHITE, (.35 + .4 * pulse) * A);
+    } else {
+      ctx.fillStyle = col(WHITE, .13 * A * ga); ctx.fill();
+      ctx.strokeStyle = col(WHITE, .32 * A * ga); ctx.lineWidth = 1.5; ctx.stroke();
+    }
+    const da = ss(32, 32.8, t);
+    ctx.setLineDash([3, 10]); ctx.lineDashOffset = -t * 14;
+    ctx.strokeStyle = col(WHITE, (on ? .75 : .28) * A * da); ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (const x of [430, 485, 540, 595, 650]) { ctx.moveTo(x, gy + 22); ctx.lineTo(x, 855); }
+    ctx.stroke(); ctx.setLineDash([]);
+
+    // Scene 9 — the channel opens instantly
+    if (on) {
+      ctx.fillStyle = col(BLUE, (.3 + .4 * pulse) * A); ctx.fillRect(400, CH_Y - 9, 280, 18);
+      ctx.strokeStyle = col(WHITE, .85 * A); ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(400, CH_Y); ctx.lineTo(680, CH_Y); ctx.stroke();
+      for (let x = 405; x <= 675; x += 30) dot(x, CH_Y, 7 * (1 + pulse), BLUE, .35 * A);
+    }
+  }
+
+  function drawUnit(ox, oy, s, on, A) {
+    const X = x => 540 + (x + ox - 540) * s, Y = y => 960 + (y + oy - 960) * s;
+    if (X(920) < -20 || X(160) > W + 20 || Y(1220) < -20 || Y(740) > H + 20) return;
+    ctx.fillStyle = col(BLUE, .2 * A);
+    ctx.fillRect(X(160), Y(860), 240 * s, 360 * s);
+    ctx.fillRect(X(680), Y(860), 240 * s, 360 * s);
+    ctx.fillStyle = col(AMBER, .05 * A);
+    ctx.fillRect(X(400), Y(860), 280 * s, 360 * s);
+    ctx.fillStyle = col(WHITE, (on ? 1 : .16) * A);
+    ctx.fillRect(X(400), Y(GATE_Y), 280 * s, Math.max(16 * s, 1.2));
+    if (on) {
+      ctx.fillStyle = col(BLUE, .9 * A);
+      ctx.fillRect(X(400), Y(CH_Y - 9), 280 * s, Math.max(18 * s, 1.5));
+      dot(X(540), Y(CH_Y), 140 * s, BLUE, .35 * A);
+      dot(X(540), Y(GATE_Y + 8), 110 * s, WHITE, .25 * A);
+    }
+  }
+
+  const zoom10 = t => (t < 49 ? 1
+    : t < 50.9 ? Math.exp(lerp(0, Math.log(.085), ease(ss(49, 50.9, t))))
+    : .085 * (1 - .1 * ss(50.9, 55, t)));
+
+  function device(t) {
+    const A = ss(30, 31, t);
+    const s = t < 49 ? lerp(1.22, 1, ease(ss(30, 31.2, t))) : zoom10(t);
+
+    if (t >= 49) {
+      const ga = ss(49.2, 49.8, t), PX = 1000, PY = 860;
+      const nx = Math.ceil(540 / s / PX) + 1, ny = Math.ceil(960 / s / PY) + 1;
+      screen();
+      for (let ix = -nx; ix <= nx; ix++) for (let iy = -ny; iy <= ny; iy++) {
+        if (!ix && !iy) continue;
+        const rate = .8 + 2.5 * hash(ix, iy, 0), slot = Math.floor(t * rate + hash(ix, iy, 1) * 10);
+        drawUnit(ix * PX, iy * PY, s, hash(ix, iy, slot + 2) < .14, ga);
+      }
+      const da = ss(.1, .3, s);
+      drawUnit(0, 0, s, true, 1 - da);
+      drawDevice(t, da, s);
+      // edge vignette so the grid reads as continuing past the frame
+      screen();
+      ctx.globalCompositeOperation = 'source-over';
+      const g = ctx.createRadialGradient(540, 960, 500, 540, 960, 1150);
+      g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(0,0,0,${.75 * ga})`);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+    } else {
+      drawDevice(t, A, s);
+    }
+
+    screen();
+    const la = 1 - ss(49, 49.4, t);
+    label([['Gate', WHITE]], 704, GATE_Y + 8, la * ss(32.8, 33.6, t), 36, 'left');
+    label([['Source', WHITE]], 280, 1300, la * ss(36.3, 37, t), 36);
+    label([['Drain', WHITE]], 800, 1300, la * ss(36.3, 37, t), 36);
+  }
+
+  // ======================================================================
+  // Scene 11 — close (55–58)
+  // ======================================================================
+  function scene11(t) {
+    screen();
+    label([['A billion switches. One idea.', WHITE]], 540, 960, win(t, 55.5, 56.5, 57.3, 58), 40);
+  }
+
+  // ---------- frame ----------
+  function render(t) {
+    screen();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    if (t < 3.4) scene1(t);
+    if (t > 2.6 && t < 19.7) materials(t);
+    if (t > 19 && t < 24.7) scene5(t);
+    if (t > 24 && t < 30.7) scene6(t);
+    if (t > 30 && t < 55) device(t);
+    if (t >= 55) scene11(t);
+  }
+  // exposed so frames can be captured deterministically (e.g. Playwright → ffmpeg)
+  window.renderFrame = render;
+
+  // ---------- playback ----------
+  const ui = document.getElementById('ui'), playBtn = document.getElementById('play');
+  let start = 0, raf = 0;
+  function loop(now) {
+    const t = (now - start) / 1000;
+    render(Math.min(t, DURATION));
+    if (t < DURATION) raf = requestAnimationFrame(loop);
+    else { document.body.classList.remove('playing'); playBtn.textContent = '↻ Replay'; ui.hidden = false; }
+  }
+  async function play() {
+    await document.fonts.load('300 40px Inter');
+    const from = clamp(parseFloat(new URLSearchParams(location.search).get('at')) || 0, 0, DURATION);
+    cancelAnimationFrame(raf);
+    ui.hidden = true;
+    document.body.classList.add('playing');
+    start = performance.now() - from * 1000;
+    raf = requestAnimationFrame(loop);
+  }
+  render(0);
+  playBtn.addEventListener('click', play);
+  addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); play(); }
+    else if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>
