@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Public pages only. Unlisted pages (for-brand-managers.html,
+  interview_report.html, sitemap.html) are deliberately excluded and carry a
+  noindex tag. The human-readable index of everything is /sitemap.html.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://imsks.github.io/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://imsks.github.io/work.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://imsks.github.io/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imsks.github.io/resume.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://imsks.github.io/for-brands.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url><loc>https://imsks.github.io/work/rajniti/market-opportunity.html</loc><priority>0.7</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/roadmap.html</loc><priority>0.7</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/trust-and-safety.html</loc><priority>0.7</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/market-sizing.html</loc><priority>0.6</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/rice-prioritization.html</loc><priority>0.6</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/okrs-dashboard.html</loc><priority>0.6</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/stakeholder-map.html</loc><priority>0.6</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/interview-script.html</loc><priority>0.6</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/experiment-brief.html</loc><priority>0.6</priority></url>
+  <url><loc>https://imsks.github.io/work/rajniti/analytics-dashboard.html</loc><priority>0.6</priority></url>
+
+</urlset>

@@ -1,388 +1,374 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-root="">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sachin Shukla — AI Product Manager</title>
-<meta name="description" content="AI Product Manager & Founding Engineer. Portfolio: a complete product case study for Rajniti, an AI civic-research tool for India's 970M voters.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sachin Kumar Shukla — AI Product Manager & Founding Engineer</title>
+<meta name="description" content="AI Product Manager and founding engineer. Six years shipping AI-first products across FinTech, EdTech and civic tech. Case studies, résumés and open-source work.">
+<meta name="theme-color" content="#14110F">
+<link rel="canonical" href="https://imsks.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sachin Kumar Shukla — AI Product Manager">
+<meta property="og:description" content="I build AI products, then I build the audience that uses them.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --ink:#0D0D0D; --paper:#F6F1E8; --cream:#EDE8DC; --rule:#CEC8BA; --muted:#7A7060;
-  --navy:#1A2A4A; --navy-lt:#E8ECF4; --navy-md:#A0B0CC;
-  --saffron:#E06B2A; --saff-lt:#FDF0E8; --saff-md:#F5C4A0;
-  --green:#1A6B40; --green-lt:#E6F4ED; --gold:#B8860B; --gold-lt:#FBF3DC;
-  --blue:#185FA5; --blue-lt:#E6F1FB; --purple:#5B21B6; --purp-lt:#EDE9FE;
+/* ---------- hero ---------- */
+.hero{background:var(--signal); border-bottom:2px solid var(--ink); padding:76px 0 0; position:relative; overflow:hidden}
+.hero::before{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background-image:linear-gradient(var(--ink) 1px,transparent 1px),linear-gradient(90deg,var(--ink) 1px,transparent 1px);
+  background-size:72px 72px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 80% 10%,#000,transparent 70%);
+          mask-image:radial-gradient(ellipse 70% 70% at 80% 10%,#000,transparent 70%);
+  opacity:.07;
 }
-html{scroll-behavior:smooth}
-body{background:var(--paper);font-family:'DM Sans',sans-serif;color:var(--ink);}
+.hero .wrap{position:relative; z-index:1}
 
-/* HERO */
-.hero{background:var(--navy);position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;
-  background:linear-gradient(90deg,var(--saffron) 0%,var(--saffron) 33.3%,#fff 33.3%,#fff 66.6%,var(--green) 66.6%);}
-.hero::after{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 100% at 95% 50%,rgba(224,107,42,0.08) 0%,transparent 60%),
-  radial-gradient(ellipse 40% 80% at 5% 80%,rgba(26,106,64,0.05) 0%,transparent 60%);pointer-events:none;}
-.hero-inner{max-width:1080px;margin:0 auto;padding:48px 40px 0;position:relative;z-index:1;}
-.hero-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
-  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;color:rgba(255,255,255,0.25);
-  text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:12px;margin-bottom:28px;}
-.hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;}
-@media(max-width:720px){.hero-grid{grid-template-columns:1fr;gap:24px}}
-.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:12px;}
-.hero-name{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;line-height:0.9;color:#F6F1E8;letter-spacing:-2px;margin-bottom:14px;}
-@media(max-width:720px){.hero-name{font-size:46px}}
-.hero-name em{font-style:italic;color:var(--saffron);}
-.hero-role{font-size:15px;font-weight:300;color:rgba(246,241,232,0.55);line-height:1.7;margin-bottom:22px;max-width:560px;}
-.hero-role strong{color:rgba(246,241,232,0.85);font-weight:500;}
-.hero-links{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px;}
-.hero-link{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
-  border:1px solid rgba(255,255,255,0.15);padding:8px 15px;color:rgba(246,241,232,0.6);text-decoration:none;transition:all 0.2s;}
-.hero-link:hover{background:rgba(255,255,255,0.06);color:rgba(246,241,232,0.9);}
-.hero-link.primary{background:var(--saffron);border-color:var(--saffron);color:white;}
-.hero-link.primary:hover{background:#C85A20;}
-.profile-badge{width:130px;height:130px;border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-shrink:0;}
-.pb-avatar{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--saffron),var(--navy));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;font-style:italic;color:white;}
-.pb-name{font-size:11px;font-weight:500;color:rgba(246,241,232,0.7);text-align:center;}
-.pb-role{font-family:'DM Mono',monospace;font-size:8px;color:rgba(246,241,232,0.3);letter-spacing:0.08em;text-align:center;text-transform:uppercase;}
-.stats-strip{border-top:1px solid rgba(255,255,255,0.07);display:grid;grid-template-columns:repeat(5,1fr);position:relative;z-index:1;}
-@media(max-width:720px){.stats-strip{grid-template-columns:repeat(2,1fr)}}
-.stat{padding:14px 0;text-align:center;border-right:1px solid rgba(255,255,255,0.06);}
-.stat:last-child{border-right:none;}
-.stat-n{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--saffron);display:block;}
-.stat-l{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;color:rgba(246,241,232,0.28);text-transform:uppercase;display:block;margin-top:2px;}
+.avail{
+  display:inline-flex; align-items:center; gap:9px; margin-bottom:26px;
+  font-family:var(--display); font-size:12.5px; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:1.5px solid var(--ink); border-radius:999px; padding:6px 15px 6px 12px;
+}
+.avail .pulse{width:9px; height:9px; border-radius:50%; background:var(--ink); position:relative}
+.avail .pulse::after{
+  content:""; position:absolute; inset:0; border-radius:50%; background:var(--ink);
+  animation:ping 1.9s cubic-bezier(0,0,.2,1) infinite;
+}
+@keyframes ping{0%{transform:scale(1);opacity:.6} 70%,100%{transform:scale(3);opacity:0}}
 
-/* MAIN */
-.main{max-width:1080px;margin:0 auto;padding:48px 40px 64px;}
-.section-hdr{display:flex;align-items:center;gap:14px;margin:0 0 24px;}
-.sec-n{font-family:'Playfair Display',serif;font-size:11px;font-style:italic;color:var(--gold);width:22px;flex-shrink:0;}
-.sec-t{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
-.sec-r{flex:1;height:1px;background:var(--rule);}
+.hero-id{
+  font-family:var(--display); font-size:13px; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--signal-ink); margin:0 0 20px;
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+}
+.hero-id .role{
+  display:inline-block; min-width:14ch; color:var(--ink);
+  transition:opacity .28s var(--ease), transform .28s var(--ease);
+}
+.hero-title{
+  font-size:clamp(40px,7.4vw,86px); font-weight:800; line-height:1.02;
+  letter-spacing:-.04em; margin:0 0 28px; max-width:17ch;
+}
+.hero-sub{max-width:56ch; margin:0 0 36px; color:var(--signal-ink); font-size:clamp(16px,1.6vw,18.5px)}
+.hero-sub strong{color:var(--ink); font-weight:600}
+.hero .btns{margin-bottom:44px}
+.hero .rule{margin-bottom:0}
+.hero-meta{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));
+  gap:0; padding:0 0 4px;
+}
+.hero-meta div{padding:20px 18px 24px 0}
+.hero-meta b{
+  display:block; font-family:var(--display); font-weight:800;
+  font-size:clamp(24px,3.2vw,34px); letter-spacing:-.04em; line-height:1;
+}
+.hero-meta span{display:block; margin-top:6px; font-family:var(--display); font-size:12.5px; font-weight:600; color:var(--signal-ink)}
 
-/* CASE STUDY */
-.cs-card{background:white;border:1px solid var(--rule);margin-bottom:40px;overflow:hidden;}
-.cs-header{background:var(--navy);padding:24px 28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;}
-@media(max-width:720px){.cs-header{grid-template-columns:1fr}}
-.cs-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--saffron);margin-bottom:8px;}
-.cs-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#F6F1E8;letter-spacing:-0.5px;margin-bottom:6px;}
-.cs-title em{font-style:italic;color:var(--saffron);}
-.cs-sub{font-size:12px;color:rgba(246,241,232,0.45);line-height:1.6;max-width:520px;}
-.cs-stats{display:flex;flex-direction:column;gap:8px;flex-shrink:0;}
-.cs-stat-item{text-align:right;}
-@media(max-width:720px){.cs-stat-item{text-align:left}}
-.cs-stat-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--saffron);display:block;line-height:1;}
-.cs-stat-l{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.08em;color:rgba(246,241,232,0.3);text-transform:uppercase;}
+/* ---------- pillars ---------- */
+.pillar{border-top:2px solid var(--ink); padding:26px 0 30px}
+.pillar .card-tag{color:var(--stone)}
+.pillar h3{font-size:clamp(20px,2.6vw,26px); font-weight:800; margin:0 0 12px}
+.pillar p{color:var(--stone); margin:0}
 
-.chapter-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);}
-@media(max-width:900px){.chapter-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.chapter-grid{grid-template-columns:1fr}}
-.ch-card{padding:18px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);text-decoration:none;color:inherit;transition:background 0.15s;display:block;}
-.ch-card:hover{background:var(--saff-lt);}
-.ch-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-.ch-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.3;}
-.ch-topics{font-size:10px;color:var(--muted);line-height:1.55;}
-.ch-status{display:inline-block;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.08em;padding:2px 7px;margin-top:8px;}
+/* ---------- featured ---------- */
+.feature-head{display:grid; grid-template-columns:1.35fr 1fr; gap:48px; align-items:end; margin-bottom:44px}
+@media (max-width:860px){ .feature-head{grid-template-columns:1fr; gap:28px} }
+.feature-title{font-size:clamp(32px,5.4vw,56px); font-weight:800; line-height:1; margin:0 0 18px}
+.feature-title em{font-style:normal; color:var(--signal)}
+.feat-stats{display:grid; grid-template-columns:1fr 1fr; gap:22px 28px}
+.feat-stats b{
+  display:block; font-family:var(--display); font-weight:800;
+  font-size:clamp(26px,3.4vw,36px); letter-spacing:-.04em; color:var(--signal); line-height:1;
+}
+.feat-stats span{display:block; margin-top:6px; font-family:var(--display); font-size:12.5px; font-weight:500; color:rgba(250,248,245,.55)}
 
-/* ARTIFACT GRID */
-.artifact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:40px;}
-@media(max-width:900px){.artifact-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.artifact-grid{grid-template-columns:1fr}}
-.artifact-card{border:1px solid var(--rule);background:white;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform 0.15s,box-shadow 0.15s;}
-.artifact-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);}
-.ac-thumb{height:88px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.ac-thumb-icon{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;font-style:italic;opacity:0.14;position:absolute;bottom:-6px;right:8px;line-height:1;}
-.ac-type-badge{position:absolute;top:10px;left:10px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;}
-.ac-body{padding:13px 15px;flex:1;display:flex;flex-direction:column;border-top:1px solid var(--rule);}
-.ac-series{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px;}
-.ac-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3;}
-.ac-desc{font-size:10.5px;color:var(--muted);line-height:1.55;flex:1;margin-bottom:10px;}
-.ac-footer{display:flex;justify-content:space-between;align-items:center;padding-top:9px;border-top:1px solid var(--cream);}
-.ac-week{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
-.ac-open{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--rule);color:var(--muted);transition:all 0.15s;}
-.artifact-card:hover .ac-open{background:var(--ink);color:white;border-color:var(--ink);}
+.ch-grid{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(250,248,245,.18)}
+@media (max-width:900px){ .ch-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:560px){ .ch-grid{grid-template-columns:1fr} }
+.ch{
+  display:block; text-decoration:none; color:var(--paper); padding:26px 24px 30px;
+  border-right:1px solid rgba(250,248,245,.14); border-bottom:1px solid rgba(250,248,245,.14);
+  position:relative; transition:background .3s var(--ease);
+}
+.ch:last-child{border-right:0}
+.ch:hover{background:rgba(227,181,5,.1)}
+.ch .kicker{font-family:var(--display); font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--signal); margin-bottom:10px}
+.ch h4{font-size:19px; font-weight:800; margin:0 0 10px}
+.ch p{font-size:15px; color:rgba(250,248,245,.62); margin:0 0 18px}
+.ch .go{font-family:var(--display); font-size:13px; font-weight:700; color:var(--signal); display:inline-flex; gap:6px}
+.ch:hover .go span{transform:translateX(4px)}
+.ch .go span{display:inline-block; transition:transform .25s var(--ease)}
 
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;}
-@media(max-width:720px){.about-grid{grid-template-columns:1fr}}
-.about-card{border:1px solid var(--rule);background:white;padding:20px;}
-.about-card-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
-.about-card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.2;}
-.about-card-body{font-size:11.5px;color:var(--muted);line-height:1.65;}
-.exp-row{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--cream);}
-.exp-row:last-child{border-bottom:none;}
-.exp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;}
-.exp-co{font-size:11px;font-weight:500;color:var(--ink);}
-.exp-role{font-size:10px;color:var(--muted);}
+/* ---------- artifacts ---------- */
+.art{padding-left:22px; position:relative}
+.art::before{
+  content:""; position:absolute; left:0; top:4px; bottom:4px; width:4px;
+  background:var(--accent,var(--signal)); border-radius:2px;
+  transform:scaleY(.35); transform-origin:top; transition:transform .4s var(--ease);
+}
+a.art:hover::before{transform:scaleY(1)}
 
-/* SKILLS */
-.skills-strip{background:var(--navy);padding:20px 28px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:40px;}
-.skill-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;border:1px solid rgba(255,255,255,0.12);padding:4px 10px;color:rgba(246,241,232,0.5);}
-.skill-tag.highlight{border-color:rgba(224,107,42,0.4);color:var(--saffron);}
-.skills-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(246,241,232,0.25);margin-right:4px;}
+/* ---------- projects ---------- */
+.proj{display:grid; grid-template-columns:260px 1fr 1fr; gap:28px; border-top:2px solid var(--ink); padding:26px 0; text-decoration:none; color:inherit; transition:background .25s var(--ease)}
+.proj:last-of-type{border-bottom:2px solid var(--ink)}
+.proj:hover{background:var(--signal-soft)}
+.proj h3{font-size:22px; font-weight:800; margin:0 0 6px}
+.proj .role{font-family:var(--display); font-size:13px; font-weight:600; color:var(--signal-deep)}
+.proj p{margin:0; color:var(--stone); font-size:16px}
+.proj .stack{font-family:var(--display); font-size:13px; font-weight:500; color:var(--stone); line-height:1.7}
+.proj .stack b{display:block; color:var(--ink); font-weight:700; margin-bottom:5px; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase}
+@media (max-width:860px){ .proj{grid-template-columns:1fr; gap:12px} }
 
-.pos-box{background:var(--navy);padding:24px 28px;margin-bottom:0;}
-.pos-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(246,241,232,0.3);margin-bottom:10px;}
-.pos-text{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;line-height:1.5;color:#F6F1E8;}
-.pos-text em{color:var(--saffron);font-style:italic;}
+/* ---------- resumes ---------- */
+.res{
+  border:2px solid var(--ink); border-radius:3px; padding:30px 30px 26px;
+  background:var(--paper); display:flex; flex-direction:column;
+}
+.res:first-child{background:var(--signal)}
+.res h3{font-size:clamp(22px,3vw,28px); font-weight:800; margin:0 0 6px}
+.res .for{font-family:var(--display); font-size:13.5px; font-weight:600; color:var(--stone); margin:0 0 18px}
+.res:first-child .for{color:var(--signal-ink)}
+.res p{font-size:16px; color:var(--stone); margin:0 0 20px}
+.res:first-child p{color:var(--signal-ink)}
+.res .chips{margin-bottom:24px}
+.res .btns{margin-top:auto}
 
-/* FOOTER */
-.footer{background:var(--cream);border-top:1px solid var(--rule);padding:18px 40px;}
-.footer-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-.f-name{font-size:13px;font-weight:600;}
-.f-role{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);}
-.f-links{display:flex;gap:14px;}
-.f-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--navy-md);padding-bottom:1px;}
-.f-links a:hover{color:var(--saffron);border-color:var(--saffron);}
+/* ---------- creator ---------- */
+.creator-grid{display:grid; grid-template-columns:1.25fr 1fr; gap:48px; align-items:center}
+@media (max-width:860px){ .creator-grid{grid-template-columns:1fr; gap:30px} }
+.creator-grid h2{font-size:clamp(30px,5vw,50px); font-weight:800; line-height:1.02; margin:0 0 18px}
+.acct{border-top:2px solid var(--ink); padding:16px 0}
+.acct b{display:block; font-family:var(--display); font-weight:800; font-size:clamp(24px,3vw,32px); letter-spacing:-.04em; line-height:1}
+.acct span{font-family:var(--display); font-size:13px; font-weight:600; color:var(--signal-ink)}
+
+@media (max-width:700px){
+  .hero{padding-top:52px}
+  .hero .btns{margin-bottom:34px}
+  .hero-meta div{padding:16px 14px 18px 0}
+  .btn{flex:1 1 100%; justify-content:center}
+}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
+<nav data-nav aria-label="Primary"></nav>
+
+<!-- ======================= HERO ======================= -->
 <header class="hero">
-  <div class="hero-inner">
-    <div class="hero-meta">
-      <span>AI PM Portfolio · 2025</span>
-      <span>Product Strategy · LLMs · Civic Tech</span>
-      <span>Open to AI PM Roles — India / Remote</span>
+  <div class="wrap">
+    <div class="avail reveal"><span class="pulse"></span>Open to AI PM roles</div>
+
+    <p class="hero-id reveal" data-delay="1">
+      Sachin Kumar Shukla <span aria-hidden="true">—</span> <span class="role" data-roles></span>
+    </p>
+
+    <h1 class="hero-title" data-kinetic>
+      I build AI products,<br>then I build the<br>audience that uses them.
+    </h1>
+
+    <p class="hero-sub reveal" data-delay="2">
+      Six years shipping full-stack systems, four of them on AI-first products across FinTech, EdTech
+      and civic tech. I own <strong>the hard part of AI products</strong> — how much a model should be
+      trusted, where it must fail gracefully, and what it costs to run at scale.
+    </p>
+
+    <div class="btns hero-btns reveal" data-delay="3">
+      <a class="btn" href="work.html">See the work <span class="arw">&rarr;</span></a>
+      <a class="btn alt" href="resume.html">Both résumés</a>
+      <a class="btn alt" href="mailto:sachinshuklapm@gmail.com">Email me</a>
     </div>
-    <div class="hero-grid">
-      <div>
-        <div class="hero-eyebrow">AI Product Manager</div>
-        <h1 class="hero-name">Sachin<br><em>Shukla</em></h1>
-        <p class="hero-role">
-          Founding engineer turned AI Product Manager. <strong>5+ years building AI-first products</strong> across FinTech, EdTech, and Civic Tech.
-          I specialize in the hard part of AI products — deciding how much a model should be trusted, where it must fail gracefully, and what it costs to run at scale.
-          This portfolio is a complete product case study for <strong>Rajniti</strong>, an AI civic-research tool for India's 970M voters.
-        </p>
-        <div class="hero-links">
-          <a href="#case-study" class="hero-link primary">View Case Study ↓</a>
-          <a href="https://www.linkedin.com/in/imsks" target="_blank" rel="noopener" class="hero-link">LinkedIn →</a>
-          <a href="https://github.com/imsks" target="_blank" rel="noopener" class="hero-link">GitHub →</a>
-          <a href="Sachin_Shukla_AI_PM_Resume.pdf" target="_blank" class="hero-link">Resume PDF →</a>
-        </div>
-      </div>
-      <div class="profile-badge">
-        <div class="pb-avatar">S</div>
-        <div class="pb-name">Sachin Shukla</div>
-        <div class="pb-role">Founding Eng<br>→ AI PM</div>
-      </div>
-    </div>
-  </div>
-  <div class="stats-strip">
-    <div class="stat"><span class="stat-n">5+ yrs</span><span class="stat-l">AI-first products</span></div>
-    <div class="stat"><span class="stat-n">7,000</span><span class="stat-l">TBE daily learners</span></div>
-    <div class="stat"><span class="stat-n">100K+</span><span class="stat-l">Community built</span></div>
-    <div class="stat"><span class="stat-n">970M</span><span class="stat-l">Rajniti TAM</span></div>
-    <div class="stat"><span class="stat-n">10</span><span class="stat-l">PM artifacts</span></div>
+
+    <div class="rule"></div>
+    <div class="hero-meta stagger" id="heroMeta"></div>
   </div>
 </header>
 
-<main class="main">
+<div data-marquee></div>
 
-  <!-- CASE STUDY -->
-  <section id="case-study">
-    <div class="section-hdr">
-      <span class="sec-n">I</span><span class="sec-t">Primary Case Study — The Full Arc</span><div class="sec-r"></div>
-    </div>
-    <div class="cs-card">
-      <div class="cs-header">
-        <div>
-          <div class="cs-badge">PM Portfolio · Rajniti Civic AI</div>
-          <div class="cs-title">Rajniti — <em>Civic AI</em></div>
-          <div class="cs-sub">An AI-powered political research tool for Indian voters, built from zero. Market opportunity, prioritisation, experimentation, and responsible AI — a complete product case study across four chapters.</div>
-        </div>
-        <div class="cs-stats">
-          <div class="cs-stat-item"><span class="cs-stat-n">₹4.85 Cr</span><span class="cs-stat-l">Base ARR (Yr 1)</span></div>
-          <div class="cs-stat-item"><span class="cs-stat-n">23.6M</span><span class="cs-stat-l">SAM users</span></div>
-        </div>
+<main>
+
+  <!-- ======================= 01 WHAT I DO ======================= -->
+  <section class="sec" id="what">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">01</span>What I actually do</h2>
+        <p>Three things, and the overlap between them is the whole point.</p>
       </div>
-      <div class="chapter-grid">
-        <a href="rajniti_chapter2_market_opportunity.html" class="ch-card">
-          <div class="ch-num">Chapter 2 · Available</div>
-          <div class="ch-name">Market Opportunity</div>
-          <div class="ch-topics">TAM/SAM/SOM · competitive landscape · dual revenue · pricing · GTM timing</div>
-          <span class="ch-status" style="background:var(--green-lt);color:var(--green);">↗ Read Chapter</span>
-        </a>
-        <a href="rajniti_roadmap.html" class="ch-card">
-          <div class="ch-num">Chapter 3 · Available</div>
-          <div class="ch-name">Roadmap & Prioritisation</div>
-          <div class="ch-topics">Now/Next/Later · KR-linked items · Saransh dependency · trade-offs</div>
-          <span class="ch-status" style="background:var(--green-lt);color:var(--green);">↗ Read Chapter</span>
-        </a>
-        <a href="rajniti_chapter4_trust_safety.html" class="ch-card">
-          <div class="ch-num">Chapter 4 · Available</div>
-          <div class="ch-name">Trust & Safety</div>
-          <div class="ch-topics">8-risk register · hallucination protocol · bias inventory · attribution</div>
-          <span class="ch-status" style="background:var(--green-lt);color:var(--green);">↗ Read Chapter</span>
-        </a>
-        <a href="rajniti_market_sizing.html" class="ch-card">
-          <div class="ch-num">Foundation · Available</div>
-          <div class="ch-name">Market Sizing Model</div>
-          <div class="ch-topics">Bottom-up funnel · dual revenue · 3-scenario analysis · assumption audit</div>
-          <span class="ch-status" style="background:var(--navy-lt);color:var(--navy);">↗ View Model</span>
-        </a>
+      <div class="grid grid-3 stagger" id="pillars"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 02 FEATURED CASE STUDY ======================= -->
+  <section class="sec dark" id="case-study">
+    <div class="wrap">
+      <div class="feature-head">
+        <div class="reveal">
+          <p class="eyebrow" style="color:var(--signal)" id="featTag"></p>
+          <h2 class="feature-title" id="featTitle"></h2>
+          <p class="muted" id="featBody" style="max-width:56ch"></p>
+        </div>
+        <div class="feat-stats stagger" id="featStats"></div>
+      </div>
+      <div class="ch-grid stagger" id="featChapters"></div>
+      <div class="btns reveal" style="margin-top:36px">
+        <a class="btn" href="work.html">Every artifact <span class="arw">&rarr;</span></a>
       </div>
     </div>
   </section>
 
-  <!-- SUPPORTING ARTIFACTS -->
-  <section>
-    <div class="section-hdr">
-      <span class="sec-n">II</span><span class="sec-t">The PM Craft — Execution Artifacts</span><div class="sec-r"></div>
-    </div>
-    <div class="artifact-grid">
-
-      <a href="rajniti_rice_prioritization.html" class="artifact-card">
-        <div class="ac-thumb" style="background:linear-gradient(135deg,#1A2A4A,#2A4070);">
-          <div class="ac-thumb-icon" style="color:white;">R</div>
-          <span class="ac-type-badge" style="background:rgba(224,107,42,0.15);color:#F5C4A0;">Prioritisation</span>
-        </div>
-        <div class="ac-body">
-          <div class="ac-series" style="color:var(--saffron)">Feature Backlog</div>
-          <div class="ac-title">RICE + Kano Scoring</div>
-          <div class="ac-desc">5 features scored with RICE, classified with Kano, and a strategic override where the numeric ranking diverges from product mission.</div>
-          <div class="ac-footer"><span class="ac-week">Prioritisation</span><span class="ac-open">Open →</span></div>
-        </div>
-      </a>
-
-      <a href="rajniti_okrs_dashboard.html" class="artifact-card">
-        <div class="ac-thumb" style="background:linear-gradient(135deg,#042C53,#185FA5);">
-          <div class="ac-thumb-icon" style="color:white;">O</div>
-          <span class="ac-type-badge" style="background:rgba(56,138,221,0.2);color:#B5D4F4;">Goal-Setting</span>
-        </div>
-        <div class="ac-body">
-          <div class="ac-series" style="color:var(--blue)">North Star + OKRs</div>
-          <div class="ac-title">Q1 OKRs & Metrics Dashboard</div>
-          <div class="ac-desc">One objective, four key results, each tied to a sprint deliverable. North star defined to the 60-second research session.</div>
-          <div class="ac-footer"><span class="ac-week">Strategy</span><span class="ac-open">Open →</span></div>
-        </div>
-      </a>
-
-      <a href="rajniti_stakeholder_map.html" class="artifact-card">
-        <div class="ac-thumb" style="background:linear-gradient(135deg,#1A6B40,#2A8A56);">
-          <div class="ac-thumb-icon" style="color:white;">S</div>
-          <span class="ac-type-badge" style="background:rgba(159,212,186,0.25);color:#E6F4ED;">Stakeholders</span>
-        </div>
-        <div class="ac-body">
-          <div class="ac-series" style="color:var(--green)">Power vs Interest</div>
-          <div class="ac-title">Stakeholder Map & RACI</div>
-          <div class="ac-desc">Power/interest mapping, RACI for three high-stakes decisions, and a framework for saying no to a founder without burning the relationship.</div>
-          <div class="ac-footer"><span class="ac-week">Management</span><span class="ac-open">Open →</span></div>
-        </div>
-      </a>
-
-      <a href="rajniti_interview_script.html" class="artifact-card">
-        <div class="ac-thumb" style="background:linear-gradient(135deg,#5B21B6,#7C3AED);">
-          <div class="ac-thumb-icon" style="color:white;">Q</div>
-          <span class="ac-type-badge" style="background:rgba(237,233,254,0.25);color:#EDE9FE;">Discovery</span>
-        </div>
-        <div class="ac-body">
-          <div class="ac-series" style="color:var(--purple)">User Research</div>
-          <div class="ac-title">User Interview Script</div>
-          <div class="ac-desc">A 10-question JTBD discovery script with three zones and probing follow-ups — no leading questions, no hypotheticals, no feature evaluation.</div>
-          <div class="ac-footer"><span class="ac-week">Research</span><span class="ac-open">Open →</span></div>
-        </div>
-      </a>
-
-      <a href="rajniti_experiment_brief.html" class="artifact-card">
-        <div class="ac-thumb" style="background:linear-gradient(135deg,#0D0D0D,#2A2A2A);">
-          <div class="ac-thumb-icon" style="color:white;">A</div>
-          <span class="ac-type-badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);">A/B Test</span>
-        </div>
-        <div class="ac-body">
-          <div class="ac-series" style="color:var(--muted)">Experimentation</div>
-          <div class="ac-title">The Blur Test — Experiment Brief</div>
-          <div class="ac-desc">Full A/B test design: hypothesis, primary metric, guardrail, sample-size calculation, and three pre-committed decision outcomes.</div>
-          <div class="ac-footer"><span class="ac-week">Experiment</span><span class="ac-open">Open →</span></div>
-        </div>
-      </a>
-
-      <a href="rajniti_analytics_dashboard.html" class="artifact-card">
-        <div class="ac-thumb" style="background:linear-gradient(135deg,#0C0E14,#1A1E2A);">
-          <div class="ac-thumb-icon" style="color:white;">≈</div>
-          <span class="ac-type-badge" style="background:rgba(255,107,43,0.2);color:#FFB89A;">Analytics</span>
-        </div>
-        <div class="ac-body">
-          <div class="ac-series" style="color:var(--saffron)">AARRR · Cohorts</div>
-          <div class="ac-title">PM Analytics Dashboard</div>
-          <div class="ac-desc">Five charts, each tied to a KR, with investigate/celebrate thresholds — plus the 24-hour diagnosis sequence for a 20% metric drop.</div>
-          <div class="ac-footer"><span class="ac-week">Analytics</span><span class="ac-open">Open →</span></div>
-        </div>
-      </a>
-
+  <!-- ======================= 03 PM CRAFT ======================= -->
+  <section class="sec" id="craft">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">02</span>The PM craft, shown not claimed</h2>
+        <p>Six execution artifacts from the same product. Prioritisation, goal-setting, discovery,
+           experimentation and analytics — each one a decision with its reasoning left in.</p>
+      </div>
+      <div class="grid grid-3 stagger" id="artifacts"></div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section>
-    <div class="section-hdr">
-      <span class="sec-n">III</span><span class="sec-t">Background</span><div class="sec-r"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-card">
-        <div class="about-card-label">The Transition</div>
-        <div class="about-card-title">From founding engineer to AI Product Manager</div>
-        <div class="about-card-body">5+ years as a founding engineer and product owner across AI-first startups in FinTech, EdTech, and E-commerce. I have built production AI systems, sized markets, and grown a community of 100,000+ — bringing genuine engineering credibility to the product decisions most PMs can only approximate. My specialism is the trust layer of AI products: how much to surface a model's uncertainty, where it must fail gracefully, and what it costs to run at scale.</div>
+  <!-- ======================= 04 PRODUCTS ======================= -->
+  <section class="sec" id="products">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">03</span>Things I have shipped</h2>
+        <p>Ventures and open source. All of it live, most of it free, none of it a side-project graveyard.</p>
       </div>
-      <div class="about-card">
-        <div class="about-card-label">Experience</div>
-        <div style="padding-top:4px;">
-          <div class="exp-row"><div class="exp-dot" style="background:var(--saffron)"></div><div><div class="exp-co">FinSoftAI · Founding Product Manager (AI)</div><div class="exp-role">AI sentiment platform for US equity traders · Confidence-surfacing & latency SLAs · Jan 2023–Present</div></div></div>
-          <div class="exp-row"><div class="exp-dot" style="background:var(--green)"></div><div><div class="exp-co">The Boring Education · Co-Founder & Product Lead</div><div class="exp-role">EdTech platform · 7K DAL · 100K+ community · Jun 2022–Present</div></div></div>
-          <div class="exp-row"><div class="exp-dot" style="background:var(--navy-md)"></div><div><div class="exp-co">Saara · Founding Product Manager</div><div class="exp-role">E-commerce returns-reduction SaaS · Integrations roadmap · Jan–Dec 2022</div></div></div>
-          <div class="exp-row"><div class="exp-dot" style="background:var(--rule)"></div><div><div class="exp-co">Trilingo · Founding Engineer</div><div class="exp-role">Tribal-language learning platform · 60% retention · Jul 2020–Jul 2021</div></div></div>
-        </div>
+      <div id="projects"></div>
+    </div>
+  </section>
+
+  <!-- ======================= 05 EXPERIENCE ======================= -->
+  <section class="sec" id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">04</span>Where I have done it</h2>
+        <p>Founding roles, three of them. The common thread is owning an outcome before owning a title.</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+      <div class="btns reveal" style="margin-top:34px">
+        <a class="btn alt" href="about.html">The longer story <span class="arw">&rarr;</span></a>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <div class="skills-strip">
-    <span class="skills-label">Skills ·</span>
-    <span class="skill-tag highlight">AI Trust & Confidence Design</span>
-    <span class="skill-tag highlight">Hallucination / Fallback Strategy</span>
-    <span class="skill-tag highlight">Inference-Cost Economics</span>
-    <span class="skill-tag highlight">Market Sizing</span>
-    <span class="skill-tag">RICE & Kano</span>
-    <span class="skill-tag">OKRs</span>
-    <span class="skill-tag">Roadmapping</span>
-    <span class="skill-tag">A/B Testing</span>
-    <span class="skill-tag">AARRR Analytics</span>
-    <span class="skill-tag">GTM Strategy</span>
-    <span class="skill-tag">LangChain / LangGraph</span>
-    <span class="skill-tag">RAG · Vector DBs</span>
-    <span class="skill-tag">React / Next.js</span>
-    <span class="skill-tag">Python / FastAPI</span>
-  </div>
-
-  <!-- POSITIONING -->
-  <div class="pos-box">
-    <div class="pos-label">Why Hire Me as an AI PM</div>
-    <div class="pos-text">
-      I am not a developer who wants to become a PM. I am a <em>founder who has been doing product management without the title</em> — shipping AI systems, sizing markets, and making the trust and architecture trade-offs that determined whether products survived. The case study above is the evidence.
+  <!-- ======================= 06 RESUMES ======================= -->
+  <section class="sec" id="resumes">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">05</span>Two résumés, pick your lens</h2>
+        <p>The same six years, framed for the role you are hiring for. Both are kept in sync.</p>
+      </div>
+      <div class="grid grid-2 stagger" id="resumeCards"></div>
     </div>
-  </div>
+  </section>
+
+  <!-- ======================= 07 CREATOR ======================= -->
+  <section class="sec signal" id="creator">
+    <div class="wrap creator-grid">
+      <div class="reveal">
+        <p class="eyebrow" style="color:var(--signal-ink)" id="crTag"></p>
+        <h2 id="crTitle"></h2>
+        <p style="color:var(--signal-ink); max-width:52ch" id="crBody"></p>
+        <div class="btns" id="crLinks" style="margin-top:28px"></div>
+      </div>
+      <div class="stagger" id="crStats"></div>
+    </div>
+  </section>
 
 </main>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <div class="f-name">Sachin Shukla</div>
-      <div class="f-role">Founding AI Product Engineer → AI PM · Open to Opportunities</div>
-    </div>
-    <div class="f-links">
-      <a href="https://www.linkedin.com/in/imsks" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/imsks" target="_blank" rel="noopener">GitHub</a>
-      <a href="Sachin_Shukla_AI_PM_Resume.pdf" target="_blank">Resume</a>
-      <a href="mailto:sachinkshuklaoo7@gmail.com">Email</a>
-    </div>
-  </div>
-</footer>
+<footer data-footer></footer>
 
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+/* Landing page render. Everything below reads from assets/js/data.js. */
+(function () {
+  var S = window.SITE, U = window.SITE_UI;
+  var esc = U.esc, url = U.url, ext = U.linkAttrs;
+  var $ = function (id) { return document.getElementById(id); };
+
+  $('heroMeta').innerHTML = S.stats.map(function (s) {
+    return '<div><b><span data-count="' + esc(s.value) + '">0</span>' + esc(s.suffix || '') + '</b>' +
+           '<span>' + esc(s.label) + '</span></div>';
+  }).join('');
+
+  $('pillars').innerHTML = S.pillars.map(function (p) {
+    return '<div class="pillar">' +
+      '<div class="card-tag">' + esc(p.tag) + '</div>' +
+      '<h3>' + esc(p.title) + '</h3><p>' + esc(p.body) + '</p></div>';
+  }).join('');
+
+  var f = S.featured;
+  $('featTag').textContent = f.tag;
+  $('featTitle').innerHTML = esc(f.title).replace('Civic AI', '<em>Civic AI</em>');
+  $('featBody').textContent = f.body;
+  $('featStats').innerHTML = f.stats.map(function (s) {
+    return '<div><b>' + esc(s.value) + '</b><span>' + esc(s.label) + '</span></div>';
+  }).join('');
+  $('featChapters').innerHTML = f.chapters.map(function (c) {
+    return '<a class="ch" href="' + esc(url(c.href)) + '">' +
+      '<div class="kicker">' + esc(c.kicker) + '</div>' +
+      '<h4>' + esc(c.title) + '</h4><p>' + esc(c.desc) + '</p>' +
+      '<span class="go">Read <span>&rarr;</span></span></a>';
+  }).join('');
+
+  $('artifacts').innerHTML = S.artifacts.map(function (a) {
+    return '<a class="card art" href="' + esc(url(a.href)) + '" style="--accent:' + esc(a.accent) + '">' +
+      '<div class="card-tag">' + esc(a.tag) + '</div>' +
+      '<h3>' + esc(a.title) + '</h3><p>' + esc(a.desc) + '</p>' +
+      '<div class="card-foot"><span>Artifact</span><span class="go">Open &rarr;</span></div></a>';
+  }).join('');
+
+  $('projects').innerHTML = S.projects.map(function (p) {
+    return '<a class="proj" href="' + esc(p.url) + '"' + ext(p.url) + '>' +
+      '<div><h3>' + esc(p.title) + '</h3><div class="role">' + esc(p.role) + '</div></div>' +
+      '<p>' + esc(p.desc) + '</p>' +
+      '<div class="stack"><b>Stack</b>' + esc(p.stack) + '</div></a>';
+  }).join('');
+
+  $('timeline').innerHTML = S.experience.slice(0, 3).map(function (e) {
+    return '<div class="tl-item reveal">' +
+      '<div class="tl-when"><b>' + esc(e.from) + ' &rarr; ' + esc(e.to) + '</b>' + esc(e.note) + '</div>' +
+      '<div><h3 class="tl-role">' + esc(e.role) + '</h3>' +
+      '<p class="tl-co">' + esc(e.company) + '</p>' +
+      '<ul>' + e.points.slice(0, 2).map(function (pt) { return '<li>' + pt + '</li>'; }).join('') + '</ul></div></div>';
+  }).join('');
+
+  $('resumeCards').innerHTML = S.resumes.map(function (r) {
+    var pdf = r.file
+      ? '<a class="btn alt" href="' + esc(url(r.file)) + '" target="_blank" rel="noopener">Download PDF</a>'
+      : '';
+    return '<div class="res">' +
+      '<h3>' + esc(r.label) + '</h3>' +
+      '<p class="for">Best for: ' + esc(r.best) + '</p>' +
+      '<p>' + esc(r.summary) + '</p>' +
+      '<div class="chips">' + r.focus.map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join('') + '</div>' +
+      '<div class="btns"><a class="btn" href="' + esc(url('resume.html#' + r.id)) + '">Read it <span class="arw">&rarr;</span></a>' + pdf + '</div></div>';
+  }).join('');
+
+  var c = S.creator;
+  $('crTag').textContent = c.tag;
+  $('crTitle').textContent = c.title;
+  $('crBody').textContent = c.body;
+  $('crLinks').innerHTML = c.links.map(function (l, i) {
+    return '<a class="btn' + (i ? ' alt' : '') + '" href="' + esc(url(l.href)) + '">' + esc(l.label) +
+           ' <span class="arw">&rarr;</span></a>';
+  }).join('');
+  $('crStats').innerHTML = c.stats.map(function (s) {
+    return '<div class="acct"><b>' + esc(s.value) + '</b><span>' + esc(s.label) + '</span></div>';
+  }).join('');
+
+  U.observe();
+})();
+</script>
 </body>
 </html>

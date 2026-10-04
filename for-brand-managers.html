@@ -1,336 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-root="">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sachin Kumar Shukla - Collab Kit</title>
+<title>For brand managers — Sachin Kumar Shukla</title>
+<meta name="description" content="Collab kit for community scouts: bring a brand deal, negotiate it, and take a cut when it closes.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14110F">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
 
 <!--
   ============================================================
-  EDIT EVERYTHING FROM THE CONFIG BLOCK AT THE BOTTOM OF THIS
-  FILE (search for: const CONFIG). You should not need to
-  touch any HTML or CSS to change text, add reels, change
-  rates, or change the scout payout.
+  SCOUT-FACING PAGE. For people in my community who want to
+  bring me a brand deal and take a cut of it.
+
+  Edit the CONFIG block at the bottom of this file. The shared
+  look lives in assets/css/site.css.
   ============================================================
 -->
 
 <style>
-:root{
-  color-scheme: only light;
-  --signal:#E3B505;      /* haldi yellow - hero block + accents */
-  --signal-deep:#C09A00;
-  --ink:#14110F;         /* text + dark blocks */
-  --stone:#6E665E;       /* secondary text */
-  --paper:#FAF8F5;       /* page background */
-  --line:#DAD3C7;        /* rules */
-  --max:1080px;
-}
-
-*{box-sizing:border-box}
-html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:calc(72px + env(safe-area-inset-top,0px)); }
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:"Source Serif 4", Georgia, "Times New Roman", serif;
-  font-size:17px;
-  line-height:1.62;
-  padding-bottom:env(safe-area-inset-bottom,0px);
-}
-img{max-width:100%}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
-
-.wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
-
-/* ---------- nav ---------- */
-.nav{
-  position:sticky; top:0; z-index:50;
-  background:var(--ink); color:var(--paper);
-  padding-top:env(safe-area-inset-top,0px);
-}
-.nav-in{display:flex; align-items:center; gap:20px; height:58px; max-width:var(--max); margin:0 auto; padding:0 24px}
-.nav-name{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:15px; letter-spacing:-.02em; margin-right:auto}
-.nav a{font-family:"Archivo",system-ui,sans-serif; font-size:13.5px; font-weight:500; text-decoration:none; opacity:.78}
-.nav a:hover{opacity:1}
-.nav a.nav-cta{background:var(--signal); color:var(--ink); opacity:1; font-weight:700; padding:7px 13px; border-radius:2px}
-.nav-links{display:flex; gap:18px; align-items:center}
-
 /* ---------- hero ---------- */
-.hero{background:var(--signal); border-bottom:2px solid var(--ink); padding:64px 0 0}
-.hero h1{
-  font-family:"Archivo",system-ui,sans-serif;
-  font-weight:800; font-size:clamp(42px,9vw,86px); line-height:.94;
-  letter-spacing:-.035em; margin:0 0 26px; max-width:14ch;
-}
-.hero-lede{font-size:clamp(19px,2.4vw,24px); line-height:1.45; max-width:30ch; margin:0 0 30px; font-weight:600}
-.hero-sub{max-width:52ch; margin:0 0 40px; color:#4A3F10}
-.hero-btns{margin:0 0 38px}
-.hero-rule{height:2px; background:var(--ink); transform-origin:left; margin-bottom:18px}
-.hero-meta{
-  display:flex; flex-wrap:wrap; gap:4px 34px; padding-bottom:26px;
-  font-family:"Archivo",system-ui,sans-serif; font-size:14px; font-weight:500;
-}
-.hero-meta b{font-weight:800}
-
-/* ---------- section scaffolding ---------- */
-.sec{padding:66px 0; border-bottom:1px solid var(--line)}
-.sec:last-of-type{border-bottom:0}
-.sec-head{margin-bottom:34px; max-width:62ch}
-.sec h2{
-  font-family:"Archivo",system-ui,sans-serif; font-weight:800;
-  font-size:clamp(26px,4vw,38px); letter-spacing:-.03em; line-height:1.05; margin:0 0 12px;
-}
-.sec h2 .num{color:var(--signal-deep); font-size:.55em; vertical-align:top; margin-right:10px; letter-spacing:0}
-.sec-head p{margin:0; color:var(--stone); max-width:58ch}
+.hero{background:var(--signal); border-bottom:2px solid var(--ink); padding:70px 0 0}
+.hero h1{font-size:clamp(38px,8vw,80px); font-weight:800; line-height:1; letter-spacing:-.04em; margin:0 0 26px; max-width:14ch}
+.hero-lede{font-size:clamp(18px,2.3vw,23px); line-height:1.45; max-width:32ch; margin:0 0 28px; font-weight:600}
+.hero-sub{max-width:52ch; margin:0 0 38px; color:var(--signal-ink)}
+.hero .btns{margin-bottom:42px}
+.hero .rule{margin-bottom:0}
+.hero-meta{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
+.hero-meta div{padding:20px 16px 26px 0}
+.hero-meta b{display:block; font-family:var(--display); font-weight:800; font-size:clamp(22px,3vw,30px); letter-spacing:-.04em; line-height:1}
+.hero-meta span{display:block; margin-top:6px; font-family:var(--display); font-size:12.5px; font-weight:600; color:var(--signal-ink)}
 
 /* ---------- story ---------- */
-.story{display:grid; grid-template-columns:1fr 1fr; gap:46px}
-.story p{margin:0 0 18px}
-.story p:last-child{margin-bottom:0}
-.pull{
-  border-left:4px solid var(--signal); padding:4px 0 4px 20px;
-  font-size:21px; line-height:1.4; font-weight:600;
-}
+.story{display:grid; grid-template-columns:1.15fr 1fr; gap:48px}
+.pull{border-left:4px solid var(--signal); padding:6px 0 6px 22px; font-size:clamp(19px,2.3vw,22px); line-height:1.4; font-weight:600}
 @media (max-width:760px){ .story{grid-template-columns:1fr; gap:26px} }
 
 /* ---------- channels ---------- */
 .chan{border-top:2px solid var(--ink); padding:26px 0; display:grid; grid-template-columns:230px 1fr 190px; gap:30px}
 .chan:last-child{border-bottom:2px solid var(--ink)}
-.chan-handle{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:19px; letter-spacing:-.02em; text-decoration:none; display:inline-block; overflow-wrap:anywhere}
+.chan-handle{font-family:var(--display); font-weight:800; font-size:19px; letter-spacing:-.02em; text-decoration:none; display:inline-block; overflow-wrap:anywhere}
 .chan-handle:hover{box-shadow:inset 0 -3px 0 var(--signal)}
-.chan-count{font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:30px; letter-spacing:-.03em; line-height:1.1; margin-top:8px}
+.chan-count{font-family:var(--display); font-weight:800; font-size:30px; letter-spacing:-.03em; line-height:1.1; margin-top:8px}
 .chan-count span{display:block; font-size:12.5px; font-weight:500; color:var(--stone); letter-spacing:0}
 .chan-what{margin:0 0 12px}
 .chan-who{margin:0; color:var(--stone); font-size:15.5px}
-.chan-fmt{font-family:"Archivo",system-ui,sans-serif; font-size:13.5px; line-height:1.75; color:var(--stone)}
-.chan-fmt b{display:block; color:var(--ink); font-weight:700; margin-bottom:4px}
+.chan-fmt{font-family:var(--display); font-size:13.5px; line-height:1.75; color:var(--stone)}
+.chan-fmt b{display:block; color:var(--ink); font-weight:700; margin-bottom:4px; font-size:12px; letter-spacing:.06em; text-transform:uppercase}
 @media (max-width:860px){ .chan{grid-template-columns:1fr; gap:14px} }
-
-/* ---------- chips ---------- */
-.chips{display:flex; flex-wrap:wrap; gap:9px}
-.chip{
-  font-family:"Archivo",system-ui,sans-serif; font-size:14px; font-weight:600;
-  border:1.5px solid var(--ink); border-radius:999px; padding:7px 15px; background:transparent;
-}
-.chip.hot{background:var(--signal); border-color:var(--signal)}
 
 /* ---------- deliverables ---------- */
 .deliv{border-top:1px solid var(--line); padding:20px 0; display:grid; grid-template-columns:260px 1fr 130px; gap:24px; align-items:baseline}
 .deliv:last-child{border-bottom:1px solid var(--line)}
-.deliv-name{font-family:"Archivo",system-ui,sans-serif; font-weight:700; font-size:17px}
+.deliv-name{font-family:var(--display); font-weight:700; font-size:17px}
 .deliv-desc{margin:0; color:var(--stone); font-size:16px}
-.deliv-rate{font-family:"Archivo",system-ui,sans-serif; font-weight:700; font-size:14px; text-align:right}
+.deliv-rate{font-family:var(--display); font-weight:700; font-size:14px; text-align:right}
 @media (max-width:760px){ .deliv{grid-template-columns:1fr; gap:6px} .deliv-rate{text-align:left} }
 
 /* ---------- reels ---------- */
 .reel-group{margin-bottom:38px}
-.reel-group h3{font-family:"Archivo",system-ui,sans-serif; font-size:15px; font-weight:800; margin:0 0 14px; letter-spacing:-.01em}
+.reel-group h3{font-family:var(--display); font-size:15px; font-weight:800; margin:0 0 14px}
 .reel-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(188px,100%),1fr)); gap:14px}
 .reel{
   display:block; text-decoration:none; background:var(--ink); color:var(--paper);
-  aspect-ratio:9/13; padding:16px; position:relative; border-radius:3px; overflow:hidden;
+  aspect-ratio:9/13; padding:18px; position:relative; border-radius:3px; overflow:hidden;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
 }
 .reel:nth-child(3n+2){background:#243028}
 .reel:nth-child(4n+3){background:#3A2E1C}
-.reel-title{font-family:"Archivo",system-ui,sans-serif; font-weight:700; font-size:16px; line-height:1.25; letter-spacing:-.01em}
+.reel:hover{transform:translateY(-5px) rotate(-.6deg); box-shadow:var(--shadow)}
+.reel-title{font-family:var(--display); font-weight:700; font-size:16px; line-height:1.25; letter-spacing:-.01em}
 .reel-note{font-size:14px; color:rgba(250,248,245,.62); margin-top:8px; line-height:1.4}
-.reel-play{
-  position:absolute; left:16px; bottom:14px; font-family:"Archivo",sans-serif;
-  font-size:12.5px; font-weight:700; color:var(--signal);
-}
+.reel-play{position:absolute; left:18px; bottom:15px; font-family:var(--display); font-size:12.5px; font-weight:700; color:var(--signal)}
 .reel:hover .reel-play{text-decoration:underline}
-.reel.empty{background:transparent; color:var(--stone); border:1.5px dashed var(--line); display:flex; align-items:center; justify-content:center; text-align:center; font-size:14px; padding:20px}
 
 /* ---------- building ---------- */
 .build{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr)); gap:28px}
-.build-item h3{font-family:"Archivo",system-ui,sans-serif; font-size:18px; font-weight:800; margin:0 0 6px}
+.build-item{border-top:2px solid var(--signal); padding-top:14px}
+.build-item h3{font-family:var(--display); font-size:18px; font-weight:800; margin:0 0 6px}
 .build-item p{margin:0; color:var(--stone); font-size:16px}
-.build-item a{text-decoration:none; box-shadow:inset 0 -2px 0 var(--signal)}
 
-/* ---------- scout block (dark) ---------- */
-.scout{background:var(--ink); color:var(--paper); border-bottom:0}
-.scout h2{color:var(--paper)}
-.scout h2 .num{color:var(--signal)}
-.scout .sec-head p{color:rgba(250,248,245,.65)}
+/* ---------- scout block ---------- */
 .steps{counter-reset:s; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(215px,100%),1fr)); gap:26px; margin-bottom:44px}
 .step{counter-increment:s; border-top:2px solid var(--signal); padding-top:14px}
-.step::before{content:"Step " counter(s); display:block; font-family:"Archivo",sans-serif; font-size:12.5px; font-weight:700; color:var(--signal); margin-bottom:6px}
-.step p{margin:0; font-size:16px; line-height:1.5}
-.payout{background:var(--signal); color:var(--ink); padding:28px 30px; border-radius:3px; margin-bottom:34px}
-.payout h3{font-family:"Archivo",sans-serif; font-size:19px; font-weight:800; margin:0 0 8px}
-.payout p{margin:0; max-width:60ch}
-.group-card{
-  display:block; text-decoration:none; color:var(--paper);
-  border:2px solid rgba(250,248,245,.3); border-radius:3px; padding:24px 26px; margin-bottom:34px;
-}
-.group-card:hover{border-color:var(--signal)}
-.group-card .cl-tag{font-family:"Archivo",sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--signal); margin-bottom:8px}
-.group-card h3{font-family:"Archivo",sans-serif; font-size:clamp(19px,3vw,24px); font-weight:800; letter-spacing:-.02em; margin:0 0 6px}
-.group-card p{margin:0; color:rgba(250,248,245,.72); max-width:62ch}
-.scout-rules{display:grid; grid-template-columns:1fr 1fr; gap:34px}
-.scout-rules h4{font-family:"Archivo",sans-serif; font-size:15px; font-weight:800; margin:0 0 10px}
+.step::before{content:"Step " counter(s); display:block; font-family:var(--display); font-size:12.5px; font-weight:700; color:var(--signal); margin-bottom:6px}
+.step p{margin:0; font-size:16px; line-height:1.5; color:rgba(250,248,245,.82)}
+.payout{background:var(--signal); color:var(--ink); padding:30px 32px; border-radius:3px; margin-bottom:34px}
+.payout h3{font-family:var(--display); font-size:20px; font-weight:800; margin:0 0 8px}
+.payout p{margin:0; max-width:60ch; color:var(--signal-ink)}
+.scout-rules{display:grid; grid-template-columns:1fr 1fr; gap:34px; margin-top:12px}
+.scout-rules h4{font-family:var(--display); font-size:15px; font-weight:800; margin:0 0 10px; color:var(--paper)}
 .scout-rules ul{margin:0; padding-left:20px; color:rgba(250,248,245,.72)}
 .scout-rules li{margin-bottom:7px; font-size:16px}
 @media (max-width:760px){ .scout-rules{grid-template-columns:1fr; gap:22px} }
 
-/* ---------- buttons ---------- */
-.btns{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
-.btn{
-  font-family:"Archivo",system-ui,sans-serif; font-weight:700; font-size:15px;
-  text-decoration:none; padding:13px 22px; border-radius:2px; border:2px solid var(--ink);
-  background:var(--ink); color:var(--paper); display:inline-block;
-}
-.btn.alt{background:transparent; color:var(--ink)}
-.scout .btn{background:var(--signal); border-color:var(--signal); color:var(--ink)}
-.scout .btn.alt{background:transparent; border-color:rgba(250,248,245,.4); color:var(--paper)}
-
-/* ---------- cross-link card ---------- */
-.crosslink{
-  display:block; text-decoration:none; border:2px solid var(--ink); border-radius:3px;
-  padding:26px 28px; background:transparent;
-}
-.crosslink:hover{background:var(--signal); border-color:var(--signal)}
-.crosslink .cl-tag{font-family:"Archivo",sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--signal-deep); margin-bottom:8px}
-.crosslink:hover .cl-tag{color:#4A3F10}
-.crosslink h3{font-family:"Archivo",sans-serif; font-size:clamp(20px,3vw,26px); font-weight:800; letter-spacing:-.02em; margin:0 0 8px}
-.crosslink p{margin:0; color:var(--stone); max-width:60ch}
-.crosslink:hover p{color:#4A3F10}
-
 /* ---------- contact ---------- */
 .contact-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:start}
-.mailbox{font-family:"Archivo",sans-serif; font-weight:800; font-size:clamp(20px,3.4vw,30px); letter-spacing:-.025em; text-decoration:none; display:inline-block; word-break:break-all}
+.mailbox{font-family:var(--display); font-weight:800; font-size:clamp(20px,3.4vw,30px); letter-spacing:-.03em; text-decoration:none; display:inline-block; word-break:break-all}
 .mailbox:hover{box-shadow:inset 0 -4px 0 var(--signal)}
-.mail-label{font-family:"Archivo",sans-serif; font-size:13px; font-weight:700; color:var(--stone); margin:0 0 4px}
-.mail-row{margin-bottom:24px}
+.mail-label{font-family:var(--display); font-size:13px; font-weight:700; color:var(--stone); margin:0 0 4px}
+.mail-row{margin-bottom:26px}
 @media (max-width:760px){ .contact-grid{grid-template-columns:1fr; gap:26px} }
 
-/* ---------- footer ---------- */
-footer{background:var(--ink); color:rgba(250,248,245,.6); padding:30px 0; font-size:14px}
-footer .wrap{display:flex; flex-wrap:wrap; gap:12px 26px; justify-content:space-between}
-footer a{color:var(--signal); text-decoration:none}
-
-/* ---------- responsive ---------- */
-@media (max-width:860px){
-  .wrap, .nav-in{padding:0 20px}
-}
 @media (max-width:700px){
-  body{font-size:16px}
-  .wrap, .nav-in{padding:0 18px}
-
-  /* nav collapses into one scrollable row */
-  .nav-in{height:54px; gap:14px}
-  .nav-name{display:none}
-  .nav-links{width:100%; min-width:0; gap:16px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none}
-  .nav-links::-webkit-scrollbar{display:none}
-  .nav a{white-space:nowrap}
-
-  .hero{padding-top:44px}
-  .hero h1{font-size:clamp(32px,11vw,56px); margin-bottom:20px; overflow-wrap:break-word}
-  .hero-lede{margin-bottom:24px}
-  .hero-sub{margin-bottom:30px}
-  .hero-meta{gap:2px 22px; font-size:13px}
-
-  .sec{padding:44px 0}
-  .sec-head{margin-bottom:24px}
-
-  .pull{font-size:19px; padding-left:16px}
-  .build{gap:22px}
-  .steps{gap:22px; margin-bottom:32px}
-  .payout{padding:22px 20px; margin-bottom:28px}
-
+  .hero{padding-top:48px}
   .reel-grid{grid-template-columns:1fr 1fr; gap:10px}
-  .reel{padding:13px}
-  .reel-title{font-size:15px}
-  .reel-note{font-size:13px}
-  .reel-play{left:13px; bottom:11px}
-
-  .btns{gap:10px}
-  .btn{flex:1 1 100%; text-align:center}
-  .crosslink{padding:20px}
-  footer .wrap{flex-direction:column; gap:6px}
-}
-
-@media (prefers-reduced-motion: no-preference){
-  .hero-rule{animation:draw .7s cubic-bezier(.2,.7,.3,1) both}
-  @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .btn{flex:1 1 100%; justify-content:center}
 }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-in">
-    <span class="nav-name" id="navName"></span>
-    <div class="nav-links">
-      <a href="#channels">Accounts</a>
-      <a href="#work">What I make</a>
-      <a href="#reels">Reels</a>
-      <a href="#scout">Bring a collab</a>
-      <a href="for-brands.html">For brands</a>
-      <a class="nav-cta" href="#contact">Email me</a>
-    </div>
-  </div>
-</nav>
+<nav data-nav aria-label="Primary"></nav>
 
 <header class="hero">
   <div class="wrap">
-    <h1 id="heroName"></h1>
-    <p class="hero-lede" id="heroLede"></p>
-    <p class="hero-sub" id="heroSub"></p>
-    <div class="btns hero-btns">
+    <p class="eyebrow reveal" style="color:var(--signal-ink)">Collab kit for scouts</p>
+    <h1 data-kinetic>Bring me a brand. Take a cut.</h1>
+    <p class="hero-lede reveal" data-delay="2" id="heroLede"></p>
+    <p class="hero-sub reveal" data-delay="3" id="heroSub"></p>
+    <div class="btns reveal" data-delay="4" style="margin-bottom:42px">
       <a class="btn" id="btnGroupHero" target="_blank" rel="noopener" href="#"></a>
       <a class="btn alt" href="#scout">How the payout works</a>
     </div>
-    <div class="hero-rule"></div>
-    <div class="hero-meta" id="heroMeta"></div>
+    <div class="rule"></div>
+    <div class="hero-meta stagger" id="heroMeta"></div>
   </div>
 </header>
 
 <main>
   <section class="sec" id="about">
     <div class="wrap">
-      <div class="sec-head"><h2><span class="num">01</span>Where I come from</h2></div>
+      <div class="sec-head reveal"><h2><span class="num">01</span>Where I come from</h2></div>
       <div class="story">
-        <div id="storyLeft"></div>
-        <div>
-          <div class="pull" id="storyPull"></div>
-        </div>
+        <div class="reveal" id="storyLeft"></div>
+        <div><div class="pull reveal" data-delay="1" id="storyPull"></div></div>
       </div>
     </div>
   </section>
 
   <section class="sec" id="channels">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <h2><span class="num">02</span>The accounts</h2>
         <p id="channelsIntro"></p>
       </div>
-      <div id="channelList"></div>
+      <div class="stagger" id="channelList"></div>
     </div>
   </section>
 
   <section class="sec" id="work">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <h2><span class="num">03</span>What I make for a brand</h2>
         <p id="delivIntro"></p>
       </div>
-      <div id="delivList"></div>
-      <div class="sec-head" style="margin-top:50px">
-        <h2 style="font-size:clamp(20px,3vw,26px)">Categories I'll work with</h2>
+      <div class="stagger" id="delivList"></div>
+
+      <div class="sec-head reveal" style="margin-top:52px">
+        <h2 style="font-size:clamp(20px,3vw,27px)">Categories I'll work with</h2>
         <p id="catIntro"></p>
       </div>
-      <div class="chips" id="categories"></div>
+      <div class="chips stagger" id="categories"></div>
     </div>
   </section>
 
   <section class="sec" id="reels">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <h2><span class="num">04</span>Work you can show a brand</h2>
         <p id="reelsIntro"></p>
       </div>
@@ -340,52 +182,50 @@ footer a{color:var(--signal); text-decoration:none}
 
   <section class="sec" id="building">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <h2><span class="num">05</span>What I'm building</h2>
         <p id="buildIntro"></p>
       </div>
-      <div class="build" id="buildList"></div>
+      <div class="build stagger" id="buildList"></div>
     </div>
   </section>
 
-  <section class="sec scout" id="scout">
+  <section class="sec dark" id="scout">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <h2><span class="num">06</span>Bring me a collab</h2>
         <p id="scoutIntro"></p>
       </div>
-      <div class="steps" id="scoutSteps"></div>
-      <div class="payout">
+      <div class="steps stagger" id="scoutSteps"></div>
+
+      <div class="payout reveal">
         <h3 id="payoutTitle"></h3>
         <p id="payoutBody"></p>
       </div>
-      <a class="group-card" id="groupCard" target="_blank" rel="noopener" href="#">
+
+      <a class="crosslink reveal" id="groupCard" target="_blank" rel="noopener" href="#" style="margin-bottom:34px">
         <div class="cl-tag" id="groupTag"></div>
         <h3 id="groupTitle"></h3>
         <p id="groupBody"></p>
       </a>
+
       <div class="scout-rules">
-        <div>
-          <h4>Rules of the game</h4>
-          <ul id="scoutRules"></ul>
-        </div>
-        <div>
-          <h4>What I won't promote</h4>
-          <ul id="scoutNos"></ul>
-        </div>
+        <div class="reveal"><h4>Rules of the game</h4><ul id="scoutRules"></ul></div>
+        <div class="reveal" data-delay="1"><h4>What I won't promote</h4><ul id="scoutNos"></ul></div>
       </div>
-      <div class="btns">
-        <a class="btn" id="btnScout" href="#contact">Send me a collab lead</a>
-        <a class="btn" id="btnGroup" target="_blank" rel="noopener" href="#"></a>
+
+      <div class="btns reveal" style="margin-top:34px">
+        <a class="btn" href="#contact-scout">Send me a collab lead <span class="arw">&rarr;</span></a>
+        <a class="btn alt" id="btnGroup" target="_blank" rel="noopener" href="#"></a>
         <a class="btn alt" href="for-brands.html">Open the brand page to pitch with</a>
       </div>
     </div>
   </section>
 
-  <section class="sec" id="contact">
+  <section class="sec" id="contact-scout">
     <div class="wrap">
-      <div class="sec-head"><h2><span class="num">07</span>Get in touch</h2></div>
-      <div class="contact-grid">
+      <div class="sec-head reveal"><h2><span class="num">07</span>Get in touch</h2></div>
+      <div class="contact-grid reveal">
         <div>
           <div class="mail-row">
             <p class="mail-label">Brands and agencies</p>
@@ -396,18 +236,18 @@ footer a{color:var(--signal); text-decoration:none}
             <a class="mailbox" id="mailScout" href="#"></a>
           </div>
           <div class="btns">
-            <a class="btn" id="btnBrand" href="#">Email about a collab</a>
+            <a class="btn" id="btnBrand" href="#">Email about a collab <span class="arw">&rarr;</span></a>
           </div>
         </div>
         <div>
           <p class="mail-label" style="margin-bottom:10px">Also here</p>
           <div class="chips" id="links"></div>
-          <p style="color:var(--stone); font-size:15px; margin-top:22px" id="replyNote"></p>
+          <p class="muted" style="font-size:15px; margin-top:22px" id="replyNote"></p>
         </div>
       </div>
 
       <div style="margin-top:50px">
-        <a class="crosslink" id="crossLink" href="for-brands.html">
+        <a class="crosslink reveal" id="crossLink" href="for-brands.html">
           <div class="cl-tag" id="clTag"></div>
           <h3 id="clTitle"></h3>
           <p id="clBody"></p>
@@ -417,39 +257,32 @@ footer a{color:var(--signal); text-decoration:none}
   </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span id="footLeft"></span>
-    <span id="footRight"></span>
-  </div>
-</footer>
+<footer data-footer></footer>
 
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
 <script>
 /* ==========================================================================
-   CONFIG - EDIT ONLY THIS BLOCK.
-   Everything on the page is generated from the values below.
+   CONFIG — edit only this block.
    ========================================================================== */
 const CONFIG = {
 
-  name: "Sachin Kumar Shukla",
-  shortName: "Sachin",
-
   hero: {
-    lede: "I make videos about the process. Building, interviewing, training, shipping",
+    lede: "I make videos about the process. Building, interviewing, training, shipping.",
     sub: "Engineer for six years, now building AI products in public. Three Instagram accounts, one audience: people who want to get good at something hard.",
     meta: [
-      ["~144,000", "people reached"],
-      ["3", "accounts"],
-      ["Bangalore", "based in"],
-      ["Barter + paid", "open to"]
+      ["~144,000", "People reached"],
+      ["3", "Accounts"],
+      ["Bangalore", "Based in"],
+      ["20%", "Scout payout"],
+      ["Barter + paid", "Open to"]
     ]
   },
 
-  // "Where I come from" - two paragraphs plus the pull quote on the right.
   story: {
     paras: [
-      "I'm from a small town in Uttar Pradesh, roughly 150 km from the nearest airport ie. Lucknow. No one around me was writing code. I taught myself the web stack in college to ship my first startup, and I've been building ever since - six years as a full-stack engineer, now moving into AI product work.",
-      "Alongside that I co-founded a free, open-source tech education platform The Boring Education for India. It's grown to 7,000+ daily learners and I've personally mentored 1000+ students into their first engineering jobs. That's where the audience came from. I never ran an ad.",
+      "I'm from a small town in Uttar Pradesh, roughly 150 km from the nearest airport in Lucknow. No one around me was writing code. I taught myself the web stack in college to ship my first startup, and I've been building ever since - six years as a full-stack engineer, now moving into AI product work.",
+      "Alongside that I co-founded a free, open-source tech education platform, The Boring Education. It's grown to 7,000+ daily learners and I've personally mentored 1,000+ students into their first engineering jobs. That's where the audience came from. I never ran an ad.",
       "So the content isn't lifestyle. It's the work: the gym at 5am, the interviews, the half-finished code, the running, the desk, the notebooks. People watch because they're trying to do the same thing."
     ],
     pull: "I don't post the result. I post the repetition that got there - which is why a product placed in my routine actually looks used."
@@ -464,7 +297,7 @@ const CONFIG = {
       count: "136,000",
       countLabel: "followers",
       what: "Tech careers and interview prep, told as process. How engineering work actually gets done, what hiring really looks like, what to study and in what order.",
-      who: "Students and early-career engineers across India, 18–28, mostly tier-2 and tier-3 cities.",
+      who: "Students and early-career engineers across India, 18-28, mostly tier-2 and tier-3 cities.",
       formats: "Reels, carousels, stories, live sessions"
     },
     {
@@ -489,11 +322,10 @@ const CONFIG = {
 
   delivIntro: "Rates are a starting point, not a wall. Barter works for me when the product is something I'd actually use daily.",
 
-  // Set rate to "Ask" if you'd rather not publish a number.
   deliverables: [
-    { name: "Integrated reel", desc: "60–90s, product inside a real workflow - the desk, the gym, the trip, the prep session. Scripted by me.", rate: "Ask" },
+    { name: "Integrated reel", desc: "60-90s, product inside a real workflow - the desk, the gym, the trip, the prep session. Scripted by me.", rate: "Ask" },
     { name: "Live interview sponsorship", desc: "Title sponsor on a live interview: open mention, mid-session mention, clip rights for 30 days.", rate: "Ask" },
-    { name: "Story series", desc: "3–5 frames across a day with a link sticker. Good for trials, launches, discount codes.", rate: "Ask" },
+    { name: "Story series", desc: "3-5 frames across a day with a link sticker. Good for trials, launches, discount codes.", rate: "Ask" },
     { name: "30-day usage log", desc: "I use it daily and post the honest log. Slow, credible, best for tools and gear.", rate: "Ask" },
     { name: "Long-term ambassador", desc: "Quarterly retainer across accounts. Fewer brands, deeper association.", rate: "Ask" }
   ],
@@ -513,44 +345,40 @@ const CONFIG = {
     { label: "Everyday carry", hot: true }
   ],
 
-  reelsIntro: "Paste a reel link into the config to add one here. These are the examples to send a brand when you pitch me.",
+  reelsIntro: "These are the examples to send a brand when you pitch me.",
 
-  // Add reels here. Group names become the headings.
-  // To add a reel: copy a line, change the group, title, note and url.
   reels: [
-    { group: "Interview prep", title: "System Design Interview Teardown", note: "How to Prep for HLD and LLD", url: "https://www.instagram.com/reel/DdbcF1nIY7z/?stkn=MmNldGh0eTFhZDY5" },
+    { group: "Interview prep", title: "System Design Interview Teardown", note: "How to prep for HLD and LLD", url: "https://www.instagram.com/reel/DdbcF1nIY7z/?stkn=MmNldGh0eTFhZDY5" },
     { group: "Interview prep", title: "Resume rewrite on camera", note: "Before and after, line by line", url: "https://www.instagram.com/reel/DTQDfWXkvKl/?stkn=MW4zZmhlbzV4MWN5ZQ==" },
     { group: "Interview prep", title: "LIVE Interview, full length", note: "No cuts", url: "https://www.instagram.com/reel/DZxNyDBiOj6/?stkn=M2RhYjFvZTg5cXo5" },
-    { group: "Travel and remote work", title: "Working from Mountains", note: "Work and Travel goes together", url: "https://www.instagram.com/reel/DaVK6CshCxJ/?stkn=NGE3azQxeWRxenY=" },
+    { group: "Travel and remote work", title: "Working from the mountains", note: "Work and travel go together", url: "https://www.instagram.com/reel/DaVK6CshCxJ/?stkn=NGE3azQxeWRxenY=" },
     { group: "AI and building", title: "Learning ANYTHING with AI", note: "How I prep for learning with AI", url: "https://www.instagram.com/reel/Dcdtp1Lh5U1/?stkn=MTd6NG92Y2phNnI3bw==" },
-    { group: "AI and building", title: "Tools I actually use daily", note: "Stack walkthrough", url: "https://www.instagram.com/reel/Ddg9NRohu5L/?stkn=cmJhZTJhN3lhYjc=" },
+    { group: "AI and building", title: "Tools I actually use daily", note: "Stack walkthrough", url: "https://www.instagram.com/reel/Ddg9NRohu5L/?stkn=cmJhZTJhN3lhYjc=" }
   ],
 
   buildIntro: "Useful context for a brand: I'm not only a creator, I ship products. Integrations can go deeper than a post.",
 
   building: [
-    { title: "Open-source tech education platform", desc: "Free, structured learning for Indian students. 7,000+ daily active learners, 1000+ mentored into jobs, zero paid acquisition.", url: "" },
-    { title: "Rajniti", desc: "Open-source AI civic research tool for Indian voters. Source-attributed answers, built with a trust and safety framework.", url: "" },
-    { title: "Chitthi", desc: "Open-source bring-your-own-key email microservice in Go. Used by 100+ developers.", url: "" },
-    { title: "AI product work", desc: "Moving from engineering into AI product management. Agentic pipelines, RAG, latency and trust design.", url: "" }
+    { title: "The Boring Education", desc: "Free, structured, open-source learning for Indian students. 7,000+ daily active learners, 1,000+ mentored into jobs, zero paid acquisition." },
+    { title: "Rajniti", desc: "Open-source AI civic research tool for Indian voters. Source-attributed answers, built with a trust and safety framework." },
+    { title: "Chitthi", desc: "Open-source bring-your-own-key email microservice in Go. Used by 100+ developers." },
+    { title: "AI product work", desc: "Moving from engineering into AI product management. Agentic pipelines, RAG, latency and trust design." }
   ],
 
   scoutIntro: "I don't have a brand manager. I'd rather my own community play that role - people who already watch the content, know which brands fit, and are willing to pitch and negotiate on my behalf. Here's the deal.",
 
   scoutSteps: [
     "Spot a brand that fits a category above. It should be something you'd genuinely believe me using.",
-    "Pitch it like a brand manager would - find the contact, make the case, negotiate the terms. Use the button below to loop me in once there's a real conversation.",
+    "Pitch it like a brand manager would - find the contact, make the case, negotiate the terms. Loop me in once there's a real conversation.",
     "Bring me the closed terms - deliverable, timeline, and rate or barter. I review, confirm, and shoot the content.",
     "If it closes, you get paid. If it doesn't, I tell you why - so your next lead is better."
   ],
 
-  // >>> DECIDE THIS BEFORE YOU SHARE THE PAGE. <<<
   payout: {
     title: "What you get if it closes",
     body: "20% of the paid deal value, sent within 7 days of the brand paying me. No cap, no limit on how many collabs you can bring."
   },
 
-  // WhatsApp group where scouts coordinate and claim brands.
   scoutGroup: {
     url: "https://chat.whatsapp.com/KCazRNCVBWHEQjquEVK9AQ?mode=gi_t",
     cta: "Join the scouts WhatsApp group",
@@ -572,13 +400,11 @@ const CONFIG = {
     "Courses that promise outcomes they can't deliver"
   ],
 
-  // Emails. Use two if you want to keep leads separate from brand mail.
   email: {
     brand: "sachinkshuklaoo7@gmail.com",
     scout: "sachinkshuklaoo7@gmail.com"
   },
 
-  // Pre-filled email templates. These make the inbox usable instead of chaos.
   mailTemplates: {
     scout: {
       subject: "Collab lead: [Brand name]",
@@ -619,122 +445,112 @@ const CONFIG = {
 
   replyNote: "I reply to everything that follows the format above, usually within 48 hours. Anything that starts with 'Hi dear, hope you are doing well' goes to the bottom of the pile.",
 
-  // Card linking across to the brand-facing page.
   crossLink: {
     url: "for-brands.html",
     tag: "Send this to the brand",
     title: "The brand page",
     body: "Audience numbers, packages, usage rights, payment terms and a pre-filled brief - everything a brand needs to say yes without a call. This is the link to put in your pitch email."
-  },
-
-  footer: {
-    left: "Sachin Kumar Shukla - collab kit",
-    right: "Last updated: October 2026"
   }
 };
 
 /* ==========================================================================
-   RENDER - you don't need to edit below this line.
+   RENDER — no need to edit below this line.
    ========================================================================== */
-const $ = id => document.getElementById(id);
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const mailto = (addr, t) =>
-  `mailto:${addr}?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(t.body)}`;
+(function () {
+  const U = window.SITE_UI, esc = U.esc;
+  const $ = id => document.getElementById(id);
+  const mailto = (addr, t) =>
+    `mailto:${addr}?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(t.body)}`;
 
-$('navName').textContent = CONFIG.shortName;
-$('heroName').textContent = CONFIG.name;
-$('heroLede').textContent = CONFIG.hero.lede;
-$('heroSub').textContent = CONFIG.hero.sub;
-$('heroMeta').innerHTML = CONFIG.hero.meta
-  .map(([v, l]) => `<span><b>${esc(v)}</b> ${esc(l)}</span>`).join('');
+  $('heroLede').textContent = CONFIG.hero.lede;
+  $('heroSub').textContent = CONFIG.hero.sub;
+  $('heroMeta').innerHTML = CONFIG.hero.meta
+    .map(([v, l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('');
 
-$('storyLeft').innerHTML = CONFIG.story.paras.map(p => `<p>${esc(p)}</p>`).join('');
-$('storyPull').textContent = CONFIG.story.pull;
+  $('storyLeft').innerHTML = CONFIG.story.paras.map(p => `<p>${esc(p)}</p>`).join('');
+  $('storyPull').textContent = CONFIG.story.pull;
 
-$('channelsIntro').textContent = CONFIG.channelsIntro;
-$('channelList').innerHTML = CONFIG.channels.map(c => `
-  <div class="chan">
-    <div>
-      <a class="chan-handle" href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.handle)}</a>
-      <div class="chan-count">${esc(c.count)}<span>${esc(c.countLabel)}</span></div>
-    </div>
-    <div>
-      <p class="chan-what">${esc(c.what)}</p>
-      <p class="chan-who">${esc(c.who)}</p>
-    </div>
-    <div class="chan-fmt"><b>Formats</b>${esc(c.formats)}</div>
-  </div>`).join('');
+  $('channelsIntro').textContent = CONFIG.channelsIntro;
+  $('channelList').innerHTML = CONFIG.channels.map(c => `
+    <div class="chan">
+      <div>
+        <a class="chan-handle" href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.handle)}</a>
+        <div class="chan-count">${esc(c.count)}<span>${esc(c.countLabel)}</span></div>
+      </div>
+      <div>
+        <p class="chan-what">${esc(c.what)}</p>
+        <p class="chan-who">${esc(c.who)}</p>
+      </div>
+      <div class="chan-fmt"><b>Formats</b>${esc(c.formats)}</div>
+    </div>`).join('');
 
-$('delivIntro').textContent = CONFIG.delivIntro;
-$('delivList').innerHTML = CONFIG.deliverables.map(d => `
-  <div class="deliv">
-    <div class="deliv-name">${esc(d.name)}</div>
-    <p class="deliv-desc">${esc(d.desc)}</p>
-    <div class="deliv-rate">${esc(d.rate)}</div>
-  </div>`).join('');
+  $('delivIntro').textContent = CONFIG.delivIntro;
+  $('delivList').innerHTML = CONFIG.deliverables.map(d => `
+    <div class="deliv">
+      <div class="deliv-name">${esc(d.name)}</div>
+      <p class="deliv-desc">${esc(d.desc)}</p>
+      <div class="deliv-rate">${esc(d.rate)}</div>
+    </div>`).join('');
 
-$('catIntro').textContent = CONFIG.catIntro;
-$('categories').innerHTML = CONFIG.categories
-  .map(c => `<span class="chip${c.hot ? ' hot' : ''}">${esc(c.label)}</span>`).join('');
+  $('catIntro').textContent = CONFIG.catIntro;
+  $('categories').innerHTML = CONFIG.categories
+    .map(c => `<span class="chip${c.hot ? ' hot' : ''}">${esc(c.label)}</span>`).join('');
 
-$('reelsIntro').textContent = CONFIG.reelsIntro;
-const groups = [...new Set(CONFIG.reels.map(r => r.group))];
-$('reelGroups').innerHTML = groups.map(g => `
-  <div class="reel-group">
-    <h3>${esc(g)}</h3>
-    <div class="reel-grid">
-      ${CONFIG.reels.filter(r => r.group === g).map(r => r.url
-        ? `<a class="reel" href="${esc(r.url)}" target="_blank" rel="noopener">
-             <div class="reel-title">${esc(r.title)}</div>
-             <div class="reel-note">${esc(r.note)}</div>
-             <div class="reel-play">Watch on Instagram</div>
-           </a>`
-        : `<div class="reel empty">${esc(r.title)}<br><span style="opacity:.7">add the link in CONFIG</span></div>`
-      ).join('')}
-    </div>
-  </div>`).join('');
+  $('reelsIntro').textContent = CONFIG.reelsIntro;
+  const groups = [...new Set(CONFIG.reels.map(r => r.group))];
+  $('reelGroups').innerHTML = groups.map(g => `
+    <div class="reel-group reveal">
+      <h3>${esc(g)}</h3>
+      <div class="reel-grid">
+        ${CONFIG.reels.filter(r => r.group === g).map(r => `
+          <a class="reel" href="${esc(r.url)}" target="_blank" rel="noopener">
+            <div class="reel-title">${esc(r.title)}</div>
+            <div class="reel-note">${esc(r.note)}</div>
+            <div class="reel-play">Watch on Instagram</div>
+          </a>`).join('')}
+      </div>
+    </div>`).join('');
 
-$('buildIntro').textContent = CONFIG.buildIntro;
-$('buildList').innerHTML = CONFIG.building.map(b => `
-  <div class="build-item">
-    <h3>${b.url ? `<a href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.title)}</a>` : esc(b.title)}</h3>
-    <p>${esc(b.desc)}</p>
-  </div>`).join('');
+  $('buildIntro').textContent = CONFIG.buildIntro;
+  $('buildList').innerHTML = CONFIG.building.map(b => `
+    <div class="build-item"><h3>${esc(b.title)}</h3><p>${esc(b.desc)}</p></div>`).join('');
 
-$('scoutIntro').textContent = CONFIG.scoutIntro;
-$('scoutSteps').innerHTML = CONFIG.scoutSteps.map(s => `<div class="step"><p>${esc(s)}</p></div>`).join('');
-$('payoutTitle').textContent = CONFIG.payout.title;
-$('payoutBody').textContent = CONFIG.payout.body;
-$('groupCard').href = CONFIG.scoutGroup.url;
-$('btnGroup').href = CONFIG.scoutGroup.url;
-$('btnGroupHero').href = CONFIG.scoutGroup.url;
-$('btnGroupHero').textContent = CONFIG.scoutGroup.cta;
-$('btnGroup').textContent = CONFIG.scoutGroup.cta;
-$('groupTag').textContent = CONFIG.scoutGroup.tag;
-$('groupTitle').textContent = CONFIG.scoutGroup.title;
-$('groupBody').textContent = CONFIG.scoutGroup.body;
-$('scoutRules').innerHTML = CONFIG.scoutRules.map(r => `<li>${esc(r)}</li>`).join('');
-$('scoutNos').innerHTML = CONFIG.scoutNos.map(r => `<li>${esc(r)}</li>`).join('');
+  $('scoutIntro').textContent = CONFIG.scoutIntro;
+  $('scoutSteps').innerHTML = CONFIG.scoutSteps.map(s => `<div class="step"><p>${esc(s)}</p></div>`).join('');
+  $('payoutTitle').textContent = CONFIG.payout.title;
+  $('payoutBody').textContent = CONFIG.payout.body;
 
-const scoutLink = mailto(CONFIG.email.scout, CONFIG.mailTemplates.scout);
-const brandLink = mailto(CONFIG.email.brand, CONFIG.mailTemplates.brand);
-$('mailScout').href = scoutLink;
-$('mailScout').textContent = CONFIG.email.scout;
-$('btnBrand').href = brandLink;
-$('mailBrand').href = brandLink;
-$('mailBrand').textContent = CONFIG.email.brand;
+  $('groupCard').href = CONFIG.scoutGroup.url;
+  $('btnGroup').href = CONFIG.scoutGroup.url;
+  $('btnGroupHero').href = CONFIG.scoutGroup.url;
+  $('btnGroupHero').textContent = CONFIG.scoutGroup.cta;
+  $('btnGroup').textContent = CONFIG.scoutGroup.cta;
+  $('groupTag').textContent = CONFIG.scoutGroup.tag;
+  $('groupTitle').textContent = CONFIG.scoutGroup.title;
+  $('groupBody').textContent = CONFIG.scoutGroup.body;
 
-$('links').innerHTML = CONFIG.links
-  .map(l => `<a class="chip" style="text-decoration:none" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('');
-$('replyNote').textContent = CONFIG.replyNote;
+  $('scoutRules').innerHTML = CONFIG.scoutRules.map(r => `<li>${esc(r)}</li>`).join('');
+  $('scoutNos').innerHTML = CONFIG.scoutNos.map(r => `<li>${esc(r)}</li>`).join('');
 
-$('crossLink').href = CONFIG.crossLink.url;
-$('clTag').textContent = CONFIG.crossLink.tag;
-$('clTitle').textContent = CONFIG.crossLink.title;
-$('clBody').textContent = CONFIG.crossLink.body;
+  const scoutLink = mailto(CONFIG.email.scout, CONFIG.mailTemplates.scout);
+  const brandLink = mailto(CONFIG.email.brand, CONFIG.mailTemplates.brand);
+  $('mailScout').href = scoutLink;
+  $('mailScout').textContent = CONFIG.email.scout;
+  $('btnBrand').href = brandLink;
+  $('mailBrand').href = brandLink;
+  $('mailBrand').textContent = CONFIG.email.brand;
 
-$('footLeft').textContent = CONFIG.footer.left;
-$('footRight').textContent = CONFIG.footer.right;
+  $('links').innerHTML = CONFIG.links
+    .map(l => `<a class="chip" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('');
+  $('replyNote').textContent = CONFIG.replyNote;
+
+  $('crossLink').href = CONFIG.crossLink.url;
+  $('clTag').textContent = CONFIG.crossLink.tag;
+  $('clTitle').textContent = CONFIG.crossLink.title;
+  $('clBody').textContent = CONFIG.crossLink.body;
+
+  U.observe();
+})();
 </script>
 </body>
 </html>

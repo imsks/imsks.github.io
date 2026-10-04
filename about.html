@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-root="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About — Sachin Kumar Shukla</title>
+<meta name="description" content="Small town in Uttar Pradesh to founding engineer to AI Product Manager. The long version, plus the full experience timeline and skill set.">
+<meta name="theme-color" content="#14110F">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+
+<style>
+.page-head{background:var(--signal); border-bottom:2px solid var(--ink); padding:72px 0 0; position:relative; overflow:hidden}
+.page-head h1{font-size:clamp(38px,7vw,76px); font-weight:800; letter-spacing:-.04em; margin:0 0 24px; max-width:16ch}
+.page-head .lede{max-width:52ch; color:var(--signal-ink); margin:0 0 40px}
+.page-head .rule{margin-bottom:0}
+.head-meta{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
+.head-meta div{padding:20px 16px 26px 0}
+.head-meta b{display:block; font-family:var(--display); font-weight:800; font-size:clamp(22px,3vw,30px); letter-spacing:-.04em; line-height:1}
+.head-meta span{display:block; margin-top:6px; font-family:var(--display); font-size:12.5px; font-weight:600; color:var(--signal-ink)}
+
+.story{display:grid; grid-template-columns:1.25fr 1fr; gap:52px; align-items:start}
+@media (max-width:860px){ .story{grid-template-columns:1fr; gap:30px} }
+.story p{margin:0 0 20px}
+.pull{
+  border-left:4px solid var(--signal); padding:6px 0 6px 22px;
+  font-size:clamp(19px,2.4vw,23px); line-height:1.4; font-weight:600;
+}
+.pull + .pull{margin-top:30px}
+
+.skill-block{border-top:2px solid var(--ink); padding:24px 0 26px}
+.skill-block h3{font-family:var(--display); font-size:13px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--signal-deep); margin:0 0 16px}
+
+.edu{display:grid; grid-template-columns:1fr auto; gap:20px; align-items:baseline; border-top:2px solid var(--ink); border-bottom:2px solid var(--ink); padding:26px 0}
+.edu h3{font-size:22px; font-weight:800; margin:0 0 4px}
+.edu p{margin:0; color:var(--stone)}
+.edu .when{font-family:var(--display); font-size:14px; font-weight:700; color:var(--stone)}
+@media (max-width:620px){ .edu{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<nav data-nav aria-label="Primary"></nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="color:var(--signal-ink)">About</p>
+    <h1 data-kinetic>150 km from the nearest airport to shipping AI products.</h1>
+    <p class="lede reveal" data-delay="2">
+      I did not grow up around engineers. I taught myself the web stack to ship a startup in college,
+      and every job since has been a founding one.
+    </p>
+    <div class="rule"></div>
+    <div class="head-meta stagger" id="headMeta"></div>
+  </div>
+</header>
+
+<div data-marquee></div>
+
+<main>
+
+  <section class="sec">
+    <div class="wrap story">
+      <div class="reveal">
+        <p>
+          I am from a small town in Uttar Pradesh, roughly 150 km from the nearest airport in Lucknow.
+          Nobody around me was writing code. I taught myself the web stack in college to ship my first
+          startup, Gangs Of Hackspur, and learned the only lesson that has stayed useful since:
+          distribution beats product when both are weak.
+        </p>
+        <p>
+          Six years of engineering followed — Trilingo, then Saara, then FinSoftAI — and in each one I
+          drifted towards the same question. Not <em>can we build it</em>, but <em>should it say that at
+          all</em>. At FinSoftAI that became the job: a sentiment platform for retail traders where a
+          confident wrong answer is worse than no answer, where a signal arriving after the trade is
+          worth nothing, and where the trust layer is the product.
+        </p>
+        <p>
+          Alongside that I co-founded The Boring Education, a free and open-source tech education
+          platform for India. It is now 7,000+ daily learners and a 100,000-strong community, with zero
+          rupees spent on acquisition. I have personally mentored over a thousand students into their
+          first engineering jobs. That community is also where my content audience came from — 144,000
+          people watching the process rather than the result.
+        </p>
+        <p>
+          So the move into AI product management is not a career change. It is the title catching up with
+          the work: owning outcomes, sizing markets, saying no to founders, and deciding how much a model
+          is allowed to claim.
+        </p>
+      </div>
+      <div>
+        <div class="pull reveal" data-delay="1">
+          A wrong fact delivered confidently is the product failing, not the model.
+        </div>
+        <div class="pull reveal" data-delay="2">
+          I am not a developer who wants to be a PM. I am a founder who has been doing product management
+          without the title.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">01</span>Experience</h2>
+        <p>Founding roles, all of them. The common thread is owning an outcome before owning a title.</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">02</span>What I work with</h2>
+        <p>Product craft on top, the stack underneath. I still write the code when it is faster to.</p>
+      </div>
+      <div id="skills"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="education">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">03</span>Education</h2>
+      </div>
+      <div class="edu reveal" id="edu"></div>
+    </div>
+  </section>
+
+  <section class="sec dark">
+    <div class="wrap grid grid-2">
+      <a class="crosslink reveal" href="work.html">
+        <div class="cl-tag">Portfolio</div>
+        <h3>See the work</h3>
+        <p>The Rajniti case study and ten PM execution artifacts.</p>
+      </a>
+      <a class="crosslink reveal" data-delay="1" href="for-brands.html">
+        <div class="cl-tag">The other half</div>
+        <h3>The creator side</h3>
+        <p>Three accounts, 144,000 reach, a published rate card and a scout payout.</p>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+(function () {
+  var S = window.SITE, U = window.SITE_UI;
+  var esc = U.esc;
+  var $ = function (id) { return document.getElementById(id); };
+
+  $('headMeta').innerHTML = S.stats.map(function (s) {
+    return '<div><b><span data-count="' + esc(s.value) + '">0</span>' + esc(s.suffix || '') + '</b>' +
+           '<span>' + esc(s.label) + '</span></div>';
+  }).join('');
+
+  $('timeline').innerHTML = S.experience.map(function (e) {
+    return '<div class="tl-item reveal">' +
+      '<div class="tl-when"><b>' + esc(e.from) + ' &rarr; ' + esc(e.to) + '</b>' + esc(e.note) + '</div>' +
+      '<div><h3 class="tl-role">' + esc(e.role) + '</h3>' +
+      '<p class="tl-co">' + esc(e.company) + '</p>' +
+      '<ul>' + e.points.map(function (p) { return '<li>' + p + '</li>'; }).join('') + '</ul></div></div>';
+  }).join('');
+
+  $('skills').innerHTML = S.skillGroups.map(function (g) {
+    return '<div class="skill-block reveal"><h3>' + esc(g.title) + '</h3>' +
+      '<div class="chips">' + g.items.map(function (i) { return '<span class="chip">' + esc(i) + '</span>'; }).join('') +
+      '</div></div>';
+  }).join('');
+
+  $('edu').innerHTML =
+    '<div><h3>' + esc(S.education.school) + '</h3><p>' + esc(S.education.degree) + '</p></div>' +
+    '<div class="when">' + esc(S.education.when) + '</div>';
+
+  U.observe();
+})();
+</script>
+</body>
+</html>

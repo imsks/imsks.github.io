@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-root="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Résumés — Sachin Kumar Shukla</title>
+<meta name="description" content="Two résumés for Sachin Kumar Shukla: AI Product Manager and AI Full-Stack Engineer. Readable on the page, printable to PDF.">
+<meta name="theme-color" content="#14110F">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+
+<style>
+.page-head{background:var(--ink); color:var(--paper); padding:70px 0 44px}
+.page-head h1{font-size:clamp(36px,6.4vw,70px); font-weight:800; letter-spacing:-.04em; margin:0 0 20px}
+.page-head p{color:rgba(250,248,245,.65); max-width:58ch; margin:0 0 30px; font-size:clamp(16px,1.8vw,19px)}
+.page-head .eyebrow{color:var(--signal)}
+.head-contact{
+  display:flex; flex-wrap:wrap; gap:8px 26px; padding-top:22px;
+  border-top:1px solid rgba(250,248,245,.16);
+  font-family:var(--display); font-size:14px; font-weight:500; color:rgba(250,248,245,.72);
+}
+.head-contact a{color:var(--signal); text-decoration:none}
+.head-contact a:hover{text-decoration:underline}
+
+/* ---------- switcher ---------- */
+.switch-bar{
+  position:sticky; top:var(--nav-h); z-index:60;
+  background:var(--paper); border-bottom:1px solid var(--line);
+  padding:14px 0;
+}
+.switch-in{display:flex; flex-wrap:wrap; gap:16px; align-items:center}
+.switch{
+  display:inline-flex; border:2px solid var(--ink); border-radius:999px;
+  padding:4px; background:var(--paper); position:relative;
+}
+.switch button{
+  font-family:var(--display); font-size:14px; font-weight:700;
+  padding:9px 20px; border-radius:999px; white-space:nowrap;
+  transition:color .25s var(--ease);
+  position:relative; z-index:1; color:var(--stone);
+}
+.switch button[aria-selected="true"]{color:var(--ink)}
+.switch .thumb{
+  position:absolute; top:4px; bottom:4px; left:4px; border-radius:999px;
+  background:var(--signal); transition:transform .4s var(--ease), width .4s var(--ease);
+}
+.switch-actions{margin-left:auto; display:flex; gap:10px; flex-wrap:wrap}
+.switch-actions .btn{padding:10px 18px; font-size:14px}
+@media (max-width:700px){ .switch-actions{margin-left:0; width:100%} .switch-actions .btn{flex:1 1 auto; justify-content:center} }
+
+/* ---------- résumé sheet ---------- */
+.sheet{
+  background:#fff; border:1.5px solid var(--line); border-radius:3px;
+  padding:48px 52px; box-shadow:var(--shadow); margin:46px 0 0;
+}
+@media (max-width:700px){ .sheet{padding:28px 22px} }
+.panel[hidden]{display:none}
+
+.sheet-head{border-bottom:2px solid var(--ink); padding-bottom:22px; margin-bottom:30px}
+.sheet-head h2{font-size:clamp(28px,4.4vw,42px); font-weight:800; margin:0 0 8px}
+.sheet-head .tag{font-family:var(--display); font-size:15px; font-weight:700; color:var(--signal-deep); margin:0 0 14px}
+.sheet-head .summary{margin:0; color:var(--stone); max-width:72ch}
+
+.r-sec{margin-bottom:34px}
+.r-sec > h3{
+  font-family:var(--display); font-size:13px; font-weight:800; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink); margin:0 0 18px;
+  padding-bottom:8px; border-bottom:1.5px solid var(--signal);
+}
+.r-role{margin-bottom:26px; break-inside:avoid}
+.r-role:last-child{margin-bottom:0}
+.r-role-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 20px; align-items:baseline}
+.r-role h4{font-size:19px; font-weight:800; margin:0}
+.r-role h4 em{font-style:normal; color:var(--signal-deep)}
+.r-role .meta{font-family:var(--display); font-size:13.5px; font-weight:600; color:var(--stone); white-space:nowrap}
+.r-role .blurb{font-style:italic; color:var(--stone); margin:6px 0 10px; font-size:15.5px}
+.r-role ul{padding-left:19px; margin:0}
+.r-role li{margin-bottom:7px; font-size:15.5px; color:var(--ink-3)}
+.r-role li b{font-weight:600; color:var(--ink)}
+.r-role .stack{
+  margin-top:10px; font-family:var(--display); font-size:12.5px; font-weight:600;
+  color:var(--stone); line-height:1.6;
+}
+
+.r-skills{display:grid; grid-template-columns:150px 1fr; gap:14px 22px; align-items:baseline}
+.r-skills dt{font-family:var(--display); font-size:13px; font-weight:700; color:var(--ink)}
+.r-skills dd{margin:0; color:var(--stone); font-size:15.5px}
+@media (max-width:620px){ .r-skills{grid-template-columns:1fr; gap:4px 0} .r-skills dd{margin-bottom:12px} }
+
+.r-list li{margin-bottom:10px; font-size:15.5px; color:var(--stone)}
+.r-list li b{color:var(--ink); font-weight:700}
+
+@media print{
+  .switch-bar,.page-head,.no-print{display:none !important}
+  .sheet{border:0; box-shadow:none; padding:0; margin:0}
+  .r-sec{margin-bottom:18px}
+  .r-role{margin-bottom:14px}
+  .r-role li{font-size:10pt; margin-bottom:3px}
+  .sheet-head h2{font-size:22pt}
+}
+</style>
+</head>
+<body>
+
+<nav data-nav aria-label="Primary" class="no-print"></nav>
+
+<header class="page-head no-print">
+  <div class="wrap">
+    <p class="eyebrow reveal">Résumés</p>
+    <h1 data-kinetic>Same six years.<br>Two lenses.</h1>
+    <p class="reveal" data-delay="2">
+      One version argues the product case, the other argues the engineering case. Both are true and both
+      are kept in sync — pick whichever matches the role you are hiring for, then print it straight to PDF.
+    </p>
+    <div class="head-contact reveal" data-delay="3" id="headContact"></div>
+  </div>
+</header>
+
+<div class="switch-bar no-print">
+  <div class="wrap switch-in">
+    <div class="switch" role="tablist" aria-label="Choose a résumé" id="switch">
+      <span class="thumb" aria-hidden="true"></span>
+    </div>
+    <div class="switch-actions">
+      <button class="btn alt" type="button" id="printBtn">Print / Save as PDF</button>
+      <a class="btn" id="pdfBtn" href="#" target="_blank" rel="noopener">Download PDF</a>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap" id="panels"></div>
+  <div style="height:72px"></div>
+</main>
+
+<footer data-footer class="no-print"></footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+(function () {
+  var S = window.SITE, U = window.SITE_UI;
+  var esc = U.esc, url = U.url;
+  var $ = function (id) { return document.getElementById(id); };
+  var p = S.person;
+
+  $('headContact').innerHTML = [
+    esc(p.location),
+    '<a href="mailto:' + esc(p.email) + '">' + esc(p.email) + '</a>',
+    '<a href="tel:' + esc(p.phone.replace(/\s/g, '')) + '">' + esc(p.phone) + '</a>'
+  ].concat(S.social.map(function (s) {
+    return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + '</a>';
+  })).map(function (x) { return '<span>' + x + '</span>'; }).join('');
+
+  /* ---------- section renderers ---------- */
+  function roles(sec) {
+    return sec.items.map(function (r) {
+      return '<div class="r-role">' +
+        '<div class="r-role-top">' +
+          '<h4>' + esc(r.role) + ' <em>&middot; ' + esc(r.company) + '</em></h4>' +
+          '<span class="meta">' + esc(r.meta) + '</span>' +
+        '</div>' +
+        (r.blurb ? '<p class="blurb">' + esc(r.blurb) + '</p>' : '') +
+        '<ul>' + r.points.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+        (r.stack ? '<div class="stack">' + esc(r.stack) + '</div>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  function skills(sec) {
+    return '<dl class="r-skills">' + sec.groups.map(function (g) {
+      return '<dt>' + esc(g.title) + '</dt><dd>' + g.items.map(esc).join(' &middot; ') + '</dd>';
+    }).join('') + '</dl>';
+  }
+
+  function list(sec) {
+    return '<ul class="r-list">' + sec.items.map(function (i) {
+      return '<li><b>' + esc(i.title) + '</b> — ' + esc(i.desc) + '</li>';
+    }).join('') + '</ul>';
+  }
+
+  var RENDER = { roles: roles, skills: skills, list: list };
+
+  /* ---------- panels ---------- */
+  $('panels').innerHTML = S.resumes.map(function (r) {
+    var body = r.sections.map(function (sec) {
+      return '<section class="r-sec"><h3>' + esc(sec.title) + '</h3>' + RENDER[sec.type](sec) + '</section>';
+    }).join('');
+
+    return '<article class="sheet panel" id="' + esc(r.id) + '" role="tabpanel" aria-labelledby="tab-' + esc(r.id) + '" hidden>' +
+      '<header class="sheet-head">' +
+        '<h2>' + esc(p.name) + '</h2>' +
+        '<p class="tag">' + esc(r.headline) + '</p>' +
+        '<p class="summary">' + esc(r.summary) + '</p>' +
+      '</header>' + body +
+      '<section class="r-sec"><h3>Education</h3>' +
+        '<div class="r-role"><div class="r-role-top">' +
+          '<h4>' + esc(S.education.school) + '</h4>' +
+          '<span class="meta">' + esc(S.education.when) + '</span>' +
+        '</div><p class="blurb">' + esc(S.education.degree) + '</p></div>' +
+      '</section>' +
+    '</article>';
+  }).join('');
+
+  /* ---------- tabs ---------- */
+  var sw = $('switch');
+  var thumb = sw.querySelector('.thumb');
+  S.resumes.forEach(function (r) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.id = 'tab-' + r.id;
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-controls', r.id);
+    b.dataset.id = r.id;
+    b.textContent = r.label;
+    sw.appendChild(b);
+  });
+
+  var tabs = Array.prototype.slice.call(sw.querySelectorAll('button'));
+
+  function select(id, push) {
+    var active = S.resumes.filter(function (r) { return r.id === id; })[0] || S.resumes[0];
+
+    tabs.forEach(function (t) {
+      var on = t.dataset.id === active.id;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (on) {
+        thumb.style.width = t.offsetWidth + 'px';
+        thumb.style.transform = 'translateX(' + (t.offsetLeft - 4) + 'px)';
+      }
+    });
+
+    S.resumes.forEach(function (r) {
+      document.getElementById(r.id).hidden = r.id !== active.id;
+    });
+
+    var pdf = $('pdfBtn');
+    if (active.file) {
+      pdf.href = url(active.file);
+      pdf.hidden = false;
+    } else {
+      pdf.hidden = true;
+    }
+
+    if (push) history.replaceState(null, '', '#' + active.id);
+  }
+
+  sw.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (b) select(b.dataset.id, true);
+  });
+
+  sw.addEventListener('keydown', function (e) {
+    var i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    var next = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : -1;
+    if (next < 0) return;
+    e.preventDefault();
+    var t = tabs[(next + tabs.length) % tabs.length];
+    t.focus();
+    select(t.dataset.id, true);
+  });
+
+  $('printBtn').addEventListener('click', function () { window.print(); });
+
+  select((location.hash || '').slice(1) || S.resumes[0].id, false);
+  // A deep link such as #ai-engineer must not leave the browser parked
+  // halfway down the panel it just anchored to.
+  if (location.hash) scrollTo(0, 0);
+
+  addEventListener('resize', function () {
+    var on = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0];
+    if (on) select(on.dataset.id, false);
+  });
+
+  U.observe();
+})();
+</script>
+</body>
+</html>

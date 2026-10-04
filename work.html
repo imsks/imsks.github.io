@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-root="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Work — Sachin Kumar Shukla</title>
+<meta name="description" content="Selected product work: the Rajniti civic-AI case study, ten PM execution artifacts, and open-source products shipped end to end.">
+<meta name="theme-color" content="#14110F">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+
+<style>
+.page-head{background:var(--ink); color:var(--paper); padding:72px 0 56px; border-bottom:2px solid var(--signal)}
+.page-head h1{font-size:clamp(38px,7vw,78px); font-weight:800; letter-spacing:-.04em; margin:0 0 22px}
+.page-head p{color:rgba(250,248,245,.65); max-width:60ch; font-size:clamp(17px,2vw,20px); margin:0}
+.page-head .eyebrow{color:var(--signal)}
+
+.feat{
+  background:var(--signal); border:2px solid var(--ink); border-radius:3px;
+  padding:40px 40px 36px; margin-bottom:46px;
+}
+.feat h2{font-size:clamp(28px,4.6vw,46px); font-weight:800; margin:0 0 16px; max-width:18ch}
+.feat p{color:var(--signal-ink); max-width:62ch; margin:0 0 28px}
+.feat-stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr)); border-top:2px solid var(--ink); margin-bottom:4px}
+.feat-stats div{padding:18px 16px 4px 0}
+.feat-stats b{display:block; font-family:var(--display); font-weight:800; font-size:clamp(24px,3.4vw,34px); letter-spacing:-.04em; line-height:1}
+.feat-stats span{display:block; margin-top:6px; font-family:var(--display); font-size:12.5px; font-weight:600; color:var(--signal-ink)}
+@media (max-width:700px){ .feat{padding:28px 22px 24px} }
+
+.ch-list{border-top:2px solid var(--ink)}
+.ch-row{
+  display:grid; grid-template-columns:150px 1fr 120px; gap:30px; align-items:center;
+  padding:24px 0; border-bottom:1px solid var(--line);
+  text-decoration:none; color:inherit; transition:background .25s var(--ease), padding .25s var(--ease);
+}
+.ch-row:hover{background:var(--signal-soft); padding-left:14px; padding-right:14px}
+.ch-row .kicker{font-family:var(--display); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--signal-deep)}
+.ch-row h3{font-size:22px; font-weight:800; margin:0 0 6px}
+.ch-row p{margin:0; color:var(--stone); font-size:16px}
+.ch-row .go{font-family:var(--display); font-size:13.5px; font-weight:700; text-align:right}
+.ch-row .go span{display:inline-block; transition:transform .25s var(--ease)}
+.ch-row:hover .go span{transform:translateX(5px)}
+@media (max-width:760px){ .ch-row{grid-template-columns:1fr; gap:8px} .ch-row .go{text-align:left} }
+
+.proj{display:grid; grid-template-columns:250px 1fr 1fr; gap:28px; border-top:2px solid var(--ink); padding:26px 0; text-decoration:none; color:inherit; transition:background .25s var(--ease)}
+.proj:last-of-type{border-bottom:2px solid var(--ink)}
+.proj:hover{background:var(--signal-soft)}
+.proj h3{font-size:22px; font-weight:800; margin:0 0 6px}
+.proj .role{font-family:var(--display); font-size:13px; font-weight:600; color:var(--signal-deep)}
+.proj p{margin:0; color:var(--stone); font-size:16px}
+.proj .stack{font-family:var(--display); font-size:13px; font-weight:500; color:var(--stone); line-height:1.7}
+.proj .stack b{display:block; color:var(--ink); font-weight:700; margin-bottom:5px; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase}
+@media (max-width:860px){ .proj{grid-template-columns:1fr; gap:12px} }
+
+.art{padding-left:22px; position:relative}
+.art::before{
+  content:""; position:absolute; left:0; top:4px; bottom:4px; width:4px;
+  background:var(--accent,var(--signal)); border-radius:2px;
+  transform:scaleY(.35); transform-origin:top; transition:transform .4s var(--ease);
+}
+a.art:hover::before{transform:scaleY(1)}
+</style>
+</head>
+<body>
+
+<nav data-nav aria-label="Primary"></nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow reveal">Selected work</p>
+    <h1 data-kinetic>Decisions,<br>with the reasoning<br>left in.</h1>
+    <p class="reveal" data-delay="2">
+      One full product case study, ten execution artifacts and four shipped products.
+      Nothing here is a mock-up — every page is a decision I actually had to make.
+    </p>
+  </div>
+</header>
+
+<main>
+
+  <section class="sec" id="rajniti">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">01</span>Rajniti — the full arc</h2>
+        <p>An AI civic-research tool for Indian voters, taken from a blank page to a defensible product plan.</p>
+      </div>
+
+      <div class="feat reveal">
+        <h2 id="featTitle"></h2>
+        <p id="featBody"></p>
+        <div class="feat-stats" id="featStats"></div>
+      </div>
+
+      <div class="ch-list stagger" id="chapters"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="artifacts">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">02</span>Execution artifacts</h2>
+        <p>The craft layer. Prioritisation, goal-setting, stakeholder management, discovery,
+           experimentation and analytics — each one scoped, argued and committed to.</p>
+      </div>
+      <div class="grid grid-3 stagger" id="artifactGrid"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="products">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2><span class="num">03</span>Shipped products</h2>
+        <p>Ventures and open source, all of it live.</p>
+      </div>
+      <div id="projects"></div>
+    </div>
+  </section>
+
+  <section class="sec dark">
+    <div class="wrap">
+      <a class="crosslink reveal" href="resume.html">
+        <div class="cl-tag">Next</div>
+        <h3>Two résumés — product and engineering</h3>
+        <p>The same six years framed for whichever role you are hiring for. Readable on the page, printable to PDF.</p>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+(function () {
+  var S = window.SITE, U = window.SITE_UI;
+  var esc = U.esc, url = U.url, ext = U.linkAttrs;
+  var $ = function (id) { return document.getElementById(id); };
+
+  var f = S.featured;
+  $('featTitle').textContent = f.title;
+  $('featBody').textContent = f.body;
+  $('featStats').innerHTML = f.stats.map(function (s) {
+    return '<div><b>' + esc(s.value) + '</b><span>' + esc(s.label) + '</span></div>';
+  }).join('');
+
+  $('chapters').innerHTML = f.chapters.map(function (c) {
+    return '<a class="ch-row" href="' + esc(url(c.href)) + '">' +
+      '<div class="kicker">' + esc(c.kicker) + '</div>' +
+      '<div><h3>' + esc(c.title) + '</h3><p>' + esc(c.desc) + '</p></div>' +
+      '<div class="go">Read <span>&rarr;</span></div></a>';
+  }).join('');
+
+  $('artifactGrid').innerHTML = S.artifacts.map(function (a) {
+    return '<a class="card art" href="' + esc(url(a.href)) + '" style="--accent:' + esc(a.accent) + '">' +
+      '<div class="card-tag">' + esc(a.tag) + '</div>' +
+      '<h3>' + esc(a.title) + '</h3><p>' + esc(a.desc) + '</p>' +
+      '<div class="card-foot"><span>Artifact</span><span class="go">Open &rarr;</span></div></a>';
+  }).join('');
+
+  $('projects').innerHTML = S.projects.map(function (p) {
+    return '<a class="proj" href="' + esc(p.url) + '"' + ext(p.url) + '>' +
+      '<div><h3>' + esc(p.title) + '</h3><div class="role">' + esc(p.role) + '</div></div>' +
+      '<p>' + esc(p.desc) + '</p>' +
+      '<div class="stack"><b>Stack</b>' + esc(p.stack) + '</div></a>';
+  }).join('');
+
+  U.observe();
+})();
+</script>
+</body>
+</html>

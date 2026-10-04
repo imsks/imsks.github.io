@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Unlisted pages are excluded via a noindex meta tag on the page itself rather
+# than a Disallow rule here, because robots.txt is public and would advertise them.
+
+Sitemap: https://imsks.github.io/sitemap.xml
