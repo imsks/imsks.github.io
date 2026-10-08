@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<!--
+BEAT SHEET — How Computers Work, Day 2 (silicon + doping + diode) · 9:16 · 84 s
+All times in seconds. Retime by editing the matching numbers in the scene functions.
+
+ 0.0– 3.5  "Aapke phone ki chip ret se bani hai. Haan, beach wali ret."
+           Sand grains drift across the frame, swarm into a chip outline with pins; camera pushes in to show it's grains.
+ 3.5–10.5  "Par us ret ko ... sabse saaf cheez banate hain... phir jaan-boojh ke ganda karte hain. Kyun?"
+           3.5–7.0 dark (dirty) grains fall away, clean grains snap into a perfect lattice; bonds draw in, a gleam sweeps across.
+           7.0–9.3 five coloured foreign atoms drop into the lattice, each with a ripple.  9.3–10.5 hold, big "?".
+10.5–12.5  "How Computers Work — Day 2."  Lattice recedes and dims; title card.
+12.5–17.5  "Computer andar se crores chhote switches hai. Aur inhe koi ungli nahi dabati — bijli khud dabati hai."
+           Field of tiny flickering switches, camera pulls out (crores). 14.8 flicker freezes ("ungli nahi").
+           16.0 a pulse of light radiates from the centre flipping every switch it reaches ("bijli khud").
+17.5–21.0  "Iske liye chahiye ek material jo kabhi current chalaye, kabhi rok de."
+           One grey bar; particle stream through it runs / stops / runs / stops with a gate line.
+21.0–26.0  "Copper? Hamesha chalata hai. Glass? Kabhi nahi. Ret wala silicon — bilkul beech mein."
+           21.0 copper bar above: constant fast stream.  22.8 glass bar below: particles pile up at its edge.
+           24.3 middle bar fills in as Silicon: hesitant, flickering trickle.
+26.0–35.0  "Current matlab electrons ka chalna. Pure silicon ko ek housefull cinema hall samjho.
+            Har electron apni seat pe baitha hai. Koi chal nahi sakta — toh current nahi."
+           26.0 camera dives into the silicon bar: rows of electrons streaming = current.
+           28.0 seats fade in, every electron decelerates and drops into its own seat.
+           30.5 glow wave runs row by row over the seated electrons.  32.5 push-streaks sweep across; electrons strain but stay; "current = 0".
+35.0–38.0  "Isliye hum milawat karte hain — ise doping kehte hain."
+           Hall splits in two halves; mint atoms hover above the right half, orange atoms above the left. "DOPING".
+38.0–43.5  "Phosphorus daalo — kuch extra log aa gaye, bina seat ke. Wo khule ghoomte hain. Ye N-type."
+           Camera to right half. Mint atoms fall in; each releases an extra electron that roams the aisles. "N-type".
+43.5–50.0  "Boron daalo — kuch seats khaali. Bagal wala khisak ke baith jaata hai, aur khaali seat aage chalti rehti hai. Ye P-type."
+           Camera to left half. Orange atoms fall in; electrons vanish leaving amber empty-seat rings.
+           46.2–48.35 one row: neighbour hops into the gap three times, the gap walks right. "P-type".
+50.0–57.5  "Ab dono ko jod do. Boundary pe ghoomne wale log khaali seats bhar dete hain.
+            Beech mein ban jaati hai ek patti jahan koi nahi hilta — ek deewar."
+           Halves slide together (P left, N right). 51.9–53.8 three roaming electrons cross and fill the three nearest gaps (flash).
+           54.5 a shimmering vertical band (the wall) grows at the boundary. "DEEWAR / depletion region".
+57.5–64.0  "Ab socho — is deewar ko P side se dhakka do... ya N side se. Dono baar same hoga?"   <-- KEY SYNC (question)
+           57.9 dashed ghost arrow at P side. 60.0 dashed ghost arrow at N side.
+           61.5 time slows to a near-freeze: roaming electrons and wall shimmer stall, arrows pulse alternately, "?" — nothing resolves.
+64.0–70.5  "Nahi. P side se — deewar toot jaati hai, current beh jaata hai. N side se — deewar aur moti ho jaati hai."   <-- KEY SYNC (answer)
+           64.0 freeze snaps, wall flickers. 64.5 P arrow goes solid and pushes; 64.6 wall shatters; 65.2 electrons stream
+           right-to-left, holes left-to-right. "✓ current".
+           67.5 flow stops, wall re-forms; 68.0 N arrow solid and pushes; 68.3 wall widens to more than double. "✗ current nahi".
+70.5–73.0  "Ek taraf ka raasta — isse kehte hain diode."   Diode symbol draws on; particles pass left-to-right. "DIODE".
+73.0–77.5  "Aapki LED ulti lagao toh nahi jalti. Wo kharab nahi hai. Wo yahi deewar hai."
+           73.0 glowing LED with current in its legs. 74.6 it flips upside down and goes dark; 75.7 a failed flicker.
+           76.3 camera dives into the LED die, the wall appears inside it.
+77.5–84.0  "Par agar ye deewar bijli se hi kholi-band ki ja sake... toh? Kal dekhte hain."
+           Bar with wall; a control wire descends from above. 78.6 and 79.9 pulses run down the wire and the wall opens/closes,
+           letting a burst through each time. 80.6 hold closed. 81.0 "KAL — DAY 3". Fade to black.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>How Computers Work — Day 2: Silicon, Doping, Diode (9:16)</title>
+<style>
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; background: #0A0A0C; overflow: hidden; }
+  body.playing { cursor: none; }
+  #cv { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: block; background: #0A0A0C; }
+  #ui { position: fixed; inset: 0; z-index: 10; display: grid; place-content: center; justify-items: center; gap: 18px;
+        background: rgba(0,0,0,.6); font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif; text-align: center; }
+  #ui button { font: 400 20px/1 "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif; padding: 16px 40px; border: 1px solid rgba(255,255,255,.5);
+               border-radius: 999px; background: transparent; color: #fff; cursor: pointer; letter-spacing: .08em; }
+  #ui p { margin: 0; font-size: 13px; color: #8a8f99; }
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="ui">
+  <button id="play" type="button">▶ Play</button>
+  <p>Space: play / replay · F: fullscreen · ?at=42 starts at a time (seconds)</p>
+</div>
+
+<script>
+(() => {
+  const W = 1080, H = 1920, DURATION = 84;
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  cv.width = W; cv.height = H;
+
+  function fit() {
+    const s = Math.min(innerWidth / W, innerHeight / H);
+    cv.style.width = W * s + 'px';
+    cv.style.height = H * s + 'px';
+  }
+  addEventListener('resize', fit); fit();
+
+  // ---------- math ----------
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const ease = u => (u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+  const ss = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
+  const win = (t, a, b, c, d) => ss(a, b, t) * (1 - ss(c, d, t));
+  const mod = (a, m) => ((a % m) + m) % m;
+  const sq = x => x * x;
+  const wob = (s, t, amp) => amp * (Math.sin(t * 1.31 + s * 12.9) + .6 * Math.sin(t * 2.73 + s * 7.13) + .35 * Math.sin(t * 5.17 + s * 3.31)) / 1.95;
+  const hash = (a, b, c) => { const x = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453; return x - Math.floor(x); };
+  function mulberry32(a) {
+    return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  const R = mulberry32(20261008);
+  const rr = (a, b) => a + R() * (b - a);
+  function integrate(f, a, t) { let p = 0; for (let x = a; x < t; x += .02) p += f(x) * .02; return p; }
+
+  // time-warp for ambient motion: near-freeze during the "Dono baar same hoga?" hold
+  function tau(t) {
+    const a = 61.5, b = 62.3, c = 64.0;
+    if (t < a) return t;
+    if (t < b) { const u = t - a; return a + u - .95 * u * u / 1.6; }
+    if (t < c) return a + .42 + .05 * (t - b);
+    return a + .42 + .05 * (c - b) + (t - c);
+  }
+
+  // ---------- palette ----------
+  const C_W = '235,240,250', C_E = '120,215,255', C_H = '255,175,70';
+  const C_PHOS = '120,255,190', C_BOR = '255,125,90', C_SEAT = '150,160,185';
+  const col = (rgb, a) => `rgba(${rgb},${a})`;
+  const FONT = '"Helvetica Neue", Helvetica, Arial, system-ui, sans-serif';
+
+  // ---------- drawing primitives ----------
+  let NOW = 0;
+  const SPR = {};
+  function sprite(rgb) {
+    if (SPR[rgb]) return SPR[rgb];
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(255,255,255,1)');
+    gr.addColorStop(.16, col(rgb, 1));
+    gr.addColorStop(.28, col(rgb, .42));
+    gr.addColorStop(.5, col(rgb, .1));
+    gr.addColorStop(1, col(rgb, 0));
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+    return (SPR[rgb] = c);
+  }
+  function dot(x, y, r, rgb, a) {
+    if (a <= .003) return;
+    ctx.globalAlpha = Math.min(1, a);
+    const s = r * 6;
+    ctx.drawImage(sprite(rgb), x - s / 2, y - s / 2, s, s);
+    ctx.globalAlpha = 1;
+  }
+  function ring(x, y, r, rgb, a, w) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = w;
+    ctx.beginPath(); ctx.arc(x, y, Math.max(0, r), 0, Math.PI * 2); ctx.stroke();
+  }
+  function line(ax, ay, bx, by, rgb, a, w) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = w;
+    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+  }
+  function cam(cx, cy, s) {
+    const dx = 7 * Math.sin(NOW * .37), dy = 9 * Math.sin(NOW * .29 + 1);
+    ctx.setTransform(s, 0, 0, s, W / 2 - cx * s + dx, H / 2 - cy * s + dy);
+  }
+  function screen() { ctx.setTransform(1, 0, 0, 1, 0, 0); }
+  function keyCam(K, t) {
+    if (t <= K[0][0]) return K[0].slice(1);
+    for (let i = 0; i < K.length - 1; i++) {
+      const a = K[i], b = K[i + 1];
+      if (t <= b[0]) { const u = ease((t - a[0]) / (b[0] - a[0])); return [lerp(a[1], b[1], u), lerp(a[2], b[2], u), lerp(a[3], b[3], u)]; }
+    }
+    return K[K.length - 1].slice(1);
+  }
+
+  function txt(s, x, y, size, a, rgb = C_W, weight = 300, sp = 2, align = 'center') {
+    if (a <= .003) return;
+    const g = ctx.globalCompositeOperation;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.font = `${weight} ${size}px ${FONT}`;
+    ctx.letterSpacing = sp + 'px';
+    ctx.textAlign = align; ctx.textBaseline = 'middle';
+    ctx.shadowColor = col(rgb, .4 * a); ctx.shadowBlur = size * .35;
+    ctx.fillStyle = col(rgb, a);
+    ctx.fillText(s, x, y + (1 - a) * 8);
+    ctx.shadowBlur = 0;
+    ctx.globalCompositeOperation = g;
+  }
+  function bottom(main, sub, a, rgb = C_W) {
+    screen();
+    txt(main, W / 2, 1590, 74, a, rgb, 400, 6);
+    if (sub) txt(sub, W / 2, 1680, 42, a * .85, '190,196,210', 300, 2);
+  }
+  function barShape(y, rgb, a, fillA) {
+    if (a <= .003) return;
+    ctx.beginPath(); ctx.roundRect(160, y - 55, 760, 110, 18);
+    ctx.fillStyle = col(rgb, fillA * a); ctx.fill();
+    ctx.strokeStyle = col(rgb, .6 * a); ctx.lineWidth = 2.5; ctx.stroke();
+    line(40, y, 160, y, rgb, .35 * a, 2); line(920, y, 1040, y, rgb, .35 * a, 2);
+  }
+  function drawWall(x, y0, y1, hw, a, tt) {
+    if (hw < 1.5 || a <= .003) return;
+    const fl = .85 + .15 * Math.sin(tt * 7);
+    ctx.fillStyle = col('190,205,255', .08 * a); ctx.fillRect(x - hw, y0, 2 * hw, y1 - y0);
+    ctx.strokeStyle = col('225,232,255', .6 * a * fl); ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(x - hw, y0); ctx.lineTo(x - hw, y1); ctx.moveTo(x + hw, y0); ctx.lineTo(x + hw, y1); ctx.stroke();
+    const n = Math.ceil(hw * .35);
+    for (let k = 0; k < n; k++) {
+      const px = x - hw + hash(k, 9, 1) * 2 * hw, dir = hash(k, 9, 2) > .5 ? 1 : -1;
+      const py = y0 + mod(hash(k, 9, 3) * (y1 - y0) + dir * tt * 55, y1 - y0);
+      dot(px, py, 2.6, '210,222,255', .45 * a);
+    }
+  }
+  function arrow(x0, x1, y, rgb, a, dashed) {
+    if (a <= .003) return;
+    const dir = Math.sign(x1 - x0);
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = 6;
+    ctx.setLineDash(dashed ? [14, 12] : []);
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1 - dir * 22, y); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = col(rgb, a);
+    ctx.beginPath(); ctx.moveTo(x1, y); ctx.lineTo(x1 - dir * 32, y - 22); ctx.lineTo(x1 - dir * 32, y + 22); ctx.closePath(); ctx.fill();
+  }
+
+  // ---------- background: tint keys cross-fade over 3 s ----------
+  const BG = [[0, '40,32,22'], [3.5, '18,24,44'], [12.5, '14,22,40'], [21, '32,24,20'], [26, '12,28,40'],
+    [38, '8,34,46'], [43.5, '42,28,10'], [50, '24,24,38'], [57.5, '10,10,18'], [64, '12,36,32'],
+    [67.5, '38,12,18'], [70.5, '18,22,38'], [73, '38,18,14'], [77.5, '16,16,30'], [81, '6,6,8']]
+    .map(([k, s]) => [k, s.split(',').map(Number)]);
+  function background(t) {
+    let c = BG[0][1].slice();
+    for (const [k, rgb] of BG) { const u = ss(k, k + 3, t); c = c.map((v, i) => lerp(v, rgb[i], u)); }
+    const rgb = c.map(Math.round).join(',');
+    ctx.fillStyle = '#0A0A0C'; ctx.fillRect(0, 0, W, H);
+    const gx = 540 + 60 * Math.sin(t * .11), gy = 880 + 90 * Math.sin(t * .083 + 1);
+    const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, 1300);
+    g.addColorStop(0, col(rgb, 1)); g.addColorStop(.55, col(rgb, .35)); g.addColorStop(1, col(rgb, 0));
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+  const DUST = Array.from({ length: 110 }, () => ({ x: R(), y: R(), z: rr(.3, 1), p: R() * 6 }));
+  function dust(t) {
+    screen();
+    for (const d of DUST) {
+      const x = mod(d.x * W + Math.sin(t * .2 + d.p) * 30 * d.z, W), y = mod(d.y * H - t * 14 * d.z, H);
+      dot(x, y, 1.6 * d.z + .4, '200,210,230', .1 * d.z);
+    }
+  }
+  function vignette() {
+    ctx.globalCompositeOperation = 'source-over';
+    const g = ctx.createRadialGradient(W / 2, H / 2, H * .3, W / 2, H / 2, H * .72);
+    g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.55)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+
+  // =============== SCENE A: sand → chip → pure crystal → impurities (0–13) ===============
+  const GR = [];
+  for (let i = 0; i < 300; i++) {
+    const good = i < 196;
+    GR.push({ good, d: R(), r: rr(2.2, 4.2), s: R() * 10,
+      sx: rr(-80, 1160), sy: rr(-80, 2000), cx: 540 + rr(-205, 205), cy: 960 + rr(-205, 205),
+      lx: 540 + ((i % 14) - 6.5) * 31, ly: 960 + (Math.floor(i / 14) - 6.5) * 31,
+      col: i % 14, row: Math.floor(i / 14), ox: rr(-320, 320), oy: rr(600, 1100) });
+  }
+  const IMP = [[3, 4, C_PHOS], [9, 2, C_BOR], [6, 8, C_PHOS], [11, 10, C_BOR], [2, 11, C_PHOS]]
+    .map(([c, r, rgb], k) => ({ i: r * 14 + c, rgb, td: 7.1 + k * .38 }));
+  const impAt = new Map(IMP.map(m => [m.i, m]));
+
+  function sceneA(t) {
+    const A = (1 - .8 * ss(10.2, 11, t)) * (1 - ss(12.2, 13.2, t));
+    if (A <= .003) return;
+    let s = lerp(1, 1.9, ease(ss(1.5, 3.4, t)));
+    s = lerp(s, 2.1, ss(3.4, 9.3, t));
+    s = lerp(s, 1.0, ease(ss(9.6, 12.6, t)));
+    cam(540, 960, s);
+
+    const chipA = win(t, .8, 1.6, 3.6, 4.8) * A;
+    if (chipA > .003) {
+      ctx.strokeStyle = col('210,220,235', .55 * chipA); ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.roundRect(300, 720, 480, 480, 18); ctx.stroke();
+      ctx.beginPath();
+      for (let k = 0; k < 8; k++) {
+        const o = -210 + k * 60;
+        ctx.moveTo(540 + o, 720); ctx.lineTo(540 + o, 685); ctx.moveTo(540 + o, 1200); ctx.lineTo(540 + o, 1235);
+        ctx.moveTo(300, 960 + o); ctx.lineTo(265, 960 + o); ctx.moveTo(780, 960 + o); ctx.lineTo(815, 960 + o);
+      }
+      ctx.stroke();
+    }
+
+    const bA = ss(5.4, 6.8, t) * A * (1 - ss(9.8, 11, t) * .5);
+    if (bA > .003) {
+      ctx.strokeStyle = col('130,160,220', .22 * bA); ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      for (let k = 0; k < 14; k++) {
+        const v = 960 + (k - 6.5) * 31, h = 540 + (k - 6.5) * 31;
+        ctx.moveTo(540 - 6.5 * 31, v); ctx.lineTo(540 + 6.5 * 31, v);
+        ctx.moveTo(h, 960 - 6.5 * 31); ctx.lineTo(h, 960 + 6.5 * 31);
+      }
+      ctx.stroke();
+    }
+
+    const phase = (t - 5.4) / 1.8;
+    for (let i = 0; i < GR.length; i++) {
+      const g = GR[i];
+      const u1 = ease(ss(.15 + g.d * .5, 1.25 + g.d * .5, t));
+      const u2 = ease(ss(3.7 + g.d * 1.3, 5.2 + g.d * 1.3, t));
+      const x0 = g.sx + wob(g.s, t, 26), y0 = g.sy + wob(g.s + 3, t, 26) - t * 20;
+      const x1 = g.cx + wob(g.s, t * 1.6, 2.5), y1 = g.cy + wob(g.s + 1, t * 1.6, 2.5);
+      let x = lerp(x0, x1, u1), y = lerp(y0, y1, u1);
+      if (g.good) {
+        x = lerp(x, g.lx + wob(g.s, t * 2, 1), u2); y = lerp(y, g.ly + wob(g.s + 2, t * 2, 1), u2);
+        let a = A;
+        const m = impAt.get(i);
+        if (m) a *= 1 - ss(m.td + .35, m.td + .6, t);
+        const gl = Math.exp(-sq(((g.col + g.row) / 26 - phase) * 8)) * (t > 5 && t < 8 ? 1 : 0);
+        const r = lerp(g.r, 3.4, u2);
+        dot(x, y, r, '225,195,140', a * (1 - u2) * .9);
+        dot(x, y, r * (1 + .4 * gl), '200,220,255', a * u2 * (.75 + 1.2 * gl));
+      } else {
+        x += g.ox * u2; y += g.oy * u2 * u2;
+        dot(x, y, g.r * 1.1, '150,100,62', A * (1 - u2) * .85);
+      }
+    }
+
+    for (const m of IMP) {
+      if (t < m.td) continue;
+      const g = GR[m.i];
+      const u = clamp((t - m.td) / .45);
+      const pulse = 1 + .3 * win(t, 9.3, 9.5, 10.1, 10.6) * (.5 + .5 * Math.sin(t * 9));
+      dot(g.lx, lerp(g.ly - 520, g.ly, u * u), 6.5 * pulse, m.rgb, A * ss(m.td, m.td + .1, t));
+      const k = (t - m.td - .45) / .9;
+      if (k > 0 && k < 1) ring(g.lx, g.ly, 10 + k * 90, m.rgb, (1 - k) * .6 * A, 2);
+    }
+
+    screen();
+    txt('?', 540, 330, 170, win(t, 9.35, 9.6, 10.4, 10.9), C_W, 200, 0);
+  }
+
+  function sceneTitle(t) {
+    const a = win(t, 10.5, 10.9, 12.3, 12.8);
+    screen();
+    txt('HOW COMPUTERS WORK', 540, 850, 38, a * .85, '190,200,220', 300, 10);
+    txt('DAY 2', 540, 970, 160, a, C_W, 200, 12);
+    txt('of 30', 540, 1090, 32, a * .6, '170,178,195', 300, 6);
+  }
+
+  // =============== SCENE B: field of switches (12.5–18) ===============
+  function sceneB(t) {
+    const A = win(t, 12.4, 13.0, 17.2, 18.0);
+    if (A <= .003) return;
+    cam(540, 960, lerp(1.7, .8, ease(ss(12.4, 17.6, t))));
+    const front = (t - 16.0) * 950, freezeT = Math.min(t, 14.8);
+    const hold = 1 - .35 * win(t, 14.8, 15.1, 16.0, 16.3);
+    const onP = new Path2D(), offP = new Path2D();
+    for (let c = 0; c < 36; c++) for (let r = 0; r < 60; r++) {
+      const x = 540 + (c - 17.5) * 42, y = 960 + (r - 29.5) * 42;
+      let on = hash(c, r, Math.floor(freezeT * 2.5 + hash(c, r, 1) * 10)) > .55, boost = 0;
+      if (t > 16) { const d = Math.hypot(x - 540, y - 960); if (d < front) on = true; boost = Math.exp(-sq((d - front) / 70)); }
+      if (on) { onP.moveTo(x - 9, y); onP.lineTo(x + 9, y); dot(x, y, 3 + 3 * boost, '190,225,255', A * hold * (.3 + boost)); }
+      else { offP.moveTo(x - 9, y); offP.lineTo(x + 5, y - 9); }
+    }
+    ctx.lineWidth = 2.4;
+    ctx.strokeStyle = col('200,230,255', .75 * A * hold); ctx.stroke(onP);
+    ctx.strokeStyle = col('95,105,125', .55 * A * hold); ctx.stroke(offP);
+    if (t > 16) ring(540, 960, front, C_E, .22 * A, 4);
+  }
+
+  // =============== SCENE C/D: one gated bar, then copper / glass / silicon (17.4–27) ===============
+  const gateO = x => ss(17.9, 18.15, x) * (1 - ss(18.85, 19.1, x)) + ss(19.65, 19.9, x) * (1 - ss(20.35, 20.6, x));
+  function sceneBars(t) {
+    const A = ss(17.4, 17.9, t) * (1 - ss(26.1, 26.9, t));
+    if (A <= .003) return;
+    cam(540, 960, lerp(1.0, 2.8, ease(ss(25.9, 27.0, t))) * lerp(1.06, 1.0, ss(17.4, 21, t)));
+
+    const sil = ss(24.2, 24.7, t);
+    barShape(960, '170,180,200', A, .04);
+    barShape(960, '150,175,215', A * sil, .1);
+
+    const mA = A * (1 - ss(21, 21.5, t));
+    if (mA > .003) {
+      const o = gateO(t), phi = integrate(gateO, 17.5, t);
+      for (let i = 0; i < 34; i++) {
+        const x = 40 + mod(hash(i, 1, 2) * 1000 + phi * 560, 1000), y = 960 + (hash(i, 2, 3) - .5) * 80;
+        dot(x, y, 5, '220,230,245', mA * (.35 + .65 * o));
+      }
+      line(540, 900, 540, 1020, '255,255,255', .8 * mA * (1 - o) * ss(17.7, 18, t), 5);
+    }
+
+    const cA = ss(20.9, 21.3, t) * (1 - ss(25.6, 26.2, t)) * A;
+    barShape(700, '230,140,80', cA, .12);
+    for (let i = 0; i < 60; i++) {
+      const x = 40 + mod(hash(i, 4, 1) * 1000 + t * 600, 1000), y = 700 + (hash(i, 5, 1) - .5) * 80;
+      dot(x, y, 5, '255,175,110', cA * .9);
+    }
+    txt('Copper', 160, 612, 42, cA, '255,190,140', 400, 3, 'left');
+    txt('always ON', 920, 612, 30, cA * .8, '205,205,215', 300, 2, 'right');
+
+    const gA = ss(22.6, 23.0, t) * (1 - ss(25.6, 26.2, t)) * A;
+    barShape(1220, '170,220,255', gA, .06);
+    for (let i = 0; i < 22; i++) {
+      const raw = -260 + mod(hash(i, 6, 1) * 420 + (t - 22.6) * 300, 420);
+      const x = Math.min(raw, 150 - hash(i, 7, 1) * 16), y = 1220 + (hash(i, 8, 1) - .5) * 80;
+      dot(x, y, 5, '220,230,245', gA * ss(30, 70, x) * .9);
+    }
+    txt('Glass', 160, 1132, 42, gA, '190,230,255', 400, 3, 'left');
+    txt('always OFF', 920, 1132, 30, gA * .8, '205,205,215', 300, 2, 'right');
+
+    const sA = sil * A;
+    for (let i = 0; i < 14; i++) {
+      const h = hash(i, 9, 4);
+      const x = 160 + mod(h * 760 + 60 * (t - 24) + 50 * Math.sin(t * 2.1 + h * 7), 760), y = 960 + (hash(i, 3, 9) - .5) * 70;
+      dot(x, y, 5, C_E, sA * (.25 + .5 * (.5 + .5 * Math.sin(t * 3.3 + h * 11))));
+    }
+    txt('Silicon', 160, 872, 42, sA, C_E, 400, 3, 'left');
+    txt('ON / OFF', 920, 872, 30, sA * .85, '205,205,215', 300, 2, 'right');
+  }
+
+  // =============== SCENE E–J: the cinema hall → doping → junction → bias (25.8–71) ===============
+  const NS = [[4, 2], [6, 0], [5, 5], [7, 7], [4, 8]];   // phosphorus sites (N half)
+  const PS = [[0, 4], [2, 1], [3, 7], [1, 6], [0, 8]];   // boron sites (P half); PS[0]'s hole walks along row 4
+  const HOP = { path: [[0, 4], [1, 4], [2, 4], [3, 4]], t0: [46.2, 47.0, 47.8], dur: .55 };
+  const FILL = [{ w: 0, hole: 0, fs: 51.9 }, { w: 1, hole: 2, fs: 52.35 }, { w: 2, hole: 1, fs: 52.8 }];
+  const finalSeat = k => (k === 0 ? [3, 4] : PS[k]);
+  const key = (c, r) => c * 10 + r;
+  const split = t => 70 * (ease(ss(36.3, 37.8, t)) - ease(ss(50.2, 51.6, t)));
+  const seatX = (c, t) => 540 + (c - 3.5) * 100 + (c < 4 ? -1 : 1) * split(t);
+  const seatY = r => 960 + (r - 4) * 100;
+  const HK = [[25.8, 540, 960, 1.0], [35, 540, 960, 1.06], [37.6, 540, 960, .96], [38.8, 800, 960, 1.3], [43.3, 800, 960, 1.36],
+    [44.4, 280, 960, 1.3], [49.7, 280, 960, 1.36], [51.3, 540, 960, 1.0], [64, 540, 960, 1.06], [70.4, 540, 960, 1.1], [71.2, 540, 960, .8]];
+  function wallHW(t) {
+    let w = 90 * ease(ss(54.5, 55.6, t));
+    w *= 1 - ease(ss(64.6, 65.3, t));
+    w += 90 * ease(ss(67.6, 68.2, t));
+    w += 140 * ease(ss(68.3, 69.6, t));
+    return w;
+  }
+  function seatShape(x, y, rgb, a) {
+    if (a <= .003) return;
+    ctx.strokeStyle = col(rgb, a); ctx.lineWidth = 2.4;
+    ctx.beginPath();
+    ctx.moveTo(x - 22, y - 16); ctx.lineTo(x - 22, y + 6); ctx.quadraticCurveTo(x - 22, y + 16, x - 12, y + 16);
+    ctx.lineTo(x + 12, y + 16); ctx.quadraticCurveTo(x + 22, y + 16, x + 22, y + 6); ctx.lineTo(x + 22, y - 16);
+    ctx.stroke();
+  }
+
+  function sceneHall(t) {
+    const HA = ss(25.8, 26.4, t) * (1 - ss(70.4, 71.0, t));
+    if (HA <= .003) return;
+    const [cx, cy, s] = keyCam(HK, t); cam(cx, cy, s);
+    const tt = tau(t);
+    const flowDim = 1 - .55 * win(t, 65.0, 65.4, 67.3, 67.7);
+    const sideA = c => HA * flowDim * (c < 4 ? 1 - .7 * win(t, 38.1, 38.7, 43.3, 43.9) : 1 - .7 * win(t, 43.6, 44.2, 49.7, 50.3));
+    const seatA = ss(27.9, 28.8, t);
+    const pLand = k => 38.15 + k * .2 + .5, bLand = k => 43.6 + k * .14 + .45;
+
+    // seats (dopant seats keep a tint once their atom has landed)
+    const tint = new Map();
+    NS.forEach(([c, r], k) => { if (t > pLand(k)) tint.set(key(c, r), C_PHOS); });
+    PS.forEach(([c, r], k) => { if (t > bLand(k)) tint.set(key(c, r), C_BOR); });
+    for (let c = 0; c < 8; c++) for (let r = 0; r < 9; r++) {
+      const tc = tint.get(key(c, r));
+      seatShape(seatX(c, t), seatY(r), tc || C_SEAT, seatA * sideA(c) * (tc ? .6 : .42));
+    }
+
+    // highlight the row where the gap walks
+    const rowA = win(t, 45.7, 46.1, 48.6, 49.2) * HA;
+    if (rowA > .003) { ctx.fillStyle = col(C_H, .06 * rowA); ctx.fillRect(seatX(0, t) - 50, seatY(4) - 45, seatX(3, t) - seatX(0, t) + 100, 90); }
+
+    // holes (empty seats) and electrons in motion between seats
+    const empty = new Set(), movers = [], holes = [];
+    PS.forEach(([c, r], k) => {
+      const land = bLand(k);
+      if (t < land) return;
+      const fadeU = ss(land, land + .35, t);
+      if (fadeU < 1) movers.push([seatX(c, t), seatY(r) + 2, 1 - fadeU, c]);
+      const f = FILL.find(f => f.hole === k);
+      const ha = fadeU * (f ? 1 - ss(f.fs + .85, f.fs + 1.05, t) : 1);
+      if (k === 0) {
+        const P = HOP.path;
+        let j = 0;
+        for (let i = 0; i < 3; i++) if (t >= HOP.t0[i] + HOP.dur) j = i + 1;
+        const hop = HOP.t0.findIndex(h => t >= h && t < h + HOP.dur);
+        if (hop >= 0) {
+          const u = ease((t - HOP.t0[hop]) / HOP.dur), a = P[hop], b = P[hop + 1];
+          empty.add(key(...a)); empty.add(key(...b));
+          movers.push([lerp(seatX(b[0], t), seatX(a[0], t), u), seatY(4) + 2 - 22 * Math.sin(Math.PI * u), 1, 0]);
+          holes.push([seatX(a[0], t), seatY(4), ha * (1 - u)], [seatX(b[0], t), seatY(4), ha * u]);
+        } else {
+          empty.add(key(...P[j])); holes.push([seatX(P[j][0], t), seatY(4), ha]);
+        }
+      } else {
+        empty.add(key(c, r)); holes.push([seatX(c, t), seatY(r), ha]);
+      }
+    });
+    for (const [x, y, a] of holes) {
+      ring(x, y + 2, 13, C_H, a * HA * .95, 2.6);
+      dot(x, y + 2, 5, C_H, a * HA * .35);
+    }
+
+    // seated electrons (+ intro: they stream in as "current", then drop into seats)
+    const pushA = win(t, 32.6, 33.0, 34.6, 35.2);
+    for (let c = 0; c < 8; c++) for (let r = 0; r < 9; r++) {
+      if (empty.has(key(c, r))) continue;
+      let x = seatX(c, t), y = seatY(r) + 2;
+      const tstop = 28.2 + hash(c, r, 7) * .9;
+      if (t < tstop + 1.2) {
+        const xf = -110 + mod(hash(c, r, 3) * 1300 + Math.min(t, tstop) * 380, 1300);
+        const u = ease(ss(tstop, tstop + 1.2, t));
+        x = lerp(xf, x, u); y += (1 - u) * wob(c * 5 + r, t, 10);
+      }
+      x += wob(c * 3.3 + r * 7.1, tt * 1.3, 1.8) + 6 * pushA * (.6 + .4 * Math.sin(t * 9 + c + r));
+      y += wob(c * 1.7 + r * 2.9, tt * 1.3, 1.8);
+      const gl = Math.exp(-sq(r - (t - 30.6) * 4.5)) * win(t, 30.5, 30.6, 32.3, 32.6);
+      dot(x, y, 6.5 * (1 + .45 * gl), C_E, (.85 + .7 * gl) * sideA(c));
+    }
+    for (const [x, y, a, c] of movers) dot(x, y, 6.5, C_E, a * sideA(c));
+
+    // push streaks for "koi chal nahi sakta"
+    if (pushA > .003) for (let i = 0; i < 26; i++) {
+      const x = mod(hash(i, 1, 8) * 1400 + t * 900, 1400) - 160, y = 540 + hash(i, 2, 8) * 840;
+      line(x, y, x + 120, y, C_W, .16 * pushA * HA, 2);
+    }
+
+    // dopant atoms: hover above during "doping", fall in on cue
+    const dropAtoms = (sites, rgb, d0, step, fall, k0) => sites.forEach(([c, r], k) => {
+      const ap = ss(35.4 + k * .1 + k0, 36.0 + k * .1 + k0, t);
+      if (ap <= .003) return;
+      const dS = d0 + k * step, land = dS + fall;
+      const hy = tm => 380 + 16 * Math.sin(tm * 1.8 + k * 1.3 + k0 * 5);
+      const u = clamp((t - dS) / fall);
+      const x = seatX(c, t), y = t < dS ? hy(t) : lerp(hy(dS), seatY(r), u * u);
+      dot(x, y, 9, rgb, ap * (1 - ss(land, land + .35, t)) * HA);
+      const e = (t - land) / .8;
+      if (e > 0 && e < 1) ring(x, seatY(r), 16 + e * 70, rgb, (1 - e) * .6 * HA, 2);
+    });
+    dropAtoms(NS, C_PHOS, 38.15, .2, .5, 0);
+    dropAtoms(PS, C_BOR, 43.6, .14, .45, .15);
+
+    // roaming extra electrons (N side)
+    NS.forEach(([c, r], k) => {
+      const sp = pLand(k) + .55;
+      if (t < sp) return;
+      const confine = ss(51.4, 53, t);
+      const hx = (seatX(4, t) + seatX(7, t)) / 2 + 60 * confine + 70 * ease(ss(68.3, 69.6, t)) * (1 - ss(70.3, 70.9, t));
+      let x = hx + lerp(150, 90, confine) * wob(k * 3.1 + .4, tt * .75, 1);
+      let y = 960 + 390 * wob(k * 5.7 + 1.3, tt * .55, 1);
+      const u0 = ease(ss(sp, sp + .9, t));
+      x = lerp(seatX(c, t), x, u0); y = lerp(seatY(r) - 20, y, u0);
+      const f = FILL.find(f => f.w === k);
+      if (f) {
+        const [tc, tr] = finalSeat(f.hole), u = ease(ss(f.fs, f.fs + 1, t));
+        x = lerp(x, seatX(tc, t) + wob(k, tt * 1.3, 1.8), u); y = lerp(y, seatY(tr) + 2, u);
+        const e = (t - f.fs - 1) / .8;
+        if (e > 0 && e < 1) ring(seatX(tc, t), seatY(tr) + 2, 14 + e * 50, C_W, (1 - e) * .7 * HA, 2.5);
+      }
+      const free = f ? 1 - ss(f.fs + .9, f.fs + 1.1, t) : 1;
+      const ea = ss(sp - .05, sp + .25, t) * sideA(4);
+      dot(x, y, 6.5, C_E, ea * (1 - free));
+      dot(x, y, 10, '200,245,255', ea * free * 1.2);
+    });
+
+    // the wall (depletion region)
+    if (t > 54.4) {
+      const nahi = 1 - .6 * win(t, 64, 64.08, 64.35, 64.5) * (.5 + .5 * Math.sin(t * 60));
+      drawWall(540, 520, 1400, wallHW(t), HA * nahi, tt);
+    }
+
+    // shatter on forward push
+    const e0 = t - 64.6;
+    if (e0 > 0 && e0 < 1.2) for (let i = 0; i < 60; i++) {
+      const h1 = hash(i, 3, 1), sx = 540 + (h1 - .5) * 170, sy = 540 + hash(i, 3, 2) * 840;
+      dot(sx + (h1 - .5) * 900 * e0, sy + (hash(i, 3, 3) - .5) * 260 * e0, 3.5, '220,230,255', (1 - e0 / 1.2) * .85 * HA);
+    }
+
+    // forward current: electrons right→left, holes left→right
+    const flowA = ss(65.2, 65.6, t) * (1 - ss(67.3, 67.7, t)) * HA;
+    if (flowA > .003) {
+      for (let i = 0; i < 80; i++) dot(1060 - mod(hash(i, 1, 1) * 1120 + (t - 65) * 460, 1120), 560 + hash(i, 2, 2) * 800, 6, C_E, flowA);
+      for (let i = 0; i < 30; i++) ring(-60 + mod(hash(i, 3, 3) * 1120 + (t - 65) * 320, 1120), 560 + hash(i, 4, 4) * 800, 10, C_H, flowA * .85, 2.4);
+    }
+
+    // push arrows: ghosts during the question, solid on the answer
+    const pulse = ph => .55 + .45 * Math.max(0, Math.sin((t - 61.5) * 4.2 + ph)) * ss(61.5, 61.8, t) + .45 * (1 - ss(61.5, 61.8, t));
+    const gL = ss(57.9, 58.4, t) * (1 - ss(64.3, 64.5, t)) * pulse(0), sL = ss(64.3, 64.6, t) * (1 - ss(67.3, 67.7, t));
+    const gR = ss(60.0, 60.5, t) * (1 - ss(64.3, 64.5, t)) * pulse(Math.PI), sR = ss(67.9, 68.2, t) * (1 - ss(70.3, 70.7, t));
+    const pl = 25 * ease(ss(64.4, 64.8, t)), pr = 25 * ease(ss(68.0, 68.4, t));
+    arrow(30, 140, 960, C_H, gL * HA * .7, true);
+    arrow(30 + pl, 140 + pl, 960, C_H, sL * HA, false);
+    arrow(1050, 940, 960, C_E, gR * HA * .7, true);
+    arrow(1050 - pr, 940 - pr, 960, C_E, sR * HA, false);
+
+    // P / N tags once joined
+    const tagA = ss(50.6, 51.2, t) * (1 - ss(70.3, 70.8, t));
+    txt('P', (seatX(0, t) + seatX(3, t)) / 2, 455, 56, tagA, C_H, 400, 0);
+    txt('N', (seatX(4, t) + seatX(7, t)) / 2, 455, 56, tagA, C_E, 400, 0);
+    txt('?', 540, 1480, 130, win(t, 62.0, 62.5, 63.9, 64.1), C_W, 200, 0);
+
+    // captions
+    bottom('current', '= electrons ka chalna', win(t, 26.5, 26.9, 27.9, 28.4));
+    bottom('current = 0', '', win(t, 33.2, 33.6, 34.7, 35.1));
+    bottom('DOPING', 'jaan-boojh ke milawat', win(t, 35.6, 36.0, 37.5, 37.9));
+    bottom('N-type', 'extra electrons, bina seat ke', win(t, 42.2, 42.5, 43.3, 43.7), C_E);
+    bottom('P-type', 'khaali seats = holes', win(t, 48.9, 49.2, 50.0, 50.4), C_H);
+    bottom('DEEWAR', 'depletion region', win(t, 55.7, 56.1, 57.2, 57.6));
+    bottom('✓  current', '', win(t, 65.6, 65.9, 67.2, 67.6), '150,255,190');
+    bottom('✗  current nahi', '', win(t, 69.0, 69.3, 70.2, 70.6), '255,130,130');
+  }
+
+  // =============== SCENE K: diode symbol (70.5–73.5) ===============
+  function sceneDiode(t) {
+    const A = win(t, 70.6, 71.0, 73.0, 73.5);
+    if (A <= .003) return;
+    cam(540, 960, lerp(1.25, 1.0, ease(ss(70.5, 72.2, t))));
+    const d = ease(ss(70.7, 71.5, t)) * A;
+    ctx.lineJoin = 'round';
+    line(100, 960, 420, 960, C_W, .85 * d, 5);
+    line(660, 960, 980, 960, C_W, .85 * d, 5);
+    ctx.beginPath(); ctx.moveTo(420, 840); ctx.lineTo(420, 1080); ctx.lineTo(660, 960); ctx.closePath();
+    ctx.fillStyle = col(C_W, .08 * d); ctx.fill();
+    ctx.strokeStyle = col(C_W, .85 * d); ctx.lineWidth = 5; ctx.stroke();
+    line(660, 840, 660, 1080, C_W, .85 * d, 7);
+    const fa = A * ss(71.2, 71.6, t);
+    for (let i = 0; i < 16; i++) dot(100 + mod(hash(i, 4, 4) * 880 + t * 420, 880), 960, 6, C_W, fa * .9);
+    txt('DIODE', 540, 1230, 96, A * ss(71.3, 71.7, t), C_W, 300, 14);
+    txt('→  ✓          ←  ✗', 540, 1335, 46, A * ss(71.6, 72.0, t), '175,185,205', 300, 2);
+  }
+
+  // =============== SCENE L: the LED (73–77.6) ===============
+  function sceneLED(t) {
+    const A = win(t, 72.9, 73.4, 77.0, 77.6);
+    if (A <= .003) return;
+    const z = ease(ss(76.2, 77.5, t));
+    cam(540, lerp(980, 1120, z), lerp(1.0, 9, z * z));
+    ctx.save();
+    ctx.translate(540, 1000); ctx.rotate(Math.PI * ease(ss(74.6, 75.3, t))); ctx.translate(-540, -1000);
+    const lit = (1 - ss(74.5, 74.7, t)) + .3 * win(t, 75.7, 75.8, 75.9, 76.1);
+    dot(540, 860, 70, '255,120,80', lit * A * .9);
+    ctx.beginPath(); ctx.moveTo(430, 950); ctx.lineTo(430, 820); ctx.arc(540, 820, 110, Math.PI, 0); ctx.lineTo(650, 950); ctx.closePath();
+    ctx.fillStyle = col('255,120,80', (.05 + .22 * lit) * A); ctx.fill();
+    ctx.strokeStyle = col('230,235,245', .75 * A); ctx.lineWidth = 3; ctx.stroke();
+    ctx.strokeRect(410, 950, 260, 24);
+    line(500, 974, 500, 1330, '230,235,245', .7 * A, 4);
+    line(580, 974, 580, 1260, '230,235,245', .7 * A, 4);
+    ctx.strokeStyle = col('230,235,245', .5 * A); ctx.lineWidth = 2; ctx.strokeRect(525, 865, 30, 30);
+    for (let i = 0; i < 6; i++) {
+      const p = mod(i / 6 + t * .9, 1);
+      dot(500, lerp(1330, 974, p), 4, '255,190,150', lit * A * .8);
+      dot(580, lerp(974, 1260, p), 4, '255,190,150', lit * A * .8);
+    }
+    drawWall(540, 866, 894, 10 * ss(76.4, 77.1, t), A, t);
+    ctx.restore();
+    bottom('LED', 'Light Emitting Diode', win(t, 73.4, 73.8, 75.9, 76.3));
+  }
+
+  // =============== SCENE M: a wall that electricity opens (77.2–84) ===============
+  const PULSES = [78.6, 79.9];
+  const openC = x => PULSES.reduce((s, p) => s + win(x, p + .5, p + .7, p + 1.1, p + 1.35), 0);
+  function sceneClose(t) {
+    const A = ss(77.2, 77.9, t) * (1 - ss(82.8, 83.7, t));
+    if (A > .003) {
+      cam(540, 960, lerp(1.7, 1.0, ease(ss(77.2, 78.8, t))));
+      barShape(980, '170,180,200', A * .8, .05);
+      const yEnd = lerp(380, 905, ease(ss(77.9, 78.5, t)));
+      line(540, 380, 540, yEnd, '200,215,255', .8 * A * ss(77.85, 78.0, t), 3);
+      line(470, 914, 610, 914, '200,215,255', .8 * A * ss(78.3, 78.5, t), 4);
+      for (const p of PULSES) { const e = (t - p) / .5; if (e >= 0 && e <= 1) dot(540, lerp(380, 905, e), 9, C_E, A); }
+      const open = openC(t), phi = integrate(openC, 78, t);
+      drawWall(540, 925, 1035, 70 * (1 - open), A, t);
+      for (let i = 0; i < 24; i++) {
+        const x = 40 + mod(hash(i, 6, 6) * 1000 + phi * 900, 1000), y = 980 + (hash(i, 7, 7) - .5) * 70;
+        dot(x, y, 5, C_E, A * (.18 + .82 * open));
+      }
+    }
+    const k = win(t, 81.0, 81.5, 83.2, 83.8);
+    screen();
+    txt('KAL', 540, 1480, 40, k * .8, '178,185,200', 300, 14);
+    txt('DAY 3', 540, 1580, 110, k, C_W, 200, 12);
+  }
+
+  // ---------- frame ----------
+  function render(t) {
+    NOW = t;
+    screen();
+    ctx.globalCompositeOperation = 'source-over';
+    background(t);
+    ctx.globalCompositeOperation = 'lighter';
+    dust(t);
+    if (t < 13.3) sceneA(t);
+    if (t > 10.4 && t < 12.9) sceneTitle(t);
+    if (t > 12.3 && t < 18.1) sceneB(t);
+    if (t > 17.4 && t < 27.1) sceneBars(t);
+    if (t > 25.8 && t < 71.2) sceneHall(t);
+    if (t > 70.5 && t < 73.5) sceneDiode(t);
+    if (t > 72.8 && t < 77.7) sceneLED(t);
+    if (t > 77.1) sceneClose(t);
+    screen();
+    vignette();
+  }
+  // exposed so frames can be captured deterministically (e.g. Playwright → ffmpeg)
+  window.renderFrame = render;
+
+  // ---------- playback ----------
+  const ui = document.getElementById('ui'), playBtn = document.getElementById('play');
+  let start = 0, raf = 0;
+  function loop(now) {
+    const t = (now - start) / 1000;
+    render(Math.min(t, DURATION));
+    if (t < DURATION) raf = requestAnimationFrame(loop);
+    else { document.body.classList.remove('playing'); playBtn.textContent = '↻ Replay'; ui.hidden = false; }
+  }
+  function play() {
+    const from = clamp(parseFloat(new URLSearchParams(location.search).get('at')) || 0, 0, DURATION);
+    cancelAnimationFrame(raf);
+    ui.hidden = true;
+    document.body.classList.add('playing');
+    start = performance.now() - from * 1000;
+    raf = requestAnimationFrame(loop);
+  }
+  render(0);
+  playBtn.addEventListener('click', play);
+  addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); play(); }
+    else if (e.key === 'f' || e.key === 'F') {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>
