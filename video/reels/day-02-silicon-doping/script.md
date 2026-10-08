@@ -1,19 +1,31 @@
-Duniya ka sabse pure material banate hain... phir jaan-boojh ke usse ganda karte hain. Kyun?
+Aapke phone ki chip ret se bani hai. Haan, beach wali ret.
 
-Copper hamesha current chalata hai. Glass kabhi nahi. Silicon? Jab hum bolein, tab.
+Par us ret ko kaam ka banane ke liye, pehle use duniya ki sabse saaf cheez banate hain... phir jaan-boojh ke ganda karte hain. Kyun?
 
-Pure silicon ek housefull cinema hall hai. Har electron apni seat pe. Koi hil nahi sakta.
+How Computers Work — Day 2.
 
-Toh hum doping karte hain — matlab jaan-boojh ke milawat. Phosphorus daalo — extra log aa gaye, bina seat ke. Ye hai N-type.
+Computer andar se crores chhote switches hai. Aur inhe koi ungli nahi dabati — bijli khud dabati hai.
 
-Boron daalo — kuch seats khaali. Us khaali seat ko kehte hain hole. Ye hai P-type.
+Iske liye chahiye ek material jo kabhi current chalaye, kabhi rok de.
 
-Dono ko jodo, toh boundary pe log khaali seats bhar dete hain. Beech mein bachti hai ek khaali deewar — depletion region.
+Copper? Hamesha chalata hai. Glass? Kabhi nahi. Ret wala silicon — bilkul beech mein.
 
-Ab socho — is deewar ko P side se dhakka do, ya N side se. Farak padega?
+Current matlab electrons ka chalna. Pure silicon ko ek housefull cinema hall samjho. Har electron apni seat pe baitha hai. Koi chal nahi sakta — toh current nahi.
 
-P side se — deewar gir jaati hai, current behta hai. N side se — deewar aur moti. Kuch nahi behta.
+Isliye hum milawat karte hain — ise doping kehte hain.
 
-Ek taraf haan, ek taraf naa. Ye hai diode.
+Phosphorus daalo — kuch extra log aa gaye, bina seat ke. Wo khule ghoomte hain. Ye N-type.
 
-Par is darwaze ko electricity se hi kholna-band karna ho... toh? Kal dekhte hain.
+Boron daalo — kuch seats khaali. Bagal wala khisak ke baith jaata hai, aur khaali seat aage chalti rehti hai. Ye P-type.
+
+Ab dono ko jod do. Boundary pe ghoomne wale log khaali seats bhar dete hain. Beech mein ban jaati hai ek patti jahan koi nahi hilta — ek deewar.
+
+Ab socho — is deewar ko P side se dhakka do... ya N side se. Dono baar same hoga?
+
+Nahi. P side se — deewar toot jaati hai, current beh jaata hai. N side se — deewar aur moti ho jaati hai.
+
+Ek taraf ka raasta — isse kehte hain diode.
+
+Aapki LED ulti lagao toh nahi jalti. Wo kharab nahi hai. Wo yahi deewar hai.
+
+Par agar ye deewar bijli se hi kholi-band ki ja sake... toh? Kal dekhte hain.

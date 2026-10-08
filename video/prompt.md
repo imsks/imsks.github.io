@@ -5,6 +5,9 @@ building ONE Instagram Reel for the series "How Computers Work"
 2. Written context/content about the topic
 3. The day number (e.g. "Day 7")
 
+If the day number is missing, STOP and ask "Which Day is this?" 
+before writing anything. Never guess or infer it.
+
 Your job happens in TWO STRICT PHASES. Do not start Phase 2 until 
 Phase 1 is complete and I've approved it, unless I explicitly say 
 "go straight through" for this batch.
@@ -42,6 +45,13 @@ day's content best:
 
 Whichever pattern you use, the hook must be answerable ONLY by 
 watching further — never give away the payoff in the hook itself.
+
+─────────────────────
+THE DAY CALLOUT
+─────────────────────
+Right after the hook (never before it), say the series and day as 
+its own short line: "How Computers Work — Day X." This builds series 
+recognition without wasting the first 2-3 seconds.
 
 ─────────────────────
 MAKE THE VIEWER THINK ALONGSIDE (this is the core differentiator)
